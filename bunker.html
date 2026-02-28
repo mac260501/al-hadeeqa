@@ -16,8 +16,8 @@
     --border:   rgba(42,110,58,0.14);
 
     /* Green accent */
-    --green:    #2a6e3a;
-    --green-l:  #38914e;
+    --green:    #1a4a26;
+    --green-l:  #1d5229;
     --green-dim: rgba(42,110,58,0.10);
 
     /* Text */
@@ -70,37 +70,39 @@
   .nav-cta:hover { background: var(--green-l); }
 
   /* ── HERO — light villa photo ── */
-  .hero {
-    min-height: 100vh;
-    position: relative;
-    display: flex; align-items: center;
-    overflow: hidden;
-  }
+  .hero { min-height: 100vh; position: relative; display: flex; align-items: center; overflow: hidden; padding: 80px 0; }
   .hero-bg {
     position: absolute; inset: 0;
     background: url('assets/images/ben-koorengevel-R9Dc1pwBTjY-unsplash.jpg') center 40%/cover no-repeat;
   }
-  /* Light overlay — keeps sky readable, darkens bottom slightly for text */
+  /* Light overlay — softer, let photo breathe */
   .hero-overlay {
     display: block;
     position: absolute; inset: 0;
     background: linear-gradient(
       105deg,
-      rgba(244,248,245,0.88) 0%,
-      rgba(244,248,245,0.72) 45%,
-      rgba(244,248,245,0.30) 100%
+      rgba(244,248,245,0.45) 0%,
+      rgba(244,248,245,0.20) 55%,
+      rgba(244,248,245,0.05) 100%
     );
   }
-  /* Remove the CSS pseudo-elements used for the gradient-only version */
-  .hero::before { display: none; }
+  .hero-green-line { display: none; }
   .hero-green-line {
     position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
     background: linear-gradient(to bottom, transparent, var(--green) 20%, var(--green) 80%, transparent);
   }
   .hero-content {
     position: relative; z-index: 2;
-    padding: 140px 80px 80px;
-    max-width: 760px;
+    padding: 52px 52px 52px 56px;
+    max-width: 680px;
+    margin-top: 64px;
+    margin-left: 48px;
+    background: rgba(255,255,255,0.62);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border: 1px solid rgba(255,255,255,0.75);
+    border-left: 4px solid var(--green);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
   }
   .eyebrow {
     display: inline-flex; align-items: center; gap: 12px;
@@ -387,7 +389,7 @@
     .nav-logo { width: 36px; height: 36px; }
     .nav-cta { padding: 10px 14px; font-size: 10px; letter-spacing: 0.06em; }
 
-    .hero-content { padding: 100px 20px 60px; }
+    .hero-content { margin: 0 16px; padding: 32px 24px; max-width: 100%; }
     .hero-stats { display: none; }
 
     .urgency-strip { flex-direction: column; gap: 4px; padding: 12px 20px; text-align: center; }
