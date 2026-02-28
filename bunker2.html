@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafeHaven UAE — Safe Room & Home Reinforcement | Al Hadeeqa</title>
+<meta name="description" content="Safe room construction UAE. Is your home protected? Al Hadeeqa Contracting — 20 years in the UAE. Free assessment within 48 hours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #050505;
+    --dark: #0d0d0d;
+    --gray: #1a1a1a;
+    --midgray: #2a2a2a;
+    --red: #cc1f1f;
+    --red-dark: #9b1515;
+    --white: #f0f0f0;
+    --offwhite: #c8c8c8;
+    --muted: #666;
+    --yellow: #f5c518;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--offwhite);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── TOP ALERT BAR ── */
+  .top-bar {
+    background: var(--red);
+    padding: 10px 48px;
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  }
+  .top-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--white); animation: tblink 0.8s infinite; }
+  @keyframes tblink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  .top-bar-text { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: white; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 36px; left: 0; right: 0; z-index: 100;
+    padding: 16px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(5,5,5,0.96);
+    border-bottom: 2px solid var(--red);
+    backdrop-filter: blur(8px);
+  }
+  .nav-wordmark {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: 0.12em;
+    color: var(--white);
+  }
+  .nav-wordmark span { color: var(--red); }
+  .nav-sub-text { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+  .nav-cta {
+    background: var(--red); color: var(--white);
+    padding: 12px 28px; font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 700; text-decoration: none; transition: background 0.2s;
+    border: none; cursor: pointer;
+  }
+  .nav-cta:hover { background: var(--red-dark); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: grid; grid-template-columns: 1fr 1fr;
+    overflow: hidden; padding-top: 88px;
+  }
+  .hero-left {
+    background: var(--dark);
+    padding: 80px 56px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 2;
+    border-right: 2px solid var(--red);
+  }
+  .hero-right {
+    position: relative; overflow: hidden;
+  }
+  .hero-right img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(0.3) brightness(0.6) contrast(1.2);
+  }
+  .hero-right-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(13,13,13,0.4) 0%, transparent 40%);
+  }
+  /* Big corner text */
+  .hero-corner {
+    position: absolute; top: -20px; right: -10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 220px; line-height: 1;
+    color: rgba(204,31,31,0.07);
+    pointer-events: none; user-select: none;
+    overflow: hidden; max-width: 100%;
+  }
+
+  .warning-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--red); padding: 7px 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    font-weight: 700; color: white; margin-bottom: 28px;
+    width: fit-content;
+  }
+  .warning-icon { font-size: 14px; }
+  .hero-h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(58px, 7vw, 96px);
+    line-height: 0.95;
+    color: var(--white);
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+  }
+  .hero-h1 .red { color: var(--red); }
+  .hero-sub {
+    font-size: 16px; color: #888; line-height: 1.8;
+    max-width: 440px; margin-bottom: 40px;
+    font-weight: 300;
+  }
+  .hero-sub strong { color: var(--white); font-weight: 500; }
+
+  /* HERO FORM */
+  .h-form { max-width: 420px; }
+  .h-form-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase;
+    font-weight: 700; color: var(--white); margin-bottom: 4px;
+  }
+  .h-form-sub { font-size: 12px; color: var(--muted); margin-bottom: 18px; letter-spacing: 0.04em; }
+  .h-form input, .h-form select {
+    width: 100%; background: rgba(255,255,255,0.04);
+    border: 1px solid #2a2a2a; border-left: 3px solid var(--red);
+    color: var(--white); padding: 13px 14px;
+    font-family: 'Barlow', sans-serif; font-size: 14px;
+    outline: none; transition: border-color 0.2s; margin-bottom: 10px;
+    appearance: none;
+  }
+  .h-form input:focus, .h-form select:focus { border-color: var(--red); background: rgba(204,31,31,0.04); }
+  .h-form input::placeholder { color: #444; }
+  .h-form select option { background: var(--dark); }
+  .h-form-btn {
+    width: 100%; background: var(--red); color: white;
+    border: none; padding: 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 700; cursor: pointer; transition: background 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .h-form-btn:hover { background: var(--red-dark); }
+  .h-form-note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+
+  /* STAT BAR */
+  .stat-bar {
+    background: var(--gray);
+    border-top: 2px solid var(--red);
+    border-bottom: 1px solid #222;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .sb-item {
+    padding: 28px 36px;
+    border-right: 1px solid #222;
+    text-align: center;
+  }
+  .sb-item:last-child { border-right: none; }
+  .sb-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px; color: var(--red); line-height: 1;
+  }
+  .sb-lbl { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+  /* SECTION BASE */
+  section { padding: 90px 80px; }
+  .sect-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 12px; font-weight: 600;
+  }
+  .sect-h {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 5vw, 68px);
+    color: var(--white); line-height: 0.95; margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+  .sect-p { font-size: 15px; color: #777; line-height: 1.85; max-width: 560px; margin-bottom: 48px; }
+  .red-rule { width: 48px; height: 3px; background: var(--red); margin-bottom: 20px; }
+
+  /* ── THREAT SECTION ── */
+  .threat { background: var(--dark); }
+  .threat-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .threat-img { position: relative; }
+  .threat-img img { width: 100%; display: block; filter: saturate(0.2) brightness(0.65) contrast(1.3); }
+  .threat-img .t-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(5,5,5,0.95), transparent);
+    padding: 40px 24px 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red);
+    font-weight: 600;
+  }
+  .threat-text {}
+  .threat-quote {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px; color: var(--white); line-height: 1.1;
+    margin-bottom: 24px; letter-spacing: 0.02em;
+  }
+  .threat-quote span { color: var(--red); }
+  .threat-text p { font-size: 14px; color: #777; line-height: 1.85; margin-bottom: 14px; }
+  .threat-text strong { color: var(--offwhite); font-weight: 500; }
+
+  /* ── SERVICES ── */
+  .services { background: var(--black); }
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .svc-card {
+    border: 1px solid #1a1a1a;
+    border-left: 3px solid var(--red);
+    padding: 44px 36px;
+    transition: background 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .svc-card:hover { background: rgba(204,31,31,0.04); }
+  .svc-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px; color: rgba(204,31,31,0.1);
+    position: absolute; top: -10px; right: 16px;
+    line-height: 1; pointer-events: none;
+  }
+  .svc-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; font-weight: 600; }
+  .svc-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--white); margin-bottom: 14px; letter-spacing: 0.02em; }
+  .svc-card p { font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 22px; }
+  .svc-features { list-style: none; }
+  .svc-features li {
+    font-size: 13px; color: #999;
+    padding: 8px 0; border-bottom: 1px solid #1a1a1a;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .svc-features li::before { content: '▸'; color: var(--red); flex-shrink: 0; margin-top: 1px; font-size: 10px; }
+  .svc-bottom-tag { margin-top: 22px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); font-weight: 600; }
+
+  /* PHOTO GRID */
+  .photo-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 280px; overflow: hidden; }
+  .pg-item { position: relative; overflow: hidden; }
+  .pg-item img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.2) brightness(0.6) contrast(1.2); transition: filter 0.4s; }
+  .pg-item:hover img { filter: saturate(0.4) brightness(0.7) contrast(1.2); }
+  .pg-item .pg-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 10px 16px;
+    background: linear-gradient(to top, rgba(5,5,5,0.9), transparent);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--red); font-weight: 600;
+  }
+  .pg-item:nth-child(1) { border-right: 1px solid #222; }
+
+  /* ── PROCESS ── */
+  .process { background: var(--dark); }
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 40px; }
+  .p-step { padding: 40px 30px; border-right: 1px solid #1a1a1a; position: relative; }
+  .p-step:last-child { border-right: none; }
+  .p-step-num { font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: rgba(204,31,31,0.15); line-height: 1; margin-bottom: 16px; }
+  .p-step h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+  .p-step p { font-size: 13px; color: #666; line-height: 1.75; }
+  .p-step::before { content: attr(data-arrow); position: absolute; right: -14px; top: 40px; font-size: 20px; color: var(--red); z-index: 2; }
+  .p-step:last-child::before { display: none; }
+
+  /* ── FAQ ── */
+  .faq-section { background: var(--black); }
+  .faq-list { max-width: 800px; margin-top: 40px; }
+  .faq-item {
+    border-bottom: 1px solid #1a1a1a;
+    padding: 0;
+    cursor: pointer;
+  }
+  .faq-q {
+    padding: 20px 0; padding-right: 40px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; letter-spacing: 0.04em;
+    font-weight: 600; color: var(--white);
+    display: flex; justify-content: space-between; align-items: center;
+    user-select: none;
+  }
+  .faq-q::after { content: '+'; color: var(--red); font-size: 22px; flex-shrink: 0; transition: transform 0.25s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    font-size: 14px; color: #666; line-height: 1.8;
+    max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.25s;
+  }
+  .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+
+  /* ── BOTTOM CTA ── */
+  .bottom-cta { background: var(--dark); position: relative; overflow: hidden; }
+  .bottom-cta-bg {
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1594074792599-7e4939561eec?w=1600&q=80') center/cover;
+    filter: saturate(0.1) brightness(0.3) contrast(1.4);
+    opacity: 0.5;
+  }
+  .bottom-cta-content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .bcta-left h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 0.95; color: var(--white); margin-bottom: 18px; letter-spacing: 0.02em;
+  }
+  .bcta-left h2 span { color: var(--red); display: block; }
+  .bcta-left p { font-size: 15px; color: #888; line-height: 1.8; max-width: 400px; }
+  .bcta-form { }
+  .bcta-form-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 700; color: var(--white); margin-bottom: 18px;
+    padding-bottom: 12px; border-bottom: 2px solid var(--red);
+  }
+  .bcta-form input, .bcta-form select {
+    width: 100%; background: rgba(255,255,255,0.04);
+    border: 1px solid #2a2a2a; border-left: 3px solid var(--red);
+    color: var(--white); padding: 13px 14px;
+    font-family: 'Barlow', sans-serif; font-size: 14px;
+    outline: none; transition: all 0.2s; margin-bottom: 10px; appearance: none;
+  }
+  .bcta-form input:focus, .bcta-form select:focus { border-color: var(--red); background: rgba(204,31,31,0.04); }
+  .bcta-form input::placeholder { color: #444; }
+  .bcta-form select option { background: var(--dark); }
+  .bcta-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 0; }
+  .bcta-submit {
+    width: 100%; background: var(--red); color: white; border: none;
+    padding: 17px; cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px;
+    transition: background 0.2s; margin-top: 4px;
+  }
+  .bcta-submit:hover { background: var(--red-dark); }
+  .bcta-note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    border-top: 2px solid var(--red);
+    padding: 32px 80px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  .foot-brand { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.1em; color: var(--white); }
+  .foot-brand span { color: var(--red); }
+  footer p { font-size: 12px; color: var(--muted); }
+  footer a { color: var(--red); text-decoration: none; }
+
+  /* STICKY WA */
+  .wa-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 300;
+    background: #25D366; width: 62px; height: 62px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; box-shadow: 0 6px 30px rgba(37,211,102,0.45);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .wa-float:hover { transform: scale(1.1); box-shadow: 0 10px 40px rgba(37,211,102,0.65); }
+  .wa-tip {
+    position: fixed; bottom: 44px; right: 102px; z-index: 300;
+    background: var(--dark); border: 1px solid #222; border-left: 2px solid var(--red);
+    color: var(--white); padding: 8px 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; letter-spacing: 0.06em; white-space: nowrap;
+    animation: fadeR2 0.5s 2s both;
+  }
+  @keyframes fadeR2 { from{opacity:0;transform:translateX(8px)} to{opacity:1;transform:translateX(0)} }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .hero { grid-template-columns: 1fr; padding-top: 90px; }
+    .hero-right { display: none; }
+    section, nav, footer { padding-left: 20px; padding-right: 20px; }
+    .threat-layout, .bottom-cta-content { grid-template-columns: 1fr; gap: 40px; }
+    .svc-grid, .process-grid { grid-template-columns: 1fr; }
+    .photo-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .pg-item { height: 200px; }
+    .stat-bar { grid-template-columns: 1fr 1fr; }
+    .bcta-form-grid { grid-template-columns: 1fr; }
+    .hero-left { padding: 60px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP ALERT -->
+<div class="top-bar">
+  <div class="top-dot"></div>
+  <span class="top-bar-text">⚠ Regional Security Escalation — UAE Families Acting Now — Limited Assessment Slots Available</span>
+  <div class="top-dot"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div>
+    <div class="nav-wordmark">SAFE<span>HAVEN</span> UAE</div>
+    <div class="nav-sub-text">Al Hadeeqa Contracting · Licensed UAE Contractor</div>
+  </div>
+  <a href="#quote" class="nav-cta">Free Assessment →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-corner">SH</div>
+    <div class="warning-tag">
+      <span class="warning-icon">⚠</span>
+      Regional Security Alert — Middle East Escalation
+    </div>
+    <h1 class="hero-h1">
+      IS YOUR<br>FAMILY<br>
+      <span class="red">PROTECTED?</span>
+    </h1>
+    <p class="hero-sub">
+      When tensions escalate, <strong>UAE families who prepared are safe.</strong> Those who waited are not. Al Hadeeqa Contracting has been building in the UAE for 20+ years — we are ready to start immediately.
+    </p>
+
+    <!-- HERO FORM -->
+    <div class="h-form">
+      <div class="h-form-title">Get Your Free Assessment</div>
+      <div class="h-form-sub">Our team will call you within 2 hours · No obligation</div>
+      <input type="text" placeholder="Your Full Name" id="h-name">
+      <input type="tel" placeholder="WhatsApp Number (+971...)" id="h-phone">
+      <select id="h-prop">
+        <option value="" disabled selected>Select Property Type</option>
+        <option>Villa — Dubai</option>
+        <option>Villa — Abu Dhabi</option>
+        <option>Villa — Sharjah</option>
+        <option>Apartment — Dubai</option>
+        <option>Apartment — Abu Dhabi</option>
+        <option>Apartment — Sharjah</option>
+      </select>
+      <button class="h-form-btn" onclick="heroSubmit()">
+        <svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        SEND TO WHATSAPP — GET CALLBACK
+      </button>
+      <p class="h-form-note">🔒 Your details go directly to our licensed contractor. No spam.</p>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1615715616181-6b34e2db8a7c?w=1200&q=80" alt="Home protection UAE">
+    <div class="hero-right-overlay"></div>
+  </div>
+</div>
+
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="sb-item"><div class="sb-num">20+</div><div class="sb-lbl">Years in UAE</div></div>
+  <div class="sb-item"><div class="sb-num">500+</div><div class="sb-lbl">Projects Done</div></div>
+  <div class="sb-item"><div class="sb-num">48H</div><div class="sb-lbl">First Consultation</div></div>
+  <div class="sb-item"><div class="sb-num">3</div><div class="sb-lbl">Emirates Covered</div></div>
+</div>
+
+<!-- THREAT / REALITY -->
+<section class="threat">
+  <div class="threat-layout">
+    <div class="threat-img reveal">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" alt="Construction reinforcement">
+      <div class="t-caption">⚠ Regional Instability — Q1 2026</div>
+    </div>
+    <div class="threat-text reveal">
+      <div class="sect-tag">The Reality</div>
+      <div class="red-rule"></div>
+      <div class="threat-quote">MOST HOMES ARE <span>NOT</span> BUILT TO WITHSTAND WHAT'S HAPPENING</div>
+      <p>Standard UAE residential construction is not designed with civil emergencies in mind. Walls, windows, and doors in typical apartments and villas <strong>offer minimal protection</strong> in the event of blast, structural damage, or security failure.</p>
+      <p>Safe rooms are mandatory in Israeli residential buildings. They are standard in European government facilities. Gulf families with the resources to act are <strong>acting now.</strong></p>
+      <p>Al Hadeeqa Contracting is not a new company capitalizing on fear. We are a licensed UAE contractor with 20 years of structural work across the region. We can begin your assessment within 48 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="sect-tag reveal">What We Build</div>
+  <div class="red-rule reveal"></div>
+  <div class="sect-h reveal">THREE LEVELS OF PROTECTION</div>
+  <p class="sect-p reveal">All projects are custom-designed and quoted after your free assessment. No prices online — every property is different.</p>
+  <div class="svc-grid reveal">
+    <div class="svc-card">
+      <div class="svc-num">01</div>
+      <div class="svc-tag">Tier One</div>
+      <h3>Safe Room Installation</h3>
+      <p>Convert an existing room into a reinforced safe space. Works in apartments and villas. Most installs complete in 7–14 days.</p>
+      <ul class="svc-features">
+        <li>Steel-reinforced walls & ceiling</li>
+        <li>Blast-resistant security door</li>
+        <li>Independent ventilation system</li>
+        <li>Emergency comms setup</li>
+        <li>Internal power backup</li>
+        <li>Supply storage built-in</li>
+      </ul>
+      <div class="svc-bottom-tag">▸ Custom Quote · Free Assessment</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">02</div>
+      <div class="svc-tag">Tier Two</div>
+      <h3>Full Home Reinforcement</h3>
+      <p>Comprehensive hardening of your entire property. Windows, walls, entry points, and a safe room — all in one project.</p>
+      <ul class="svc-features">
+        <li>Blast-resistant window glazing</li>
+        <li>Reinforced exterior walls</li>
+        <li>Secured main entry & doors</li>
+        <li>Safe room included</li>
+        <li>Perimeter hardening</li>
+        <li>Emergency egress planning</li>
+      </ul>
+      <div class="svc-bottom-tag">▸ Custom Quote · Free Assessment</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">03</div>
+      <div class="svc-tag">Tier Three</div>
+      <h3>Underground Shelter</h3>
+      <p>For villas with outdoor space. Purpose-built underground shelter with independent life support systems.</p>
+      <ul class="svc-features">
+        <li>Full underground construction</li>
+        <li>Reinforced concrete structure</li>
+        <li>Independent air filtration</li>
+        <li>Extended power & water storage</li>
+        <li>Blast door access</li>
+        <li>Comms & monitoring systems</li>
+      </ul>
+      <div class="svc-bottom-tag">▸ Custom Quote · Free Assessment</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GRID -->
+<div class="photo-grid">
+  <div class="pg-item">
+    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80" alt="Steel construction">
+    <div class="pg-label">▸ Structural Steel Work</div>
+  </div>
+  <div class="pg-item">
+    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" alt="Construction site">
+    <div class="pg-label">▸ Professional Installation</div>
+  </div>
+  <div class="pg-item">
+    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Secure building">
+    <div class="pg-label">▸ Secured Properties</div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="sect-tag reveal">How It Works</div>
+  <div class="red-rule reveal"></div>
+  <div class="sect-h reveal">FOUR STEPS. FAST AS 2 WEEKS.</div>
+  <div class="process-grid reveal">
+    <div class="p-step" data-arrow="▸">
+      <div class="p-step-num">01</div>
+      <h3>Free Assessment</h3>
+      <p>We visit your home within 48 hours. Full assessment of your layout, structure, and requirements. No cost. No pressure.</p>
+    </div>
+    <div class="p-step" data-arrow="▸">
+      <div class="p-step-num">02</div>
+      <h3>Custom Quote</h3>
+      <p>Fixed-price itemized proposal. All materials, all labour, firm timeline. Everything in writing before a single thing is touched.</p>
+    </div>
+    <div class="p-step" data-arrow="▸">
+      <div class="p-step-num">03</div>
+      <h3>Build & Install</h3>
+      <p>Licensed team executes the work. Most safe rooms: 7–14 days. Full reinforcement: 3–5 weeks. Minimal disruption to your household.</p>
+    </div>
+    <div class="p-step" data-arrow="">
+      <div class="p-step-num">04</div>
+      <h3>Full Handover</h3>
+      <p>Every system tested with you present. Full walkthrough. We remain reachable for follow-up maintenance or additions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="sect-tag reveal">FAQ</div>
+  <div class="red-rule reveal"></div>
+  <div class="sect-h reveal">QUESTIONS. ANSWERED.</div>
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <div class="faq-q">How fast can you start?</div>
+      <div class="faq-a">Assessments are available within 48 hours. We have teams operational now across Dubai, Abu Dhabi, and Sharjah. Project start dates depend on scope — most can begin within 1–2 weeks of quote approval.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Does this work in apartments, not just villas?</div>
+      <div class="faq-a">Yes. Safe room conversions work in apartments — we typically use a bathroom, walk-in wardrobe, or internal bedroom. Underground shelters require outdoor space and are villa-only. We assess your specific unit and advise accordingly.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What materials do you use?</div>
+      <div class="faq-a">Military-grade steel reinforcement panels, multi-layer blast-resistant glazing, and security doors rated for significant impact. All materials are certified, sourced from verified suppliers, and suited to UAE's climate conditions.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do I need my landlord's approval?</div>
+      <div class="faq-a">For tenanted apartments, landlord consent is typically required for structural modifications. We provide full technical documentation and drawings to support your request, and can advise on municipality permit requirements.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How much does it cost?</div>
+      <div class="faq-a">We don't list prices because every property is different. After the free assessment we provide a fully itemized, fixed-price quote. There is zero obligation to proceed, and zero cost for the consultation.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Are you a legitimate licensed contractor?</div>
+      <div class="faq-a">Yes. Al Hadeeqa Contracting is a UAE-licensed construction company with over 20 years of operational history. We are not a new company. We have completed 500+ residential projects and will provide our trade license and credentials on request.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="bottom-cta" id="quote">
+  <div class="bottom-cta-bg"></div>
+  <div class="bottom-cta-content">
+    <div class="bcta-left reveal">
+      <div class="sect-tag">The Decision</div>
+      <div class="red-rule"></div>
+      <h2>DON'T WAIT<br><span>FOR PROOF.</span></h2>
+      <p>The families who regret not acting didn't think it would happen to them either. A free assessment costs nothing. Not having a safe room could cost everything.</p>
+      <br>
+      <p style="color:#555; font-size:13px;">Al Hadeeqa Contracting · UAE Licensed · Dubai, Abu Dhabi, Sharjah<br>+971 50 880 6292</p>
+    </div>
+    <div class="bcta-form reveal">
+      <div class="bcta-form-title">Request Free Assessment Now</div>
+      <div class="bcta-form-grid">
+        <input type="text" placeholder="First Name" id="b-first">
+        <input type="text" placeholder="Last Name" id="b-last">
+      </div>
+      <input type="tel" placeholder="WhatsApp Number (+971...)" id="b-phone">
+      <select id="b-prop">
+        <option value="" disabled selected>Property Type</option>
+        <option>Villa — Dubai</option>
+        <option>Villa — Abu Dhabi</option>
+        <option>Villa — Sharjah</option>
+        <option>Apartment — Dubai</option>
+        <option>Apartment — Abu Dhabi</option>
+        <option>Apartment — Sharjah</option>
+      </select>
+      <input type="text" placeholder="Area / Community (optional)" id="b-area">
+      <button class="bcta-submit" onclick="bottomSubmit()">
+        <svg style="width:18px;height:18px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        SEND TO WHATSAPP NOW
+      </button>
+      <p class="bcta-note">🔒 Details go directly to our contractor. We respond within 2 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="foot-brand">SAFE<span>HAVEN</span> UAE</div>
+    <p style="margin-top:4px;">By Al Hadeeqa Contracting · UAE Licensed Contractor</p>
+  </div>
+  <div style="text-align:right;">
+    <p><a href="https://wa.me/971508806292">+971 50 880 6292</a> · <a href="https://thejanfurniture.com" target="_blank">Jan Furnishings</a></p>
+    <p style="margin-top:4px;color:#333;">© 2026 Al Hadeeqa Contracting</p>
+  </div>
+</footer>
+
+<!-- STICKY WA -->
+<div class="wa-tip">Talk to us now →</div>
+<a href="https://wa.me/971508806292?text=Hi%2C%20I%27m%20interested%20in%20a%20free%20safe%20room%20assessment%20for%20my%20home." class="wa-float" target="_blank">
+  <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+function buildMsg(name, phone, prop, area) {
+  return encodeURIComponent(`Hi Al Hadeeqa Contracting,\n\nI am interested in a *free safe room assessment*.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Property:* ${prop}${area ? '\n*Area:* ' + area : ''}\n\nPlease contact me at your earliest convenience.`);
+}
+function heroSubmit() {
+  const name = document.getElementById('h-name').value || 'Not provided';
+  const phone = document.getElementById('h-phone').value || 'Not provided';
+  const prop = document.getElementById('h-prop').value || 'Not specified';
+  window.open(`https://wa.me/971508806292?text=${buildMsg(name, phone, prop, '')}`, '_blank');
+}
+function bottomSubmit() {
+  const first = document.getElementById('b-first').value || '';
+  const last = document.getElementById('b-last').value || '';
+  const name = (first + ' ' + last).trim() || 'Not provided';
+  const phone = document.getElementById('b-phone').value || 'Not provided';
+  const prop = document.getElementById('b-prop').value || 'Not specified';
+  const area = document.getElementById('b-area').value || '';
+  window.open(`https://wa.me/971508806292?text=${buildMsg(name, phone, prop, area)}`, '_blank');
+}
+
+// Accordion FAQ
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    item.classList.toggle('open');
+  });
+});
+
+// Reveal
+const els = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(e => e.forEach(el => { if (el.isIntersecting) el.target.classList.add('in'); }), { threshold: 0.08 });
+els.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
