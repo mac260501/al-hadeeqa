@@ -39,7 +39,7 @@
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(201,168,76,0.15);
   }
-  .nav-brand { display: flex; align-items: center; gap: 14px; }
+  .nav-brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
   .nav-logo {
     width: 36px; height: 36px; flex-shrink: 0;
     border: 1.5px solid var(--gold);
@@ -97,7 +97,7 @@
     background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.35);
     padding: 8px 16px; margin-bottom: 32px;
   }
-  .alert-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); animation: blink 1.8s infinite; }
+  .alert-dot { width: 7px; height: 7px; border-radius: 50%; background: #c0392b; animation: blink 1.8s infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
   .alert-text { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
 
@@ -452,11 +452,12 @@
 
   /* ── RESPONSIVE ── */
   @media(max-width:900px) {
-    nav { padding: 0 16px; height: 56px; }
-    .nav-name { font-size: 11px; }
+    nav { padding: 0 20px; height: 62px; gap: 12px; }
+    .nav-brand { gap: 10px; min-width: 0; flex: 1; overflow: hidden; }
+    .nav-name { display: block; font-size: 10px; letter-spacing: 0.04em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .nav-sub { display: none; }
-    .nav-logo { width: 30px; height: 30px; font-size: 11px; }
-    .nav-cta { padding: 8px 14px; font-size: 11px; letter-spacing: 0.06em; }
+    .nav-logo { width: 34px; height: 34px; font-size: 12px; flex-shrink: 0; }
+    .nav-cta { padding: 10px 14px; font-size: 10px; letter-spacing: 0.06em; white-space: nowrap; flex-shrink: 0; }
 
     .hero-content { padding: 100px 20px 60px; }
     .hero-stats { display: none; }
@@ -526,15 +527,15 @@
   <div class="hero-content">
     <div class="alert-badge">
       <div class="alert-dot"></div>
-      <span class="alert-text">UAE Families Are Acting Now — Assessment Slots Available</span>
+      <span class="alert-text">Regional Security Alert — UAE Families Taking Action Now</span>
     </div>
     <div class="eyebrow">SafeHaven by Al Hadeeqa Contracting</div>
     <h1>
-      We Build
-      <em>Underground Bunkers.</em>
+      Your Family Deserves
+      <em>A Safe Place to Go.</em>
     </h1>
     <p class="hero-sub">
-      Purpose-built. Discreetly installed. Designed for UAE families who understand that preparation is not panic — it is prudence.
+      When the unthinkable happens, seconds matter. We build underground bunkers for UAE families — purpose-built, discreetly installed, by a contractor with 20+ years in the UAE.
     </p>
     <div class="hero-cta-row">
       <a href="#quote" class="btn-primary">
