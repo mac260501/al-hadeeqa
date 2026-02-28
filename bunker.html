@@ -72,20 +72,18 @@
   .hero { min-height: 100vh; position: relative; display: flex; align-items: center; overflow: hidden; padding: 80px 0; }
   .hero-bg {
     position: absolute; inset: 0;
-    background: url('assets/images/ben-koorengevel-R9Dc1pwBTjY-unsplash.jpg') center 40%/cover no-repeat;
+    background: url('assets/images/bunker-full.png') center 40%/cover no-repeat;
   }
-  /* Light overlay — softer, let photo breathe */
   .hero-overlay {
     display: block;
     position: absolute; inset: 0;
     background: linear-gradient(
       105deg,
-      rgba(244,248,245,0.45) 0%,
-      rgba(244,248,245,0.20) 55%,
-      rgba(244,248,245,0.05) 100%
+      rgba(244,248,245,0.30) 0%,
+      rgba(244,248,245,0.10) 50%,
+      rgba(244,248,245,0.0) 100%
     );
   }
-  .hero-green-line { display: none; }
   .hero-green-line {
     position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
     background: linear-gradient(to bottom, transparent, var(--green) 20%, var(--green) 80%, transparent);
@@ -96,12 +94,10 @@
     max-width: 680px;
     margin-top: 64px;
     margin-left: 48px;
-    background: rgba(255,255,255,0.62);
-    backdrop-filter: blur(18px) saturate(1.4);
-    -webkit-backdrop-filter: blur(18px) saturate(1.4);
-    border: 1px solid rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.96);
+    border: 1px solid rgba(255,255,255,0.98);
     border-left: 4px solid var(--green);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 48px rgba(0,0,0,0.14);
   }
   .eyebrow {
     display: inline-flex; align-items: center; gap: 12px;
@@ -146,12 +142,17 @@
   /* Right stats — dark on light */
   .hero-stats {
     position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
-    display: flex; flex-direction: column; gap: 3px; z-index: 3;
+    display: flex; flex-direction: column; gap: 0; z-index: 3;
+    background: rgba(255,255,255,0.96);
+    border: 1px solid rgba(255,255,255,0.98);
+    border-top: 4px solid var(--green);
+    box-shadow: 0 8px 48px rgba(0,0,0,0.14);
+    padding: 28px 32px;
   }
-  .h-stat { text-align: right; }
-  .h-stat-num { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 900; color: var(--green); line-height: 1; }
-  .h-stat-lbl { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-top: 3px; }
-  .h-stat-divider { height: 1px; background: rgba(42,110,58,0.2); margin: 14px 0; }
+  .h-stat { text-align: center; }
+  .h-stat-num { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--green); line-height: 1; }
+  .h-stat-lbl { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-top: 4px; }
+  .h-stat-divider { height: 1px; background: rgba(42,110,58,0.15); margin: 18px 0; }
 
   /* ── URGENCY STRIP ── */
   .urgency-strip {
@@ -179,11 +180,17 @@
     content: ''; position: absolute; inset: 0;
     background: linear-gradient(to right, transparent 50%, var(--surface));
     pointer-events: none;
+    z-index: 1;
   }
   .sit-label {
-    position: absolute; bottom: 14px; left: 16px;
-    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--green); background: rgba(255,255,255,0.88); padding: 5px 10px;
+    position: absolute; bottom: 0; left: 0; right: 0;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #fff; font-weight: 700;
+    background: rgba(26,74,38,0.92);
+    backdrop-filter: blur(4px);
+    padding: 10px 16px;
+    border-top: 2px solid var(--green);
+    z-index: 5;
   }
   .sit-text { padding: 64px 52px; display: flex; flex-direction: column; justify-content: center; background: var(--surface); }
   .s-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
@@ -395,7 +402,7 @@
 
     .situation { grid-template-columns: 1fr; }
     .sit-img { height: 240px; }
-    .sit-img:nth-child(2)::after { background: linear-gradient(to bottom, transparent 55%, var(--surface)); }
+    .sit-img:nth-child(2)::after { display: none; }
     .sit-text { padding: 40px 20px; }
 
     .spec-section { padding: 60px 20px; }
@@ -487,12 +494,12 @@
 <!-- SITUATION -->
 <div class="situation">
   <div class="sit-img">
-    <img src="assets/images/dmytro-tolokonov-nNZHKFq4l1E-unsplash.jpg" alt="The reality">
-    <div class="sit-label">The Reality</div>
+    <img src="assets/images/reality.jpeg" alt="The reality" style="object-position: center center;">
+    <div class="sit-label">THE REALITY</div>
   </div>
   <div class="sit-img">
     <img src="assets/images/ernest-malimon-5t-9W4qHbjA-unsplash.jpg" alt="The threat" style="object-position: center 20%;">
-    <div class="sit-label">The Threat</div>
+    <div class="sit-label">THE THREAT</div>
   </div>
   <div class="sit-text reveal">
     <div class="s-label">Why Families Are Calling Us</div>
