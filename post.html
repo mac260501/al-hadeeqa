@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>SafeHaven Instagram Post</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 900px;
+    height: 900px;
+    overflow: hidden;
+    font-family: 'Archivo', sans-serif;
+    background: #f4f8f5;
+  }
+
+  .post {
+    width: 900px;
+    height: 900px;
+    position: relative;
+    overflow: hidden;
+    background: #0f1f12;
+  }
+
+  /* ── Background photo ── */
+  .bg-photo {
+    position: absolute; inset: 0;
+    background: url('assets/images/ben-koorengevel-lotxjfRcx80-unsplash.jpg') center 35%/cover no-repeat;
+    filter: brightness(0.35) saturate(0.7);
+  }
+
+  /* ── Green diagonal slash ── */
+  .slash {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 520px;
+    background: linear-gradient(170deg, transparent 38%, #1a4a26 38%);
+    z-index: 1;
+  }
+  /* Lighter green accent layer */
+  .slash-accent {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 520px;
+    background: linear-gradient(170deg, transparent 37.2%, rgba(42,110,58,0.35) 37.2%, transparent 52%);
+    z-index: 2;
+  }
+
+  /* ── Content ── */
+  .content {
+    position: absolute; inset: 0; z-index: 10;
+    display: flex; flex-direction: column;
+  }
+
+  /* Top section — over photo, below white header */
+  .top {
+    padding: 130px 56px 0;
+    flex-shrink: 0;
+  }
+
+  /* White header bar — matches logo background */
+  .brand-bar {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+    background: #ffffff;
+    border-bottom: 3px solid #1a4a26;
+    padding: 14px 48px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .brand-logo {
+    width: 64px; height: 64px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .brand-logo img { width: 100%; height: 100%; object-fit: contain; }
+  .brand-text { }
+  .brand-name { font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: #1a4a26; font-weight: 700; }
+  .brand-sub { font-size: 11px; color: #6b876f; letter-spacing: 0.05em; margin-top: 3px; }
+
+  /* Alert chip */
+  .alert-chip {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.5);
+    padding: 7px 16px; margin-bottom: 28px;
+  }
+  .alert-dot { width: 7px; height: 7px; border-radius: 50%; background: #e74c3c; }
+  .alert-text { font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase; color: #e8a09a; font-weight: 600; }
+
+  /* Hero headline */
+  .headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px; font-weight: 900; line-height: 1.0;
+    color: #fff; margin-bottom: 14px;
+  }
+  .headline em { font-style: italic; color: #7ecf92; display: block; }
+
+  .subline {
+    font-size: 15px; color: rgba(255,255,255,0.65);
+    line-height: 1.6; max-width: 440px;
+  }
+
+  /* ── Bottom green section ── */
+  .bottom {
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 56px 48px;
+  }
+
+  /* Three proof points */
+  .proof-row {
+    display: flex; gap: 0; margin-bottom: 48px;
+  }
+  .proof-item {
+    flex: 1;
+    padding: 24px 28px;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(8px);
+  }
+  .proof-item:last-child { border-right: none; }
+  .proof-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; font-weight: 900; color: #7ecf92; line-height: 1;
+    margin-bottom: 4px;
+  }
+  .proof-lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+
+  /* CTA block */
+  .cta-block {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 32px;
+  }
+  .cta-left { }
+  .cta-tag {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #7ecf92; margin-bottom: 10px;
+  }
+  .cta-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px; font-weight: 900; color: #fff; line-height: 1.1;
+  }
+  .cta-headline em { font-style: italic; color: #7ecf92; }
+  .cta-checks { margin-top: 14px; display: flex; flex-direction: column; gap: 7px; }
+  .cta-check { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(255,255,255,0.75); }
+  .cta-check::before { content: '✓'; color: #7ecf92; font-weight: 700; font-size: 15px; flex-shrink: 0; }
+
+  .cta-right {
+    flex-shrink: 0; text-align: center;
+  }
+  .cta-btn {
+    background: #fff; color: #1a4a26;
+    padding: 22px 42px;
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 800; display: block; margin-bottom: 16px;
+    white-space: nowrap;
+  }
+  .cta-wa {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: 18px; color: rgba(255,255,255,0.9); font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .wa-icon {
+    width: 22px; height: 22px; background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .wa-icon svg { width: 13px; height: 13px; }
+
+  /* ── Divider line ── */
+  .divider {
+    width: 100%; height: 1px;
+    background: rgba(255,255,255,0.12);
+    margin-bottom: 36px;
+  }
+
+  /* ── Decorative corner ── */
+  .corner-mark {
+    position: absolute; top: 108px; right: 56px; z-index: 10;
+    text-align: right;
+  }
+  .corner-mark-inner {
+    display: inline-flex; flex-direction: column; align-items: flex-end;
+    gap: 3px;
+  }
+  .corner-tag {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .corner-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px; font-weight: 900; color: rgba(255,255,255,0.08);
+    line-height: 1;
+  }
+  .corner-badge {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    padding: 10px 18px; margin-top: 8px;
+  }
+  .corner-badge-top { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .corner-badge-val { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: 0.02em; margin-top: 2px; }
+</style>
+</head>
+<body>
+<div class="post">
+  <!-- Background -->
+  <div class="bg-photo"></div>
+  <div class="slash"></div>
+  <div class="slash-accent"></div>
+
+  <!-- Top right badge -->
+  <div class="corner-mark">
+    <div class="corner-mark-inner">
+      <div class="corner-tag">Response Time</div>
+      <div class="corner-val">48h</div>
+      <div class="corner-badge">
+        <div class="corner-badge-top">Free Assessment</div>
+        <div class="corner-badge-val">No Obligation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- White brand header bar -->
+  <div class="brand-bar">
+    <div class="brand-logo">
+      <img src="assets/images/logo.jpeg" alt="Al Hadeeqa">
+    </div>
+    <div class="brand-text">
+      <div class="brand-name">Al Hadeeqa Contracting</div>
+      <div class="brand-sub">Licensed UAE Contractor · 20+ Years</div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="top">
+      <!-- Alert -->
+      <div class="alert-chip">
+        <div class="alert-dot"></div>
+        <span class="alert-text">Regional Security Alert — UAE Families Acting Now</span>
+      </div>
+
+      <!-- Headline -->
+      <div class="headline">
+        Your Family<br>Deserves
+        <em>A Safe Place.</em>
+      </div>
+      <p class="subline">We build underground bunkers for UAE families — discreet, purpose-built, done right.</p>
+    </div>
+
+    <div class="bottom">
+      <!-- Stats -->
+      <div class="proof-row">
+        <div class="proof-item">
+          <div class="proof-val">20+</div>
+          <div class="proof-lbl">Years in UAE</div>
+        </div>
+        <div class="proof-item">
+          <div class="proof-val">500+</div>
+          <div class="proof-lbl">Projects Completed</div>
+        </div>
+        <div class="proof-item">
+          <div class="proof-val">6–10</div>
+          <div class="proof-lbl">Week Build Time</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- CTA -->
+      <div class="cta-block">
+        <div class="cta-left">
+          <div class="cta-tag">One Product. Done Right.</div>
+          <div class="cta-headline">Underground<br>Bunkers for<br><em>UAE Villas.</em></div>
+          <div class="cta-checks">
+            <div class="cta-check">Free site assessment — no obligation</div>
+            <div class="cta-check">Fixed-price quote, fully licensed</div>
+            <div class="cta-check">Dubai · Abu Dhabi · Sharjah</div>
+          </div>
+        </div>
+        <div class="cta-right">
+          <div class="cta-btn">Get Free Assessment →</div>
+          <div class="cta-wa">
+            <div class="wa-icon">
+              <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            +971 54 441 9854
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
