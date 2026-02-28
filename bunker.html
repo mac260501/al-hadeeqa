@@ -67,7 +67,7 @@
   }
   .hero-img {
     position: absolute; inset: 0;
-    background: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1800&q=80') center/cover no-repeat;
+    background: url('assets/images/shivendu-shukla-3yoTPuYR9ZY-unsplash.jpg') center 30%/cover no-repeat;
   }
   .hero-overlay {
     position: absolute; inset: 0;
@@ -102,12 +102,29 @@
   /* ALERT BADGE */
   .alert-badge {
     display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.4);
+    background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.35);
     padding: 8px 16px; margin-bottom: 28px;
   }
-  .alert-dot { width:8px; height:8px; border-radius:50%; background:var(--red); animation: blink 1.2s infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-  .alert-text { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #e57168; font-weight: 500; }
+  .alert-dot { width:7px; height:7px; border-radius:50%; background:var(--gold); animation: blink 1.8s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+  .alert-text { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+
+  /* HERO SERVICE CARDS */
+  .hero-services {
+    display: flex; gap: 10px; margin-bottom: 40px; flex-wrap: wrap;
+  }
+  .hero-svc {
+    display: flex; align-items: center; gap: 12px;
+    border: 1px solid rgba(201,168,76,0.22);
+    background: rgba(14,18,24,0.75);
+    backdrop-filter: blur(10px);
+    padding: 13px 18px; cursor: default;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .hero-svc:hover { border-color: rgba(201,168,76,0.55); background: rgba(201,168,76,0.06); }
+  .hero-svc-icon { font-size: 18px; flex-shrink: 0; }
+  .hero-svc-name { font-size: 12px; font-weight: 600; color: var(--white); letter-spacing: 0.04em; line-height: 1.2; }
+  .hero-svc-desc { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
   .hero h1 {
     font-family: 'Playfair Display', serif;
@@ -120,7 +137,7 @@
   .hero h1 em { font-style: italic; color: var(--gold); display: block; }
   .hero-sub {
     font-size: 17px; color: #9aabb8;
-    max-width: 520px; margin-bottom: 48px; line-height: 1.85;
+    max-width: 520px; margin-bottom: 32px; line-height: 1.85;
   }
 
   /* HERO FORM */
@@ -168,14 +185,17 @@
 
   /* ── URGENCY STRIP ── */
   .urgency-strip {
-    background: var(--red);
-    padding: 16px 48px;
-    display: flex; align-items: center; justify-content: center; gap: 16px;
-    animation: slideDown 0.5s ease;
+    background: var(--deep);
+    border-top: 1px solid rgba(201,168,76,0.18);
+    border-bottom: 1px solid rgba(201,168,76,0.18);
+    padding: 14px 48px;
+    display: flex; align-items: center; justify-content: center; gap: 20px;
   }
-  @keyframes slideDown { from{transform:translateY(-100%)} to{transform:translateY(0)} }
-  .u-icon { font-size: 18px; }
-  .u-text { font-size: 13px; font-weight: 600; letter-spacing: 0.05em; color: white; }
+  .u-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: blink 1.8s infinite; flex-shrink: 0; }
+  .u-icon { font-size: 14px; }
+  .u-text { font-size: 12px; font-weight: 500; letter-spacing: 0.07em; color: var(--text); }
+  .u-text strong { color: var(--gold); font-weight: 600; }
+  .u-sep { width: 1px; height: 14px; background: rgba(201,168,76,0.2); }
 
   /* ── SECTION BASE ── */
   section { padding: 100px 80px; }
@@ -189,12 +209,20 @@
   .reality-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
   .reality-img-col {
     position: relative; overflow: hidden; min-height: 520px;
+    display: grid; grid-template-rows: 1fr 1fr; gap: 2px;
   }
-  .reality-img-col img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); }
+  .reality-img-col .r-img { position: relative; overflow: hidden; }
+  .reality-img-col .r-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(15%) brightness(0.75); }
+  .reality-img-col .r-img-label {
+    position: absolute; bottom: 12px; left: 16px;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); background: rgba(8,8,8,0.7); padding: 5px 10px;
+  }
   .reality-img-col::after {
     content: '';
     position: absolute; inset: 0;
     background: linear-gradient(to right, transparent 60%, var(--deep));
+    pointer-events: none;
   }
   .reality-text { padding: 72px 56px; display: flex; flex-direction: column; justify-content: center; }
   .reality-text blockquote {
@@ -234,7 +262,7 @@
 
   /* ── PHOTO STRIP ── */
   .photo-strip {
-    display: grid; grid-template-columns: repeat(3, 1fr);
+    display: grid; grid-template-columns: 1fr 1.4fr 1fr 1.4fr 1fr;
     height: 320px; overflow: hidden;
   }
   .photo-strip-item { position: relative; overflow: hidden; }
@@ -280,7 +308,7 @@
   }
   .final-cta-img {
     position: absolute; inset: 0;
-    background: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1800&q=80') center/cover;
+    background: url('assets/images/pexels-jacobyclarkephoto-1579356.jpg') center/cover;
   }
   .final-cta-overlay {
     position: absolute; inset: 0;
@@ -369,8 +397,9 @@
     .hero-right-stats { display: none; }
     .reality-layout, .cred-layout, .faq-grid { grid-template-columns: 1fr; }
     .services-grid, .process-steps { grid-template-columns: 1fr; }
-    .photo-strip { height: auto; grid-template-columns: 1fr; }
-    .photo-strip-item { height: 220px; }
+    .photo-strip { height: auto; grid-template-columns: 1fr 1fr; }
+    .photo-strip-item { height: 200px; }
+    .photo-strip-item:last-child { grid-column: span 2; }
     .f-grid { grid-template-columns: 1fr; }
     .final-cta { padding: 80px 20px; }
   }
@@ -409,6 +438,31 @@
       When the unthinkable happens, seconds matter. Professional safe room installation and full home reinforcement across Dubai, Abu Dhabi & Sharjah — by a contractor with 20+ years in the UAE.
     </p>
 
+    <!-- HERO SERVICE OVERVIEW -->
+    <div class="hero-services">
+      <div class="hero-svc">
+        <span class="hero-svc-icon">🛡️</span>
+        <div>
+          <div class="hero-svc-name">Safe Room Installation</div>
+          <div class="hero-svc-desc">Convert any room · 7–14 days</div>
+        </div>
+      </div>
+      <div class="hero-svc">
+        <span class="hero-svc-icon">🏠</span>
+        <div>
+          <div class="hero-svc-name">Full Home Reinforcement</div>
+          <div class="hero-svc-desc">Windows, walls & entry points</div>
+        </div>
+      </div>
+      <div class="hero-svc">
+        <span class="hero-svc-icon">⛺</span>
+        <div>
+          <div class="hero-svc-name">Underground Shelter</div>
+          <div class="hero-svc-desc">Purpose-built · Villas only</div>
+        </div>
+      </div>
+    </div>
+
     <!-- HERO QUICK FORM -->
     <div class="hero-form-wrap">
       <h3>Get Your Free Home Assessment</h3>
@@ -443,16 +497,27 @@
 
 <!-- URGENCY STRIP -->
 <div class="urgency-strip">
-  <span class="u-icon">⚠️</span>
-  <span class="u-text">Consultations available within 48 hours · Team is operational and accepting projects now across Dubai, Abu Dhabi & Sharjah</span>
-  <span class="u-icon">⚠️</span>
+  <div class="u-dot"></div>
+  <span class="u-text"><strong>Assessments available within 48 hours</strong> — Team is operational and accepting projects now</span>
+  <div class="u-sep"></div>
+  <span class="u-text"><strong>Dubai · Abu Dhabi · Sharjah</strong></span>
+  <div class="u-sep"></div>
+  <span class="u-text">Free consultation · No obligation</span>
+  <div class="u-dot"></div>
 </div>
 
 <!-- REALITY SECTION -->
 <section class="reality">
   <div class="reality-layout">
     <div class="reality-img-col">
-      <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&q=80" alt="Security and protection">
+      <div class="r-img">
+        <img src="assets/images/dmytro-tolokonov-nNZHKFq4l1E-unsplash.jpg" alt="Destroyed building">
+        <div class="r-img-label">The Reality</div>
+      </div>
+      <div class="r-img">
+        <img src="assets/images/ernest-malimon-5t-9W4qHbjA-unsplash.jpg" alt="Missile trail over city" style="object-position: center 20%;">
+        <div class="r-img-label">The Threat</div>
+      </div>
     </div>
     <div class="reality-text reveal">
       <div class="s-label">The Situation</div>
@@ -520,16 +585,24 @@
 <!-- PHOTO STRIP -->
 <div class="photo-strip">
   <div class="photo-strip-item">
-    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Construction work">
+    <img src="assets/images/pexels-finhov-10167412.jpg" alt="Missiles in sky" style="object-position: center top; filter: grayscale(10%) brightness(0.6);">
+    <div class="strip-label">The Threat Is Real</div>
+  </div>
+  <div class="photo-strip-item">
+    <img src="assets/images/etienne-girardet-sgYamIzhAhg-unsplash.jpg" alt="Steel rebar reinforcement work">
     <div class="strip-label">Structural Reinforcement</div>
   </div>
   <div class="photo-strip-item">
-    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Security door">
-    <div class="strip-label">Blast-Resistant Doors</div>
+    <img src="assets/images/scott-blake-x-ghf9LjrVg-unsplash.jpg" alt="Missile contrail" style="object-position: center 30%;">
+    <div class="strip-label">Why Families Are Acting Now</div>
   </div>
   <div class="photo-strip-item">
-    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80" alt="Construction project">
-    <div class="strip-label">Professional Installation</div>
+    <img src="assets/images/pexels-burst-544966.jpg" alt="Precision construction work">
+    <div class="strip-label">Precision Installation</div>
+  </div>
+  <div class="photo-strip-item">
+    <img src="assets/images/pexels-mikael-blomkvist-8961557.jpg" alt="Professional construction team">
+    <div class="strip-label">Professional Team</div>
   </div>
 </div>
 
