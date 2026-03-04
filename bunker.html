@@ -496,7 +496,7 @@
   <div class="u-dot"></div>
   <span class="u-text"><strong>Assessments available within 48 hours</strong> — Team operational and accepting projects now</span>
   <div class="u-sep"></div>
-  <span class="u-text"><strong>Dubai · Abu Dhabi · Sharjah</strong></span>
+  <span class="u-text"><strong>Serving Dubai Only</strong></span>
   <div class="u-sep"></div>
   <span class="u-text">Free consultation · No obligation</span>
   <div class="u-dot"></div>
@@ -567,7 +567,7 @@
     <div class="mosaic-stat-row">
       <div class="mosaic-stat"><div class="mosaic-stat-val">20+</div><div class="mosaic-stat-lbl">Years in UAE</div></div>
       <div class="mosaic-stat"><div class="mosaic-stat-val">50+</div><div class="mosaic-stat-lbl">Projects Done</div></div>
-      <div class="mosaic-stat"><div class="mosaic-stat-val">3</div><div class="mosaic-stat-lbl">Emirates Covered</div></div>
+      <div class="mosaic-stat"><div class="mosaic-stat-val">1</div><div class="mosaic-stat-lbl">City Served</div></div>
     </div>
   </div>
   <div class="mosaic-right">
@@ -629,7 +629,7 @@
         <div class="cta-check">Free site assessment — no cost, no obligation</div>
         <div class="cta-check">Fixed-price quote before work begins</div>
         <div class="cta-check">6–10 week build, fully discreet</div>
-        <div class="cta-check">UAE licensed · 20+ years · 3 Emirates</div>
+        <div class="cta-check">UAE licensed · 20+ years · Dubai only</div>
       </div>
     </div>
     <div class="cta-form reveal">
@@ -642,10 +642,11 @@
       <div class="f-row"><input type="tel" placeholder="WhatsApp Number (+971...)" id="f-phone"></div>
       <div class="f-row">
         <select id="f-area">
-          <option value="" disabled selected>Your Emirate</option>
-          <option>Dubai</option>
-          <option>Abu Dhabi</option>
-          <option>Sharjah</option>
+          <option value="" disabled selected>Your Dubai area</option>
+          <option>Dubai Marina</option>
+          <option>Jumeirah</option>
+          <option>Business Bay</option>
+          <option>Dubai Hills</option>
         </select>
       </div>
       <div class="f-row"><input type="text" placeholder="Community / Area (optional)" id="f-community"></div>
@@ -662,7 +663,7 @@
 <footer>
   <div>
     <p class="footer-name">SafeHaven by Al Hadeeqa Contracting</p>
-    <p>UAE Licensed · Dubai · Abu Dhabi · Sharjah · <a href="https://wa.me/971544419854">+971 54 441 9854</a></p>
+    <p>UAE Licensed · Serving Dubai Only · <a href="https://wa.me/971544419854">+971 54 441 9854</a></p>
   </div>
   <div style="text-align:right;">
     <p>Sister company: <a href="https://thejanfurniture.com" target="_blank">Jan Furnishings</a></p>
@@ -685,7 +686,7 @@ function submitForm() {
   const area  = document.getElementById('f-area').value  || 'Not specified';
   const community = document.getElementById('f-community').value || '';
   const msg = encodeURIComponent(
-    `Hi Al Hadeeqa Contracting,\n\nI am interested in a *free underground bunker assessment* for my villa.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Emirate:* ${area}${community ? '\n*Area:* ' + community : ''}\n\nPlease contact me at your earliest convenience.`
+    `Hi Al Hadeeqa Contracting,\n\nI am interested in a *free underground bunker assessment* for my villa.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Area in Dubai:* ${area}${community ? '\n*Community:* ' + community : ''}\n\nPlease contact me at your earliest convenience.`
   );
   window.open(`https://wa.me/971544419854?text=${msg}`, '_blank');
 }

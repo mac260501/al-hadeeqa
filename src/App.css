@@ -1,0 +1,317 @@
+/* ── GLOBAL RESET ── */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* ── RESPONSIVE OVERRIDES ── */
+
+/* Desktop: hide hamburger, show nav links */
+.hamburger {
+  display: none !important;
+}
+.nav-links {
+  display: flex !important;
+}
+.nav-cta-desktop {
+  display: flex !important;
+}
+
+/* ── TABLET (≤ 1024px) ── */
+@media (max-width: 1024px) {
+  .section-main {
+    padding: 80px 40px !important;
+  }
+
+  .spotlight-section {
+    padding: 80px 40px !important;
+  }
+
+  .contact-inner {
+    padding: 80px 40px !important;
+  }
+
+  .footer-pad {
+    padding: 48px 40px 0 !important;
+  }
+
+  .spotlight-inner {
+    gap: 48px !important;
+  }
+
+  .about-inner {
+    gap: 48px !important;
+  }
+}
+
+/* ── MOBILE (≤ 768px) ── */
+@media (max-width: 768px) {
+  /* NAV */
+  .main-nav {
+    padding: 0 16px !important;
+    min-height: 60px !important;
+  }
+
+  .nav-links {
+    display: none !important;
+  }
+
+  .nav-cta-desktop {
+    display: none !important;
+  }
+
+  .hamburger {
+    display: flex !important;
+  }
+
+  /* HERO — keep content at top on mobile */
+  .hero-section {
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: stretch !important;
+    min-height: calc(100svh - 60px) !important;
+    padding-top: 60px !important;
+  }
+
+  /* hide decorative elements to slim the content box */
+  .hero-eyebrow {
+    display: none !important;
+  }
+
+  .hero-alert {
+    display: none !important;
+  }
+
+  .hero-h1 {
+    font-size: clamp(32px, 9vw, 44px) !important;
+    margin-bottom: 12px !important;
+  }
+
+  .hero-sub {
+    font-size: 15px !important;
+    margin-bottom: 24px !important;
+    line-height: 1.6 !important;
+  }
+
+  .hero-content {
+    margin: 14px 14px 0 !important;
+    padding: 26px 22px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    border-left-width: 3px !important;
+    background: rgba(255,255,255,0.97) !important;
+  }
+
+  /* STATS — single row visible on first load */
+  .hero-stats {
+    position: static !important;
+    transform: none !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: stretch !important;
+    padding: 0 !important;
+    border-top: 3px solid #1a4a26 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    gap: 0 !important;
+    margin-top: auto !important;
+    width: 100% !important;
+  }
+
+  .hero-stat-item {
+    flex: 1 1 33.333% !important;
+    box-sizing: border-box !important;
+    padding: 14px 6px !important;
+    border-bottom: none !important;
+    border-right: 1px solid rgba(26,74,38,0.12) !important;
+  }
+
+  .hero-stat-item:last-child {
+    border-right: none !important;
+  }
+
+  /* SECTIONS */
+  .section-main {
+    padding: 56px 20px !important;
+  }
+
+  /* SERVICES GRID */
+  .services-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* SPOTLIGHT */
+  .spotlight-section {
+    padding: 60px 20px !important;
+  }
+
+  .spotlight-inner {
+    flex-direction: column !important;
+    gap: 40px !important;
+  }
+
+  /* ABOUT */
+  .about-inner {
+    flex-direction: column !important;
+    gap: 36px !important;
+  }
+
+  .about-images {
+    grid-template-columns: 1fr !important;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    max-width: 100% !important;
+  }
+
+  .about-stat {
+    padding: 18px 10px !important;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  /* CONTACT */
+  .contact-inner {
+    flex-direction: column !important;
+    gap: 36px !important;
+    padding: 56px 20px !important;
+  }
+
+  /* FOOTER */
+  .footer-pad {
+    padding: 48px 20px 0 !important;
+  }
+
+  .footer-inner {
+    flex-direction: column !important;
+    gap: 32px !important;
+    padding-bottom: 36px !important;
+  }
+
+  .wa-float-btn {
+    width: 150px !important;
+    min-height: 44px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    gap: 8px !important;
+    padding: 0 10px !important;
+  }
+
+  .wa-float-btn svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .wa-float-text {
+    font-size: 11px !important;
+  }
+}
+
+/* ── SERVICES NAV GRID ── */
+.services-nav-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+  .services-nav-section {
+    padding: 48px 20px !important;
+  }
+
+  .services-nav-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .services-nav-tile {
+    min-height: 102px !important;
+    padding: 14px 12px !important;
+  }
+
+  .services-nav-tile-name {
+    font-size: 15px !important;
+  }
+
+  .services-nav-tile-sub {
+    font-size: 10px !important;
+  }
+}
+
+/* ── SMALL MOBILE (≤ 480px) ── */
+@media (max-width: 480px) {
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .section-main {
+    padding: 48px 16px !important;
+  }
+
+  .contact-inner {
+    padding: 48px 16px !important;
+  }
+
+  .spotlight-section {
+    padding: 48px 16px !important;
+  }
+
+  .footer-pad {
+    padding: 40px 16px 0 !important;
+  }
+
+  .services-nav-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── HOVER STATES ── */
+.services-nav-tile:hover {
+  background: #1a4a26 !important;
+  color: #fff !important;
+  border-color: #1a4a26 !important;
+}
+
+.services-nav-tile:hover .services-nav-tile-name {
+  color: #fff !important;
+}
+
+.services-nav-tile:hover .services-nav-tile-sub {
+  color: rgba(255,255,255,0.7) !important;
+}
+
+.services-nav-tile:hover {
+  transform: translateY(-2px);
+}
+
+.services-nav-tile:hover span:first-child {
+  color: rgba(255,255,255,0.78) !important;
+}
+
+.footer-pad a:hover {
+  color: #fff !important;
+}
+
+.footer-social-btn:hover {
+  border-color: rgba(209,176,117,0.8) !important;
+  background: rgba(209,176,117,0.08);
+}
+
+.footer-social-btn-wa:hover {
+  border-color: #23df71 !important;
+  background: rgba(35,223,113,0.08);
+}
