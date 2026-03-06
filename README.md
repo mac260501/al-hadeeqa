@@ -15,7 +15,7 @@ npm run build   # production build
 
 ## Contacts in Code
 - WhatsApp: +971 54 441 9854
-- Phone 2: +971 50 482 4621
+- Phone: +971 54 441 9854
 - Email: alhadeeqallc@gmail.com
 
 ## Pages / Routes

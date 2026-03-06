@@ -1,5 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
+import {
+  CONTACT_PHONE_DISPLAY,
+  CONTACT_TEL_URL,
+  CONTACT_WHATSAPP_URL,
+  buildWhatsAppUrl,
+} from "./constants/contact";
 
 // ── LOGO IMAGE ──
 const LogoImg = ({ size = 44 }) => (
@@ -132,10 +138,10 @@ function ContactModal({ service, onClose }) {
   const [msg, setMsg] = useState("");
 
   const submit = () => {
-    const text = encodeURIComponent(
+    const text = (
       `Hi Al Hadeeqa Contracting,\n\nI'd like to enquire about: *${service || "your services"}*\n\n*Name:* ${name || "Not provided"}\n*Phone:* ${phone || "Not provided"}\n*Area in Dubai:* ${area || "Not specified"}${msg ? "\n\n*Message:* " + msg : ""}\n\nPlease get in touch. Thank you.`
     );
-    window.open(`https://wa.me/971544419854?text=${text}`, "_blank");
+    window.open(buildWhatsAppUrl(text), "_blank");
     onClose();
   };
 
@@ -597,13 +603,13 @@ function Contact({ onContact }) {
             <em style={{color:"#5aad6e", fontStyle:"italic"}}>We're one call away.</em>
           </h2>
           <div style={styles.contactDetails}>
-            <a href="https://wa.me/971544419854" target="_blank" rel="noreferrer" style={styles.contactItem}>
+            <a href={CONTACT_WHATSAPP_URL} target="_blank" rel="noreferrer" style={styles.contactItem}>
               <span style={styles.contactItemLabel}>WhatsApp</span>
-              <span>+971 54 441 9854</span>
+              <span>{CONTACT_PHONE_DISPLAY}</span>
             </a>
-            <a href="tel:+971504824621" style={styles.contactItem}>
+            <a href={CONTACT_TEL_URL} style={styles.contactItem}>
               <span style={styles.contactItemLabel}>Phone</span>
-              <span>+971 50 482 4621</span>
+              <span>{CONTACT_PHONE_DISPLAY}</span>
             </a>
             <a href="mailto:alhadeeqallc@gmail.com" style={styles.contactItem}>
               <span style={styles.contactItemLabel}>Email</span>
@@ -633,10 +639,10 @@ function ContactFormInline() {
   const [msg, setMsg] = useState("");
 
   const submit = () => {
-    const text = encodeURIComponent(
+    const text = (
       `Hi Al Hadeeqa Contracting,\n\nI'm interested in a *free assessment*.\n\n*Name:* ${name || "Not provided"}\n*Phone:* ${phone || "Not provided"}\n*Area in Dubai:* ${area || "Not specified"}\n*Service:* ${service || "General enquiry"}${msg ? "\n\n*Message:* " + msg : ""}\n\nPlease get in touch.`
     );
-    window.open(`https://wa.me/971544419854?text=${text}`, "_blank");
+    window.open(buildWhatsAppUrl(text), "_blank");
   };
 
   return (
@@ -698,8 +704,8 @@ function Footer() {
           </div>
           <div style={styles.footerLinkGroup}>
             <div style={styles.footerLinkHead}>Contact</div>
-            <a href="https://wa.me/971544419854" target="_blank" rel="noreferrer" style={styles.footerLink}>+971 54 441 9854</a>
-            <a href="tel:+971504824621" style={styles.footerLink}>+971 50 482 4621</a>
+            <a href={CONTACT_WHATSAPP_URL} target="_blank" rel="noreferrer" style={styles.footerLink}>{CONTACT_PHONE_DISPLAY}</a>
+            <a href={CONTACT_TEL_URL} style={styles.footerLink}>{CONTACT_PHONE_DISPLAY}</a>
             <a href="mailto:alhadeeqallc@gmail.com" style={styles.footerLink}>alhadeeqallc@gmail.com</a>
             <div style={{...styles.footerLink, cursor:"default"}}>Downtown Dubai, UAE 23435</div>
             <div style={styles.footerSocialRow}>
@@ -724,7 +730,7 @@ function Footer() {
                 <IgIcon />
               </a>
               <a
-                href="https://wa.me/971544419854"
+                href={CONTACT_WHATSAPP_URL}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="WhatsApp"
@@ -754,7 +760,7 @@ function Footer() {
 function FloatingWa() {
   return (
     <a
-      href="https://wa.me/971544419854?text=Hi%20Al%20Hadeeqa%2C%20I%27d%20like%20a%20free%20consultation."
+      href={buildWhatsAppUrl("Hi Al Hadeeqa, I'd like a free consultation.")}
       target="_blank"
       rel="noreferrer"
       className="wa-float-btn"
