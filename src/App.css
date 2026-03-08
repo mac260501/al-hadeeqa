@@ -28,6 +28,34 @@ body {
     padding: 80px 40px !important;
   }
 
+  .services-page-hero {
+    padding: 156px 40px 56px !important;
+  }
+
+  .services-page-hero-inner {
+    grid-template-columns: 1fr !important;
+  }
+
+  .page-hero-copy-card {
+    padding: 30px 30px 34px !important;
+  }
+
+  .services-page-meta {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .service-detail-hero {
+    padding: 156px 40px 56px !important;
+  }
+
+  .service-detail-hero-inner {
+    grid-template-columns: 1fr !important;
+  }
+
+  .service-detail-grid {
+    grid-template-columns: 1fr !important;
+  }
+
   .spotlight-section {
     padding: 80px 40px !important;
   }
@@ -69,13 +97,18 @@ body {
     display: flex !important;
   }
 
+  .mobile-menu button {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
   /* HERO — keep content at top on mobile */
   .hero-section {
     flex-direction: column !important;
     justify-content: space-between !important;
     align-items: stretch !important;
-    min-height: calc(100svh - 60px) !important;
-    padding-top: 60px !important;
+    min-height: calc(100svh - 96px) !important;
+    padding-top: 96px !important;
   }
 
   /* hide decorative elements to slim the content box */
@@ -138,6 +171,45 @@ body {
   /* SECTIONS */
   .section-main {
     padding: 56px 20px !important;
+  }
+
+  .services-page-hero {
+    padding: 128px 20px 44px !important;
+  }
+
+  .page-hero-copy-card {
+    padding: 24px 20px 28px !important;
+  }
+
+  .services-page-meta {
+    grid-template-columns: 1fr !important;
+  }
+
+  .service-detail-hero {
+    padding: 128px 20px 44px !important;
+  }
+
+  .service-detail-lists {
+    grid-template-columns: 1fr !important;
+  }
+
+  .page-contact-section {
+    padding-top: 96px !important;
+  }
+
+  .home-bunker-section {
+    padding: 0 20px 40px !important;
+  }
+
+  .home-bunker-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 28px 24px !important;
+    gap: 24px !important;
+  }
+
+  .home-bunker-actions {
+    width: 100% !important;
   }
 
   /* SERVICES GRID */
@@ -254,6 +326,22 @@ body {
     grid-template-columns: 1fr !important;
   }
 
+  .services-page-hero {
+    padding: 124px 16px 40px !important;
+  }
+
+  .service-detail-hero {
+    padding: 124px 16px 40px !important;
+  }
+
+  .home-bunker-section {
+    padding: 0 16px 32px !important;
+  }
+
+  .home-bunker-card {
+    padding: 24px 20px !important;
+  }
+
   .section-main {
     padding: 48px 16px !important;
   }
@@ -314,4 +402,39 @@ body {
 .footer-social-btn-wa:hover {
   border-color: #23df71 !important;
   background: rgba(35,223,113,0.08);
+}
+
+/* ── JAN GROUP BAR ── */
+.jan-group-bar a:hover {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+@media (max-width: 600px) {
+  .jan-group-bar-tab,
+  .jan-group-bar-current {
+    font-size: 9px !important;
+    letter-spacing: 0.08em !important;
+    padding: 0 12px !important;
+  }
+
+  .jan-group-bar-current {
+    margin: 6px 6px !important;
+  }
+}
+
+/* ── JAN GROUP SECTION ── */
+@media (max-width: 768px) {
+  .jan-group-section {
+    padding: 48px 20px !important;
+  }
+
+  .jan-brands-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .jan-group-section {
+    padding: 40px 16px !important;
+  }
 }

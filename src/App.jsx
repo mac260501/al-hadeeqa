@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import {
   CONTACT_PHONE_DISPLAY,
@@ -6,16 +6,25 @@ import {
   CONTACT_WHATSAPP_URL,
   buildWhatsAppUrl,
 } from "./constants/contact";
+import {
+  SERVICES,
+  SERVICE_SELECT_OPTIONS,
+  getServiceAnchorId,
+  getServiceById,
+  getServiceHref,
+} from "./constants/services";
 
-// ── LOGO IMAGE ──
 const LogoImg = ({ size = 44 }) => (
-  <img src="/logo.jpeg" alt="Al Hadeeqa" style={{ height: size, width: "auto", display: "block", objectFit: "contain" }} />
+  <img
+    src="/logo.jpeg"
+    alt="Al Hadeeqa"
+    style={{ height: size, width: "auto", display: "block", objectFit: "contain" }}
+  />
 );
 
-// ── WHATSAPP SVG ──
 const WaIcon = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
   </svg>
 );
 
@@ -31,106 +40,195 @@ const IgIcon = () => (
   </svg>
 );
 
-// ── SERVICES DATA ──
-const SERVICES = [
-  {
-    id: "construction",
-    title: "Construction & Remodeling",
-    subtitle: "Complete build solutions",
-    desc: "Full-scope residential and commercial construction. From villa extensions to complete fit-outs, we deliver precision builds that stand for decades.",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-    tags: ["Villa Construction", "Extensions", "Fit-Out", "Remodeling"]
-  },
-  {
-    id: "pergolas",
-    title: "Luxury Pergolas",
-    subtitle: "Crafted for the exceptional",
-    desc: "Bespoke pergolas engineered for UAE's elite. Powder-coated aluminum, louvred roofing, integrated lighting — spaces that become destinations.",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
-    tags: ["Louvred Roof", "Custom Design", "Lighting", "DM Approved"],
-    highlight: true
-  },
-  {
-    id: "carports",
-    title: "Supercar Carports",
-    subtitle: "Protection worthy of the machine",
-    desc: "Your Lamborghini, Ferrari, or Rolls deserves more than a parking spot. Our architectural carports are precision-engineered shelters for exceptional vehicles.",
-    image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=800&q=80",
-    tags: ["Supercar Ready", "UV-Resistant", "Custom Steel", "10-Year Warranty"],
-    highlight: true
-  },
-  {
-    id: "glassrooms",
-    title: "Glass Rooms & Partitions",
-    subtitle: "Transparency, perfected",
-    desc: "Architectural glass installations — office partitions, enclosed patios, frameless balustrades, and bespoke glassrooms that blend indoor and outdoor living.",
-    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80",
-    tags: ["Frameless Glass", "Partitions", "Balustrades", "Enclosures"]
-  },
-  {
-    id: "dewatering",
-    title: "Dewatering & Shoring",
-    subtitle: "Ground control from day one",
-    desc: "Professional dewatering systems and shoring solutions for deep excavations. We manage groundwater and stabilize excavations safely — critical for UAE's coastal and sandy substrates.",
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80",
-    tags: ["Wellpoint Systems", "Sheet Piling", "Groundwater Control", "Deep Excavation"]
-  },
-  {
-    id: "excavation",
-    title: "Excavation",
-    subtitle: "Precision earthworks",
-    desc: "Controlled excavation for foundations, basements, utilities, and civil works. Our experienced operators handle complex sites with precision and safety protocols.",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80",
-    tags: ["Basement Dig", "Foundation Work", "Utility Trenching", "Site Prep"]
-  },
-  {
-    id: "demolition",
-    title: "Demolition",
-    subtitle: "Cleared. Clean. Ready.",
-    desc: "Safe, licensed demolition for residential and commercial structures. Full debris removal and site clearance — leaving your plot ready for what comes next.",
-    image: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&q=80",
-    tags: ["Licensed", "Debris Removal", "Structural Demo", "Site Clearance"]
-  },
-  {
-    id: "waterproofing",
-    title: "Roof Waterproofing",
-    subtitle: "Sealed against the elements",
-    desc: "Comprehensive waterproofing systems for flat roofs, terraces, and wet areas. UAE-rated membranes and coatings that handle extreme heat and rare but punishing rainfall.",
-    image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80",
-    tags: ["Membrane Systems", "Terrace Waterproofing", "Heat-Resistant", "10-Year Warranty"]
-  },
-  {
-    id: "maintenance",
-    title: "Maintenance",
-    subtitle: "Ongoing care, on schedule",
-    desc: "Planned and reactive maintenance for residential and commercial properties. Painting, repairs, fixture replacement, and everything in between — handled by one trusted team.",
-    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
-    tags: ["Annual Contracts", "Painting", "Repairs", "Handyman Services"]
-  },
-];
-
-// ── STATS ──
 const STATS = [
   { val: "35+", label: "Years in UAE" },
   { val: "500+", label: "Projects Completed" },
   { val: "10yr", label: "Warranty on Select Works" },
 ];
 
-// ── USE INTERSECTION OBSERVER ──
+const JAN_BRANDS = [
+  {
+    id: "construction",
+    name: "Jan Construction",
+    desc: "Premium construction and bespoke contracting for luxury residential and commercial projects.",
+    href: "/",
+    current: true,
+  },
+  {
+    id: "furnishings",
+    name: "Jan Furnishings",
+    desc: "Custom curtains, blinds and premium window treatments across Dubai.",
+    href: "https://thejanfurniture.com",
+    current: false,
+  },
+  {
+    id: "interiors",
+    name: "Jan Interiors",
+    desc: "Wall panels, wallpaper, painting and curated interior package solutions.",
+    href: "https://thejanfurniture.com/interiors/",
+    current: false,
+  },
+];
+
+const BrandIcon = ({ id }) => {
+  if (id === "furnishings") return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+      <polyline points="9,22 9,12 15,12 15,22"/>
+    </svg>
+  );
+  if (id === "interiors") return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="7.5" height="7.5"/>
+      <rect x="13.5" y="3" width="7.5" height="7.5"/>
+      <rect x="3" y="13.5" width="7.5" height="7.5"/>
+      <rect x="13.5" y="13.5" width="7.5" height="7.5"/>
+    </svg>
+  );
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/>
+      <line x1="12" y1="22" x2="12" y2="15.5"/>
+      <line x1="22" y1="8.5" x2="12" y2="15.5"/>
+      <line x1="2" y1="8.5" x2="12" y2="15.5"/>
+    </svg>
+  );
+};
+
+function JanGroupBar() {
+  return (
+    <div className="jan-group-bar" style={styles.janGroupBar}>
+      <div style={styles.janGroupBarInner}>
+        {JAN_BRANDS.map((brand) =>
+          brand.current ? (
+            <div key={brand.id} style={styles.janGroupBarCurrent} className="jan-group-bar-current">
+              <span style={styles.janGroupBarCurrentDot} />
+              <span>{brand.name}</span>
+            </div>
+          ) : (
+            <a
+              key={brand.id}
+              href={brand.href}
+              target="_blank"
+              rel="noreferrer"
+              style={styles.janGroupBarTab}
+              className="jan-group-bar-tab"
+            >
+              {brand.name}
+            </a>
+          )
+        )}
+      </div>
+    </div>
+  );
+}
+
+const PROJECT_IMGS = [
+  { src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80", label: "Luxury Pergola - Dubai Villa" },
+  { src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80", label: "Glass Partition - Office Fit-Out" },
+  { src: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80", label: "Excavation, Dewatering & Shoring" },
+  { src: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&q=80", label: "Premium Carport - Jumeirah" },
+  { src: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80", label: "Roof Waterproofing" },
+  { src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80", label: "Foundation Work" },
+];
+
+const PAGE_HERO_IMAGES = {
+  services: "/assets/images/services-hero.jpg",
+  about: "/assets/images/about-hero.jpg",
+  projects: "/assets/images/projects-hero.jpg",
+};
+
+function normalizePath(pathname) {
+  const trimmed = pathname.replace(/\/+$/, "");
+  return trimmed || "/";
+}
+
+function resolveRoute(pathname) {
+  const normalizedPath = normalizePath(pathname);
+
+  if (normalizedPath === "/") {
+    return { type: "home", pathname: normalizedPath };
+  }
+
+  if (normalizedPath === "/services") {
+    return { type: "services", pathname: normalizedPath };
+  }
+
+  if (normalizedPath === "/about") {
+    return { type: "about", pathname: normalizedPath };
+  }
+
+  if (normalizedPath === "/projects") {
+    return { type: "projects", pathname: normalizedPath };
+  }
+
+  if (normalizedPath === "/contact") {
+    return { type: "contact", pathname: normalizedPath };
+  }
+
+  if (normalizedPath === "/bunker") {
+    return { type: "bunker", pathname: normalizedPath };
+  }
+
+  const serviceMatch = normalizedPath.match(/^\/services\/([^/]+)$/);
+  if (serviceMatch) {
+    const serviceId = decodeURIComponent(serviceMatch[1]);
+    const service = getServiceById(serviceId);
+
+    if (service) {
+      return { type: "service", pathname: normalizedPath, service };
+    }
+  }
+
+  return { type: "not-found", pathname: normalizedPath };
+}
+
 function useInView(options = {}) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
+
   useEffect(() => {
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setInView(true); obs.disconnect(); }
-    }, { threshold: 0.12, ...options });
-    if (ref.current) obs.observe(ref.current);
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.12, ...options }
+    );
+
+    if (ref.current) {
+      obs.observe(ref.current);
+    }
+
     return () => obs.disconnect();
   }, []);
+
   return [ref, inView];
 }
 
-// ── CONTACT FORM MODAL ──
+function useScrollToHash(pathname) {
+  useEffect(() => {
+    const scrollToTarget = () => {
+      const hash = window.location.hash.replace(/^#/, "");
+
+      if (!hash) {
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      const el = document.getElementById(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "auto", block: "start" });
+      }
+    };
+
+    const timer = window.setTimeout(scrollToTarget, 60);
+    return () => window.clearTimeout(timer);
+  }, [pathname]);
+}
+
 function ContactModal({ service, onClose }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -138,25 +236,23 @@ function ContactModal({ service, onClose }) {
   const [msg, setMsg] = useState("");
 
   const submit = () => {
-    const text = (
-      `Hi Al Hadeeqa Contracting,\n\nI'd like to enquire about: *${service || "your services"}*\n\n*Name:* ${name || "Not provided"}\n*Phone:* ${phone || "Not provided"}\n*Area in Dubai:* ${area || "Not specified"}${msg ? "\n\n*Message:* " + msg : ""}\n\nPlease get in touch. Thank you.`
-    );
+    const text = `Hi Al Hadeeqa Contracting,\n\nI'd like to enquire about: *${service || "your services"}*\n\n*Name:* ${name || "Not provided"}\n*Phone:* ${phone || "Not provided"}\n*Area in Dubai:* ${area || "Not specified"}${msg ? `\n\n*Message:* ${msg}` : ""}\n\nPlease get in touch. Thank you.`;
     window.open(buildWhatsAppUrl(text), "_blank");
     onClose();
   };
 
   return (
     <div style={styles.modalOverlay} onClick={onClose}>
-      <div style={styles.modalBox} onClick={e => e.stopPropagation()}>
+      <div style={styles.modalBox} onClick={(event) => event.stopPropagation()}>
         <button style={styles.modalClose} onClick={onClose}>✕</button>
         <div style={styles.modalEyebrow}>Free Consultation</div>
         <h3 style={styles.modalTitle}>Let's talk about your project</h3>
         {service && <div style={styles.modalService}>{service}</div>}
         <div style={styles.formGrid}>
-          <input style={styles.input} placeholder="Your Name" value={name} onChange={e=>setName(e.target.value)} />
-          <input style={styles.input} placeholder="WhatsApp (+971...)" value={phone} onChange={e=>setPhone(e.target.value)} />
+          <input style={styles.input} placeholder="Your Name" value={name} onChange={(event) => setName(event.target.value)} />
+          <input style={styles.input} placeholder="WhatsApp (+971...)" value={phone} onChange={(event) => setPhone(event.target.value)} />
         </div>
-        <select style={{...styles.input, width:"100%", marginBottom:14}} value={area} onChange={e=>setArea(e.target.value)}>
+        <select style={{ ...styles.input, width: "100%", marginBottom: 14 }} value={area} onChange={(event) => setArea(event.target.value)}>
           <option value="">Select Dubai area</option>
           <option>Dubai Marina</option>
           <option>Jumeirah</option>
@@ -164,7 +260,12 @@ function ContactModal({ service, onClose }) {
           <option>Dubai Hills</option>
           <option>Other Dubai Area</option>
         </select>
-        <textarea style={{...styles.input, width:"100%", height:90, resize:"vertical", marginBottom:20}} placeholder="Brief description of your project (optional)" value={msg} onChange={e=>setMsg(e.target.value)} />
+        <textarea
+          style={{ ...styles.input, width: "100%", height: 90, resize: "vertical", marginBottom: 20 }}
+          placeholder="Brief description of your project (optional)"
+          value={msg}
+          onChange={(event) => setMsg(event.target.value)}
+        />
         <button style={styles.waBtn} onClick={submit}>
           <WaIcon /> Send via WhatsApp
         </button>
@@ -174,66 +275,179 @@ function ContactModal({ service, onClose }) {
   );
 }
 
-// ── NAV ──
-function Nav({ onContact }) {
+function Nav({ onContact, route }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navLinks = ["Services", "About", "Projects", "Contact"];
+  let navLinks = [
+    { label: "Home", href: "/", active: route.type === "home" },
+    { label: "Services", href: "/services" },
+    { label: "About", href: "/about" },
+    { label: "Projects", href: "/projects" },
+    { label: "Contact", href: "/contact" },
+  ];
+
+  if (route.type === "services") {
+    navLinks = [
+      { label: "Home", href: "/" },
+      { label: "Services", href: "#services-list", active: true },
+      { label: "About", href: "/about" },
+      { label: "Projects", href: "/projects" },
+      { label: "Contact", href: "/contact" },
+    ];
+  } else if (route.type === "service") {
+    navLinks = [
+      { label: "Home", href: "/" },
+      { label: "Services", href: "/services", active: true },
+      { label: "About", href: "/about" },
+      { label: "Projects", href: "/projects" },
+      { label: "Contact", href: "/contact" },
+    ];
+  } else if (route.type === "about") {
+    navLinks = [
+      { label: "Home", href: "/" },
+      { label: "Services", href: "/services" },
+      { label: "About", href: "/about", active: true },
+      { label: "Projects", href: "/projects" },
+      { label: "Contact", href: "/contact" },
+    ];
+  } else if (route.type === "projects") {
+    navLinks = [
+      { label: "Home", href: "/" },
+      { label: "Services", href: "/services" },
+      { label: "About", href: "/about" },
+      { label: "Projects", href: "/projects", active: true },
+      { label: "Contact", href: "/contact" },
+    ];
+  } else if (route.type === "contact") {
+    navLinks = [
+      { label: "Home", href: "/" },
+      { label: "Services", href: "/services" },
+      { label: "About", href: "/about" },
+      { label: "Projects", href: "/projects" },
+      { label: "Contact", href: "/contact", active: true },
+    ];
+  } else if (route.type === "not-found") {
+    navLinks = [
+      { label: "Home", href: "/" },
+      { label: "Services", href: "/services" },
+      { label: "About", href: "/about" },
+      { label: "Projects", href: "/projects" },
+      { label: "Contact", href: "/contact" },
+    ];
+  }
 
   return (
-    <nav style={{ ...styles.nav, boxShadow: scrolled ? "0 4px 24px rgba(0,0,0,0.10)" : "0 2px 12px rgba(0,0,0,0.04)" }} className="main-nav">
-      <div style={styles.navBrand}>
+    <nav
+      style={{
+        ...styles.nav,
+        boxShadow: scrolled ? "0 4px 24px rgba(0,0,0,0.10)" : "0 2px 12px rgba(0,0,0,0.04)",
+      }}
+      className="main-nav"
+    >
+      <a href="/" style={styles.navBrandLink}>
         <LogoImg size={42} />
         <div>
           <div style={styles.navName}>Al Hadeeqa Contracting</div>
         </div>
-      </div>
+      </a>
 
-      {/* Desktop links */}
       <div style={styles.navLinks} className="nav-links">
-        {navLinks.map(l => (
-          <a key={l} href={`#${l.toLowerCase()}`} style={styles.navLink}>{l}</a>
+        {navLinks.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            style={{ ...styles.navLink, ...(link.active ? styles.navLinkActive : {}) }}
+          >
+            {link.label}
+          </a>
         ))}
       </div>
 
       <button style={styles.navCta} className="nav-cta-desktop" onClick={onContact}>Free Consultation</button>
 
-      {/* Hamburger */}
-      <button style={styles.hamburger} className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-        <span style={{...styles.hamburgerLine, transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none"}} />
-        <span style={{...styles.hamburgerLine, opacity: menuOpen ? 0 : 1}} />
-        <span style={{...styles.hamburgerLine, transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none"}} />
+      <button style={styles.hamburger} className="hamburger" onClick={() => setMenuOpen((open) => !open)}>
+        <span style={{ ...styles.hamburgerLine, transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
+        <span style={{ ...styles.hamburgerLine, opacity: menuOpen ? 0 : 1 }} />
+        <span style={{ ...styles.hamburgerLine, transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
       </button>
 
       {menuOpen && (
-        <div style={styles.mobileMenu}>
-          {navLinks.map(l => (
-            <a key={l} href={`#${l.toLowerCase()}`} style={styles.mobileLink} onClick={() => setMenuOpen(false)}>{l}</a>
+        <div style={styles.mobileMenu} className="mobile-menu">
+          {navLinks.map((link) => (
+            <a key={link.label} href={link.href} style={styles.mobileLink} onClick={() => setMenuOpen(false)}>
+              {link.label}
+            </a>
           ))}
-          <button style={{...styles.navCta, width:"100%", marginTop:8}} onClick={() => { setMenuOpen(false); onContact(); }}>
-            Free Consultation
-          </button>
+          <div style={styles.mobileCta}>
+            <button
+              style={{ ...styles.navCta, width: "100%" }}
+              onClick={() => {
+                setMenuOpen(false);
+                onContact();
+              }}
+            >
+              Free Consultation
+            </button>
+            <a
+              href={CONTACT_WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              style={styles.mobileWaBtn}
+              onClick={() => setMenuOpen(false)}
+            >
+              <WaIcon /> Chat on WhatsApp
+            </a>
+          </div>
+          <div style={styles.mobileJanGroup}>
+            <div style={styles.mobileJanGroupLabel}>Part of the Jan Group</div>
+            {JAN_BRANDS.map((brand) =>
+              brand.current ? (
+                <div key={brand.id} style={styles.mobileJanBrandRow}>
+                  <div style={styles.mobileJanBrandIconBox}>
+                    <BrandIcon id={brand.id} />
+                  </div>
+                  <span style={styles.mobileJanBrandName}>{brand.name}</span>
+                  <span style={styles.mobileJanBrandTag}>Current</span>
+                </div>
+              ) : (
+                <a
+                  key={brand.id}
+                  href={brand.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ ...styles.mobileJanBrandRow, textDecoration: "none" }}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <div style={styles.mobileJanBrandIconBox}>
+                    <BrandIcon id={brand.id} />
+                  </div>
+                  <span style={styles.mobileJanBrandName}>{brand.name}</span>
+                </a>
+              )
+            )}
+          </div>
         </div>
       )}
     </nav>
   );
 }
 
-// ── HERO ──
 function Hero({ onContact }) {
   return (
     <section style={styles.hero} id="home" className="hero-section">
-      {/* BG image from Unsplash — luxury villa */}
-      <div style={{
-        ...styles.heroBg,
-        backgroundImage: `url('https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1600&q=80')`
-      }} />
+      <div
+        style={{
+          ...styles.heroBg,
+          backgroundImage: "url('https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1600&q=80')",
+        }}
+      />
       <div style={styles.heroOverlay} />
 
       <div style={styles.heroContent} className="hero-content">
@@ -249,21 +463,21 @@ function Hero({ onContact }) {
           <em style={styles.heroEm}>Crafting Excellence.</em>
         </h1>
         <p style={styles.heroSub} className="hero-sub">
-          From luxury pergolas and supercar carports to dewatering, excavation, and full construction — one Dubai team, decades of proof.
+          From luxury pergolas and premium carports to dewatering, shoring, excavation, and full construction - one Dubai team, decades of proof.
         </p>
         <div style={styles.heroCtas}>
           <button style={styles.btnPrimary} onClick={onContact}>
             <WaIcon /> Get a Free Quote
           </button>
-          <a href="#services" style={styles.btnSecondary}>Explore Our Services →</a>
+          <a href="/services" style={styles.btnSecondary}>View Services →</a>
         </div>
       </div>
 
       <div style={styles.heroStats} className="hero-stats">
-        {STATS.map(s => (
-          <div key={s.label} style={styles.heroStatItem} className="hero-stat-item">
-            <div style={styles.heroStatVal}>{s.val}</div>
-            <div style={styles.heroStatLabel}>{s.label}</div>
+        {STATS.map((stat) => (
+          <div key={stat.label} style={styles.heroStatItem} className="hero-stat-item">
+            <div style={styles.heroStatVal}>{stat.val}</div>
+            <div style={styles.heroStatLabel}>{stat.label}</div>
           </div>
         ))}
       </div>
@@ -271,21 +485,20 @@ function Hero({ onContact }) {
   );
 }
 
-// ── SERVICE CARD ──
-function ServiceCard({ service, onContact, index }) {
+function ServicePreviewCard({ service, index }) {
   const [ref, inView] = useInView();
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
-      id={`service-${service.id}`}
       ref={ref}
       style={{
         ...styles.serviceCard,
+        ...(service.highlight ? styles.serviceCardHighlight : {}),
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(30px)",
         transition: `opacity 0.6s ease ${index * 0.08}s, transform 0.6s ease ${index * 0.08}s`,
-        ...(hovered ? styles.serviceCardHover : {})
+        ...(hovered ? styles.serviceCardHover : {}),
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -296,104 +509,466 @@ function ServiceCard({ service, onContact, index }) {
           alt={service.title}
           style={{
             ...styles.serviceImg,
-            transform: hovered ? "scale(1.05)" : "scale(1)"
+            transform: hovered ? "scale(1.05)" : "scale(1)",
           }}
         />
         <div style={styles.serviceImgOverlay} />
       </div>
       <div style={styles.serviceBody}>
+        {service.highlight && <div style={styles.highlightBadge}>Featured</div>}
         <div style={styles.serviceSubtitle}>{service.subtitle}</div>
         <h3 style={styles.serviceTitle}>{service.title}</h3>
         <p style={styles.serviceDesc}>{service.desc}</p>
         <div style={styles.serviceTags}>
-          {service.tags.map(t => (
-            <span key={t} style={styles.serviceTag}>{t}</span>
+          {service.tags.map((tag) => (
+            <span key={tag} style={styles.serviceTag}>{tag}</span>
           ))}
         </div>
-        <button
-          style={styles.serviceBtn}
-          onClick={() => onContact(service.title)}
-        >
-          Enquire Now →
-        </button>
+        <a href={getServiceHref(service.id)} style={styles.serviceLinkBtn}>Learn More →</a>
       </div>
     </div>
   );
 }
 
-// ── SERVICES OVERVIEW / QUICK NAV ──
-function ServicesOverview() {
-  const scrollToService = (id) => {
-    const el = document.getElementById(`service-${id}`);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+function ServiceDetailCard({ service, index }) {
+  const [ref, inView] = useInView();
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <section id="services-nav" style={styles.servicesNavSection} className="services-nav-section">
-      <div style={styles.servicesNavInner}>
-        <div style={{ textAlign: "center", marginBottom: 36 }}>
-          <div style={styles.sectionEyebrow}>Everything We Do</div>
-          <div style={styles.greenRule} />
-          <h2 style={{ ...styles.sectionH2, fontSize: "clamp(26px, 3vw, 40px)" }}>
-            Our Services at a Glance
-          </h2>
-          <p style={{ ...styles.sectionSub, marginTop: 12 }}>
-            Select any service to jump straight to the full details.
-          </p>
-        </div>
-
-        <div style={styles.servicesNavGrid} className="services-nav-grid">
-          {SERVICES.map((s, index) => (
-            <button
-              key={s.id}
-              className="services-nav-tile"
-              style={styles.servicesNavTile}
-              onClick={() => scrollToService(s.id)}
-            >
-              <span style={styles.servicesNavIndex}>{String(index + 1).padStart(2, "0")}</span>
-              <span className="services-nav-tile-name" style={styles.servicesNavName}>{s.title}</span>
-              <span className="services-nav-tile-sub" style={styles.servicesNavSub}>{s.subtitle}</span>
-            </button>
+    <div
+      id={getServiceAnchorId(service.id)}
+      ref={ref}
+      style={{
+        ...styles.serviceCard,
+        ...(service.highlight ? styles.serviceCardHighlight : {}),
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(30px)",
+        transition: `opacity 0.6s ease ${index * 0.08}s, transform 0.6s ease ${index * 0.08}s`,
+        ...(hovered ? styles.serviceCardHover : {}),
+        scrollMarginTop: 96,
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div style={styles.serviceImgWrap}>
+        <img
+          src={service.image}
+          alt={service.title}
+          style={{
+            ...styles.serviceImg,
+            transform: hovered ? "scale(1.05)" : "scale(1)",
+          }}
+        />
+        <div style={styles.serviceImgOverlay} />
+      </div>
+      <div style={styles.serviceBody}>
+        {service.highlight && <div style={styles.highlightBadge}>Featured</div>}
+        <div style={styles.serviceSubtitle}>{service.subtitle}</div>
+        <h3 style={styles.serviceTitle}>{service.title}</h3>
+        <p style={styles.serviceDesc}>{service.desc}</p>
+        <div style={styles.serviceTags}>
+          {service.tags.map((tag) => (
+            <span key={tag} style={styles.serviceTag}>{tag}</span>
           ))}
         </div>
+        <a href={getServiceHref(service.id)} style={styles.serviceLinkBtn}>Learn More →</a>
+      </div>
+    </div>
+  );
+}
 
-        <div style={{ textAlign: "center", marginTop: 36 }}>
-          <a href="#services" style={styles.servicesNavCta}>View Full Details ↓</a>
+function HomeServicesPreview() {
+  const [ref, inView] = useInView();
+  const featuredServices = ["construction", "shoring", "excavation", "carports"]
+    .map((serviceId) => getServiceById(serviceId))
+    .filter(Boolean);
+
+  return (
+    <section id="services" style={{ ...styles.section, scrollMarginTop: 96 }} className="section-main">
+      <div
+        ref={ref}
+        style={{
+          ...styles.sectionHeader,
+          opacity: inView ? 1 : 0,
+          transform: inView ? "translateY(0)" : "translateY(20px)",
+          transition: "opacity 0.6s ease, transform 0.6s ease",
+        }}
+      >
+        <div style={styles.sectionEyebrow}>Our Services</div>
+        <div style={styles.greenRule} />
+        <h2 style={styles.sectionH2}>From groundwork to finishing detail — we do it all.</h2>
+        <p style={styles.sectionSub}>
+          Al Hadeeqa covers the full construction spectrum: enabling works, dewatering, shoring, luxury pergolas, carports, glass, waterproofing, and maintenance. One licensed team, one standard of work.
+        </p>
+      </div>
+
+      <div style={styles.servicesGrid} className="services-grid home-services-grid">
+        {featuredServices.map((service, index) => (
+          <ServicePreviewCard key={service.id} service={service} index={index} />
+        ))}
+      </div>
+
+      <div style={styles.homeServicesFooter}>
+        <a href="/services" style={styles.servicesNavCta}>Explore all services and landing pages →</a>
+      </div>
+    </section>
+  );
+}
+
+function HomeAboutPreview() {
+  const [ref, inView] = useInView();
+
+  return (
+    <section id="about" style={{ ...styles.section, background: "#f4f8f5", scrollMarginTop: 96 }} className="section-main">
+      <div
+        ref={ref}
+        className="about-inner"
+        style={{
+          ...styles.aboutInner,
+          opacity: inView ? 1 : 0,
+          transform: inView ? "translateY(0)" : "translateY(24px)",
+          transition: "opacity 0.7s ease, transform 0.7s ease",
+        }}
+      >
+        <div style={styles.aboutText}>
+          <div style={styles.sectionEyebrow}>About Us</div>
+          <div style={{ ...styles.greenRule, margin: "12px 0 24px", marginLeft: 0 }} />
+          <h2 style={{ ...styles.sectionH2, textAlign: "left" }}>
+            Built on experience.<br />
+            <em style={{ color: "var(--green)", fontStyle: "italic" }}>Delivered by one team.</em>
+          </h2>
+          <p style={styles.aboutDesc}>
+            Al Hadeeqa has spent 35 years building across the UAE — from enabling works and specialist site packages to luxury pergolas, fit-outs, glass, waterproofing, and maintenance.
+          </p>
+          <p style={styles.aboutDesc}>
+            Our in-house crew handles every phase of your project, so nothing gets passed down the chain. One point of contact, one accountable team, from site prep through to final finish.
+          </p>
+          <div style={styles.pageHeroActions}>
+            <a href="/about" style={styles.btnPrimaryLink}>Read About Al Hadeeqa</a>
+          </div>
+        </div>
+        <div style={styles.aboutImages} className="about-images">
+          <img
+            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80"
+            alt="Construction site Dubai"
+            style={styles.aboutImg}
+          />
         </div>
       </div>
     </section>
   );
 }
 
-// ── SERVICES SECTION ──
-function Services({ onContact }) {
+function HomeProjectsPreview() {
   const [ref, inView] = useInView();
+  const featuredProjects = PROJECT_IMGS.slice(0, 3);
+
   return (
-    <section id="services" style={styles.section} className="section-main">
-      <div ref={ref} style={{
-        ...styles.sectionHeader,
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(20px)",
-        transition: "opacity 0.6s ease, transform 0.6s ease"
-      }}>
+    <section id="projects" style={{ ...styles.section, scrollMarginTop: 96 }} className="section-main">
+      <div
+        ref={ref}
+        style={{
+          ...styles.sectionHeader,
+          opacity: inView ? 1 : 0,
+          transform: inView ? "translateY(0)" : "translateY(20px)",
+          transition: "opacity 0.6s ease, transform 0.6s ease",
+        }}
+      >
+        <div style={styles.sectionEyebrow}>Projects</div>
+        <div style={styles.greenRule} />
+        <h2 style={styles.sectionH2}>Proof of work across Dubai.</h2>
+        <p style={styles.sectionSub}>
+          A selection of residential and commercial projects we have delivered — from luxury villa pergolas and premium carports to excavation, dewatering, and full fit-outs.
+        </p>
+      </div>
+      <div style={styles.projectsGrid} className="projects-grid">
+        {featuredProjects.map((project, index) => (
+          <ProjectThumb key={project.label} project={project} index={index} />
+        ))}
+      </div>
+      <div style={styles.homeServicesFooter}>
+        <a href="/projects" style={styles.servicesNavCta}>Browse the full Projects page →</a>
+      </div>
+    </section>
+  );
+}
+
+function HomeBunkerPreview() {
+  const [ref, inView] = useInView();
+
+  return (
+    <section style={styles.homeBunkerSection} className="home-bunker-section">
+      <div
+        ref={ref}
+        className="home-bunker-card"
+        style={{
+          ...styles.homeBunkerCard,
+          opacity: inView ? 1 : 0,
+          transform: inView ? "translateY(0)" : "translateY(20px)",
+          transition: "opacity 0.7s ease, transform 0.7s ease",
+        }}
+      >
+        <img
+          src="/assets/images/vault-door.jpg"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            right: 0,
+            top: 0,
+            height: "100%",
+            width: "45%",
+            objectFit: "cover",
+            objectPosition: "center",
+            opacity: 0.13,
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 40%, black 100%)",
+            maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 40%, black 100%)",
+            pointerEvents: "none",
+          }}
+        />
+        <div style={styles.homeBunkerCopy} className="home-bunker-copy">
+          <div style={styles.homeBunkerBadge}>Select Clients Only</div>
+          <div style={styles.homeBunkerEyebrow}>SafeHaven Bunkers</div>
+          <div style={{ ...styles.greenRule, background: "#7fb38a", margin: "12px 0 20px", marginLeft: 0 }} />
+          <h2 style={styles.homeBunkerTitle}>
+            A discreet bunker offering for a very specific kind of brief.
+          </h2>
+          <p style={styles.homeBunkerText}>
+            Al Hadeeqa also delivers underground bunker builds through SafeHaven for select villa clients in the UAE. It is intentionally a quieter offering, but it is there for customers who need serious private protection built properly.
+          </p>
+        </div>
+        <div style={styles.homeBunkerActions} className="home-bunker-actions">
+          <a href="/bunker" style={styles.btnPrimaryLink}>Explore SafeHaven</a>
+          <div style={styles.homeBunkerNote}>Available by consultation only.</div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServicesPageHero({ onContact }) {
+  return (
+    <section style={styles.pageHero} className="services-page-hero">
+      <div
+        style={{
+          ...styles.pageHeroBg,
+          backgroundImage: `url('${PAGE_HERO_IMAGES.services}')`,
+        }}
+      />
+      <div style={styles.pageHeroOverlay} />
+      <div style={styles.pageHeroInner} className="services-page-hero-inner">
+        <div style={styles.pageHeroCopyCard} className="page-hero-copy-card">
+          <a href="/" style={styles.backToOverview}>← Back to Home</a>
+          <div style={styles.sectionEyebrow}>Dedicated Services</div>
+          <div style={{ ...styles.greenRule, marginLeft: 0 }} />
+          <h1 style={styles.pageHeroTitle}>
+            Ten services. One team. Nothing subcontracted.
+          </h1>
+          <p style={styles.pageHeroSub}>
+            Every scope Al Hadeeqa takes on is delivered by the same in-house crew — from deep enabling works to luxury finishes. Find the service you need and request a quote directly.
+          </p>
+          <div style={styles.pageHeroActions} className="page-cta-row">
+            <button style={styles.btnPrimary} onClick={() => onContact("General Enquiry")}>
+              <WaIcon /> Request Consultation
+            </button>
+            <a href="#services-nav" style={styles.btnSecondary}>Browse Service List ↓</a>
+          </div>
+        </div>
+
+        <div style={styles.pageHeroMeta} className="services-page-meta">
+          <div style={styles.pageHeroMetaCard}>
+            <div style={styles.pageHeroMetaValue}>{SERVICES.length}</div>
+            <div style={styles.pageHeroMetaLabel}>Service Offerings</div>
+            <div style={styles.pageHeroMetaCopy}>From enabling works and groundwork through to luxury finishes and maintenance.</div>
+          </div>
+          <div style={styles.pageHeroMetaCard}>
+            <div style={styles.pageHeroMetaValue}>35+</div>
+            <div style={styles.pageHeroMetaLabel}>Years in UAE</div>
+            <div style={styles.pageHeroMetaCopy}>Licensed experience across residential, commercial, and specialist site work.</div>
+          </div>
+          <div style={styles.pageHeroMetaCard}>
+            <div style={styles.pageHeroMetaValue}>One Team</div>
+            <div style={styles.pageHeroMetaLabel}>Single Point of Accountability</div>
+            <div style={styles.pageHeroMetaCopy}>Groundworks, structure, glass, waterproofing, and maintenance under one contractor.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AboutPageHero({ onContact }) {
+  return (
+    <section style={styles.pageHero} className="services-page-hero">
+      <div
+        style={{
+          ...styles.pageHeroBg,
+          backgroundImage: `url('${PAGE_HERO_IMAGES.about}')`,
+        }}
+      />
+      <div style={styles.pageHeroOverlay} />
+      <div style={styles.pageHeroInner} className="services-page-hero-inner">
+        <div style={styles.pageHeroCopyCard} className="page-hero-copy-card">
+          <a href="/" style={styles.backToOverview}>← Back to Home</a>
+          <div style={styles.sectionEyebrow}>About Al Hadeeqa</div>
+          <div style={{ ...styles.greenRule, marginLeft: 0 }} />
+          <h1 style={styles.pageHeroTitle}>
+            A licensed contractor with depth, not just range.
+          </h1>
+          <p style={styles.pageHeroSub}>
+            35 years in the UAE, a fully licensed in-house crew, and a track record that spans residential villas, commercial fit-outs, and complex enabling works — all under one contractor.
+          </p>
+          <div style={styles.pageHeroActions} className="page-cta-row">
+            <button style={styles.btnPrimary} onClick={() => onContact("General Enquiry")}>
+              <WaIcon /> Speak to Our Team
+            </button>
+            <a href="#about" style={styles.btnSecondary}>Read Our Story ↓</a>
+          </div>
+        </div>
+
+        <div style={styles.pageHeroMeta} className="services-page-meta">
+          <div style={styles.pageHeroMetaCard}>
+            <div style={styles.pageHeroMetaValue}>35+</div>
+            <div style={styles.pageHeroMetaLabel}>Years in UAE</div>
+            <div style={styles.pageHeroMetaCopy}>Longstanding delivery experience across specialist site works and finishing scopes.</div>
+          </div>
+          <div style={styles.pageHeroMetaCard}>
+            <div style={styles.pageHeroMetaValue}>500+</div>
+            <div style={styles.pageHeroMetaLabel}>Completed Projects</div>
+            <div style={styles.pageHeroMetaCopy}>A working history that spans villas, commercial spaces, and enabling works.</div>
+          </div>
+          <div style={styles.pageHeroMetaCard}>
+            <div style={styles.pageHeroMetaValue}>One Team</div>
+            <div style={styles.pageHeroMetaLabel}>Single Accountability</div>
+            <div style={styles.pageHeroMetaCopy}>Groundworks, structure, glass, waterproofing, and maintenance handled under one contractor.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProjectsPageHero({ onContact }) {
+  return (
+    <section style={styles.pageHero} className="services-page-hero">
+      <div
+        style={{
+          ...styles.pageHeroBg,
+          backgroundImage: `url('${PAGE_HERO_IMAGES.projects}')`,
+        }}
+      />
+      <div style={styles.pageHeroOverlay} />
+      <div style={styles.pageHeroInner} className="services-page-hero-inner">
+        <div style={styles.pageHeroCopyCard} className="page-hero-copy-card">
+          <a href="/" style={styles.backToOverview}>← Back to Home</a>
+          <div style={styles.sectionEyebrow}>Projects</div>
+          <div style={{ ...styles.greenRule, marginLeft: 0 }} />
+          <h1 style={styles.pageHeroTitle}>
+            A clearer look at the kind of work we deliver.
+          </h1>
+          <p style={styles.pageHeroSub}>
+            Browse completed work across pergolas, carports, excavation, dewatering, glass, waterproofing, and fit-outs — all delivered by one licensed team across Dubai.
+          </p>
+          <div style={styles.pageHeroActions} className="page-cta-row">
+            <button style={styles.btnPrimary} onClick={() => onContact("General Enquiry")}>
+              <WaIcon /> Discuss Your Project
+            </button>
+            <a href="#projects" style={styles.btnSecondary}>View Gallery ↓</a>
+          </div>
+        </div>
+
+        <div style={styles.pageHeroMeta} className="services-page-meta">
+          <div style={styles.pageHeroMetaCard}>
+            <div style={styles.pageHeroMetaValue}>Residential</div>
+            <div style={styles.pageHeroMetaLabel}>Luxury and Lifestyle Work</div>
+            <div style={styles.pageHeroMetaCopy}>Pergolas, carports, waterproofing, glass, and villa upgrade scopes.</div>
+          </div>
+          <div style={styles.pageHeroMetaCard}>
+            <div style={styles.pageHeroMetaValue}>Commercial</div>
+            <div style={styles.pageHeroMetaLabel}>Fit-Out and Site Works</div>
+            <div style={styles.pageHeroMetaCopy}>Office partitions, excavation support, demolition, and enabling packages.</div>
+          </div>
+          <div style={styles.pageHeroMetaCard}>
+            <div style={styles.pageHeroMetaValue}>Dubai</div>
+            <div style={styles.pageHeroMetaLabel}>Local Delivery Focus</div>
+            <div style={styles.pageHeroMetaCopy}>Projects structured around Dubai-only delivery with one licensed contractor.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServicesQuickNav() {
+  return (
+    <section id="services-nav" style={{ ...styles.servicesNavSection, scrollMarginTop: 96 }} className="services-nav-section">
+      <div style={styles.servicesNavInner}>
+        <div style={{ textAlign: "center", marginBottom: 36 }}>
+          <div style={styles.sectionEyebrow}>Everything We Do</div>
+          <div style={styles.greenRule} />
+          <h2 style={{ ...styles.sectionH2, fontSize: "clamp(26px, 3vw, 40px)" }}>
+            Services at a Glance
+          </h2>
+          <p style={{ ...styles.sectionSub, marginTop: 12 }}>
+            Select any service to jump straight to its section.
+          </p>
+        </div>
+
+        <div style={styles.servicesNavGrid} className="services-nav-grid">
+          {SERVICES.map((service, index) => (
+            <a
+              key={service.id}
+              href={`#${getServiceAnchorId(service.id)}`}
+              className="services-nav-tile"
+              style={styles.servicesNavTile}
+            >
+              <span style={styles.servicesNavIndex}>{String(index + 1).padStart(2, "0")}</span>
+              <span className="services-nav-tile-name" style={styles.servicesNavName}>{service.title}</span>
+              <span className="services-nav-tile-sub" style={styles.servicesNavSub}>{service.subtitle}</span>
+            </a>
+          ))}
+        </div>
+
+        <div style={{ textAlign: "center", marginTop: 36 }}>
+          <a href="#services-list" style={styles.servicesNavCta}>View Full Details ↓</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServicesPageSection() {
+  const [ref, inView] = useInView();
+
+  return (
+    <section id="services-list" style={{ ...styles.section, scrollMarginTop: 96 }} className="section-main">
+      <div
+        ref={ref}
+        style={{
+          ...styles.sectionHeader,
+          opacity: inView ? 1 : 0,
+          transform: inView ? "translateY(0)" : "translateY(20px)",
+          transition: "opacity 0.6s ease, transform 0.6s ease",
+        }}
+      >
         <a href="#services-nav" style={styles.backToOverview}>← Back to Overview</a>
         <div style={styles.sectionEyebrow}>What We Build</div>
         <div style={styles.greenRule} />
         <h2 style={styles.sectionH2}>Our Services</h2>
         <p style={styles.sectionSub}>
-          From groundwork to the finishing detail — we handle every phase with the same licensed team, the same standards.
+          From groundwork to finishing detail - we handle every phase with the same licensed team and the same standards.
         </p>
       </div>
+
       <div style={styles.servicesGrid} className="services-grid">
-        {SERVICES.map((s, i) => (
-          <ServiceCard key={s.id} service={s} onContact={onContact} index={i} />
+        {SERVICES.map((service, index) => (
+          <ServiceDetailCard key={service.id} service={service} index={index} />
         ))}
       </div>
 
-      {/* Bunker note */}
       <div style={styles.bunkerNote}>
         <div>
-          <strong>SafeHaven Underground Bunkers</strong> — Al Hadeeqa also builds discreet underground bunkers for UAE villas through our SafeHaven division.{" "}
+          <strong>SafeHaven Underground Bunkers</strong> - Al Hadeeqa also builds discreet underground bunkers for UAE villas through our SafeHaven division.{" "}
           <a href="/bunker" style={styles.bunkerLink}>Learn more →</a>
         </div>
       </div>
@@ -401,32 +976,186 @@ function Services({ onContact }) {
   );
 }
 
-// ── LUXURY CARPORT/PERGOLA SPOTLIGHT ──
+function ServiceLandingPage({ service, onContact }) {
+  const relatedServices = service.relatedIds
+    .map((serviceId) => getServiceById(serviceId))
+    .filter(Boolean);
+
+  return (
+    <>
+      <section style={styles.serviceHero} className="service-detail-hero">
+        <div style={styles.serviceHeroInner} className="service-detail-hero-inner">
+          <div style={styles.serviceHeroCopy}>
+            <a href="/services" style={styles.backToOverview}>← Back to Services</a>
+            <div style={styles.sectionEyebrow}>Al Hadeeqa Contracting</div>
+            <div style={{ ...styles.greenRule, marginLeft: 0 }} />
+            <h1 style={styles.serviceHeroTitle}>{service.title}</h1>
+            <div style={styles.serviceHeroSubtitle}>{service.subtitle}</div>
+            <p style={styles.serviceHeroSub}>{service.heroDescription}</p>
+            <div style={styles.serviceHeroTags}>
+              {service.tags.map((tag) => (
+                <span key={tag} style={styles.serviceHeroTag}>{tag}</span>
+              ))}
+            </div>
+            <div style={styles.pageHeroActions} className="page-cta-row">
+              <button style={styles.btnPrimary} onClick={() => onContact(service.title)}>
+                <WaIcon /> Request Quote
+              </button>
+              <a href="#contact" style={styles.btnSecondary}>Talk to Our Team ↓</a>
+            </div>
+          </div>
+
+          <div style={styles.serviceHeroMedia}>
+            <img src={service.image} alt={service.title} style={styles.serviceHeroImage} />
+          </div>
+        </div>
+      </section>
+
+      <section style={styles.section} className="section-main">
+        <div style={styles.serviceDetailGrid} className="service-detail-grid">
+          <div style={styles.serviceOverviewCard}>
+            <div style={styles.sectionEyebrow}>Overview</div>
+            <h2 style={styles.serviceSectionTitle}>How we approach {service.title.toLowerCase()}.</h2>
+            <div style={styles.serviceParagraphs}>
+              {service.summary.map((paragraph) => (
+                <p key={paragraph} style={styles.serviceParagraph}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+
+          <aside style={styles.serviceSidebar}>
+            <div style={styles.serviceSidebarCard}>
+              <div style={styles.serviceSidebarLabel}>Scope Snapshot</div>
+              <div style={styles.serviceSidebarTitle}>{service.title}</div>
+              <p style={styles.serviceSidebarText}>
+                Al Hadeeqa delivers this service with its own licensed, in-house team. No subcontracting — the same crew that quotes is the crew that builds.
+              </p>
+            </div>
+            <div style={styles.serviceSidebarCard}>
+              <div style={styles.serviceSidebarLabel}>Need Pricing?</div>
+              <p style={styles.serviceSidebarText}>
+                Send us the project location, property type, and a quick summary of the scope. We will respond on WhatsApp with the next step.
+              </p>
+              <button style={{ ...styles.serviceBtn, width: "100%", justifyContent: "center" }} onClick={() => onContact(service.title)}>
+                Get a Quote →
+              </button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section style={{ ...styles.section, paddingTop: 0 }} className="section-main">
+        <div style={styles.serviceListsGrid} className="service-detail-lists">
+          <div style={styles.serviceListCard}>
+            <div style={styles.serviceListEyebrow}>What This Service Covers</div>
+            <ul style={styles.serviceList}>
+              {service.inclusions.map((item) => (
+                <li key={item} style={styles.serviceListItem}>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div style={styles.serviceListCard}>
+            <div style={styles.serviceListEyebrow}>Best Suited For</div>
+            <ul style={styles.serviceList}>
+              {service.idealFor.map((item) => (
+                <li key={item} style={styles.serviceListItem}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {relatedServices.length > 0 && (
+        <section style={{ ...styles.section, paddingTop: 0 }} className="section-main">
+          <div style={styles.sectionHeader}>
+            <div style={styles.sectionEyebrow}>Related Services</div>
+            <div style={styles.greenRule} />
+            <h2 style={styles.sectionH2}>Often paired with {service.title.toLowerCase()}.</h2>
+            <p style={styles.sectionSub}>
+              Many clients use Al Hadeeqa across more than one scope. Here are the services most commonly combined with this one.
+            </p>
+          </div>
+          <div style={styles.servicesGrid} className="services-grid">
+            {relatedServices.map((relatedService, index) => (
+              <ServicePreviewCard key={relatedService.id} service={relatedService} index={index} />
+            ))}
+          </div>
+        </section>
+      )}
+    </>
+  );
+}
+
+function NotFoundPage() {
+  return (
+    <section style={styles.notFoundSection} className="section-main">
+      <div style={styles.notFoundCard}>
+        <div style={styles.sectionEyebrow}>Page Not Found</div>
+        <div style={styles.greenRule} />
+        <h1 style={styles.sectionH2}>That page does not exist.</h1>
+        <p style={styles.sectionSub}>
+          Use the links below to return to the main site or the services index.
+        </p>
+        <div style={styles.pageHeroActions} className="page-cta-row">
+          <a href="/" style={styles.btnPrimaryLink}>Back to Home</a>
+          <a href="/services" style={styles.btnSecondary}>Browse Services →</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StaticPageRedirect({ to }) {
+  useEffect(() => {
+    window.location.replace(to);
+  }, [to]);
+
+  return (
+    <section style={styles.notFoundSection} className="section-main">
+      <div style={styles.notFoundCard}>
+        <div style={styles.sectionEyebrow}>Redirecting</div>
+        <div style={styles.greenRule} />
+        <h1 style={styles.sectionH2}>Opening page…</h1>
+      </div>
+    </section>
+  );
+}
+
 function LuxurySpotlight({ onContact }) {
   const [ref, inView] = useInView();
+
   return (
     <section style={styles.spotlightSection} className="spotlight-section">
       <div style={styles.spotlightBg} />
       <div ref={ref} style={styles.spotlightInner} className="spotlight-inner">
-        <div style={{
-          ...styles.spotlightText,
-          opacity: inView ? 1 : 0,
-          transform: inView ? "translateX(0)" : "translateX(-30px)",
-          transition: "opacity 0.7s ease, transform 0.7s ease"
-        }}>
+        <div
+          style={{
+            ...styles.spotlightText,
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateX(0)" : "translateX(-30px)",
+            transition: "opacity 0.7s ease, transform 0.7s ease",
+          }}
+        >
           <div style={styles.sectionEyebrow}>Exclusive to Al Hadeeqa</div>
-          <div style={{...styles.greenRule, margin:"12px 0 20px"}} />
-          <h2 style={{...styles.sectionH2, color:"#fff", textAlign:"left"}}>
-            Your Supercar<br />
-            <em style={{color:"#5aad6e", fontStyle:"italic"}}>Deserves Better</em>
+          <div style={{ ...styles.greenRule, margin: "12px 0 20px" }} />
+          <h2 style={{ ...styles.sectionH2, color: "#fff", textAlign: "left" }}>
+            Your Premium Vehicle<br />
+            <em style={{ color: "#5aad6e", fontStyle: "italic" }}>Deserves Better</em>
           </h2>
-          <p style={{...styles.sectionSub, color:"rgba(255,255,255,0.72)", textAlign:"left", maxWidth:440}}>
-            We design and build architectural carports and luxury pergolas specifically for clients with exceptional vehicles. Powder-coated steel, polycarbonate or louvred aluminium roofing, custom footprints — engineered to protect what matters most.
+          <p style={{ ...styles.sectionSub, color: "rgba(255,255,255,0.72)", textAlign: "left", maxWidth: 440 }}>
+            We design and build architectural carports and luxury pergolas specifically for clients with exceptional vehicles. Powder-coated steel, polycarbonate or louvred aluminium roofing, custom footprints - engineered to protect what matters most.
           </p>
           <div style={styles.spotlightFeatures}>
-            {["DM Approved & Licensed", "10-Year Structural Warranty", "UV & Heat-Resistant Materials", "Custom Sizing — 1 to 6+ Cars", "Integrated Drainage & Lighting"].map(f => (
-              <div key={f} style={styles.spotlightFeature}>
-                <span style={styles.checkmark}>✓</span> {f}
+            {[
+              "DM Approved & Licensed",
+              "10-Year Structural Warranty",
+              "UV & Heat-Resistant Materials",
+              "Custom Sizing - 1 to 6+ Cars",
+              "Integrated Drainage & Lighting",
+            ].map((feature) => (
+              <div key={feature} style={styles.spotlightFeature}>
+                <span style={styles.checkmark}>✓</span> {feature}
               </div>
             ))}
           </div>
@@ -448,20 +1177,22 @@ function LuxurySpotlight({ onContact }) {
             <WaIcon /> Get a Custom Quote
           </button>
         </div>
-        <div style={{
-          ...styles.spotlightImages,
-          opacity: inView ? 1 : 0,
-          transform: inView ? "translateX(0)" : "translateX(30px)",
-          transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s"
-        }}>
+        <div
+          style={{
+            ...styles.spotlightImages,
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateX(0)" : "translateX(30px)",
+            transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
+          }}
+        >
           <img
-            src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600&q=80"
-            alt="Supercar carport"
+            src="/assets/images/carport-1.jpg"
+            alt="Premium carport"
             style={styles.spotlightImg1}
           />
           <img
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80"
-            alt="Luxury pergola"
+            src="/assets/images/carport-2.jpg"
+            alt="Premium carport"
             style={styles.spotlightImg2}
           />
         </div>
@@ -470,35 +1201,42 @@ function LuxurySpotlight({ onContact }) {
   );
 }
 
-// ── ABOUT SECTION ──
 function About() {
   const [ref, inView] = useInView();
+
   return (
-    <section id="about" style={styles.section} className="section-main">
-      <div ref={ref} className="about-inner" style={{
-        ...styles.aboutInner,
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(24px)",
-        transition: "opacity 0.7s ease, transform 0.7s ease"
-      }}>
+    <section id="about" style={{ ...styles.section, scrollMarginTop: 96 }} className="section-main">
+      <div
+        ref={ref}
+        className="about-inner"
+        style={{
+          ...styles.aboutInner,
+          opacity: inView ? 1 : 0,
+          transform: inView ? "translateY(0)" : "translateY(24px)",
+          transition: "opacity 0.7s ease, transform 0.7s ease",
+        }}
+      >
         <div style={styles.aboutText}>
           <div style={styles.sectionEyebrow}>Who We Are</div>
-          <div style={{...styles.greenRule, margin:"12px 0 24px", marginLeft:0}} />
-          <h2 style={{...styles.sectionH2, textAlign:"left"}}>
+          <div style={{ ...styles.greenRule, margin: "12px 0 24px", marginLeft: 0 }} />
+          <h2 style={{ ...styles.sectionH2, textAlign: "left" }}>
             An Established Name.<br />
-            <em style={{color:"var(--green)", fontStyle:"italic"}}>Not a pop-up service.</em>
+            <em style={{ color: "var(--green)", fontStyle: "italic" }}>Delivered by people who stay.</em>
           </h2>
           <p style={styles.aboutDesc}>
             Al Hadeeqa Contracting, Dewatering, Aluminum & Glass LLC has been building across the UAE for 35 years. We are a fully licensed contractor serving Dubai with a team that has seen and solved every site condition the city can throw at a project.
           </p>
           <p style={styles.aboutDesc}>
-            We don't subcontract your project to strangers. Our in-house crew handles everything: groundwork, structure, glass, aluminum, finishes. One point of contact. One accountable team.
+            We do not subcontract your project to strangers. Our in-house crew handles groundwork, structure, glass, aluminum, finishes, and maintenance. One point of contact. One accountable team.
+          </p>
+          <p style={styles.aboutDesc}>
+            That continuity is why clients come back. Whether the scope is enabling works on a new plot, a luxury carport or pergola, a full interior fit-out, or ongoing maintenance — the same crew, the same standards, and the same accountability applies every time.
           </p>
           <div style={styles.aboutStats} className="about-stats">
-            {STATS.map(s => (
-              <div key={s.label} style={styles.aboutStat} className="about-stat">
-                <div style={styles.aboutStatVal}>{s.val}</div>
-                <div style={styles.aboutStatLabel}>{s.label}</div>
+            {STATS.map((stat) => (
+              <div key={stat.label} style={styles.aboutStat} className="about-stat">
+                <div style={styles.aboutStatVal}>{stat.val}</div>
+                <div style={styles.aboutStatLabel}>{stat.label}</div>
               </div>
             ))}
           </div>
@@ -520,33 +1258,30 @@ function About() {
   );
 }
 
-// ── PROJECTS / GALLERY ──
-const PROJECT_IMGS = [
-  { src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80", label: "Luxury Pergola — Dubai Villa" },
-  { src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80", label: "Glass Partition — Office Fit-Out" },
-  { src: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80", label: "Excavation & Dewatering" },
-  { src: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&q=80", label: "Supercar Carport — Jumeirah" },
-  { src: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80", label: "Roof Waterproofing" },
-  { src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80", label: "Foundation Work" },
-];
-
 function Projects() {
   const [ref, inView] = useInView();
+
   return (
-    <section id="projects" style={{...styles.section, background:"#f4f8f5"}} className="section-main">
-      <div ref={ref} style={{
-        ...styles.sectionHeader,
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(20px)",
-        transition: "opacity 0.6s ease, transform 0.6s ease"
-      }}>
+    <section id="projects" style={{ ...styles.section, background: "#f4f8f5", scrollMarginTop: 96 }} className="section-main">
+      <div
+        ref={ref}
+        style={{
+          ...styles.sectionHeader,
+          opacity: inView ? 1 : 0,
+          transform: inView ? "translateY(0)" : "translateY(20px)",
+          transition: "opacity 0.6s ease, transform 0.6s ease",
+        }}
+      >
         <div style={styles.sectionEyebrow}>Recent Work</div>
         <div style={styles.greenRule} />
-        <h2 style={styles.sectionH2}>Projects</h2>
+        <h2 style={styles.sectionH2}>Work Across Dubai.</h2>
+        <p style={styles.sectionSub}>
+          Residential and commercial projects spanning excavation, shoring, luxury pergolas, premium carports, glass installations, waterproofing, and full construction — all delivered by one licensed team.
+        </p>
       </div>
       <div style={styles.projectsGrid} className="projects-grid">
-        {PROJECT_IMGS.map((p, i) => (
-          <ProjectThumb key={i} project={p} index={i} />
+        {PROJECT_IMGS.map((project, index) => (
+          <ProjectThumb key={project.label} project={project} index={index} />
         ))}
       </div>
     </section>
@@ -556,6 +1291,7 @@ function Projects() {
 function ProjectThumb({ project, index }) {
   const [ref, inView] = useInView();
   const [hovered, setHovered] = useState(false);
+
   return (
     <div
       ref={ref}
@@ -573,34 +1309,46 @@ function ProjectThumb({ project, index }) {
         alt={project.label}
         style={{
           ...styles.projectImg,
-          transform: hovered ? "scale(1.07)" : "scale(1)"
+          transform: hovered ? "scale(1.07)" : "scale(1)",
         }}
       />
-      <div style={{...styles.projectOverlay, opacity: hovered ? 1 : 0}}>
+      <div style={{ ...styles.projectOverlay, opacity: hovered ? 1 : 0 }}>
         <span style={styles.projectLabel}>{project.label}</span>
       </div>
     </div>
   );
 }
 
-// ── CONTACT SECTION ──
-function Contact({ onContact }) {
+function Contact({ pageOffset = false }) {
   const [ref, inView] = useInView();
+
   return (
-    <section id="contact" style={styles.contactSection}>
+    <section
+      id="contact"
+      className={pageOffset ? "page-contact-section" : undefined}
+      style={{
+        ...styles.contactSection,
+        ...(pageOffset ? styles.contactPageSection : {}),
+        scrollMarginTop: 96,
+      }}
+    >
       <div style={styles.contactBg} />
-      <div ref={ref} className="contact-inner" style={{
-        ...styles.contactInner,
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(24px)",
-        transition: "opacity 0.7s ease, transform 0.7s ease"
-      }}>
+      <div
+        ref={ref}
+        className="contact-inner"
+        style={{
+          ...styles.contactInner,
+          opacity: inView ? 1 : 0,
+          transform: inView ? "translateY(0)" : "translateY(24px)",
+          transition: "opacity 0.7s ease, transform 0.7s ease",
+        }}
+      >
         <div style={styles.contactText}>
-          <div style={{...styles.sectionEyebrow, color:"rgba(255,255,255,0.6)"}}>Reach Out</div>
-          <div style={{...styles.greenRule, margin:"12px 0 24px", marginLeft:0}} />
-          <h2 style={{...styles.sectionH2, color:"#fff", textAlign:"left"}}>
+          <div style={{ ...styles.sectionEyebrow, color: "rgba(255,255,255,0.6)" }}>Reach Out</div>
+          <div style={{ ...styles.greenRule, margin: "12px 0 24px", marginLeft: 0 }} />
+          <h2 style={{ ...styles.sectionH2, color: "#fff", textAlign: "left" }}>
             Ready to start?<br />
-            <em style={{color:"#5aad6e", fontStyle:"italic"}}>We're one call away.</em>
+            <em style={{ color: "#5aad6e", fontStyle: "italic" }}>We're one call away.</em>
           </h2>
           <div style={styles.contactDetails}>
             <a href={CONTACT_WHATSAPP_URL} target="_blank" rel="noreferrer" style={styles.contactItem}>
@@ -639,19 +1387,17 @@ function ContactFormInline() {
   const [msg, setMsg] = useState("");
 
   const submit = () => {
-    const text = (
-      `Hi Al Hadeeqa Contracting,\n\nI'm interested in a *free assessment*.\n\n*Name:* ${name || "Not provided"}\n*Phone:* ${phone || "Not provided"}\n*Area in Dubai:* ${area || "Not specified"}\n*Service:* ${service || "General enquiry"}${msg ? "\n\n*Message:* " + msg : ""}\n\nPlease get in touch.`
-    );
+    const text = `Hi Al Hadeeqa Contracting,\n\nI'm interested in a *free assessment*.\n\n*Name:* ${name || "Not provided"}\n*Phone:* ${phone || "Not provided"}\n*Area in Dubai:* ${area || "Not specified"}\n*Service:* ${service || "General enquiry"}${msg ? `\n\n*Message:* ${msg}` : ""}\n\nPlease get in touch.`;
     window.open(buildWhatsAppUrl(text), "_blank");
   };
 
   return (
     <div>
       <div style={styles.formGrid}>
-        <input style={styles.input} placeholder="Your Name" value={name} onChange={e=>setName(e.target.value)} />
-        <input style={styles.input} placeholder="WhatsApp (+971...)" value={phone} onChange={e=>setPhone(e.target.value)} />
+        <input style={styles.input} placeholder="Your Name" value={name} onChange={(event) => setName(event.target.value)} />
+        <input style={styles.input} placeholder="WhatsApp (+971...)" value={phone} onChange={(event) => setPhone(event.target.value)} />
       </div>
-      <select style={{...styles.input, width:"100%", marginBottom:14}} value={area} onChange={e=>setArea(e.target.value)}>
+      <select style={{ ...styles.input, width: "100%", marginBottom: 14 }} value={area} onChange={(event) => setArea(event.target.value)}>
         <option value="">Select Dubai area</option>
         <option>Dubai Marina</option>
         <option>Jumeirah</option>
@@ -659,30 +1405,26 @@ function ContactFormInline() {
         <option>Dubai Hills</option>
         <option>Other Dubai Area</option>
       </select>
-      <select style={{...styles.input, width:"100%", marginBottom:14}} value={service} onChange={e=>setService(e.target.value)}>
+      <select style={{ ...styles.input, width: "100%", marginBottom: 14 }} value={service} onChange={(event) => setService(event.target.value)}>
         <option value="">Select Service</option>
-        <option>Luxury Pergola</option>
-        <option>Supercar Carport</option>
-        <option>Construction / Remodeling</option>
-        <option>Dewatering & Shoring</option>
-        <option>Excavation</option>
-        <option>Demolition</option>
-        <option>Roof Waterproofing</option>
-        <option>Glass Rooms & Partitions</option>
-        <option>Maintenance</option>
-        <option>Underground Bunker</option>
-        <option>Other</option>
+        {SERVICE_SELECT_OPTIONS.map((option) => (
+          <option key={option}>{option}</option>
+        ))}
       </select>
-      <textarea style={{...styles.input, width:"100%", height:80, resize:"vertical", marginBottom:18}} placeholder="Project details (optional)" value={msg} onChange={e=>setMsg(e.target.value)} />
+      <textarea
+        style={{ ...styles.input, width: "100%", height: 80, resize: "vertical", marginBottom: 18 }}
+        placeholder="Project details (optional)"
+        value={msg}
+        onChange={(event) => setMsg(event.target.value)}
+      />
       <button style={styles.waBtn} onClick={submit}>
         <WaIcon /> Send via WhatsApp
       </button>
-      <p style={{...styles.formNote, marginTop:10}}>No spam, ever. Direct to our licensed contractor.</p>
+      <p style={{ ...styles.formNote, marginTop: 10 }}>No spam, ever. Direct to our licensed contractor.</p>
     </div>
   );
 }
 
-// ── FOOTER ──
 function Footer() {
   return (
     <footer style={styles.footer} className="footer-pad">
@@ -698,8 +1440,8 @@ function Footer() {
         <div style={styles.footerLinks}>
           <div style={styles.footerLinkGroup}>
             <div style={styles.footerLinkHead}>Services</div>
-            {["Construction", "Luxury Pergolas", "Supercar Carports", "Dewatering & Shoring", "Excavation", "Demolition", "Waterproofing", "Maintenance"].map(l => (
-              <a key={l} href="#services" style={styles.footerLink}>{l}</a>
+            {SERVICES.map((service) => (
+              <a key={service.id} href={getServiceHref(service.id)} style={styles.footerLink}>{service.title}</a>
             ))}
           </div>
           <div style={styles.footerLinkGroup}>
@@ -707,7 +1449,7 @@ function Footer() {
             <a href={CONTACT_WHATSAPP_URL} target="_blank" rel="noreferrer" style={styles.footerLink}>{CONTACT_PHONE_DISPLAY}</a>
             <a href={CONTACT_TEL_URL} style={styles.footerLink}>{CONTACT_PHONE_DISPLAY}</a>
             <a href="mailto:alhadeeqallc@gmail.com" style={styles.footerLink}>alhadeeqallc@gmail.com</a>
-            <div style={{...styles.footerLink, cursor:"default"}}>Downtown Dubai, UAE 23435</div>
+            <div style={{ ...styles.footerLink, cursor: "default" }}>Downtown Dubai, UAE 23435</div>
             <div style={styles.footerSocialRow}>
               <a
                 href="https://www.facebook.com/p/Al-Hadeeqa-Contracting-100088397351845/"
@@ -735,16 +1477,18 @@ function Footer() {
                 rel="noreferrer"
                 aria-label="WhatsApp"
                 className="footer-social-btn footer-social-btn-wa"
-                style={{...styles.footerSocialBtn, ...styles.footerSocialBtnWa}}
+                style={{ ...styles.footerSocialBtn, ...styles.footerSocialBtnWa }}
               >
                 <WaIcon />
               </a>
             </div>
           </div>
           <div style={styles.footerLinkGroup}>
-            <div style={styles.footerLinkHead}>Also</div>
+            <div style={styles.footerLinkHead}>Company</div>
+            <a href="/about" style={styles.footerLink}>About</a>
+            <a href="/projects" style={styles.footerLink}>Projects</a>
+            <a href="/contact" style={styles.footerLink}>Contact</a>
             <a href="/bunker" style={styles.footerLink}>SafeHaven Bunkers</a>
-            <a href="https://thejanfurniture.com" target="_blank" rel="noreferrer" style={styles.footerLink}>Jan Furnishings (sister co.)</a>
           </div>
         </div>
       </div>
@@ -756,7 +1500,6 @@ function Footer() {
   );
 }
 
-// ── FLOATING WHATSAPP ──
 function FloatingWa() {
   return (
     <a
@@ -773,23 +1516,179 @@ function FloatingWa() {
   );
 }
 
-// ── APP ──
+function JanGroupSection() {
+  const [ref, inView] = useInView();
+  return (
+    <section ref={ref} className="jan-group-section" style={styles.janGroupSection}>
+      <div style={styles.janGroupSectionInner}>
+        <div style={styles.janGroupSectionHeader}>
+          <span style={styles.janGroupSectionEyebrow}>Part of the Jan Group</span>
+          <span style={styles.janGroupSectionTagline}>Three specialised brands. One standard of excellence.</span>
+        </div>
+        <div className="jan-brands-grid" style={styles.janBrandsGrid}>
+          {JAN_BRANDS.map((brand, i) => (
+            <div
+              key={brand.id}
+              style={{
+                ...styles.janBrandCard,
+                ...(brand.current ? styles.janBrandCardCurrent : {}),
+                opacity: inView ? 1 : 0,
+                transform: inView ? "none" : "translateY(16px)",
+                transition: `opacity 0.5s ${i * 0.1}s, transform 0.5s ${i * 0.1}s`,
+              }}
+            >
+              {brand.current && (
+                <div style={styles.janBrandCurrentBadge}>You are here</div>
+              )}
+              <div style={styles.janBrandIconBox}>
+                <BrandIcon id={brand.id} />
+              </div>
+              <div style={styles.janBrandName}>{brand.name}</div>
+              <p style={styles.janBrandDesc}>{brand.desc}</p>
+              {brand.current ? (
+                <span style={{ ...styles.janBrandVisit, opacity: 0.3, cursor: "default" }}>Current Site</span>
+              ) : (
+                <a href={brand.href} target="_blank" rel="noreferrer" style={styles.janBrandVisit}>
+                  Visit Site →
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HomePage({ onContact }) {
+  return (
+    <>
+      <Hero onContact={onContact} />
+      <HomeServicesPreview />
+      <HomeBunkerPreview />
+      <HomeAboutPreview />
+      <HomeProjectsPreview />
+      <Contact />
+    </>
+  );
+}
+
+function ServicesPage({ onContact }) {
+  return (
+    <>
+      <ServicesPageHero onContact={onContact} />
+      <ServicesQuickNav />
+      <ServicesPageSection />
+      <LuxurySpotlight onContact={onContact} />
+      <Contact />
+    </>
+  );
+}
+
+function AboutPage({ onContact }) {
+  return (
+    <>
+      <AboutPageHero onContact={onContact} />
+      <About />
+      <Contact />
+    </>
+  );
+}
+
+function ProjectsPage({ onContact }) {
+  return (
+    <>
+      <ProjectsPageHero onContact={onContact} />
+      <Projects />
+      <Contact />
+    </>
+  );
+}
+
+function ContactPage() {
+  return (
+    <>
+      <Contact pageOffset />
+    </>
+  );
+}
+
 export default function App() {
-  const [modal, setModal] = useState(null); // null or service string
+  const route = resolveRoute(window.location.pathname);
+  const [modal, setModal] = useState(null);
+
+  useScrollToHash(route.pathname);
+
+  useEffect(() => {
+    if (route.type === "services") {
+      document.title = "Services | Al Hadeeqa Contracting";
+      return;
+    }
+
+    if (route.type === "service") {
+      document.title = `${route.service.title} | Al Hadeeqa Contracting`;
+      return;
+    }
+
+    if (route.type === "about") {
+      document.title = "About | Al Hadeeqa Contracting";
+      return;
+    }
+
+    if (route.type === "projects") {
+      document.title = "Projects | Al Hadeeqa Contracting";
+      return;
+    }
+
+    if (route.type === "contact") {
+      document.title = "Contact | Al Hadeeqa Contracting";
+      return;
+    }
+
+    if (route.type === "bunker") {
+      document.title = "SafeHaven Bunkers | Al Hadeeqa Contracting";
+      return;
+    }
+
+    if (route.type === "not-found") {
+      document.title = "Page Not Found | Al Hadeeqa Contracting";
+      return;
+    }
+
+    document.title = "Al Hadeeqa Contracting";
+  }, [route.type, route.type === "service" ? route.service.title : ""]);
 
   const openContact = (service = "") => setModal(service || "General Enquiry");
   const closeContact = () => setModal(null);
 
+  let page = <HomePage onContact={openContact} />;
+  if (route.type === "services") {
+    page = <ServicesPage onContact={openContact} />;
+  } else if (route.type === "service") {
+    page = (
+      <>
+        <ServiceLandingPage service={route.service} onContact={openContact} />
+        <Contact />
+      </>
+    );
+  } else if (route.type === "about") {
+    page = <AboutPage onContact={openContact} />;
+  } else if (route.type === "projects") {
+    page = <ProjectsPage onContact={openContact} />;
+  } else if (route.type === "contact") {
+    page = <ContactPage />;
+  } else if (route.type === "bunker") {
+    page = <StaticPageRedirect to="/bunker.html" />;
+  } else if (route.type === "not-found") {
+    page = <NotFoundPage />;
+  }
+
   return (
     <div style={styles.root}>
-      <Nav onContact={() => openContact()} />
-      <Hero onContact={openContact} />
-      <ServicesOverview />
-      <Services onContact={openContact} />
-      <LuxurySpotlight onContact={openContact} />
-      <About />
-      <Projects />
-      <Contact onContact={openContact} />
+      <JanGroupBar />
+      <Nav onContact={() => openContact()} route={route} />
+      {page}
+      <JanGroupSection />
       <Footer />
       <FloatingWa />
       {modal && <ContactModal service={modal} onClose={closeContact} />}
@@ -797,125 +1696,530 @@ export default function App() {
   );
 }
 
-// ══════════════════════════════════════
-// STYLES
-// ══════════════════════════════════════
 const GREEN = "#1a4a26";
-const GREEN_L = "#1d5229";
 const GREEN_DIM = "rgba(26,74,38,0.10)";
 const GREEN_BORDER = "rgba(26,74,38,0.18)";
 
 const styles = {
   root: { fontFamily: "'DM Sans', sans-serif", color: "#141f16", overflowX: "hidden" },
 
-  // NAV
   nav: {
-    position: "fixed", top: 0, left: 0, right: 0, zIndex: 200,
-    padding: "0 48px", minHeight: 68,
-    display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24,
+    position: "fixed",
+    top: 36,
+    left: 0,
+    right: 0,
+    zIndex: 200,
+    padding: "0 48px",
+    minHeight: 68,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 24,
     background: "#fff",
     borderBottom: `1px solid ${GREEN_BORDER}`,
-    transition: "box-shadow 0.3s"
+    transition: "box-shadow 0.3s",
   },
-  navBrand: { display: "flex", alignItems: "center", gap: 13, flex: 1 },
-  navName: { fontSize: 14, letterSpacing: "0.06em", textTransform: "uppercase", color: "#141f16", fontWeight: 600, lineHeight: 1.4 },
-  navSub: { fontSize: 11, color: "#6b876f", letterSpacing: "0.04em", marginTop: 2 },
-  navLinks: {
-    display: "flex", gap: 32, alignItems: "center",
-    "@media (max-width: 768px)": { display: "none" }
+  navBrandLink: {
+    display: "flex",
+    alignItems: "center",
+    gap: 13,
+    flex: 1,
+    textDecoration: "none",
+    color: "inherit",
   },
-  navLink: { fontSize: 16, color: "#3d5c42", textDecoration: "none", letterSpacing: "0.04em", fontWeight: 500, transition: "color 0.2s" },
+  navName: {
+    fontSize: 14,
+    letterSpacing: "0.06em",
+    textTransform: "uppercase",
+    color: "#141f16",
+    fontWeight: 600,
+    lineHeight: 1.4,
+  },
+  navLinks: { display: "flex", gap: 32, alignItems: "center" },
+  navLink: {
+    fontSize: 16,
+    color: "#3d5c42",
+    textDecoration: "none",
+    letterSpacing: "0.04em",
+    fontWeight: 500,
+    transition: "color 0.2s",
+  },
+  navLinkActive: {
+    color: GREEN,
+    borderBottom: `2px solid ${GREEN}`,
+    paddingBottom: 4,
+  },
   navCta: {
-    background: GREEN, color: "#fff", border: "none", cursor: "pointer",
-    padding: "12px 24px", fontSize: 14, letterSpacing: "0.1em",
-    textTransform: "uppercase", fontWeight: 700,
-    transition: "background 0.2s", whiteSpace: "nowrap", flexShrink: 0,
-    display: "flex", alignItems: "center", gap: 8
+    background: GREEN,
+    color: "#fff",
+    border: "none",
+    cursor: "pointer",
+    padding: "12px 24px",
+    fontSize: 14,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    transition: "background 0.2s",
+    whiteSpace: "nowrap",
+    flexShrink: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    textAlign: "center",
+    boxSizing: "border-box",
   },
   hamburger: {
-    display: "none", flexDirection: "column", gap: 5, background: "none", border: "none", cursor: "pointer",
-    "@media (max-width: 768px)": { display: "flex" }
+    display: "none",
+    flexDirection: "column",
+    gap: 5,
+    background: "none",
+    border: "none",
+    cursor: "pointer",
   },
-  hamburgerLine: { width: 24, height: 2, background: "#141f16", transition: "transform 0.3s, opacity 0.3s", display: "block" },
+  hamburgerLine: {
+    width: 24,
+    height: 2,
+    background: "#141f16",
+    transition: "transform 0.3s, opacity 0.3s",
+    display: "block",
+  },
   mobileMenu: {
-    position: "absolute", top: 68, left: 0, right: 0,
-    background: "#fff", borderBottom: `2px solid ${GREEN}`,
+    position: "absolute",
+    top: "100%",
+    left: 0,
+    right: 0,
+    background: "#fff",
+    borderBottom: `2px solid ${GREEN}`,
     padding: "16px 24px 24px",
-    display: "flex", flexDirection: "column", gap: 8,
-    boxShadow: "0 8px 24px rgba(0,0,0,0.1)"
+    display: "flex",
+    flexDirection: "column",
+    gap: 8,
+    boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
   },
-  mobileLink: { fontSize: 16, color: "#141f16", textDecoration: "none", padding: "10px 0", borderBottom: `1px solid ${GREEN_BORDER}` },
+  mobileLink: {
+    fontSize: 16,
+    color: "#141f16",
+    textDecoration: "none",
+    padding: "10px 0",
+    borderBottom: `1px solid ${GREEN_BORDER}`,
+  },
 
-  // HERO
-  hero: { minHeight: "100vh", position: "relative", display: "flex", alignItems: "center", overflow: "hidden", paddingTop: 68 },
-  heroBg: { position: "absolute", inset: 0, backgroundSize: "cover", backgroundPosition: "center 40%", backgroundRepeat: "no-repeat" },
+  hero: {
+    minHeight: "100vh",
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    overflow: "hidden",
+    paddingTop: 104,
+  },
+  heroBg: {
+    position: "absolute",
+    inset: 0,
+    backgroundSize: "cover",
+    backgroundPosition: "center 40%",
+    backgroundRepeat: "no-repeat",
+  },
   heroOverlay: {
-    position: "absolute", inset: 0,
-    background: "linear-gradient(105deg, rgba(244,248,245,0.22) 0%, rgba(244,248,245,0.06) 50%, transparent 100%)"
+    position: "absolute",
+    inset: 0,
+    background: "linear-gradient(105deg, rgba(244,248,245,0.22) 0%, rgba(244,248,245,0.06) 50%, transparent 100%)",
   },
   heroContent: {
-    position: "relative", zIndex: 2,
-    padding: "52px 52px 52px 56px", maxWidth: 640,
+    position: "relative",
+    zIndex: 2,
+    padding: "52px 52px 52px 56px",
+    maxWidth: 640,
     margin: "64px 0 0 48px",
     background: "rgba(255,255,255,0.96)",
     borderLeft: `4px solid ${GREEN}`,
-    boxShadow: "0 8px 48px rgba(0,0,0,0.14)"
+    boxShadow: "0 8px 48px rgba(0,0,0,0.14)",
   },
-  eyebrow: { display: "inline-flex", alignItems: "center", gap: 12, fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", color: GREEN, marginBottom: 24, marginRight: 22 },
+  eyebrow: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 12,
+    fontSize: 12,
+    letterSpacing: "0.22em",
+    textTransform: "uppercase",
+    color: GREEN,
+    marginBottom: 24,
+    marginRight: 22,
+  },
   eyebrowLine: { display: "inline-block", width: 28, height: 1, background: GREEN },
   alertBadge: {
-    display: "inline-flex", alignItems: "center", gap: 10,
-    background: GREEN_DIM, border: `1px solid ${GREEN_BORDER}`,
-    padding: "8px 16px", marginBottom: 28
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 10,
+    background: GREEN_DIM,
+    border: `1px solid ${GREEN_BORDER}`,
+    padding: "8px 16px",
+    marginBottom: 28,
   },
   alertDot: { width: 7, height: 7, borderRadius: "50%", background: GREEN, animation: "pulse 2s infinite" },
   alertText: { fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", color: "#3d5c42", fontWeight: 500 },
-  heroH1: { fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(40px, 5.5vw, 80px)", fontWeight: 700, lineHeight: 1.06, color: "#141f16", marginBottom: 20 },
+  heroH1: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "clamp(40px, 5.5vw, 80px)",
+    fontWeight: 700,
+    lineHeight: 1.06,
+    color: "#141f16",
+    marginBottom: 20,
+  },
   heroEm: { fontStyle: "italic", color: GREEN, display: "block" },
   heroSub: { fontSize: 18, color: "#6b876f", maxWidth: 480, marginBottom: 44, lineHeight: 1.8, fontWeight: 300 },
   heroCtas: { display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" },
   heroStats: {
-    position: "absolute", right: 60, top: "50%", transform: "translateY(-50%)",
-    display: "flex", flexDirection: "column", zIndex: 3,
+    position: "absolute",
+    right: 60,
+    top: "50%",
+    transform: "translateY(-50%)",
+    display: "flex",
+    flexDirection: "column",
+    zIndex: 3,
     background: "rgba(255,255,255,0.96)",
     borderTop: `4px solid ${GREEN}`,
     boxShadow: "0 8px 48px rgba(0,0,0,0.14)",
-    padding: "28px 32px", gap: 0
+    padding: "28px 32px",
+    gap: 0,
   },
   heroStatItem: { textAlign: "center", padding: "16px 0", borderBottom: `1px solid ${GREEN_BORDER}` },
   heroStatVal: { fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: GREEN, lineHeight: 1 },
   heroStatLabel: { fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6b876f", marginTop: 6 },
 
-  // BUTTONS
   btnPrimary: {
-    background: GREEN, color: "#fff", border: "none", cursor: "pointer",
-    padding: "15px 32px", fontFamily: "'DM Sans', sans-serif",
-    fontSize: 14, letterSpacing: "0.12em", textTransform: "uppercase",
-    fontWeight: 700, transition: "background 0.2s",
-    display: "inline-flex", alignItems: "center", gap: 10
+    background: GREEN,
+    color: "#fff",
+    border: "none",
+    cursor: "pointer",
+    padding: "15px 32px",
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: 14,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    transition: "background 0.2s",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 10,
+  },
+  btnPrimaryLink: {
+    background: GREEN,
+    color: "#fff",
+    border: "none",
+    cursor: "pointer",
+    padding: "15px 32px",
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: 14,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    transition: "background 0.2s",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 10,
+    textDecoration: "none",
   },
   btnSecondary: {
-    color: "#6b876f", fontSize: 14, letterSpacing: "0.08em",
-    textDecoration: "none", borderBottom: `1px solid rgba(26,74,38,0.3)`,
-    paddingBottom: 2, transition: "color 0.2s"
+    color: "#6b876f",
+    fontSize: 14,
+    letterSpacing: "0.08em",
+    textDecoration: "none",
+    borderBottom: "1px solid rgba(26,74,38,0.3)",
+    paddingBottom: 2,
+    transition: "color 0.2s",
   },
   waBtn: {
-    background: "#25d366", color: "#fff", border: "none", cursor: "pointer",
-    padding: "15px 32px", fontFamily: "'DM Sans', sans-serif",
-    fontSize: 14, fontWeight: 700, width: "100%",
-    display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
-    transition: "background 0.2s"
+    background: "#25d366",
+    color: "#fff",
+    border: "none",
+    cursor: "pointer",
+    padding: "15px 32px",
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: 14,
+    fontWeight: 700,
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+    transition: "background 0.2s",
   },
 
-  // SECTION
   section: { padding: "100px 64px", maxWidth: 1400, margin: "0 auto" },
   sectionHeader: { textAlign: "center", marginBottom: 60 },
   sectionEyebrow: { fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", color: GREEN, fontWeight: 600 },
   greenRule: { width: 36, height: 2, background: GREEN, margin: "12px auto 18px" },
-  sectionH2: { fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 56px)", fontWeight: 700, lineHeight: 1.12, textAlign: "center" },
-  sectionSub: { fontSize: 17, color: "#6b876f", maxWidth: 520, margin: "16px auto 0", lineHeight: 1.8, fontWeight: 300, textAlign: "center" },
+  sectionH2: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "clamp(36px, 4vw, 56px)",
+    fontWeight: 700,
+    lineHeight: 1.12,
+    textAlign: "center",
+  },
+  sectionSub: {
+    fontSize: 17,
+    color: "#6b876f",
+    maxWidth: 520,
+    margin: "16px auto 0",
+    lineHeight: 1.8,
+    fontWeight: 300,
+    textAlign: "center",
+  },
 
-  // SERVICES OVERVIEW / QUICK NAV
+  pageHero: {
+    padding: "168px 64px 72px",
+    background: "#132017",
+    borderBottom: `1px solid ${GREEN_BORDER}`,
+    position: "relative",
+    overflow: "hidden",
+  },
+  pageHeroBg: {
+    position: "absolute",
+    inset: 0,
+    backgroundSize: "cover",
+    backgroundPosition: "center center",
+    backgroundRepeat: "no-repeat",
+    transform: "scale(1.02)",
+  },
+  pageHeroOverlay: {
+    position: "absolute",
+    inset: 0,
+    background: "linear-gradient(108deg, rgba(9,18,11,0.74) 0%, rgba(9,18,11,0.58) 42%, rgba(9,18,11,0.44) 100%)",
+  },
+  pageHeroInner: {
+    maxWidth: 1280,
+    margin: "0 auto",
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1.4fr) minmax(300px, 0.9fr)",
+    gap: 32,
+    alignItems: "end",
+    position: "relative",
+    zIndex: 1,
+  },
+  pageHeroCopyCard: {
+    background: "rgba(255,255,255,0.95)",
+    borderLeft: `4px solid ${GREEN}`,
+    boxShadow: "0 12px 48px rgba(8,18,11,0.22)",
+    padding: "34px 36px 38px",
+    backdropFilter: "blur(4px)",
+  },
+  pageHeroTitle: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "clamp(42px, 5vw, 72px)",
+    fontWeight: 700,
+    lineHeight: 1.06,
+    margin: "0 0 18px",
+    maxWidth: 720,
+  },
+  pageHeroSub: {
+    fontSize: 18,
+    color: "#6b876f",
+    lineHeight: 1.8,
+    fontWeight: 300,
+    maxWidth: 620,
+    margin: 0,
+  },
+  pageHeroActions: {
+    display: "flex",
+    gap: 16,
+    alignItems: "center",
+    flexWrap: "wrap",
+    marginTop: 28,
+  },
+  pageHeroMeta: {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gap: 16,
+  },
+  pageHeroMetaCard: {
+    background: "rgba(255,255,255,0.94)",
+    borderLeft: `4px solid ${GREEN}`,
+    padding: "22px 22px 20px",
+    boxShadow: "0 12px 32px rgba(8,18,11,0.18)",
+  },
+  pageHeroMetaValue: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: 36,
+    lineHeight: 1,
+    color: GREEN,
+    fontWeight: 700,
+    marginBottom: 8,
+  },
+  pageHeroMetaLabel: {
+    fontSize: 11,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: "#3d5c42",
+    fontWeight: 700,
+    marginBottom: 8,
+  },
+  pageHeroMetaCopy: {
+    fontSize: 15,
+    color: "#6b876f",
+    lineHeight: 1.65,
+  },
+
+  serviceHero: {
+    padding: "168px 64px 72px",
+    background: "#f4f8f5",
+    borderBottom: `1px solid ${GREEN_BORDER}`,
+  },
+  serviceHeroInner: {
+    maxWidth: 1280,
+    margin: "0 auto",
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1.1fr) minmax(320px, 0.9fr)",
+    gap: 36,
+    alignItems: "center",
+  },
+  serviceHeroCopy: { minWidth: 0 },
+  serviceHeroTitle: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "clamp(44px, 5.2vw, 76px)",
+    lineHeight: 1.02,
+    fontWeight: 700,
+    margin: "0 0 12px",
+  },
+  serviceHeroSubtitle: {
+    fontSize: 13,
+    letterSpacing: "0.16em",
+    textTransform: "uppercase",
+    color: GREEN,
+    fontWeight: 700,
+    marginBottom: 16,
+  },
+  serviceHeroSub: {
+    fontSize: 18,
+    color: "#6b876f",
+    lineHeight: 1.8,
+    fontWeight: 300,
+    maxWidth: 620,
+    margin: 0,
+  },
+  serviceHeroTags: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 8,
+    marginTop: 24,
+  },
+  serviceHeroTag: {
+    background: "#fff",
+    border: `1px solid ${GREEN_BORDER}`,
+    color: "#3d5c42",
+    fontSize: 11,
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+    padding: "8px 12px",
+    fontWeight: 600,
+  },
+  serviceHeroMedia: {
+    minWidth: 0,
+    position: "relative",
+  },
+  serviceHeroImage: {
+    width: "100%",
+    aspectRatio: "4 / 4.2",
+    objectFit: "cover",
+    boxShadow: "0 14px 48px rgba(20,31,22,0.14)",
+  },
+
+  serviceDetailGrid: {
+    maxWidth: 1280,
+    margin: "0 auto",
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1.2fr) minmax(280px, 0.75fr)",
+    gap: 28,
+    alignItems: "start",
+  },
+  serviceOverviewCard: {
+    background: "#fff",
+    border: `1px solid ${GREEN_BORDER}`,
+    borderLeft: `4px solid ${GREEN}`,
+    padding: "32px 32px 30px",
+  },
+  serviceSectionTitle: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "clamp(32px, 4vw, 48px)",
+    lineHeight: 1.08,
+    fontWeight: 700,
+    margin: "0 0 18px",
+  },
+  serviceParagraphs: { display: "flex", flexDirection: "column", gap: 18 },
+  serviceParagraph: {
+    fontSize: 17,
+    color: "#556d5b",
+    lineHeight: 1.85,
+    fontWeight: 300,
+    margin: 0,
+  },
+  serviceSidebar: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 18,
+  },
+  serviceSidebarCard: {
+    background: "#fff",
+    border: `1px solid ${GREEN_BORDER}`,
+    padding: "24px 24px 22px",
+  },
+  serviceSidebarLabel: {
+    fontSize: 11,
+    letterSpacing: "0.16em",
+    textTransform: "uppercase",
+    color: GREEN,
+    fontWeight: 700,
+    marginBottom: 10,
+  },
+  serviceSidebarTitle: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: 30,
+    lineHeight: 1.1,
+    fontWeight: 700,
+    marginBottom: 10,
+  },
+  serviceSidebarText: {
+    fontSize: 15,
+    color: "#6b876f",
+    lineHeight: 1.75,
+    margin: "0 0 18px",
+  },
+  serviceListsGrid: {
+    maxWidth: 1280,
+    margin: "0 auto",
+    display: "grid",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    gap: 24,
+  },
+  serviceListCard: {
+    background: "#fff",
+    borderTop: `3px solid ${GREEN}`,
+    padding: "30px 30px 26px",
+    boxShadow: "0 8px 24px rgba(20,31,22,0.05)",
+  },
+  serviceListEyebrow: {
+    fontSize: 12,
+    letterSpacing: "0.16em",
+    textTransform: "uppercase",
+    color: GREEN,
+    fontWeight: 700,
+    marginBottom: 18,
+  },
+  serviceList: {
+    listStyle: "disc",
+    margin: 0,
+    paddingLeft: 20,
+    display: "flex",
+    flexDirection: "column",
+    gap: 14,
+  },
+  serviceListItem: {
+    fontSize: 16,
+    color: "#556d5b",
+    lineHeight: 1.65,
+    paddingLeft: 2,
+  },
+
   servicesNavSection: {
     background: "#f4f8f5",
     borderTop: `3px solid ${GREEN}`,
@@ -929,73 +2233,205 @@ const styles = {
     gap: 14,
   },
   servicesNavTile: {
-    display: "flex", flexDirection: "column", alignItems: "flex-start",
-    textAlign: "left", padding: "20px 18px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    textAlign: "left",
+    padding: "20px 18px",
     minHeight: 124,
-    background: "#fff", border: `1px solid ${GREEN_BORDER}`,
+    background: "#fff",
+    border: `1px solid ${GREEN_BORDER}`,
     borderLeft: `3px solid ${GREEN}`,
-    cursor: "pointer", transition: "background 0.2s, border-color 0.2s, transform 0.2s",
-    gap: 8, fontFamily: "'DM Sans', sans-serif",
+    cursor: "pointer",
+    transition: "background 0.2s, border-color 0.2s, transform 0.2s",
+    gap: 8,
+    fontFamily: "'DM Sans', sans-serif",
+    textDecoration: "none",
+    color: "inherit",
   },
   servicesNavIndex: { fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "#6b876f", fontWeight: 700 },
   servicesNavName: { fontSize: 18, fontWeight: 600, color: "#141f16", lineHeight: 1.25 },
   servicesNavSub: { fontSize: 12, color: "#6b876f", letterSpacing: "0.06em", textTransform: "uppercase", lineHeight: 1.4 },
   servicesNavCta: {
-    display: "inline-block", color: GREEN, fontSize: 14, fontWeight: 700,
-    letterSpacing: "0.08em", textDecoration: "none",
-    borderBottom: `2px solid ${GREEN}`, paddingBottom: 3,
+    display: "inline-block",
+    color: GREEN,
+    fontSize: 14,
+    fontWeight: 700,
+    letterSpacing: "0.08em",
+    textDecoration: "none",
+    borderBottom: `2px solid ${GREEN}`,
+    paddingBottom: 3,
   },
   backToOverview: {
-    display: "inline-block", color: "#6b876f", fontSize: 13,
-    textDecoration: "none", letterSpacing: "0.06em",
-    marginBottom: 20, transition: "color 0.2s",
-    borderBottom: `1px solid rgba(107,135,111,0.3)`, paddingBottom: 2,
+    display: "inline-block",
+    color: "#6b876f",
+    fontSize: 13,
+    textDecoration: "none",
+    letterSpacing: "0.06em",
+    marginBottom: 20,
+    transition: "color 0.2s",
+    borderBottom: "1px solid rgba(107,135,111,0.3)",
+    paddingBottom: 2,
   },
 
-  // SERVICES GRID
+  homeServicesFooter: { textAlign: "center", marginTop: 40 },
+  homeBunkerSection: {
+    padding: "0 24px 56px",
+    background: "#fff",
+  },
+  homeBunkerCard: {
+    maxWidth: 1280,
+    margin: "0 auto",
+    background: "linear-gradient(120deg, #0d1710 0%, #122417 58%, #18321f 100%)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    boxShadow: "0 18px 40px rgba(8,18,11,0.18)",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+    gap: 36,
+    padding: "36px 36px 34px",
+    position: "relative",
+    overflow: "hidden",
+  },
+  homeBunkerCopy: { maxWidth: 760 },
+  homeBunkerBadge: {
+    display: "inline-block",
+    marginBottom: 16,
+    padding: "7px 12px",
+    fontSize: 11,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: "#d6e6d7",
+    border: "1px solid rgba(255,255,255,0.14)",
+    background: "rgba(255,255,255,0.04)",
+  },
+  homeBunkerEyebrow: {
+    fontSize: 12,
+    letterSpacing: "0.22em",
+    textTransform: "uppercase",
+    color: "#d7eadb",
+    fontWeight: 700,
+  },
+  homeBunkerTitle: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "clamp(34px, 4vw, 52px)",
+    lineHeight: 1.08,
+    color: "#fff",
+    margin: "0 0 16px",
+    maxWidth: 780,
+  },
+  homeBunkerText: {
+    margin: 0,
+    fontSize: 17,
+    lineHeight: 1.8,
+    color: "rgba(255,255,255,0.72)",
+    fontWeight: 300,
+    maxWidth: 660,
+  },
+  homeBunkerActions: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: 14,
+    minWidth: 220,
+  },
+  homeBunkerNote: {
+    fontSize: 13,
+    letterSpacing: "0.06em",
+    color: "rgba(255,255,255,0.56)",
+  },
   servicesGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 28 },
   serviceCard: {
-    background: "#fff", border: `1px solid ${GREEN_BORDER}`,
-    overflow: "hidden", transition: "box-shadow 0.3s, transform 0.3s",
-    display: "flex", flexDirection: "column"
+    background: "#fff",
+    border: `1px solid ${GREEN_BORDER}`,
+    overflow: "hidden",
+    transition: "box-shadow 0.3s, transform 0.3s",
+    display: "flex",
+    flexDirection: "column",
   },
   serviceCardHighlight: { border: `2px solid ${GREEN}` },
   serviceCardHover: { boxShadow: "0 16px 48px rgba(26,74,38,0.14)", transform: "translateY(-4px)" },
   highlightBadge: {
-    background: GREEN, color: "#fff",
-    fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700,
-    padding: "6px 14px", alignSelf: "flex-start", margin: "12px 0 0 12px"
+    background: GREEN,
+    color: "#fff",
+    fontSize: 10,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    padding: "6px 14px",
+    alignSelf: "flex-start",
+    marginBottom: 14,
   },
   serviceImgWrap: { height: 200, overflow: "hidden", position: "relative", flexShrink: 0 },
   serviceImg: { width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" },
   serviceImgOverlay: { position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(26,74,38,0.15), transparent)" },
   serviceBody: { padding: "24px 24px 28px", flex: 1, display: "flex", flexDirection: "column" },
   serviceSubtitle: { fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: GREEN, marginBottom: 8, fontWeight: 600 },
-  serviceTitle: { fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 700, color: "#141f16", marginBottom: 12, lineHeight: 1.2 },
+  serviceTitle: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: 26,
+    fontWeight: 700,
+    color: "#141f16",
+    marginBottom: 12,
+    lineHeight: 1.2,
+  },
   serviceDesc: { fontSize: 15, color: "#6b876f", lineHeight: 1.75, fontWeight: 300, flex: 1 },
   serviceTags: { display: "flex", flexWrap: "wrap", gap: 6, marginTop: 16, marginBottom: 20 },
   serviceTag: { background: GREEN_DIM, color: "#3d5c42", fontSize: 11, letterSpacing: "0.08em", padding: "5px 11px", fontWeight: 500 },
   serviceBtn: {
-    background: "none", border: `1px solid ${GREEN}`, color: GREEN,
-    padding: "11px 22px", fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase",
-    fontWeight: 700, cursor: "pointer", transition: "background 0.2s, color 0.2s", alignSelf: "flex-start"
+    background: "none",
+    border: `1px solid ${GREEN}`,
+    color: GREEN,
+    padding: "11px 22px",
+    fontSize: 13,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    cursor: "pointer",
+    transition: "background 0.2s, color 0.2s",
+    alignSelf: "flex-start",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textDecoration: "none",
+  },
+  serviceLinkBtn: {
+    background: "none",
+    border: `1px solid ${GREEN}`,
+    color: GREEN,
+    padding: "11px 22px",
+    fontSize: 13,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    cursor: "pointer",
+    transition: "background 0.2s, color 0.2s",
+    alignSelf: "flex-start",
+    textDecoration: "none",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
-  // BUNKER NOTE
   bunkerNote: {
-    marginTop: 48, padding: "20px 28px",
-    background: "#f4f8f5", border: `1px solid ${GREEN_BORDER}`, borderLeft: `4px solid ${GREEN}`,
+    marginTop: 48,
+    padding: "20px 28px",
+    background: "#f4f8f5",
+    border: `1px solid ${GREEN_BORDER}`,
+    borderLeft: `4px solid ${GREEN}`,
     display: "block",
-    fontSize: 15, color: "#3d5c42", lineHeight: 1.7
+    fontSize: 15,
+    color: "#3d5c42",
+    lineHeight: 1.7,
   },
   bunkerLink: { color: GREEN, fontWeight: 700, textDecoration: "none" },
 
-  // LUXURY SPOTLIGHT
   spotlightSection: { background: "#111", position: "relative", padding: "100px 64px", overflow: "hidden" },
   spotlightBg: {
-    position: "absolute", inset: 0,
+    position: "absolute",
+    inset: 0,
     background: "radial-gradient(ellipse at 70% 50%, rgba(26,74,38,0.25) 0%, transparent 70%)",
-    pointerEvents: "none"
+    pointerEvents: "none",
   },
   spotlightInner: { maxWidth: 1280, margin: "0 auto", display: "flex", gap: 80, alignItems: "center" },
   spotlightText: { flex: 1, minWidth: 0 },
@@ -1008,7 +2444,6 @@ const styles = {
   spotlightImg1: { width: "100%", aspectRatio: "4/3", objectFit: "cover", gridColumn: "1 / -1" },
   spotlightImg2: { width: "100%", aspectRatio: "4/3", objectFit: "cover", gridColumn: "1 / -1" },
 
-  // ABOUT
   aboutInner: { display: "flex", gap: 80, alignItems: "center", maxWidth: 1280, margin: "0 auto" },
   aboutText: { flex: 1 },
   aboutDesc: { fontSize: 17, color: "#6b876f", lineHeight: 1.8, fontWeight: 300, marginBottom: 18 },
@@ -1019,19 +2454,19 @@ const styles = {
   aboutImages: { flex: 1, display: "grid", gridTemplateColumns: "1fr", gap: 16 },
   aboutImg: { width: "100%", aspectRatio: "4/3", objectFit: "cover" },
 
-  // PROJECTS
   projectsGrid: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, maxWidth: 1280, margin: "0 auto" },
   projectThumb: { position: "relative", overflow: "hidden", aspectRatio: "4/3", cursor: "pointer" },
   projectImg: { width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease", display: "block" },
   projectOverlay: { position: "absolute", inset: 0, background: "rgba(26,74,38,0.7)", display: "flex", alignItems: "flex-end", padding: 16, transition: "opacity 0.3s" },
   projectLabel: { color: "#fff", fontSize: 15, fontWeight: 500, letterSpacing: "0.04em" },
 
-  // CONTACT
   contactSection: { background: "#0f1f12", position: "relative", overflow: "hidden" },
+  contactPageSection: { paddingTop: 104 },
   contactBg: {
-    position: "absolute", inset: 0,
+    position: "absolute",
+    inset: 0,
     background: "radial-gradient(ellipse at 30% 50%, rgba(26,74,38,0.3) 0%, transparent 70%)",
-    pointerEvents: "none"
+    pointerEvents: "none",
   },
   contactInner: { maxWidth: 1280, margin: "0 auto", padding: "100px 64px", display: "flex", gap: 80, alignItems: "flex-start" },
   contactText: { flex: 1 },
@@ -1042,20 +2477,29 @@ const styles = {
   contactFormTitle: { fontFamily: "'Cormorant Garamond', serif", fontSize: 30, fontWeight: 700, color: "#141f16", marginBottom: 8 },
   contactFormSub: { fontSize: 15, color: "#6b876f", marginBottom: 24 },
 
-  // FORM
   formGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 14 },
   input: {
-    width: "100%", padding: "13px 16px",
-    border: `1px solid ${GREEN_BORDER}`, background: "#f4f8f5",
-    fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: "#141f16",
-    outline: "none", display: "block"
+    width: "100%",
+    padding: "13px 16px",
+    border: `1px solid ${GREEN_BORDER}`,
+    background: "#f4f8f5",
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: 15,
+    color: "#141f16",
+    outline: "none",
+    display: "block",
   },
   formNote: { fontSize: 13, color: "#6b876f", textAlign: "center" },
 
-  // MODAL
   modalOverlay: {
-    position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", zIndex: 1000,
-    display: "flex", alignItems: "center", justifyContent: "center", padding: 20
+    position: "fixed",
+    inset: 0,
+    background: "rgba(0,0,0,0.6)",
+    zIndex: 1000,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
   },
   modalBox: { background: "#fff", padding: "40px 36px", maxWidth: 480, width: "100%", position: "relative" },
   modalClose: { position: "absolute", top: 16, right: 16, background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#6b876f" },
@@ -1063,7 +2507,6 @@ const styles = {
   modalTitle: { fontFamily: "'Cormorant Garamond', serif", fontSize: 30, fontWeight: 700, marginBottom: 8 },
   modalService: { fontSize: 14, color: "#6b876f", marginBottom: 20, padding: "8px 14px", background: GREEN_DIM, display: "inline-block" },
 
-  // FOOTER
   footer: { background: "#0a160b", padding: "60px 64px 0" },
   footerInner: { maxWidth: 1280, margin: "0 auto", display: "flex", gap: 64, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" },
   footerBrand: { display: "flex", gap: 14, alignItems: "flex-start", flex: 1, minWidth: 200 },
@@ -1075,27 +2518,275 @@ const styles = {
   footerLink: { color: "rgba(255,255,255,0.5)", fontSize: 14, textDecoration: "none", transition: "color 0.2s", lineHeight: 1.6 },
   footerSocialRow: { display: "flex", gap: 10, marginTop: 8 },
   footerSocialBtn: {
-    width: 46, height: 46, display: "inline-flex", alignItems: "center", justifyContent: "center",
-    border: "1px solid rgba(209,176,117,0.45)", color: "rgba(255,255,255,0.78)",
-    textDecoration: "none", transition: "border-color 0.2s, color 0.2s, background 0.2s"
+    width: 46,
+    height: 46,
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "1px solid rgba(209,176,117,0.45)",
+    color: "rgba(255,255,255,0.78)",
+    textDecoration: "none",
+    transition: "border-color 0.2s, color 0.2s, background 0.2s",
   },
   footerSocialBtnWa: { borderColor: "#23df71", color: "#23df71" },
   footerBottom: { maxWidth: 1280, margin: "0 auto", padding: "20px 0", display: "flex", justifyContent: "space-between", fontSize: 13, color: "rgba(255,255,255,0.3)" },
 
-  // WHATSAPP FLOAT
   waFloat: {
-    position: "fixed", bottom: 16, right: 16, zIndex: 150,
-    minHeight: 56, width: 188, maxWidth: "calc(100vw - 20px)",
+    position: "fixed",
+    bottom: 16,
+    right: 16,
+    zIndex: 150,
+    minHeight: 56,
+    width: 188,
+    maxWidth: "calc(100vw - 20px)",
     borderRadius: 0,
-    background: "#25d366", color: "#fff",
-    display: "flex", alignItems: "center", justifyContent: "center",
+    background: "#25d366",
+    color: "#fff",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     gap: 10,
     padding: "0 14px",
     boxShadow: "0 8px 22px rgba(37,211,102,0.28)",
-    textDecoration: "none"
+    textDecoration: "none",
   },
-  waFloatText: {
-    fontSize: 13, fontWeight: 700, letterSpacing: "0.02em",
-    lineHeight: 1, fontFamily: "'DM Sans', sans-serif"
+  waFloatText: { fontSize: 13, fontWeight: 700, letterSpacing: "0.02em", lineHeight: 1, fontFamily: "'DM Sans', sans-serif" },
+
+  notFoundSection: {
+    padding: "168px 24px 96px",
+    minHeight: "60vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  notFoundCard: {
+    maxWidth: 760,
+    width: "100%",
+    background: "#f4f8f5",
+    borderTop: `4px solid ${GREEN}`,
+    padding: "44px 36px",
+    textAlign: "center",
+  },
+
+  janGroupBar: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 201,
+    height: 36,
+    background: "#080f09",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderBottom: "1px solid rgba(255,255,255,0.05)",
+  },
+  janGroupBarInner: {
+    display: "flex",
+    alignItems: "stretch",
+    height: "100%",
+  },
+  janGroupBarTab: {
+    fontSize: 11,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: "rgba(255,255,255,0.36)",
+    fontWeight: 500,
+    textDecoration: "none",
+    padding: "0 22px",
+    display: "flex",
+    alignItems: "center",
+    transition: "color 0.2s",
+    borderRight: "1px solid rgba(255,255,255,0.05)",
+  },
+  janGroupBarCurrent: {
+    fontSize: 11,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: "rgba(255,255,255,0.80)",
+    fontWeight: 600,
+    padding: "0 22px",
+    display: "flex",
+    alignItems: "center",
+    gap: 8,
+    border: "1px solid rgba(255,255,255,0.10)",
+    margin: "6px 10px",
+    background: "rgba(255,255,255,0.04)",
+  },
+  janGroupBarCurrentDot: {
+    width: 5,
+    height: 5,
+    borderRadius: "50%",
+    background: "#5aad6e",
+    flexShrink: 0,
+  },
+
+  mobileCta: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
+    marginTop: 8,
+    paddingTop: 16,
+    borderTop: `1px solid ${GREEN_BORDER}`,
+  },
+  mobileWaBtn: {
+    background: "#25d366",
+    color: "#fff",
+    border: "none",
+    cursor: "pointer",
+    padding: "13px 24px",
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: 13,
+    fontWeight: 700,
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    textDecoration: "none",
+    width: "100%",
+    boxSizing: "border-box",
+  },
+  mobileJanGroup: {
+    marginTop: 4,
+    paddingTop: 16,
+    borderTop: `1px solid ${GREEN_BORDER}`,
+  },
+  mobileJanGroupLabel: {
+    fontSize: 10,
+    letterSpacing: "0.18em",
+    textTransform: "uppercase",
+    color: "#6b876f",
+    fontWeight: 600,
+    marginBottom: 4,
+  },
+  mobileJanBrandRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    padding: "11px 0",
+    borderBottom: `1px solid ${GREEN_BORDER}`,
+    color: "inherit",
+  },
+  mobileJanBrandIconBox: {
+    width: 32,
+    height: 32,
+    border: `1px solid ${GREEN_BORDER}`,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: GREEN,
+    flexShrink: 0,
+  },
+  mobileJanBrandName: {
+    fontSize: 14,
+    color: "#141f16",
+    fontWeight: 500,
+    flex: 1,
+  },
+  mobileJanBrandTag: {
+    fontSize: 10,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    color: GREEN,
+    fontWeight: 700,
+    border: `1px solid ${GREEN_BORDER}`,
+    padding: "4px 8px",
+  },
+
+  janGroupSection: {
+    background: "#07100a",
+    padding: "60px 64px",
+    borderBottom: "1px solid rgba(255,255,255,0.05)",
+  },
+  janGroupSectionInner: {
+    maxWidth: 1280,
+    margin: "0 auto",
+  },
+  janGroupSectionHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "baseline",
+    marginBottom: 32,
+    paddingBottom: 22,
+    borderBottom: "1px solid rgba(255,255,255,0.07)",
+  },
+  janGroupSectionEyebrow: {
+    fontSize: 11,
+    letterSpacing: "0.2em",
+    textTransform: "uppercase",
+    color: "rgba(255,255,255,0.38)",
+    fontWeight: 600,
+  },
+  janGroupSectionTagline: {
+    fontSize: 14,
+    color: "rgba(255,255,255,0.3)",
+    letterSpacing: "0.02em",
+    fontStyle: "italic",
+  },
+  janBrandsGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: 1,
+    background: "rgba(255,255,255,0.05)",
+  },
+  janBrandCard: {
+    background: "#07100a",
+    padding: "32px 28px 28px",
+    display: "flex",
+    flexDirection: "column",
+    position: "relative",
+  },
+  janBrandCardCurrent: {
+    background: "rgba(255,255,255,0.025)",
+  },
+  janBrandCurrentBadge: {
+    position: "absolute",
+    top: 18,
+    right: 18,
+    fontSize: 10,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: "rgba(255,255,255,0.4)",
+    border: "1px solid rgba(255,255,255,0.12)",
+    padding: "5px 10px",
+  },
+  janBrandIconBox: {
+    width: 48,
+    height: 48,
+    border: "1px solid rgba(255,255,255,0.10)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "rgba(255,255,255,0.5)",
+    marginBottom: 18,
+    flexShrink: 0,
+  },
+  janBrandName: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: 22,
+    fontWeight: 600,
+    color: "rgba(255,255,255,0.86)",
+    marginBottom: 10,
+    lineHeight: 1.2,
+  },
+  janBrandDesc: {
+    fontSize: 14,
+    color: "rgba(255,255,255,0.36)",
+    lineHeight: 1.75,
+    fontWeight: 300,
+    margin: "0 0 22px",
+    flex: 1,
+  },
+  janBrandVisit: {
+    fontSize: 11,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: "rgba(255,255,255,0.42)",
+    textDecoration: "none",
+    fontWeight: 600,
+    transition: "color 0.2s",
+    alignSelf: "flex-start",
   },
 };
