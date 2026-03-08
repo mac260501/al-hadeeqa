@@ -124,12 +124,31 @@ function JanGroupBar() {
 }
 
 const PROJECT_IMGS = [
-  { src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80", label: "Luxury Pergola - Dubai Villa" },
-  { src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80", label: "Glass Partition - Office Fit-Out" },
-  { src: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80", label: "Excavation, Dewatering & Shoring" },
-  { src: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&q=80", label: "Premium Carport - Jumeirah" },
-  { src: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80", label: "Roof Waterproofing" },
-  { src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80", label: "Foundation Work" },
+  { src: "/assets/images/projects/proj-01.jpg", label: "Luxury Villa — Jumeirah" },
+  { src: "/assets/images/projects/proj-02.jpg", label: "Residential Villa — Dubai" },
+  { src: "/assets/images/projects/proj-03.jpg", label: "Villa Complex — Sharjah" },
+  { src: "/assets/images/projects/proj-17.jpg", label: "Luxury Residential — Dubai Hills" },
+  { src: "/assets/images/projects/proj-04.jpg", label: "Grand Villa — Dubai" },
+  { src: "/assets/images/projects/proj-18.jpg", label: "Luxury Villa Interior — Dubai" },
+  { src: "/assets/images/projects/proj-05.jpg", label: "Townhouse Development — UAE" },
+  { src: "/assets/images/projects/proj-06.jpg", label: "Residential Villa — Sharjah" },
+  { src: "/assets/images/projects/proj-19.jpg", label: "Villa Interior Fit-Out — Dubai" },
+  { src: "/assets/images/projects/proj-07.jpg", label: "Commercial Warehouse — Dubai Industrial City" },
+  { src: "/assets/images/projects/proj-08.jpg", label: "Villa Construction — Dubai" },
+  { src: "/assets/images/projects/proj-09.jpg", label: "Residential Development — UAE" },
+  { src: "/assets/images/projects/proj-20.jpg", label: "Commercial Showroom — Ajman" },
+  { src: "/assets/images/projects/proj-10.jpg", label: "Industrial Building — Dubai" },
+  { src: "/assets/images/projects/proj-21.jpg", label: "Commercial Building — Dubai" },
+  { src: "/assets/images/projects/proj-11.jpg", label: "Warehouse Fit-Out — Jebel Ali" },
+  { src: "/assets/images/projects/proj-12.jpg", label: "Warehouse Interior — Dubai" },
+  { src: "/assets/images/projects/proj-22.jpg", label: "Villa Construction — Dubai" },
+  { src: "/assets/images/projects/proj-13.jpg", label: "Residential Project — Dubai" },
+  { src: "/assets/images/projects/proj-23.jpg", label: "Villa Build — UAE" },
+  { src: "/assets/images/projects/proj-14.jpg", label: "Residential Complex — Dubai" },
+  { src: "/assets/images/projects/proj-15.jpg", label: "Modern Villa — Dubai" },
+  { src: "/assets/images/projects/proj-16.jpg", label: "Luxury Residential — UAE" },
+  { src: "/assets/images/projects/proj-24.jpg", label: "Warehouse Build — Dubai" },
+  { src: "/assets/images/projects/proj-25.jpg", label: "Commercial Development — Dubai" },
 ];
 
 const PAGE_HERO_IMAGES = {
@@ -1299,7 +1318,7 @@ function ProjectThumb({ project, index }) {
         ...styles.projectThumb,
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(20px)",
-        transition: `opacity 0.5s ease ${index * 0.09}s, transform 0.5s ease ${index * 0.09}s`,
+        transition: `opacity 0.5s ease ${Math.min(index * 0.06, 0.25)}s, transform 0.5s ease ${Math.min(index * 0.06, 0.25)}s`,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
