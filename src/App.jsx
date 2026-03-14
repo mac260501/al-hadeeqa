@@ -144,7 +144,6 @@ const PROJECT_IMGS = [
   { src: "/assets/images/projects/proj-22.jpg", label: "Villa Construction — Dubai" },
   { src: "/assets/images/projects/proj-13.jpg", label: "Residential Project — Dubai" },
   { src: "/assets/images/projects/proj-23.jpg", label: "Villa Build — UAE" },
-  { src: "/assets/images/projects/proj-14.jpg", label: "Residential Complex — Dubai" },
   { src: "/assets/images/projects/proj-15.jpg", label: "Modern Villa — Dubai" },
   { src: "/assets/images/projects/proj-16.jpg", label: "Luxury Residential — UAE" },
   { src: "/assets/images/projects/proj-24.jpg", label: "Warehouse Build — Dubai" },
