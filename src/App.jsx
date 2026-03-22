@@ -124,6 +124,7 @@ function JanGroupBar() {
 }
 
 const PROJECT_IMGS = [
+  { src: "/assets/images/projects/proj-28.jpg", label: "Luxury Villa — Dubai" },
   { src: "/assets/images/projects/proj-01.jpg", label: "Luxury Villa — Jumeirah" },
   { src: "/assets/images/projects/proj-02.jpg", label: "Residential Villa — Dubai" },
   { src: "/assets/images/projects/proj-03.jpg", label: "Villa Complex — Sharjah" },
@@ -132,7 +133,6 @@ const PROJECT_IMGS = [
   { src: "/assets/images/projects/proj-18.jpg", label: "Luxury Villa Interior — Dubai" },
   { src: "/assets/images/projects/proj-05.jpg", label: "Townhouse Development — UAE" },
   { src: "/assets/images/projects/proj-06.jpg", label: "Residential Villa — Sharjah" },
-  { src: "/assets/images/projects/proj-19.jpg", label: "Villa Interior Fit-Out — Dubai" },
   { src: "/assets/images/projects/proj-07.jpg", label: "Commercial Warehouse — Dubai Industrial City" },
   { src: "/assets/images/projects/proj-08.jpg", label: "Villa Construction — Dubai" },
   { src: "/assets/images/projects/proj-09.jpg", label: "Residential Development — UAE" },
@@ -148,6 +148,8 @@ const PROJECT_IMGS = [
   { src: "/assets/images/projects/proj-16.jpg", label: "Luxury Residential — UAE" },
   { src: "/assets/images/projects/proj-24.jpg", label: "Warehouse Build — Dubai" },
   { src: "/assets/images/projects/proj-25.jpg", label: "Commercial Development — Dubai" },
+  { src: "/assets/images/projects/proj-26.jpg", label: "Shoring Works — Dubai" },
+  { src: "/assets/images/projects/proj-27.jpg", label: "Excavation & Shoring — Dubai" },
 ];
 
 const PAGE_HERO_IMAGES = {

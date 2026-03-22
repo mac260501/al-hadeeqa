@@ -31,7 +31,7 @@ export const SERVICES = [
     subtitle: "Excavation support engineered for stability",
     desc: "Excavation support systems that stabilize open cuts and basement works safely. We coordinate shoring with dewatering and excavation so structural support is in place before the heavy work begins.",
     heroDescription: "Excavation support solutions that stabilize the dig, protect adjacent conditions, and prepare the site for safe progress.",
-    image: "/assets/images/shoring.png",
+    image: "/assets/images/shoring.jpeg",
     tags: ["Sheet Piling", "Retaining Systems", "Basement Support", "Excavation Safety"],
     summary: [
       "Shoring exists to create control where excavation depth, edge stability, and neighboring conditions demand it. We approach it as a structural enabling scope, not just a temporary site item.",
