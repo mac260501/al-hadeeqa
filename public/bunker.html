@@ -3,41 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Underground Bunkers UAE — Al Hadeeqa Contracting</title>
-<meta name="description" content="Private underground safe rooms for UAE villa owners. Purpose-built, discreetly installed by a licensed contractor with 20+ years in the UAE. SafeHaven by Al Hadeeqa.">
+<title>Underground Bunker Solutions UAE | From AED 100,000 | Al Hadeeqa Contracting</title>
+<meta name="description" content="Underground safe room solutions for UAE villas. Three tiers from AED 100,000 to AED 500,000+. Precast and custom-built options. Free site assessment within 48 hours. Al Hadeeqa Contracting — 35+ years in UAE.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/jpeg" href="assets/images/logo.jpeg">
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-658897837">
-</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-658897837"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'AW-658897837');
 </script>
 <style>
   :root {
-    /* Page colours — light base */
-    --bg:       #f4f8f5;
-    --surface:  #ffffff;
-    --surface2: #eaf1ec;
-    --border:   rgba(42,110,58,0.14);
-
-    /* Green accent */
-    --green:    #1a4a26;
-    --green-l:  #1d5229;
-    --green-dim: rgba(42,110,58,0.10);
-
-    /* Text */
-    --ink:      #141f16;
-    --ink-mid:  #3d5c42;
-    --ink-soft: #6b876f;
-
-    /* Hero is always dark */
-    --hero-bg:  #080808;
+    --bg:       #0a0a0a;
+    --bg2:      #111111;
+    --bg3:      #161616;
+    --bg4:      #1a1a1a;
+    --surface:  #1e1e1e;
+    --border:   rgba(255,255,255,0.08);
+    --green:    #2E6B3A;
+    --green-l:  #3a844a;
+    --gold:     #C9A54E;
+    --gold-l:   #d9b86a;
+    --gold-dim: rgba(201,165,78,0.12);
+    --ink:      #ffffff;
+    --ink-mid:  #c0c0c0;
+    --ink-soft: #888888;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -51,25 +45,19 @@
     overflow-x: hidden;
   }
 
-  /* ── NAV — frosted glass ── */
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 0 48px; min-height: 66px;
+    padding: 0 48px; min-height: 64px;
     display: flex; align-items: center; justify-content: space-between; gap: 24px;
-    background: #ffffff;
-    border-bottom: 1px solid rgba(42,110,58,0.12);
-    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    background: rgba(10,10,10,0.96);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
   }
-  .nav-brand { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
-  .nav-logo {
-    width: 44px; height: 44px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-  }
+  .nav-brand { display: flex; align-items: center; gap: 12px; }
+  .nav-logo { width: 40px; height: 40px; flex-shrink: 0; overflow: hidden; }
   .nav-logo img { width: 100%; height: 100%; object-fit: contain; }
-  .nav-texts { min-width: 0; }
-  .nav-name { font-size: 12px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink); font-weight: 600; white-space: normal; line-height: 1.4; }
-  .nav-sub  { font-size: 10px; color: var(--ink-soft); letter-spacing: 0.04em; margin-top: 2px; white-space: nowrap; }
+  .nav-name { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); font-weight: 600; }
   .nav-cta {
     background: var(--green); color: #fff;
     padding: 11px 22px; font-size: 12px;
@@ -79,364 +67,244 @@
   }
   .nav-cta:hover { background: var(--green-l); }
 
-  /* ── HERO — light villa photo ── */
-  .hero { min-height: 100vh; position: relative; display: flex; align-items: center; overflow: hidden; padding: 80px 0; }
+  /* HERO */
+  .hero {
+    min-height: 100svh; position: relative;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 80px 80px;
+    overflow: hidden;
+  }
   .hero-bg {
     position: absolute; inset: 0;
     background: url('assets/images/bunker-full.png') center 40%/cover no-repeat;
+    filter: brightness(0.28);
   }
   .hero-overlay {
-    display: block;
     position: absolute; inset: 0;
-    background: linear-gradient(
-      105deg,
-      rgba(244,248,245,0.30) 0%,
-      rgba(244,248,245,0.10) 50%,
-      rgba(244,248,245,0.0) 100%
-    );
+    background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.65) 65%, rgba(10,10,10,1) 100%);
   }
-  .hero-green-line {
-    position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-    background: linear-gradient(to bottom, transparent, var(--green) 20%, var(--green) 80%, transparent);
-  }
-  .hero-content {
-    position: relative; z-index: 2;
-    padding: 52px 52px 52px 56px;
-    max-width: 680px;
-    margin-top: 64px;
-    margin-left: 48px;
-    background: rgba(255,255,255,0.96);
-    border: 1px solid rgba(255,255,255,0.98);
-    border-left: 4px solid var(--green);
-    box-shadow: 0 8px 48px rgba(0,0,0,0.14);
-  }
-  .eyebrow {
+  .hero-content { position: relative; z-index: 2; max-width: 760px; }
+  .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 12px;
     font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--green); margin-bottom: 28px;
+    color: var(--gold); margin-bottom: 28px;
   }
-  .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--green); }
-  .alert-badge {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(42,110,58,0.08); border: 1px solid rgba(42,110,58,0.30);
-    padding: 8px 16px; margin-bottom: 32px;
-  }
-  .alert-dot { width: 7px; height: 7px; border-radius: 50%; background: #c0392b; animation: blink 1.8s infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
-  .alert-text { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); font-weight: 500; }
+  .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
   .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(44px, 6vw, 86px);
-    font-weight: 900; line-height: 1.04;
-    color: var(--ink); margin-bottom: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 700; line-height: 1.02;
+    color: #fff; margin-bottom: 28px;
   }
-  .hero h1 em { font-style: italic; color: var(--green); display: block; }
+  .hero h1 em { font-style: italic; color: var(--gold); display: block; }
   .hero-sub {
-    font-size: 18px; color: var(--ink-soft);
-    max-width: 500px; margin-bottom: 52px; line-height: 1.8;
+    font-size: 18px; color: var(--ink-mid);
+    max-width: 560px; margin-bottom: 48px; line-height: 1.8;
   }
-  .hero-cta-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .hero-cta-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 72px; }
   .btn-primary {
     background: var(--green); color: #fff;
-    padding: 16px 36px; font-family: 'Archivo', sans-serif;
-    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 16px 36px; font-size: 13px;
+    letter-spacing: 0.14em; text-transform: uppercase;
     font-weight: 700; text-decoration: none; transition: background 0.2s;
     display: inline-flex; align-items: center; gap: 10px;
   }
   .btn-primary:hover { background: var(--green-l); }
-  .btn-secondary {
-    color: var(--ink-soft); font-size: 13px; letter-spacing: 0.08em;
-    text-decoration: none; border-bottom: 1px solid rgba(42,110,58,0.25);
+  .btn-ghost {
+    color: var(--ink-mid); font-size: 13px; letter-spacing: 0.08em;
+    text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2);
     padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
   }
-  .btn-secondary:hover { color: var(--green); border-color: var(--green); }
-  /* Right stats — dark on light */
+  .btn-ghost:hover { color: #fff; border-color: #fff; }
+
+  /* Hero stats */
   .hero-stats {
-    position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
-    display: flex; flex-direction: column; gap: 0; z-index: 3;
-    background: rgba(255,255,255,0.96);
-    border: 1px solid rgba(255,255,255,0.98);
-    border-top: 4px solid var(--green);
-    box-shadow: 0 8px 48px rgba(0,0,0,0.14);
-    padding: 28px 32px;
-  }
-  .h-stat { text-align: center; }
-  .h-stat-num { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--green); line-height: 1; }
-  .h-stat-lbl { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-top: 4px; }
-  .h-stat-divider { height: 1px; background: rgba(42,110,58,0.15); margin: 18px 0; }
-
-  /* ── URGENCY STRIP ── */
-  .urgency-strip {
-    background: var(--surface2);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 48px;
-    display: flex; align-items: center; justify-content: center; gap: 20px;
-  }
-  .u-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blink 1.8s infinite; flex-shrink: 0; }
-  .u-text { font-size: 12px; font-weight: 500; letter-spacing: 0.07em; color: var(--ink-mid); }
-  .u-text strong { color: var(--green); font-weight: 600; }
-  .u-sep { width: 1px; height: 14px; background: var(--border); flex-shrink: 0; }
-
-  /* ── SITUATION ── */
-  .situation {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1.2fr;
-    min-height: 500px;
-    background: var(--surface);
-  }
-  .sit-img { position: relative; overflow: hidden; }
-  .sit-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(10%) brightness(0.80); }
-  .sit-img:nth-child(2)::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to right, transparent 50%, var(--surface));
-    pointer-events: none;
-    z-index: 1;
-  }
-  .sit-label {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: #fff; font-weight: 700;
-    background: rgba(26,74,38,0.92);
-    backdrop-filter: blur(4px);
-    padding: 10px 16px;
-    border-top: 2px solid var(--green);
-    z-index: 5;
-  }
-  .sit-text { padding: 64px 52px; display: flex; flex-direction: column; justify-content: center; background: var(--surface); }
-  .s-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
-  .green-rule { width: 44px; height: 2px; background: var(--green); margin-bottom: 22px; }
-  .sit-text blockquote {
-    font-family: 'Playfair Display', serif;
-    font-size: 21px; font-style: italic;
-    color: var(--ink); line-height: 1.6;
-    border-left: 3px solid var(--green); padding-left: 22px;
-    margin-bottom: 28px;
-  }
-  .sit-text p { font-size: 15px; color: var(--ink-soft); line-height: 1.85; margin-bottom: 14px; }
-  .sit-text strong { color: var(--green); font-weight: 600; }
-
-  /* ── BUNKER SPEC ── */
-  .spec-section { background: var(--bg); padding: 100px 80px; }
-  .spec-header { margin-bottom: 60px; }
-  .spec-tag { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
-  .spec-rule { width: 44px; height: 2px; background: var(--green); margin-bottom: 22px; }
-  .spec-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(34px, 4vw, 56px); font-weight: 900;
-    color: var(--ink); line-height: 1.1; margin-bottom: 18px;
-  }
-  .spec-title em { font-style: italic; color: var(--green); }
-  .spec-intro { font-size: 16px; color: var(--ink-soft); max-width: 540px; line-height: 1.85; }
-  .spec-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
-  .spec-img { position: relative; overflow: hidden; min-height: 480px; }
-  .spec-img img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    filter: grayscale(10%) brightness(0.80); transition: filter 0.5s;
-  }
-  .spec-img:hover img { filter: grayscale(0%) brightness(0.90); }
-  .spec-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(4,12,6,0.82) 0%, transparent 50%); }
-  .spec-img-caption { position: absolute; bottom: 28px; left: 28px; right: 28px; }
-  .spec-img-caption h3 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-  .spec-img-caption p { font-size: 13px; color: #aec8b4; line-height: 1.6; }
-  .spec-features { background: var(--surface); padding: 52px 48px; display: flex; flex-direction: column; justify-content: center; }
-  .spec-features-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 28px; }
-  .feature-list { list-style: none; margin-bottom: 36px; }
-  .feature-list li {
-    padding: 14px 0; border-bottom: 1px solid var(--border);
-    display: flex; gap: 16px; align-items: flex-start;
-    font-size: 14px; color: var(--ink-mid); line-height: 1.6;
-  }
-  .feature-list li::before { content: '—'; color: var(--green); flex-shrink: 0; font-weight: 600; }
-  .feature-list li:first-child { border-top: 1px solid var(--border); }
-  .spec-note {
-    font-size: 12px; color: var(--ink-soft); line-height: 1.7;
-    border-left: 2px solid rgba(42,110,58,0.3); padding-left: 16px;
-  }
-
-  /* ── MOSAIC ── */
-  .mosaic { background: var(--bg); padding: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-  .mosaic-left .s-label { margin-bottom: 14px; }
-  .mosaic-left h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 3.5vw, 46px); font-weight: 900;
-    color: var(--ink); line-height: 1.12; margin-bottom: 18px;
-  }
-  .mosaic-left h2 em { font-style: italic; color: var(--green); }
-  .mosaic-left p { font-size: 15px; color: var(--ink-soft); line-height: 1.85; margin-bottom: 32px; max-width: 420px; }
-  .mosaic-stat-row { display: flex; gap: 14px; flex-wrap: wrap; }
-  .mosaic-stat {
-    background: var(--surface); border: 1px solid var(--border);
-    padding: 20px 28px; flex: 1; min-width: 120px;
-  }
-  .mosaic-stat-val { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 900; color: var(--green); line-height: 1; margin-bottom: 4px; }
-  .mosaic-stat-lbl { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
-  .mosaic-right { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; height: 480px; }
-  .mosaic-img { position: relative; overflow: hidden; }
-  .mosaic-img:nth-child(2) { margin-top: -40px; margin-bottom: 40px; }
-  .mosaic-img:nth-child(3) { margin-top: 40px; margin-bottom: -40px; }
-  .mosaic-img img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    filter: grayscale(10%) brightness(0.80); transition: filter 0.5s, transform 0.5s;
-  }
-  .mosaic-img:hover img { filter: grayscale(0%) brightness(0.90); transform: scale(1.03); }
-  .mosaic-img-label {
-    position: absolute; bottom: 12px; left: 12px;
-    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--green); background: rgba(255,255,255,0.90); padding: 4px 9px;
-  }
-
-  /* ── PROCESS BAND ── */
-  .process-band {
-    background: var(--surface2);
-    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-    padding: 60px 80px;
-  }
-  .process-band-header { text-align: center; margin-bottom: 48px; }
-  .process-band-header .s-label { margin-bottom: 10px; }
-  .process-band-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 3.5vw, 44px); font-weight: 900;
-    color: var(--ink); line-height: 1.1;
-  }
-  .process-band-header h2 em { font-style: italic; color: var(--green); }
-  .process-inline { display: flex; align-items: flex-start; justify-content: center; gap: 0; max-width: 900px; margin: 0 auto; }
-  .p-inline-step { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .p-inline-num {
-    width: 52px; height: 52px; border-radius: 50%;
-    border: 1.5px solid var(--green);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--green);
-    margin-bottom: 18px; background: var(--surface); flex-shrink: 0;
-  }
-  .p-inline-step h3 { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; letter-spacing: 0.02em; }
-  .p-inline-step p { font-size: 12px; color: var(--ink-soft); line-height: 1.65; max-width: 180px; }
-  .p-inline-arrow { flex-shrink: 0; color: rgba(42,110,58,0.4); font-size: 22px; margin: 0 8px; display: flex; align-items: flex-start; padding-top: 12px; }
-
-  /* ── CTA / FORM ── */
-  .cta-section { position: relative; overflow: hidden; padding: 120px 80px; }
-  .cta-bg {
-    position: absolute; inset: 0;
-    background: url('assets/images/pexels-jacobyclarkephoto-1579356.jpg') center/cover;
-    filter: grayscale(20%) brightness(0.25);
-  }
-  .cta-inner {
     position: relative; z-index: 2;
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; align-items: center; max-width: 1100px; margin: 0 auto;
+    display: flex; gap: 0; flex-wrap: wrap;
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
   }
-  .cta-left h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 5vw, 62px); font-weight: 900;
-    color: #fff; line-height: 1.08; margin-bottom: 20px;
+  .h-stat { flex: 1; min-width: 140px; padding: 0 32px 0 0; border-right: 1px solid var(--border); }
+  .h-stat:first-child { padding-left: 0; }
+  .h-stat:last-child { border-right: none; }
+  .h-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+  .h-stat-lbl { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+
+  /* INFO STRIP */
+  .info-strip {
+    background: var(--bg2); border-bottom: 1px solid var(--border);
+    padding: 14px 48px;
+    display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap;
   }
-  .cta-left h2 em { font-style: italic; color: #7ec490; display: block; }
-  .cta-left p { font-size: 16px; color: #8aab90; line-height: 1.85; margin-bottom: 30px; }
-  .cta-checks { display: flex; flex-direction: column; gap: 10px; }
-  .cta-check { display: flex; align-items: center; gap: 12px; font-size: 14px; color: #c8daca; }
-  .cta-check::before { content: '✓'; color: #7ec490; font-weight: 700; flex-shrink: 0; }
-  .cta-form {
-    background: rgba(255,255,255,0.96);
-    border: 1px solid rgba(42,110,58,0.2);
-    padding: 44px; backdrop-filter: blur(20px);
-  }
-  .cta-form h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--ink); margin-bottom: 6px; }
+  .i-text { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; color: var(--ink-mid); }
+  .i-text strong { color: var(--gold); font-weight: 600; }
+  .i-sep { width: 1px; height: 14px; background: var(--border); flex-shrink: 0; }
+
+  /* SECTION DEFAULTS */
+  .section-tag { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .section-rule { width: 44px; height: 1px; background: var(--gold); margin-bottom: 24px; }
+  .section-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 56px); font-weight: 700; color: #fff; line-height: 1.08; margin-bottom: 18px; }
+  .section-h2 em { font-style: italic; color: var(--gold); }
+  .section-sub { font-size: 16px; color: var(--ink-mid); max-width: 560px; line-height: 1.85; }
+
+  /* TIER CARDS */
+  .tiers-section { background: var(--bg2); padding: 100px 80px; }
+  .tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+  .tier-card { background: var(--bg3); padding: 44px 36px; position: relative; display: flex; flex-direction: column; }
+  .tier-card.featured { background: var(--bg4); border: 1px solid rgba(201,165,78,0.3); margin: -1px; z-index: 1; }
+  .tier-badge { display: inline-block; background: var(--gold); color: #000; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; padding: 4px 12px; margin-bottom: 24px; align-self: flex-start; }
+  .tier-badge-placeholder { height: 25px; margin-bottom: 24px; }
+  .tier-tier { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
+  .tier-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.1; }
+  .tier-tagline { font-size: 14px; color: var(--ink-mid); margin-bottom: 32px; font-style: italic; line-height: 1.5; }
+  .tier-price { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+  .tier-price-label { font-size: 12px; color: var(--ink-soft); margin-bottom: 36px; letter-spacing: 0.04em; }
+  .tier-specs { list-style: none; margin-bottom: 40px; flex: 1; }
+  .tier-specs li { padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; font-size: 13px; color: var(--ink-mid); line-height: 1.5; }
+  .tier-specs li::before { content: '—'; color: var(--gold); flex-shrink: 0; font-weight: 600; }
+  .tier-specs li:first-child { border-top: 1px solid var(--border); }
+  .tier-meta { font-size: 11px; color: var(--ink-soft); margin-bottom: 28px; padding: 16px 0; border-top: 1px solid var(--border); letter-spacing: 0.03em; }
+  .tier-meta span { color: var(--ink-mid); font-weight: 500; }
+  .tier-cta { display: block; text-align: center; padding: 14px 24px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+  .tier-cta-green { background: var(--green); color: #fff; }
+  .tier-cta-green:hover { background: var(--green-l); }
+  .tier-cta-gold { background: var(--gold); color: #000; }
+  .tier-cta-gold:hover { background: var(--gold-l); }
+
+  /* VIDEO SECTION */
+  .video-section { background: var(--bg); padding: 80px; display: flex; flex-direction: column; align-items: center; }
+  .video-header { text-align: center; margin-bottom: 40px; }
+  .video-wrapper { position: relative; width: 100%; max-width: 900px; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .video-wrapper video { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
+  .video-label { position: absolute; bottom: 20px; left: 20px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; font-weight: 700; background: rgba(0,0,0,0.72); backdrop-filter: blur(6px); padding: 6px 14px; border-left: 2px solid var(--gold); }
+  .video-caption { margin-top: 20px; font-size: 13px; color: var(--ink-soft); text-align: center; letter-spacing: 0.04em; }
+
+  /* COMPARISON TABLE */
+  .compare-section { background: var(--bg2); padding: 100px 80px; }
+  .table-scroll { overflow-x: auto; margin-top: 48px; -webkit-overflow-scrolling: touch; }
+  .compare-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+  .compare-table th { padding: 16px 24px; text-align: left; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; border-bottom: 2px solid var(--border); }
+  .compare-table th.fcol { color: var(--gold); border-bottom-color: var(--gold); }
+  .compare-table td { padding: 14px 24px; font-size: 13px; color: var(--ink-mid); border-bottom: 1px solid var(--border); line-height: 1.5; vertical-align: top; }
+  .compare-table td:first-child { color: var(--ink-soft); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; white-space: nowrap; }
+  .compare-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .compare-table td.fcol { color: var(--ink); }
+  .compare-table td.price-row { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--gold); }
+  .chk { color: var(--gold); font-weight: 700; }
+  .crs { color: var(--ink-soft); }
+
+  /* PROCESS */
+  .process-section { background: var(--bg3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 100px 80px; }
+  .process-header { text-align: center; margin-bottom: 60px; }
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .process-step { padding: 0 36px 0 0; border-right: 1px solid var(--border); }
+  .process-step:last-child { border-right: none; padding-right: 0; }
+  .process-step:not(:first-child) { padding-left: 36px; }
+  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 700; color: rgba(201,165,78,0.18); line-height: 1; margin-bottom: 20px; }
+  .step-title { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 10px; }
+  .step-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+
+  /* CREDIBILITY */
+  .cred-section { background: var(--bg); padding: 100px 80px; }
+  .cred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+  .cred-points { display: flex; flex-direction: column; gap: 32px; }
+  .cred-point { display: flex; gap: 20px; align-items: flex-start; }
+  .cred-icon { width: 44px; height: 44px; flex-shrink: 0; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 18px; }
+  .cred-point-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .cred-point-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.65; }
+  .cred-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; height: 440px; }
+  .cred-img { overflow: hidden; }
+  .cred-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7); transition: filter 0.4s; display: block; }
+  .cred-img:hover img { filter: brightness(0.88); }
+  .cred-img:first-child { grid-column: 1 / -1; }
+
+  /* THE VAULT */
+  .vault-section { background: #050505; border-top: 1px solid rgba(201,165,78,0.18); border-bottom: 1px solid rgba(201,165,78,0.18); padding: 100px 80px; position: relative; overflow: hidden; }
+  .vault-bg-text { position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-family: 'Cormorant Garamond', serif; font-size: 220px; font-weight: 700; color: rgba(201,165,78,0.04); white-space: nowrap; pointer-events: none; user-select: none; line-height: 1; }
+  .vault-inner { position: relative; z-index: 1; max-width: 680px; }
+  .vault-eyebrow { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .vault-rule { width: 44px; height: 1px; background: var(--gold); margin-bottom: 28px; }
+  .vault-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 5vw, 68px); font-weight: 700; color: #fff; line-height: 1.06; margin-bottom: 20px; }
+  .vault-h2 em { font-style: italic; color: var(--gold); }
+  .vault-sub { font-size: 16px; color: var(--ink-mid); line-height: 1.85; margin-bottom: 20px; max-width: 520px; }
+  .vault-features { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 44px; }
+  .vault-feature { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-mid); }
+  .vault-feature::before { content: '◆'; color: var(--gold); font-size: 8px; flex-shrink: 0; }
+  .vault-cta { display: inline-flex; align-items: center; gap: 12px; background: transparent; color: var(--gold); border: 1px solid rgba(201,165,78,0.45); padding: 16px 36px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+  .vault-cta:hover { background: var(--gold-dim); border-color: var(--gold); }
+
+  /* FORM */
+  .form-section { background: var(--bg2); padding: 100px 80px; position: relative; overflow: hidden; }
+  .form-bg { position: absolute; inset: 0; background: url('assets/images/pexels-jacobyclarkephoto-1579356.jpg') center/cover; filter: brightness(0.08) grayscale(30%); }
+  .form-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .form-left h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 62px); font-weight: 700; color: #fff; line-height: 1.06; margin-bottom: 20px; }
+  .form-left h2 em { font-style: italic; color: var(--gold); display: block; }
+  .form-left p { font-size: 16px; color: var(--ink-mid); line-height: 1.85; margin-bottom: 32px; }
+  .form-checks { display: flex; flex-direction: column; gap: 10px; }
+  .form-check { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--ink-mid); }
+  .form-check::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+  .cta-form { background: rgba(22,22,22,0.97); border: 1px solid var(--border); padding: 44px; backdrop-filter: blur(20px); }
+  .cta-form h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 6px; }
   .cta-form > p { font-size: 13px; color: var(--ink-soft); margin-bottom: 28px; }
   .f-row { margin-bottom: 14px; }
   .f-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .f-row input, .f-row select {
-    width: 100%; background: var(--bg);
-    border: 1px solid rgba(42,110,58,0.2);
-    color: var(--ink); padding: 14px 16px;
-    font-family: 'Archivo', sans-serif; font-size: 14px;
-    outline: none; transition: border-color 0.2s; appearance: none;
-  }
-  .f-row input:focus, .f-row select:focus { border-color: var(--green); }
+  .f-row input, .f-row select { width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--ink); padding: 14px 16px; font-family: 'Archivo', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; appearance: none; }
+  .f-row input:focus, .f-row select:focus { border-color: var(--gold); }
   .f-row input::placeholder { color: var(--ink-soft); }
-  .f-row select option { background: #fff; color: var(--ink); }
-  .f-submit {
-    width: 100%; background: var(--green); color: #fff;
-    border: none; padding: 17px;
-    font-family: 'Archivo', sans-serif; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
-    font-weight: 700; cursor: pointer; transition: background 0.25s;
-    display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 4px;
-  }
+  .f-row select option { background: var(--bg3); color: var(--ink); }
+  .f-submit { width: 100%; background: var(--green); color: #fff; border: none; padding: 17px; font-family: 'Archivo', sans-serif; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; cursor: pointer; transition: background 0.25s; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 4px; }
   .f-submit:hover { background: var(--green-l); }
   .f-note { font-size: 11px; color: var(--ink-soft); text-align: center; margin-top: 12px; }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--surface2); padding: 32px 80px;
-    border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
-  }
+  /* FOOTER */
+  footer { background: var(--bg); border-top: 1px solid var(--border); padding: 32px 80px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
   footer p { font-size: 12px; color: var(--ink-soft); }
-  footer a { color: var(--green); text-decoration: none; }
-  footer .footer-name { color: var(--ink); font-weight: 600; margin-bottom: 4px; }
+  footer a { color: var(--gold); text-decoration: none; }
+  .footer-name { color: var(--ink-mid); font-weight: 600; margin-bottom: 4px; font-size: 13px; }
 
-  /* ── STICKY WA ── */
-  .wa-float {
-    position: fixed; bottom: 28px; right: 28px; z-index: 200;
-    background: #25D366; width: 62px; height: 62px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    text-decoration: none; box-shadow: 0 6px 30px rgba(37,211,102,0.45);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
+  /* STICKY WA */
+  .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 200; background: #25D366; width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 6px 30px rgba(37,211,102,0.45); transition: transform 0.3s, box-shadow 0.3s; }
   .wa-float:hover { transform: scale(1.1); box-shadow: 0 10px 40px rgba(37,211,102,0.65); }
   .wa-float svg { width: 28px; height: 28px; }
-  .wa-tip {
-    position: fixed; bottom: 44px; right: 104px; z-index: 200;
-    background: var(--surface); border: 1px solid var(--border);
-    color: var(--ink); padding: 8px 14px; font-size: 12px; white-space: nowrap;
-    animation: fadeR 0.5s 2s both; pointer-events: none;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  }
-  @keyframes fadeR { from{opacity:0;transform:translateX(8px)} to{opacity:1;transform:translateX(0)} }
 
-  /* ── REVEAL ── */
+  /* REVEAL */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.in { opacity: 1; transform: translateY(0); }
 
-  /* ── RESPONSIVE ── */
-  @media(max-width:900px) {
-    nav { padding: 0 16px; min-height: 58px; gap: 12px; }
-    .nav-logo { width: 36px; height: 36px; }
-    .nav-name { font-size: 10px; letter-spacing: 0.05em; }
-    .nav-sub { display: none; }
-    .nav-cta { padding: 10px 14px; font-size: 10px; letter-spacing: 0.06em; }
-
-    .hero-content { margin: 0 16px; padding: 32px 24px; max-width: 100%; }
-    .hero-stats { display: none; }
-
-    .urgency-strip { flex-direction: column; gap: 4px; padding: 12px 20px; text-align: center; }
-    .u-sep, .u-dot { display: none; }
-
-    .situation { grid-template-columns: 1fr; }
-    .sit-img { height: 240px; }
-    .sit-img:nth-child(2)::after { display: none; }
-    .sit-text { padding: 40px 20px; }
-
-    .spec-section { padding: 60px 20px; }
-    .spec-layout { grid-template-columns: 1fr; }
-    .spec-img { min-height: 300px; }
-    .spec-features { padding: 36px 20px; }
-
-    .mosaic { grid-template-columns: 1fr; padding: 48px 20px; gap: 40px; }
-    .mosaic-right { height: 320px; }
-    .mosaic-img:nth-child(2),
-    .mosaic-img:nth-child(3) { margin-top: 0; margin-bottom: 0; }
-
-    .process-band { padding: 48px 20px; }
-    .process-inline { flex-direction: column; align-items: center; gap: 24px; }
-    .p-inline-arrow { transform: rotate(90deg); }
-    .p-inline-step p { max-width: 260px; }
-
-    .cta-section { padding: 60px 20px; }
-    .cta-inner { grid-template-columns: 1fr; gap: 40px; }
+  /* RESPONSIVE */
+  @media(max-width: 1024px) {
+    .tiers-grid { grid-template-columns: 1fr; gap: 2px; }
+    .tier-card.featured { margin: 0; }
+    .tier-badge-placeholder { display: none; }
+    .process-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .process-step { border-right: none; padding: 0; }
+    .cred-grid { grid-template-columns: 1fr; }
+    .cred-img-grid { height: 320px; }
+    .form-inner { grid-template-columns: 1fr; gap: 48px; }
+  }
+  @media(max-width: 768px) {
+    nav { padding: 0 20px; min-height: 56px; }
+    .nav-name { font-size: 10px; }
+    .nav-cta { padding: 9px 14px; font-size: 10px; letter-spacing: 0.06em; }
+    .hero { padding: 96px 24px 60px; }
+    .hero h1 { font-size: clamp(38px, 10vw, 56px); }
+    .hero-sub { font-size: 16px; }
+    .hero-stats { gap: 0; }
+    .h-stat { padding: 16px 0; border-right: none; border-bottom: 1px solid var(--border); min-width: 50%; flex: none; width: 50%; }
+    .h-stat:nth-child(odd) { border-right: 1px solid var(--border); }
+    .h-stat:last-child, .h-stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+    .info-strip { padding: 12px 20px; flex-direction: column; gap: 4px; text-align: center; }
+    .i-sep { display: none; }
+    .tiers-section, .compare-section, .process-section, .cred-section, .vault-section, .form-section { padding: 60px 24px; }
+    .video-section { padding: 60px 24px; }
+    .process-grid { grid-template-columns: 1fr; }
+    .cta-form { padding: 28px 20px; }
     .f-grid { grid-template-columns: 1fr; }
-
-    footer { padding: 28px 20px; flex-direction: column; align-items: flex-start; gap: 10px; }
-    .wa-tip { display: none; }
+    footer { padding: 28px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .tier-card { padding: 32px 24px; }
+    .hero-cta-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .vault-bg-text { font-size: 80px; }
+    .vault-features { gap: 16px; }
   }
 </style>
 </head>
@@ -445,13 +313,8 @@
 <!-- NAV -->
 <nav>
   <div class="nav-brand">
-    <div class="nav-logo">
-      <img src="assets/images/logo.jpeg" alt="Al Hadeeqa Contracting">
-    </div>
-    <div class="nav-texts">
-      <div class="nav-name">Al Hadeeqa Contracting</div>
-      <div class="nav-sub">Licensed UAE Contractor · 20+ Years</div>
-    </div>
+    <div class="nav-logo"><img src="assets/images/logo.jpeg" alt="Al Hadeeqa Contracting"></div>
+    <div class="nav-name">Al Hadeeqa Contracting</div>
   </div>
   <a href="#quote" class="nav-cta">Get Free Assessment →</a>
 </nav>
@@ -460,170 +323,287 @@
 <div class="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
-  <div class="hero-green-line"></div>
-  <div class="hero-content">
-    <div class="eyebrow">SafeHaven by Al Hadeeqa Contracting</div>
+  <div class="hero-content reveal">
+    <div class="hero-eyebrow">Underground Protection — Dubai, UAE</div>
     <h1>
-      A Private Underground Space.
-      <em>Built to the Highest Standard.</em>
+      Underground Protection
+      <em>For Your Family.</em>
     </h1>
     <p class="hero-sub">
-      Al Hadeeqa designs and builds discreet underground safe rooms for UAE villa owners — purpose-engineered, properly built, and installed by a licensed contractor with 20+ years in the UAE.
+      Three product tiers. Every build licensed, engineered, and delivered by a contractor with 35+ years in the UAE. Starting from AED 100,000.
     </p>
     <div class="hero-cta-row">
-      <a href="#quote" class="btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Request Free Assessment
-      </a>
-      <a href="#what-we-build" class="btn-secondary">See what we build ↓</a>
+      <a href="#tiers" class="btn-primary">See Our Solutions ↓</a>
+      <a href="#quote" class="btn-ghost">Request a free assessment</a>
     </div>
   </div>
-  <div class="hero-stats">
-    <div class="h-stat"><div class="h-stat-num">20+</div><div class="h-stat-lbl">Years in UAE</div></div>
-    <div class="h-stat-divider"></div>
-    <div class="h-stat"><div class="h-stat-num">50+</div><div class="h-stat-lbl">Projects Done</div></div>
-    <div class="h-stat-divider"></div>
-    <div class="h-stat"><div class="h-stat-num">48h</div><div class="h-stat-lbl">First Response</div></div>
+  <div class="hero-stats reveal">
+    <div class="h-stat">
+      <div class="h-stat-num">35+</div>
+      <div class="h-stat-lbl">Years in UAE</div>
+    </div>
+    <div class="h-stat">
+      <div class="h-stat-num">50+</div>
+      <div class="h-stat-lbl">Projects Delivered</div>
+    </div>
+    <div class="h-stat">
+      <div class="h-stat-num">48h</div>
+      <div class="h-stat-lbl">Site Assessment</div>
+    </div>
+    <div class="h-stat">
+      <div class="h-stat-num" style="font-size:30px; line-height:1.15;">AED 100K</div>
+      <div class="h-stat-lbl">Starting From</div>
+    </div>
   </div>
 </div>
 
 <!-- INFO STRIP -->
-<div class="urgency-strip">
-  <span class="u-text"><strong>Assessments available within 48 hours</strong> — Currently accepting new projects</span>
-  <div class="u-sep"></div>
-  <span class="u-text"><strong>Serving Dubai Only</strong></span>
-  <div class="u-sep"></div>
-  <span class="u-text">Free consultation · No obligation</span>
+<div class="info-strip">
+  <span class="i-text"><strong>Free site assessments within 48 hours</strong> — currently accepting new projects</span>
+  <div class="i-sep"></div>
+  <span class="i-text"><strong>Serving Dubai Only</strong></span>
+  <div class="i-sep"></div>
+  <span class="i-text">No obligation · Fixed-price quotes · UAE licensed</span>
 </div>
 
-<!-- SITUATION -->
-<div class="situation">
-  <div class="sit-img">
-    <img src="assets/images/vault-door.jpg" alt="Safe room vault door" style="object-position: center center;">
-    <div class="sit-label">THE BUILD</div>
+<!-- TIER CARDS -->
+<div class="tiers-section" id="tiers">
+  <div class="reveal">
+    <div class="section-tag">Our Products</div>
+    <div class="section-rule"></div>
+    <h2 class="section-h2">Three tiers.<br><em>One standard of build.</em></h2>
+    <p class="section-sub">Precast drop-in units for faster installation, or a fully custom poured-in-place build for complete specification control.</p>
   </div>
-  <div class="sit-img">
-    <img src="assets/images/construction-remodeling.jpg" alt="Construction in progress" style="object-position: center 20%;">
-    <div class="sit-label">THE CRAFT</div>
-  </div>
-  <div class="sit-text reveal">
-    <div class="s-label">Why Clients Choose SafeHaven</div>
-    <div class="green-rule"></div>
-    <blockquote>"Complete privacy. Complete peace of mind. Built properly."</blockquote>
-    <p>Discerning homeowners across Dubai are investing in private underground spaces for one simple reason: the option is there when you need it, and <strong>invisible when you don't.</strong></p>
-    <p>Every SafeHaven shelter is custom-engineered to your villa's specific layout — discreet, permanent, and built by a team with 20+ years in UAE construction.</p>
+  <div class="tiers-grid">
+
+    <!-- Tier 1 -->
+    <div class="tier-card reveal">
+      <div class="tier-badge-placeholder"></div>
+      <div class="tier-tier">Tier 1 · Precast</div>
+      <div class="tier-title">Emergency Pod</div>
+      <div class="tier-tagline">"A panic room buried in your garden."</div>
+      <div class="tier-price">100K</div>
+      <div class="tier-price-label">AED · Fixed price</div>
+      <ul class="tier-specs">
+        <li>7–8 sqm internal area · 2–4 people</li>
+        <li>220mm reinforced concrete walls</li>
+        <li>Top hatch entry · Manual ventilation</li>
+        <li>Chemical toilet · 40L water supply</li>
+        <li>Walkie-talkie communication</li>
+      </ul>
+      <div class="tier-meta">Manufacturing: <span>5–7 days</span> &nbsp;·&nbsp; Install: <span>1–2 days</span></div>
+      <a href="https://wa.me/971544419854?text=Hi%20Al%20Hadeeqa%2C%20I%27m%20interested%20in%20the%20Emergency%20Pod%20(AED%20100%2C000).%20Can%20I%20get%20a%20free%20site%20assessment%3F" target="_blank" class="tier-cta tier-cta-green">Get a Quote →</a>
+    </div>
+
+    <!-- Tier 2 (featured) -->
+    <div class="tier-card featured reveal">
+      <div class="tier-badge">Most Popular</div>
+      <div class="tier-tier">Tier 2 · Precast</div>
+      <div class="tier-title">Compact Shelter</div>
+      <div class="tier-tagline">"Real protection your family can shelter in."</div>
+      <div class="tier-price">200K</div>
+      <div class="tier-price-label">AED · Fixed price</div>
+      <ul class="tier-specs">
+        <li>15–20 sqm internal area · 6–8 people</li>
+        <li>250mm reinforced concrete walls</li>
+        <li>Top hatch entry · HEPA filtration</li>
+        <li>24hr battery backup · 200L water tank</li>
+        <li>Fold-down bunks · Intercom · CO₂ detector</li>
+      </ul>
+      <div class="tier-meta">Manufacturing: <span>10–14 days</span> &nbsp;·&nbsp; Install: <span>2–3 days</span></div>
+      <a href="https://wa.me/971544419854?text=Hi%20Al%20Hadeeqa%2C%20I%27m%20interested%20in%20the%20Compact%20Shelter%20(AED%20200%2C000).%20Can%20I%20get%20a%20free%20site%20assessment%3F" target="_blank" class="tier-cta tier-cta-gold">Get a Quote →</a>
+    </div>
+
+    <!-- Tier 3 -->
+    <div class="tier-card reveal">
+      <div class="tier-badge-placeholder"></div>
+      <div class="tier-tier">Tier 3 · Poured In Place</div>
+      <div class="tier-title">Shelter</div>
+      <div class="tier-tagline">"Custom-built. Full protection. Properly engineered."</div>
+      <div class="tier-price">500K+</div>
+      <div class="tier-price-label">AED · From · Custom at AED 15,200/sqm</div>
+      <ul class="tier-specs">
+        <li>28 sqm standard (7m × 4m) · 8–15 people</li>
+        <li>300–400mm RC walls · Certified blast door</li>
+        <li>HEPA + backup ventilation · 48hr battery</li>
+        <li>500L water · Full bathroom · Kitchenette</li>
+        <li>Hardwired intercom · Emergency escape hatch</li>
+      </ul>
+      <div class="tier-meta">Custom engineering &nbsp;·&nbsp; Build time: <span>4–6 weeks on-site</span></div>
+      <a href="https://wa.me/971544419854?text=Hi%20Al%20Hadeeqa%2C%20I%27m%20interested%20in%20the%20Shelter%20(from%20AED%20500%2C000).%20Can%20I%20arrange%20a%20free%20site%20assessment%3F" target="_blank" class="tier-cta tier-cta-green">Get a Quote →</a>
+    </div>
+
   </div>
 </div>
 
-<!-- WHAT WE BUILD -->
-<section class="spec-section" id="what-we-build">
-  <div class="spec-header reveal">
-    <div class="spec-tag">What We Build</div>
-    <div class="spec-rule"></div>
-    <h2 class="spec-title">One bunker.<br><em>Built right.</em></h2>
-    <p class="spec-intro">We build a single type of underground shelter — purpose-designed for UAE villas. No corners cut. No upsell. One product, done properly.</p>
+<!-- VIDEO -->
+<div class="video-section">
+  <div class="video-header reveal">
+    <div class="section-tag">Real Build</div>
+    <div class="section-rule" style="margin: 14px auto;"></div>
   </div>
-  <div class="spec-layout reveal">
-    <div class="spec-img">
-      <img src="assets/images/bunker-rendering.png" alt="Underground shelter rendering">
-      <div class="spec-img-overlay"></div>
-      <div class="spec-img-caption">
-        <h3>The Underground Shelter</h3>
-        <p>Purpose-built below your villa. Your neighbors will think you're renovating a pool.</p>
+  <div class="video-wrapper reveal">
+    <video autoplay muted loop playsinline>
+      <source src="assets/videos/bunker-walkthrough.mp4" type="video/mp4">
+    </video>
+    <div class="video-label">Real Build — Al Hadeeqa Contracting</div>
+  </div>
+  <p class="video-caption">Actual underground safe room walkthrough — built and delivered by our team in Dubai.</p>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="compare-section" id="compare">
+  <div class="reveal">
+    <div class="section-tag">Full Specification</div>
+    <div class="section-rule"></div>
+    <h2 class="section-h2">Compare all three <em>side by side.</em></h2>
+  </div>
+  <div class="table-scroll reveal">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="width:180px;"></th>
+          <th>Emergency Pod</th>
+          <th class="fcol">Compact Shelter ★</th>
+          <th>Shelter</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Type</td><td>Precast drop-in</td><td class="fcol">Precast drop-in</td><td>Poured in place</td></tr>
+        <tr><td>Internal Area</td><td>7–8 sqm</td><td class="fcol">15–20 sqm</td><td>From 28 sqm</td></tr>
+        <tr><td>Capacity</td><td>2–4 people</td><td class="fcol">6–8 people</td><td>8–15 people</td></tr>
+        <tr><td>Depth</td><td>Per plot</td><td class="fcol">Per plot</td><td>Custom engineered</td></tr>
+        <tr><td>Wall Thickness</td><td>220mm RC</td><td class="fcol">250mm RC</td><td>300–400mm RC</td></tr>
+        <tr><td>Autonomy</td><td>Basic</td><td class="fcol">24 hours</td><td>48 hours</td></tr>
+        <tr><td>Entry</td><td>Top hatch</td><td class="fcol">Top hatch</td><td>Blast door + airtight door</td></tr>
+        <tr><td>Ventilation</td><td>Manual</td><td class="fcol">HEPA filtration</td><td>HEPA + backup system</td></tr>
+        <tr><td>Power</td><td><span class="crs">None</span></td><td class="fcol">24hr battery</td><td>48hr battery</td></tr>
+        <tr><td>Bathroom</td><td>Chemical toilet</td><td class="fcol">—</td><td>Full bathroom</td></tr>
+        <tr><td>Water Storage</td><td>40L</td><td class="fcol">200L tank</td><td>500L tank</td></tr>
+        <tr><td>Blast Door</td><td><span class="crs">No</span></td><td class="fcol"><span class="crs">No</span></td><td><span class="chk">Yes — certified</span></td></tr>
+        <tr><td>Intercom</td><td>Walkie-talkies</td><td class="fcol">Intercom system</td><td>Hardwired intercom</td></tr>
+        <tr><td>Kitchenette</td><td><span class="crs">No</span></td><td class="fcol"><span class="crs">No</span></td><td><span class="chk">Yes</span></td></tr>
+        <tr><td>Escape Hatch</td><td><span class="crs">No</span></td><td class="fcol"><span class="crs">No</span></td><td><span class="chk">Yes</span></td></tr>
+        <tr><td>Manufacturing</td><td>5–7 days</td><td class="fcol">10–14 days</td><td>Built on-site</td></tr>
+        <tr><td>Install Time</td><td>1–2 days</td><td class="fcol">2–3 days</td><td>4–6 weeks</td></tr>
+        <tr>
+          <td>Price</td>
+          <td class="price-row">AED 100,000</td>
+          <td class="fcol price-row">AED 200,000</td>
+          <td class="price-row">From AED 500,000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="process-section">
+  <div class="process-header reveal">
+    <div class="section-tag">How It Works</div>
+    <div class="section-rule" style="margin: 14px auto;"></div>
+    <h2 class="section-h2">Four steps. <em>That's it.</em></h2>
+  </div>
+  <div class="process-grid reveal">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Free Site Assessment</div>
+      <p class="step-desc">We visit your villa within 48 hours. Review the plot, assess feasibility, and answer every question. Zero cost, zero commitment.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Custom Design</div>
+      <p class="step-desc">Our engineer produces drawings tailored to your property — accounting for plot layout, access, depth, and your chosen tier.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Construction</div>
+      <p class="step-desc">Our licensed team builds it. Precast units are installed in days. Poured-in-place Shelter: 4–6 weeks on-site. Fixed price, no surprises.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Handover</div>
+      <p class="step-desc">Fully tested, inspected, and handed over with complete documentation. You walk through it with us before we leave.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CREDIBILITY -->
+<div class="cred-section">
+  <div class="reveal">
+    <div class="section-tag">Why Al Hadeeqa</div>
+    <div class="section-rule"></div>
+    <h2 class="section-h2">Not a pop-up service.<br><em>A 35-year contractor.</em></h2>
+  </div>
+  <div class="cred-grid reveal">
+    <div class="cred-points">
+      <div class="cred-point">
+        <div class="cred-icon">✦</div>
+        <div>
+          <div class="cred-point-title">UAE Licensed &amp; Regulated</div>
+          <p class="cred-point-desc">Fully licensed contractor operating under UAE construction regulations. Every build is documented, permitted, and compliant.</p>
+        </div>
+      </div>
+      <div class="cred-point">
+        <div class="cred-icon">◈</div>
+        <div>
+          <div class="cred-point-title">Fixed-Price Quotes</div>
+          <p class="cred-point-desc">Your quote is itemised and fixed before a single shovel moves. No surprises, no scope creep, nothing hidden.</p>
+        </div>
+      </div>
+      <div class="cred-point">
+        <div class="cred-icon">◎</div>
+        <div>
+          <div class="cred-point-title">In-House Team Only</div>
+          <p class="cred-point-desc">No subcontracting. The team that assesses your plot is the team that builds it. One point of accountability throughout.</p>
+        </div>
+      </div>
+      <div class="cred-point">
+        <div class="cred-icon">⊕</div>
+        <div>
+          <div class="cred-point-title">Discreet by Design</div>
+          <p class="cred-point-desc">Once installed, there is no visible trace above ground. The build is designed to look like standard garden works during construction.</p>
+        </div>
       </div>
     </div>
-    <div class="spec-features">
-      <div class="spec-features-title">What's Included — Every Build</div>
-      <ul class="feature-list">
-        <li>Full underground reinforced concrete structure</li>
-        <li>Blast-proof hatch entry with redundant locking</li>
-        <li>Independent air filtration & ventilation</li>
-        <li>72-hour power backup system</li>
-        <li>Water storage & emergency supply integration</li>
-        <li>Communication & monitoring setup</li>
-        <li>Discreet backyard integration — no visible trace</li>
-        <li>UAE climate-rated materials throughout</li>
-      </ul>
-      <p class="spec-note">
-        Every project is custom-quoted after a free site assessment. We don't publish prices because every villa and plot is different. The assessment is free. The quote is fixed. No surprises.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- MOSAIC + STATS -->
-<div class="mosaic reveal">
-  <div class="mosaic-left">
-    <div class="s-label">An Established Name</div>
-    <div class="green-rule"></div>
-    <h2>Not a pop-up service.<br><em>A 20-year contractor.</em></h2>
-    <p>Al Hadeeqa Contracting has built hundreds of residential projects across the UAE. SafeHaven is our dedicated bunker division — backed by the same licensed team, proven materials, and accountability.</p>
-    <div class="mosaic-stat-row">
-      <div class="mosaic-stat"><div class="mosaic-stat-val">20+</div><div class="mosaic-stat-lbl">Years in UAE</div></div>
-      <div class="mosaic-stat"><div class="mosaic-stat-val">50+</div><div class="mosaic-stat-lbl">Projects Done</div></div>
-      <div class="mosaic-stat"><div class="mosaic-stat-val">1</div><div class="mosaic-stat-lbl">City Served</div></div>
-    </div>
-  </div>
-  <div class="mosaic-right">
-    <div class="mosaic-img">
-      <img src="assets/images/excavation.jpg" alt="Excavation work" style="object-position: center top;">
-      <div class="mosaic-img-label">The Excavation</div>
-    </div>
-    <div class="mosaic-img">
-      <img src="assets/images/bunker-top-down.png" alt="Bunker top-down view">
-      <div class="mosaic-img-label">Top-Down View</div>
-    </div>
-    <div class="mosaic-img">
-      <img src="assets/images/pexels-burst-544966.jpg" alt="Precision work">
-      <div class="mosaic-img-label">Precision Work</div>
-    </div>
-    <div class="mosaic-img">
-      <img src="assets/images/pexels-mikael-blomkvist-8961557.jpg" alt="Team">
-      <div class="mosaic-img-label">Our Team</div>
+    <div class="cred-img-grid">
+      <div class="cred-img"><img src="assets/images/construction-remodeling.jpg" alt="Al Hadeeqa construction"></div>
+      <div class="cred-img"><img src="assets/images/vault-door.jpg" alt="Safe room vault door"></div>
+      <div class="cred-img"><img src="assets/images/bunker-rendering.png" alt="Underground shelter rendering"></div>
     </div>
   </div>
 </div>
 
-<!-- PROCESS BAND -->
-<div class="process-band">
-  <div class="process-band-header reveal">
-    <div class="s-label">How It Works</div>
-    <div class="green-rule" style="margin: 10px auto 18px;"></div>
-    <h2>Three steps.<br><em>That's it.</em></h2>
-  </div>
-  <div class="process-inline reveal">
-    <div class="p-inline-step">
-      <div class="p-inline-num">1</div>
-      <h3>Free Assessment</h3>
-      <p>We visit your villa within 48 hours. Review the plot, assess feasibility, answer every question. Zero cost, zero commitment.</p>
+<!-- THE VAULT -->
+<div class="vault-section">
+  <div class="vault-bg-text">THE VAULT</div>
+  <div class="vault-inner reveal">
+    <div class="vault-eyebrow">Premium · Coming Soon</div>
+    <div class="vault-rule"></div>
+    <h2 class="vault-h2">Looking for<br><em>underground luxury?</em></h2>
+    <p class="vault-sub">The Vault — private underground living spaces with car ramps, cinemas, gyms, and lounges. Built to full bunker-grade specifications.</p>
+    <div class="vault-features">
+      <div class="vault-feature">Underground car ramps</div>
+      <div class="vault-feature">Private cinema rooms</div>
+      <div class="vault-feature">Gym &amp; wellness spaces</div>
+      <div class="vault-feature">Lounge &amp; entertainment</div>
     </div>
-    <div class="p-inline-arrow">→</div>
-    <div class="p-inline-step">
-      <div class="p-inline-num">2</div>
-      <h3>Fixed-Price Quote</h3>
-      <p>Fully itemized proposal — all materials, all labour, firm timeline. Everything in writing before a single shovel moves.</p>
-    </div>
-    <div class="p-inline-arrow">→</div>
-    <div class="p-inline-step">
-      <div class="p-inline-num">3</div>
-      <h3>We Build It</h3>
-      <p>Our licensed team completes the build in 6–10 weeks. Discreet, professional, tested with you at handover. Done.</p>
-    </div>
+    <a href="#quote" class="vault-cta">Enquire About The Vault →</a>
   </div>
 </div>
 
-<!-- CTA + FORM -->
-<div class="cta-section" id="quote">
-  <div class="cta-bg"></div>
-  <div class="cta-inner">
-    <div class="reveal">
-      <h2>Built once.<br>Built right.<br><em>Built to last.</em></h2>
-      <p>A free assessment costs nothing. A private safe room is one of the most enduring additions you can make to your home.</p>
-      <div class="cta-checks">
-        <div class="cta-check">Free site assessment — no cost, no obligation</div>
-        <div class="cta-check">Fixed-price quote before work begins</div>
-        <div class="cta-check">6–10 week build, fully discreet</div>
-        <div class="cta-check">UAE licensed · 20+ years · Dubai only</div>
+<!-- LEAD FORM -->
+<div class="form-section" id="quote">
+  <div class="form-bg"></div>
+  <div class="form-inner">
+    <div class="form-left reveal">
+      <h2>Get your<br><em>free assessment.</em></h2>
+      <p>A free site assessment costs nothing. We visit within 48 hours, review your plot, and give you a fixed-price quote before any work begins.</p>
+      <div class="form-checks">
+        <div class="form-check">Free site assessment — no cost, no obligation</div>
+        <div class="form-check">Fixed-price quote before any work begins</div>
+        <div class="form-check">Precast: installed in days · Poured: 4–6 weeks</div>
+        <div class="form-check">UAE licensed · 35+ years · Dubai only</div>
       </div>
     </div>
     <div class="cta-form reveal">
@@ -635,15 +615,28 @@
       </div>
       <div class="f-row"><input type="tel" placeholder="WhatsApp Number (+971...)" id="f-phone"></div>
       <div class="f-row">
-        <select id="f-area">
-          <option value="" disabled selected>Your Dubai area</option>
-          <option>Dubai Marina</option>
-          <option>Jumeirah</option>
-          <option>Business Bay</option>
-          <option>Dubai Hills</option>
+        <select id="f-tier">
+          <option value="" disabled selected>Which tier are you interested in?</option>
+          <option value="Emergency Pod (AED 100,000)">Emergency Pod — AED 100,000</option>
+          <option value="Compact Shelter (AED 200,000)">Compact Shelter — AED 200,000</option>
+          <option value="Shelter (from AED 500,000)">Shelter — From AED 500,000</option>
+          <option value="Not sure — help me choose">Not sure — help me choose</option>
+          <option value="The Vault (premium underground space)">The Vault — Premium Underground Space</option>
         </select>
       </div>
-      <div class="f-row"><input type="text" placeholder="Community / Area (optional)" id="f-community"></div>
+      <div class="f-row">
+        <select id="f-area">
+          <option value="" disabled selected>Your Dubai area</option>
+          <option>Jumeirah</option>
+          <option>Dubai Hills</option>
+          <option>Arabian Ranches</option>
+          <option>Palm Jumeirah</option>
+          <option>Emirates Hills</option>
+          <option>Mirdif</option>
+          <option>Al Barsha</option>
+          <option>Other / Not listed</option>
+        </select>
+      </div>
       <button class="f-submit" onclick="submitForm()">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Send via WhatsApp — Get Free Assessment
@@ -656,38 +649,39 @@
 <!-- FOOTER -->
 <footer>
   <div>
-    <p class="footer-name">SafeHaven by Al Hadeeqa Contracting</p>
+    <p class="footer-name">Al Hadeeqa Contracting Co. L.L.C</p>
     <p>UAE Licensed · Serving Dubai Only · <a href="https://wa.me/971544419854">+971 54 441 9854</a></p>
   </div>
   <div style="text-align:right;">
-    <p>Sister company: <a href="https://thejanfurniture.com" target="_blank">Jan Furnishings</a></p>
+    <p>Part of: <a href="https://thejanfurniture.com" target="_blank">Jan Group</a></p>
     <p style="margin-top:4px;font-size:11px;">© 2026 Al Hadeeqa Contracting. All rights reserved.</p>
   </div>
 </footer>
 
 <!-- STICKY WHATSAPP -->
-<div class="wa-tip">Talk to us now →</div>
-<a href="https://wa.me/971544419854?text=Hi%2C%20I%27m%20interested%20in%20a%20free%20underground%20bunker%20assessment%20for%20my%20villa." class="wa-float" target="_blank">
+<a href="https://wa.me/971544419854?text=Hi%2C%20I%27m%20interested%20in%20a%20free%20underground%20safe%20room%20assessment%20for%20my%20villa." class="wa-float" target="_blank">
   <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <script>
 function submitForm() {
-  const first = document.getElementById('f-first').value || '';
-  const last  = document.getElementById('f-last').value  || '';
+  const first = document.getElementById('f-first').value.trim() || '';
+  const last  = document.getElementById('f-last').value.trim()  || '';
   const name  = (first + ' ' + last).trim() || 'Not provided';
-  const phone = document.getElementById('f-phone').value || 'Not provided';
+  const phone = document.getElementById('f-phone').value.trim() || 'Not provided';
+  const tier  = document.getElementById('f-tier').value  || 'Not specified';
   const area  = document.getElementById('f-area').value  || 'Not specified';
-  const community = document.getElementById('f-community').value || '';
   const msg = encodeURIComponent(
-    `Hi Al Hadeeqa Contracting,\n\nI am interested in a *free underground bunker assessment* for my villa.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Area in Dubai:* ${area}${community ? '\n*Community:* ' + community : ''}\n\nPlease contact me at your earliest convenience.`
+    `Hi Al Hadeeqa Contracting,\n\nI'm interested in a *free underground safe room assessment* for my villa.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Interested in:* ${tier}\n*Area in Dubai:* ${area}\n\nPlease contact me at your earliest convenience.`
   );
   window.open(`https://wa.me/971544419854?text=${msg}`, '_blank');
 }
+
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.08 });
+}, { threshold: 0.07 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
