@@ -619,6 +619,47 @@ html, body {
   .bunker-hero-content {
     margin-bottom: 24px !important;
   }
+
+  /* Info strip */
+  .bunker-info-strip {
+    padding: 10px 16px !important;
+  }
+
+  /* Situation — stack vertically, hide second image */
+  .bunker-situation {
+    grid-template-columns: 1fr !important;
+  }
+  .bunker-sit-img {
+    height: 220px !important;
+  }
+  .bunker-sit-img-2 {
+    display: none !important;
+  }
+  .bunker-sit-text {
+    padding: 36px 20px !important;
+  }
+
+  /* What we build — stack vertically */
+  .bunker-what-layout {
+    grid-template-columns: 1fr !important;
+    padding: 0 16px !important;
+  }
+  .bunker-what-img {
+    min-height: 260px !important;
+  }
+  .bunker-what-features {
+    padding: 32px 20px !important;
+  }
+
+  /* Mosaic photos — 2 col but shorter, no offsets */
+  .bunker-mosaic-photos {
+    height: 300px !important;
+  }
+  .bunker-mosaic-photo:nth-child(2),
+  .bunker-mosaic-photo:nth-child(3) {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
 }
 
 /* ── BUNKER: SMALL MOBILE (≤ 480px) ── */
