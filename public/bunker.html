@@ -509,8 +509,10 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    /* JAN GROUP BAR — hide non-current tabs */
-    .jan-group-bar-tab { display: none; }
+    /* JAN GROUP BAR — shrink to fit on small screens */
+    .jan-group-bar-tab,
+    .jan-group-bar-current { font-size: 9px; letter-spacing: 0.08em; padding: 0 12px; }
+    .jan-group-bar-current { margin: 6px 6px; }
 
     /* MAIN NAV */
     .main-nav { padding: 0 16px; min-height: 60px; }
