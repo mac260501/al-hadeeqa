@@ -2106,7 +2106,7 @@ function BunkerPage({ onContact }) {
 
       {/* ── CTA + FORM ── */}
       <div id="quote" style={bStyles.ctaSection} className="bunker-cta-section">
-        <div style={bStyles.ctaBg} />
+        <div style={bStyles.ctaBg} className="bunker-cta-bg" />
         <div style={bStyles.ctaInner} className="bunker-cta-inner">
           <BunkerReveal>
             <h2 style={bStyles.ctaH2}>
@@ -2128,7 +2128,7 @@ function BunkerPage({ onContact }) {
               ))}
             </div>
           </BunkerReveal>
-          <BunkerReveal>
+          <BunkerReveal className="bunker-cta-form-wrap">
             <CtaForm />
           </BunkerReveal>
         </div>
@@ -2860,7 +2860,6 @@ const bStyles = {
     inset: 0,
     backgroundImage: "url('/assets/images/1774299363277.png')",
     backgroundSize: "cover",
-    backgroundPosition: "center",
     filter: "grayscale(20%) brightness(0.25)",
   },
   ctaInner: {
