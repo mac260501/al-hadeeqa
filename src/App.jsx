@@ -1821,8 +1821,8 @@ function BunkerPage({ onContact }) {
         </div>
       </section>
 
-      {/* Divider strip — visually separates hero photo from video */}
-      <div style={{ height: 6, background: GREEN, flexShrink: 0 }} />
+      {/* Divider strip — visually separates hero photo from video (desktop only) */}
+      <div className="bunker-divider-strip" style={{ height: 6, background: GREEN, flexShrink: 0 }} />
 
       {/* ── VIDEO ── (before tiers for hook) */}
       <section style={bStyles.videoSection} className="bunker-video-section">

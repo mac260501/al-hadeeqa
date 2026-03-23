@@ -609,6 +609,16 @@ html, body {
     max-width: 100% !important;
     overflow-x: hidden !important;
   }
+
+  /* Hide desktop divider strip — the two sections stack naturally on mobile */
+  .bunker-divider-strip {
+    display: none !important;
+  }
+
+  /* Gap between hero content box and stats bar */
+  .bunker-hero-content {
+    margin-bottom: 24px !important;
+  }
 }
 
 /* ── BUNKER: SMALL MOBILE (≤ 480px) ── */
