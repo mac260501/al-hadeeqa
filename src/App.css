@@ -549,10 +549,6 @@ html, body {
   }
 }
 
-.bunker-cta-bg {
-  background-position: center;
-}
-
 /* ── BUNKER: MOBILE (≤ 768px) ── */
 @media (max-width: 768px) {
   /* Hero */
@@ -700,28 +696,6 @@ html, body {
   .bunker-mosaic-photo:nth-child(3) {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
-  }
-
-  /* CTA section — stack columns, full image visible then form as own section */
-  .bunker-cta-section {
-    padding: 64px 24px 0 !important;
-    overflow: visible !important;
-  }
-  .bunker-cta-inner {
-    grid-template-columns: 1fr !important;
-    gap: 0 !important;
-  }
-  .bunker-cta-bg {
-    background-position: top center;
-  }
-
-  /* Form wrapper becomes its own white section below the image */
-  .bunker-cta-form-wrap {
-    position: relative;
-    z-index: 3;
-    background: #fff;
-    margin: 48px -24px 0;
-    padding: 48px 24px 56px;
   }
 }
 
