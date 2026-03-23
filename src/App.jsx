@@ -310,6 +310,7 @@ function Nav({ onContact, route }) {
     { label: "Services", href: "/services" },
     { label: "About", href: "/about" },
     { label: "Projects", href: "/projects" },
+    { label: "Bunkers", href: "/bunker" },
     { label: "Contact", href: "/contact" },
   ];
 
@@ -319,6 +320,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "#services-list", active: true },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
+      { label: "Bunkers", href: "/bunker" },
       { label: "Contact", href: "/contact" },
     ];
   } else if (route.type === "service") {
@@ -327,6 +329,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services", active: true },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
+      { label: "Bunkers", href: "/bunker" },
       { label: "Contact", href: "/contact" },
     ];
   } else if (route.type === "about") {
@@ -335,6 +338,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services" },
       { label: "About", href: "/about", active: true },
       { label: "Projects", href: "/projects" },
+      { label: "Bunkers", href: "/bunker" },
       { label: "Contact", href: "/contact" },
     ];
   } else if (route.type === "projects") {
@@ -343,6 +347,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects", active: true },
+      { label: "Bunkers", href: "/bunker" },
       { label: "Contact", href: "/contact" },
     ];
   } else if (route.type === "contact") {
@@ -351,6 +356,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
+      { label: "Bunkers", href: "/bunker" },
       { label: "Contact", href: "/contact", active: true },
     ];
   } else if (route.type === "not-found") {
@@ -359,6 +365,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
+      { label: "Bunkers", href: "/bunker" },
       { label: "Contact", href: "/contact" },
     ];
   }
@@ -748,17 +755,17 @@ function HomeBunkerPreview() {
         />
         <div style={styles.homeBunkerCopy} className="home-bunker-copy">
           <div style={styles.homeBunkerBadge}>Select Clients Only</div>
-          <div style={styles.homeBunkerEyebrow}>SafeHaven Bunkers</div>
+          <div style={styles.homeBunkerEyebrow}>Underground Protection</div>
           <div style={{ ...styles.greenRule, background: "#7fb38a", margin: "12px 0 20px", marginLeft: 0 }} />
           <h2 style={styles.homeBunkerTitle}>
             A discreet bunker offering for a very specific kind of brief.
           </h2>
           <p style={styles.homeBunkerText}>
-            Al Hadeeqa also delivers underground bunker builds through SafeHaven for select villa clients in the UAE. It is intentionally a quieter offering, but it is there for customers who need serious private protection built properly.
+            Al Hadeeqa delivers underground safe rooms for select villa clients in the UAE. Three tiers available — from a compact precast pod to a fully custom shelter. Properly engineered, properly built.
           </p>
         </div>
         <div style={styles.homeBunkerActions} className="home-bunker-actions">
-          <a href="/bunker" style={styles.btnPrimaryLink}>Explore SafeHaven</a>
+          <a href="/bunker" style={styles.btnPrimaryLink}>Explore Our Solutions</a>
           <div style={styles.homeBunkerNote}>Available by consultation only.</div>
         </div>
       </div>
@@ -988,7 +995,7 @@ function ServicesPageSection() {
 
       <div style={styles.bunkerNote}>
         <div>
-          <strong>SafeHaven Underground Bunkers</strong> - Al Hadeeqa also builds discreet underground bunkers for UAE villas through our SafeHaven division.{" "}
+          <strong>Underground Protection</strong> — Al Hadeeqa builds underground safe rooms for UAE villas. Three tiers from AED 100,000.{" "}
           <a href="/bunker" style={styles.bunkerLink}>Learn more →</a>
         </div>
       </div>
@@ -1508,7 +1515,7 @@ function Footer() {
             <a href="/about" style={styles.footerLink}>About</a>
             <a href="/projects" style={styles.footerLink}>Projects</a>
             <a href="/contact" style={styles.footerLink}>Contact</a>
-            <a href="/bunker" style={styles.footerLink}>SafeHaven Bunkers</a>
+            <a href="/bunker" style={styles.footerLink}>Underground Protection</a>
           </div>
         </div>
       </div>
@@ -1666,7 +1673,7 @@ export default function App() {
     }
 
     if (route.type === "bunker") {
-      document.title = "SafeHaven Bunkers | Al Hadeeqa Contracting";
+      document.title = "Underground Protection | Al Hadeeqa Contracting";
       return;
     }
 
@@ -1698,7 +1705,7 @@ export default function App() {
   } else if (route.type === "contact") {
     page = <ContactPage />;
   } else if (route.type === "bunker") {
-    page = <StaticPageRedirect to="/bunker.html" />;
+    page = <BunkerPage onContact={() => openContact()} />;
   } else if (route.type === "not-found") {
     page = <NotFoundPage />;
   }
@@ -1719,6 +1726,632 @@ export default function App() {
 const GREEN = "#1a4a26";
 const GREEN_DIM = "rgba(26,74,38,0.10)";
 const GREEN_BORDER = "rgba(26,74,38,0.18)";
+
+/* ─────────────────────────────────────────
+   BUNKER PAGE
+───────────────────────────────────────── */
+const BUNKER_WA = "971544419854";
+const bunkerWaUrl = (tier) =>
+  `https://wa.me/${BUNKER_WA}?text=${encodeURIComponent(`Hi Al Hadeeqa Contracting,\n\nI'm interested in the ${tier}. Can I get a free assessment?`)}`;
+
+const TIERS = [
+  { name: "Pod",       type: "Precast", price: "AED 100K",   size: "7–8 sqm",      cap: "2–4 people",   depth: "2.5–3m", auto: "12–24 hrs",  walls: "220mm RC",   entry: "Top hatch",  featured: false, vault: false },
+  { name: "Compact",   type: "Precast", price: "AED 200K",   size: "15–20 sqm",    cap: "6–8 people",   depth: "3–3.5m", auto: "1–3 days",   walls: "250mm RC",   entry: "Top hatch",  featured: false, vault: false },
+  { name: "Shelter",   type: "Poured",  price: "AED 500K",   size: "25–35 sqm",    cap: "8–15 people",  depth: "3–4m",   auto: "1–3 days",   walls: "300–400mm",  entry: "Ladder",     featured: false, vault: false },
+  { name: "Safe Room", type: "Poured",  price: "AED 950K",   size: "50–80 sqm",    cap: "10–20 people", depth: "4–5m",   auto: "3–7 days",   walls: "400mm",      entry: "Staircase",  featured: true,  vault: false },
+  { name: "Fortified", type: "Poured",  price: "AED 1.9M",   size: "100–150 sqm",  cap: "15–25 people", depth: "5–6m",   auto: "7–14 days",  walls: "400–500mm",  entry: "Wide stair", featured: false, vault: false },
+  { name: "The Vault", type: "Poured",  price: "AED 5M+",    size: "300–500+ sqm", cap: "15–30 people", depth: "5–6m",   auto: "14+ days",   walls: "500mm",      entry: "Car ramp",   featured: false, vault: true  },
+];
+
+function BunkerReveal({ children, style, className = "" }) {
+  const [ref, inView] = useInView({ threshold: 0.08 });
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "none" : "translateY(18px)",
+        transition: "opacity 0.55s ease, transform 0.55s ease",
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function BunkerPage({ onContact }) {
+  return (
+    <>
+      {/* ── HERO ── */}
+      <section style={bStyles.hero} className="bunker-hero">
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "url('/assets/images/bunker-rendering.png')", backgroundSize: "cover", backgroundPosition: "center 40%" }} />
+        <div style={styles.heroOverlay} />
+        <div style={styles.heroContent} className="hero-content bunker-hero-content">
+          <div style={styles.eyebrow} className="hero-eyebrow">Underground Protection</div>
+          <h1 style={styles.heroH1} className="hero-h1">
+            Built for your
+            <em style={styles.heroEm}>family's safety.</em>
+          </h1>
+          <p style={styles.heroSub} className="hero-sub">
+            Six tiers of underground protection — from a precast pod installed in days to a fully engineered safe room built on your site.
+          </p>
+          <div style={styles.heroCtas}>
+            <button
+              style={styles.btnPrimary}
+              onClick={() => document.getElementById("bunker-tiers").scrollIntoView({ behavior: "smooth" })}
+            >
+              See Our Solutions ↓
+            </button>
+            <button
+              style={{
+                background: "transparent",
+                color: GREEN,
+                border: `1px solid ${GREEN}`,
+                cursor: "pointer",
+                padding: "14px 28px",
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: 13,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                fontWeight: 600,
+                transition: "background 0.2s, color 0.2s",
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+              onClick={onContact}
+            >
+              Get a Free Assessment
+            </button>
+          </div>
+        </div>
+        <div style={bStyles.heroStats} className="bunker-hero-stats">
+          {[
+            { val: "35+",      label: "Years in UAE" },
+            { val: "50+",      label: "Projects Done" },
+            { val: "48h",      label: "First Response" },
+            { val: "AED 100K", label: "Starting From" },
+          ].map((s) => (
+            <div key={s.label} style={styles.heroStatItem} className="hero-stat-item">
+              <div style={styles.heroStatVal}>{s.val}</div>
+              <div style={styles.heroStatLabel}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Divider strip — visually separates hero photo from video */}
+      <div style={{ height: 6, background: GREEN, flexShrink: 0 }} />
+
+      {/* ── VIDEO ── (before tiers for hook) */}
+      <section style={bStyles.videoSection} className="bunker-video-section">
+        <video autoPlay muted loop playsInline style={bStyles.videoBg}>
+          <source src="/assets/videos/bunker-walkthrough.mp4" type="video/mp4" />
+        </video>
+        <div style={bStyles.videoOverlay} />
+        <div style={bStyles.videoContent} className="video-content-inner">
+          <BunkerReveal>
+            <div style={{ fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: 16, display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ display: "inline-block", width: 24, height: 1, background: "rgba(255,255,255,0.3)" }} />
+              See the Work
+            </div>
+            <div style={bStyles.videoH2}>
+              An underground<br />
+              safe room,{" "}
+              <em style={{ fontStyle: "italic", color: "#a8c8a0" }}>up close.</em>
+            </div>
+          </BunkerReveal>
+        </div>
+        <div style={bStyles.videoCaption}>Al Hadeeqa Contracting — Underground Shelter</div>
+      </section>
+
+      {/* ── TIERS ── */}
+      <section id="bunker-tiers" style={{ ...bStyles.section, paddingBottom: 0 }} className="bunker-section">
+        <div style={bStyles.inner}>
+          <BunkerReveal><div style={styles.sectionEyebrow}>Our Range</div></BunkerReveal>
+          <BunkerReveal>
+            <div style={bStyles.leftH2}>Six tiers of <em style={{ fontStyle: "italic", color: GREEN }}>underground protection</em></div>
+          </BunkerReveal>
+          <BunkerReveal>
+            <p style={{ ...bStyles.leftSub, marginBottom: 48 }}>
+              Precast units manufactured in our Ajman yard, delivered and installed in days. Poured-in-place shelters designed by our engineers and built on your site. All prices starting from.
+            </p>
+          </BunkerReveal>
+        </div>
+
+        {/* Spec comparison grid — CSS Grid ensures every row aligns across all columns */}
+        <BunkerReveal>
+          <div className="bunker-spec-scroll" style={{ overflowX: "auto", WebkitOverflowScrolling: "touch", borderTop: `1px solid ${GREEN_BORDER}`, borderBottom: `1px solid ${GREEN_BORDER}` }}>
+            <div style={{ display: "grid", gridTemplateColumns: "110px repeat(6, 1fr)", minWidth: 840 }}>
+
+              {/* ── HEADER ROW ── */}
+              <div className="bunker-spec-label-cell" style={{ background: "#fff", borderBottom: `1px solid ${GREEN_BORDER}`, borderRight: `1px solid ${GREEN_BORDER}` }} />
+              {TIERS.map((tier, i) => (
+                <div key={`h${i}`} style={{
+                  padding: "16px 16px 13px",
+                  borderBottom: `1px solid ${tier.vault ? "rgba(201,165,78,0.15)" : GREEN_BORDER}`,
+                  borderRight: i < 5 ? `1px solid ${tier.vault ? "rgba(201,165,78,0.15)" : GREEN_BORDER}` : "none",
+                  borderTop: tier.featured ? `4px solid ${GREEN}` : tier.vault ? "4px solid #C9A54E" : "4px solid transparent",
+                  display: "flex", flexDirection: "column", justifyContent: "flex-end",
+                  background: tier.vault ? "#04090a" : tier.featured ? "#eef4ef" : "#fff",
+                }}>
+                  {tier.featured && <div style={bStyles.specBadge}>Most Popular</div>}
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(16px, 1.4vw, 22px)", fontWeight: 700, lineHeight: 1.1, marginBottom: 3, color: tier.vault ? "#fff" : "#141f16" }}>{tier.name}</div>
+                  <div style={{ fontSize: 9, letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700, color: tier.vault ? "rgba(255,255,255,0.38)" : "#6b876f" }}>{tier.type}</div>
+                </div>
+              ))}
+
+              {/* ── SPEC ROWS — display:contents wrapper is invisible to grid, children slot in as grid items ── */}
+              {[
+                { label: "Starting From", key: "price", isPrice: true },
+                { label: "Size",          key: "size"  },
+                { label: "Capacity",      key: "cap"   },
+                { label: "Depth",         key: "depth" },
+                { label: "Autonomy",      key: "auto"  },
+                { label: "Entry",         key: "entry" },
+              ].map(({ label, key, isPrice }, ri) => (
+                <div key={label} style={{ display: "contents" }}>
+                  <div className="bunker-spec-label-cell" style={{
+                    ...bStyles.specLabelRow,
+                    background: ri % 2 !== 0 ? "#f7faf8" : "#fff",
+                    borderRight: `1px solid ${GREEN_BORDER}`,
+                  }}>{label}</div>
+                  {TIERS.map((tier, ci) => {
+                    const odd = ri % 2 !== 0;
+                    return (
+                      <div key={ci} style={{
+                        fontSize: isPrice ? "clamp(15px, 1.3vw, 19px)" : 13,
+                        fontFamily: isPrice ? "'Cormorant Garamond', serif" : "inherit",
+                        fontWeight: isPrice ? 700 : 400,
+                        color: isPrice ? (tier.vault ? "#C9A54E" : GREEN) : (tier.vault ? "rgba(255,255,255,0.72)" : "#3d5c42"),
+                        padding: "12px 16px",
+                        borderBottom: `1px solid ${tier.vault ? "rgba(201,165,78,0.1)" : GREEN_BORDER}`,
+                        borderRight: ci < 5 ? `1px solid ${tier.vault ? "rgba(201,165,78,0.1)" : GREEN_BORDER}` : "none",
+                        lineHeight: 1.4,
+                        /* Vault always dark — never transparent or the white text becomes invisible */
+                        background: tier.vault
+                          ? (odd ? "#0b0f0b" : "#04090a")
+                          : (odd
+                              ? (tier.featured ? "rgba(26,74,38,0.045)" : "rgba(26,74,38,0.02)")
+                              : (tier.featured ? "#eef4ef" : "#fff")),
+                      }}>{tier.vault && !isPrice ? "Custom" : tier[key]}</div>
+                    );
+                  })}
+                </div>
+              ))}
+
+              {/* ── CTA ROW ── */}
+              <div className="bunker-spec-label-cell" style={{ background: "#fff", borderRight: `1px solid ${GREEN_BORDER}`, borderTop: `1px solid ${GREEN_BORDER}` }} />
+              {TIERS.map((tier, ci) => (
+                <div key={`cta${ci}`} style={{
+                  padding: "14px 16px",
+                  borderRight: ci < 5 ? `1px solid ${tier.vault ? "rgba(201,165,78,0.15)" : GREEN_BORDER}` : "none",
+                  borderTop: `1px solid ${tier.vault ? "rgba(201,165,78,0.15)" : GREEN_BORDER}`,
+                  background: tier.vault ? "#04090a" : tier.featured ? "#eef4ef" : "#fff",
+                }}>
+                  <a href={bunkerWaUrl(tier.name)} target="_blank" rel="noreferrer"
+                    style={tier.vault ? bStyles.tierCtaVault : bStyles.tierCta}>
+                    Enquire →
+                  </a>
+                </div>
+              ))}
+
+            </div>
+          </div>
+        </BunkerReveal>
+      </section>
+
+      {/* ── CREDIBILITY ── */}
+      <section style={bStyles.section} className="bunker-section">
+        <div style={bStyles.inner}>
+          <div className="bunker-cred-grid" style={bStyles.credGrid}>
+            <div>
+              <BunkerReveal><div style={styles.sectionEyebrow}>Why Al Hadeeqa</div></BunkerReveal>
+              <BunkerReveal><div style={{ ...bStyles.leftH2, marginBottom: 40 }}>35 years of <em style={{ fontStyle: "italic", color: GREEN }}>real construction</em></div></BunkerReveal>
+              {[
+                { n: "01", title: "Dubai-Licensed Contractor",      desc: "Fully licensed under Dubai Municipality with all required permits for underground works." },
+                { n: "02", title: "Structural Engineering In-House", desc: "Every shelter is structurally designed by our engineers — not outsourced, not generic." },
+                { n: "03", title: "35+ Years in UAE",               desc: "Since the 1980s. Villas, warehouses, commercial — our track record speaks for itself." },
+                { n: "04", title: "End-to-End Delivery",            desc: "We handle permits, excavation, structure, MEP and handover — one team, one point of contact." },
+              ].map((pt) => (
+                <BunkerReveal key={pt.n} style={{ display: "flex", gap: 20, marginBottom: 28 }}>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, color: GREEN, lineHeight: 1, flexShrink: 0, width: 36 }}>{pt.n}</div>
+                  <div>
+                    <div style={{ fontSize: 16, fontWeight: 600, color: "#141f16", marginBottom: 6 }}>{pt.title}</div>
+                    <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.65 }}>{pt.desc}</p>
+                  </div>
+                </BunkerReveal>
+              ))}
+            </div>
+            <BunkerReveal className="bunker-cred-photos" style={bStyles.credPhotos}>
+              <div style={{ ...bStyles.credPhotoFull, gridColumn: "1 / -1" }}>
+                <img src="/assets/images/bunker-top-down.png" alt="Underground safe room — top-down view" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={bStyles.credPhoto}>
+                <img src="/assets/images/projects/proj-26.jpg" alt="Shoring works" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={bStyles.credPhoto}>
+                <img src="/assets/images/projects/proj-08.jpg" alt="Construction works" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+            </BunkerReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── THE VAULT ── */}
+      <section style={bStyles.vault}>
+        <div style={{ position: "absolute", right: -20, top: "50%", transform: "translateY(-50%)", fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(80px, 12vw, 160px)", fontWeight: 700, color: "rgba(201,165,78,0.05)", lineHeight: 1, userSelect: "none", pointerEvents: "none", whiteSpace: "nowrap" }}>THE VAULT</div>
+        <div style={{ position: "relative", zIndex: 2, maxWidth: 1200, margin: "0 auto", padding: "0 64px" }} className="bunker-vault-inner">
+          <BunkerReveal>
+            <div style={bStyles.vaultEyebrow}>Premium Underground Living</div>
+            <div style={bStyles.vaultH2}>Looking for underground luxury?</div>
+            <p style={bStyles.vaultSub}>The Vault — private underground living spaces with car ramps, cinemas, gyms, and lounges. Built to the same structural standards as our shelters.</p>
+            <a href="#" style={bStyles.vaultCta}>Explore The Vault →</a>
+          </BunkerReveal>
+        </div>
+      </section>
+
+      {/* ── CONTACT (shared component) ── */}
+      <Contact pageOffset />
+    </>
+  );
+}
+
+const bStyles = {
+  hero: {
+    minHeight: "100vh",
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    overflow: "hidden",
+    paddingTop: 104,
+  },
+  heroStats: {
+    position: "absolute",
+    right: 60,
+    top: "50%",
+    transform: "translateY(-50%)",
+    zIndex: 3,
+    background: "rgba(255,255,255,0.97)",
+    borderTop: `4px solid ${GREEN}`,
+    boxShadow: "0 8px 48px rgba(0,0,0,0.14)",
+    padding: "28px 32px",
+  },
+  section: {
+    padding: "100px 64px",
+    background: "#fff",
+  },
+  inner: {
+    maxWidth: 1200,
+    margin: "0 auto",
+  },
+  leftH2: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "clamp(32px, 4vw, 52px)",
+    fontWeight: 700,
+    lineHeight: 1.1,
+    color: "#141f16",
+    marginBottom: 16,
+    marginTop: 8,
+  },
+  leftSub: {
+    fontSize: 17,
+    color: "#6b876f",
+    maxWidth: 560,
+    lineHeight: 1.75,
+    fontWeight: 300,
+    marginBottom: 48,
+  },
+  tiersGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: 2,
+    background: GREEN_BORDER,
+  },
+  tierCard: {
+    background: "#fff",
+    padding: "40px 36px",
+    display: "flex",
+    flexDirection: "column",
+    borderTop: `4px solid transparent`,
+  },
+  tierCardFeatured: {
+    borderTop: `4px solid ${GREEN}`,
+    background: "#f4f8f5",
+  },
+  tierBadge: {
+    display: "inline-block",
+    fontSize: 10,
+    letterSpacing: "0.16em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    padding: "5px 12px",
+    marginBottom: 20,
+    background: GREEN_DIM,
+    color: GREEN,
+    border: `1px solid ${GREEN_BORDER}`,
+    alignSelf: "flex-start",
+  },
+  tierName: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: 28,
+    fontWeight: 700,
+    color: "#141f16",
+    marginBottom: 6,
+  },
+  tierTagline: {
+    fontSize: 14,
+    color: "#6b876f",
+    marginBottom: 28,
+    lineHeight: 1.5,
+  },
+  tierPrice: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: 44,
+    fontWeight: 700,
+    color: GREEN,
+    lineHeight: 1,
+    marginBottom: 4,
+  },
+  tierMeta: {
+    fontSize: 12,
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+    color: "#6b876f",
+    marginBottom: 28,
+  },
+  tierSpecs: {
+    listStyle: "none",
+    marginBottom: 32,
+    flex: 1,
+  },
+  tierSpecItem: {
+    fontSize: 14,
+    color: "#3d5c42",
+    padding: "8px 0",
+    borderBottom: `1px solid ${GREEN_BORDER}`,
+    display: "flex",
+    alignItems: "flex-start",
+    gap: 10,
+  },
+  specLabelRow: {
+    fontSize: 10,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    color: "#9aafa0",
+    padding: "13px 14px",
+    borderBottom: `1px solid ${GREEN_BORDER}`,
+    lineHeight: 1.5,
+    background: "#fff",
+  },
+  specBadge: {
+    fontSize: 9,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    color: GREEN,
+    background: GREEN_DIM,
+    border: `1px solid ${GREEN_BORDER}`,
+    padding: "3px 8px",
+    marginBottom: 7,
+    alignSelf: "flex-start",
+    display: "inline-block",
+  },
+  tierCta: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "11px 14px",
+    fontSize: 11,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    textDecoration: "none",
+    background: GREEN,
+    color: "#fff",
+    transition: "background 0.2s",
+  },
+  tierCtaVault: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "11px 14px",
+    fontSize: 11,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    textDecoration: "none",
+    border: "1.5px solid #C9A54E",
+    color: "#C9A54E",
+    transition: "background 0.2s",
+  },
+  videoSection: {
+    position: "relative",
+    minHeight: "72vh",
+    display: "flex",
+    alignItems: "flex-end",
+    overflow: "hidden",
+    background: "#060a07",
+  },
+  videoBg: {
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    opacity: 0.68,
+  },
+  videoOverlay: {
+    position: "absolute",
+    inset: 0,
+    /* Left + right edge fade hides compression artefacts; bottom-heavy gradient provides text contrast */
+    background: [
+      "linear-gradient(to right,  rgba(6,10,7,0.82) 0%, rgba(6,10,7,0.05) 30%, rgba(6,10,7,0.05) 70%, rgba(6,10,7,0.82) 100%)",
+      "linear-gradient(to bottom, rgba(6,10,7,0.15) 0%, transparent 25%, rgba(6,10,7,0.92) 100%)",
+    ].join(", "),
+  },
+  videoContent: {
+    position: "relative",
+    zIndex: 2,
+    maxWidth: 1200,
+    margin: "0 auto",
+    padding: "0 64px 60px",
+    width: "100%",
+    boxSizing: "border-box",
+  },
+  videoH2: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "clamp(38px, 5.5vw, 76px)",
+    fontWeight: 700,
+    color: "#fff",
+    lineHeight: 1.05,
+    marginTop: 10,
+  },
+  videoCaption: {
+    position: "absolute",
+    bottom: 24,
+    right: 48,
+    zIndex: 3,
+    fontSize: 9,
+    letterSpacing: "0.2em",
+    textTransform: "uppercase",
+    fontWeight: 600,
+    color: "rgba(255,255,255,0.28)",
+  },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse",
+    minWidth: 680,
+  },
+  th: {
+    padding: "14px 20px",
+    textAlign: "left",
+    background: GREEN,
+    color: "#fff",
+    fontSize: 12,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    fontWeight: 600,
+  },
+  td: {
+    padding: "13px 20px",
+    fontSize: 14,
+    color: "#3d5c42",
+    borderBottom: `1px solid ${GREEN_BORDER}`,
+  },
+  tdLabel: {
+    padding: "13px 20px",
+    fontSize: 13,
+    color: "#3d5c42",
+    fontWeight: 600,
+    borderBottom: `1px solid ${GREEN_BORDER}`,
+    background: "rgba(26,74,38,0.03)",
+  },
+  tdFeatured: {
+    background: "rgba(26,74,38,0.05)",
+    fontWeight: 500,
+  },
+  stepsGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gap: 1,
+    background: GREEN_BORDER,
+  },
+  step: {
+    background: "#fff",
+    padding: "36px 28px",
+  },
+  stepNum: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: 52,
+    fontWeight: 700,
+    color: GREEN_BORDER,
+    lineHeight: 1,
+    marginBottom: 20,
+  },
+  stepTitle: {
+    fontSize: 17,
+    fontWeight: 600,
+    color: "#141f16",
+    marginBottom: 10,
+  },
+  stepDesc: {
+    fontSize: 14,
+    color: "#6b876f",
+    lineHeight: 1.7,
+  },
+  credGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: 56,
+    alignItems: "start",
+  },
+  credPhotos: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: 8,
+  },
+  credPhotoFull: {
+    aspectRatio: "16 / 9",
+    overflow: "hidden",
+    border: `1px solid ${GREEN_BORDER}`,
+  },
+  credPhoto: {
+    aspectRatio: "4 / 3",
+    overflow: "hidden",
+    border: `1px solid ${GREEN_BORDER}`,
+  },
+  vault: {
+    background: "#04090a",
+    padding: "100px 0",
+    borderTop: "1px solid rgba(201,165,78,0.20)",
+    borderBottom: "1px solid rgba(201,165,78,0.20)",
+    position: "relative",
+    overflow: "hidden",
+  },
+  vaultEyebrow: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 12,
+    fontSize: 11,
+    letterSpacing: "0.22em",
+    textTransform: "uppercase",
+    color: "#C9A54E",
+    marginBottom: 20,
+  },
+  vaultH2: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "clamp(36px, 5vw, 64px)",
+    fontWeight: 700,
+    lineHeight: 1.08,
+    color: "rgba(255,255,255,0.90)",
+    marginBottom: 16,
+  },
+  vaultSub: {
+    fontSize: 17,
+    color: "rgba(255,255,255,0.45)",
+    maxWidth: 540,
+    lineHeight: 1.75,
+    marginBottom: 36,
+    fontWeight: 300,
+  },
+  vaultCta: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 10,
+    border: "1.5px solid #C9A54E",
+    color: "#C9A54E",
+    padding: "14px 32px",
+    fontSize: 13,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    textDecoration: "none",
+    transition: "background 0.2s",
+  },
+};
 
 const styles = {
   root: { fontFamily: "'DM Sans', sans-serif", color: "#141f16", overflowX: "hidden" },

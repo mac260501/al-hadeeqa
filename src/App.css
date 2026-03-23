@@ -3,9 +3,10 @@ html, body, #root {
   margin: 0;
   padding: 0;
   width: 100%;
+  max-width: 100%;
 }
 
-body {
+html, body {
   overflow-x: hidden;
 }
 
@@ -436,5 +437,183 @@ body {
 @media (max-width: 480px) {
   .jan-group-section {
     padding: 40px 16px !important;
+  }
+}
+
+/* ── BUNKER PAGE ── */
+
+/* ── BUNKER PAGE: Global overflow guard ── */
+.bunker-hero,
+.bunker-section,
+.bunker-cred-grid,
+.bunker-cred-photos,
+.bunker-vault-inner {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Spec comparison strip */
+.bunker-spec-scroll {
+  width: 100%;
+}
+
+.bunker-spec-label-cell {
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  background: #fff; /* always opaque — overridden per-cell by inline style */
+  /* Right shadow signals the column is floating above the scrolling content */
+  box-shadow: 3px 0 10px rgba(0,0,0,0.07);
+}
+
+/* Scrollable hint on mobile */
+@media (max-width: 900px) {
+  .bunker-spec-scroll::after {
+    content: "← scroll to compare all tiers →";
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9aafa0;
+    padding: 10px 0 6px;
+    font-family: 'DM Sans', sans-serif;
+  }
+}
+
+.bunker-hero-stats {
+  display: flex;
+  flex-direction: column;
+}
+
+.bunker-tiers-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+.bunker-steps-grid {
+  grid-template-columns: repeat(4, 1fr) !important;
+}
+
+.bunker-cred-grid {
+  grid-template-columns: 1fr 1fr !important;
+  align-items: start !important;
+}
+
+.bunker-vault-inner {
+  padding: 0 64px !important;
+}
+
+/* ── BUNKER: TABLET (≤ 1024px) ── */
+@media (max-width: 1024px) {
+  .bunker-tiers-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2px !important;
+  }
+
+  .bunker-steps-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .bunker-cred-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  .bunker-cred-photos {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .bunker-vault-inner {
+    padding: 0 40px !important;
+  }
+}
+
+/* ── BUNKER: MOBILE (≤ 768px) ── */
+@media (max-width: 768px) {
+  /* Hero */
+  .bunker-hero {
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    min-height: calc(100svh - 96px) !important;
+    padding-top: 96px !important;
+  }
+
+  .bunker-hero-content {
+    margin: 20px 16px 0 !important;
+    padding: 26px 22px !important;
+    max-width: calc(100% - 32px) !important;
+    width: calc(100% - 32px) !important;
+    box-sizing: border-box !important;
+    border-left-width: 3px !important;
+    background: rgba(255,255,255,0.97) !important;
+    align-self: center !important;
+  }
+
+  /* Stats: pull out of absolute, sit at bottom as 2×2 grid */
+  .bunker-hero-stats {
+    position: static !important;
+    transform: none !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    flex-direction: unset !important;
+    margin-top: auto !important;
+    border-top: 3px solid #1a4a26 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    padding: 0 !important;
+    width: 100% !important;
+    align-self: stretch !important;
+  }
+
+  .bunker-hero-stats .hero-stat-item {
+    padding: 14px 8px !important;
+    border-bottom: none !important;
+    border-right: 1px solid rgba(26,74,38,0.12) !important;
+  }
+
+  .bunker-hero-stats .hero-stat-item:nth-child(2n) {
+    border-right: none !important;
+  }
+
+  /* Sections */
+  .bunker-section {
+    padding: 56px 20px !important;
+  }
+
+  /* Video — taller on mobile for immersive feel, text padding adjusted */
+  .bunker-video-section {
+    min-height: 62vh !important;
+    align-items: flex-end !important;
+  }
+  .bunker-video-section .video-content-inner {
+    padding: 0 24px 48px !important;
+  }
+
+  /* Steps */
+  .bunker-steps-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Vault */
+  .bunker-vault-inner {
+    padding: 0 20px !important;
+  }
+
+  /* Prevent any overflow */
+  .bunker-hero,
+  .bunker-tiers-grid,
+  .bunker-steps-grid,
+  .bunker-cred-grid,
+  .bunker-cred-photos {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+}
+
+/* ── BUNKER: SMALL MOBILE (≤ 480px) ── */
+@media (max-width: 480px) {
+  .bunker-cred-photos {
+    grid-template-columns: 1fr !important;
   }
 }
