@@ -6,6 +6,27 @@ html, body, #root {
   max-width: 100%;
 }
 
+/* ── KEYFRAME ANIMATIONS ── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes bunkerBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* Eyebrow line on bunker hero */
+.bunker-hero-content .bunker-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  vertical-align: middle;
+}
+
 html, body {
   overflow-x: hidden;
 }
@@ -649,6 +670,22 @@ html, body {
   }
   .bunker-what-features {
     padding: 32px 20px !important;
+  }
+
+  /* Process / How it works — stack vertically */
+  .bunker-process-band {
+    padding: 56px 20px !important;
+  }
+  .bunker-process-inline {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 24px !important;
+  }
+  .bunker-process-step {
+    max-width: 280px !important;
+  }
+  .bunker-process-arrow {
+    transform: rotate(90deg);
   }
 
   /* Mosaic photos — 2 col but shorter, no offsets */

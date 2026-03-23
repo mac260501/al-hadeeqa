@@ -310,7 +310,7 @@ function Nav({ onContact, route }) {
     { label: "Services", href: "/services" },
     { label: "About", href: "/about" },
     { label: "Projects", href: "/projects" },
-    { label: "Bunkers", href: "/bunker.html" },
+    { label: "Bunkers", href: "/bunker" },
     { label: "Contact", href: "/contact" },
   ];
 
@@ -320,7 +320,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "#services-list", active: true },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
-      { label: "Bunkers", href: "/bunker.html" },
+      { label: "Bunkers", href: "/bunker" },
       { label: "Contact", href: "/contact" },
     ];
   } else if (route.type === "service") {
@@ -329,7 +329,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services", active: true },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
-      { label: "Bunkers", href: "/bunker.html" },
+      { label: "Bunkers", href: "/bunker" },
       { label: "Contact", href: "/contact" },
     ];
   } else if (route.type === "about") {
@@ -338,7 +338,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services" },
       { label: "About", href: "/about", active: true },
       { label: "Projects", href: "/projects" },
-      { label: "Bunkers", href: "/bunker.html" },
+      { label: "Bunkers", href: "/bunker" },
       { label: "Contact", href: "/contact" },
     ];
   } else if (route.type === "projects") {
@@ -347,7 +347,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects", active: true },
-      { label: "Bunkers", href: "/bunker.html" },
+      { label: "Bunkers", href: "/bunker" },
       { label: "Contact", href: "/contact" },
     ];
   } else if (route.type === "contact") {
@@ -356,7 +356,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
-      { label: "Bunkers", href: "/bunker.html" },
+      { label: "Bunkers", href: "/bunker" },
       { label: "Contact", href: "/contact", active: true },
     ];
   } else if (route.type === "not-found") {
@@ -365,7 +365,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
-      { label: "Bunkers", href: "/bunker.html" },
+      { label: "Bunkers", href: "/bunker" },
       { label: "Contact", href: "/contact" },
     ];
   }
@@ -765,7 +765,7 @@ function HomeBunkerPreview() {
           </p>
         </div>
         <div style={styles.homeBunkerActions} className="home-bunker-actions">
-          <a href="/bunker.html" style={styles.btnPrimaryLink}>Explore Our Solutions</a>
+          <a href="/bunker" style={styles.btnPrimaryLink}>Explore Our Solutions</a>
           <div style={styles.homeBunkerNote}>Available by consultation only.</div>
         </div>
       </div>
@@ -996,7 +996,7 @@ function ServicesPageSection() {
       <div style={styles.bunkerNote}>
         <div>
           <strong>Underground Protection</strong> — Al Hadeeqa builds underground safe rooms for UAE villas. Three tiers from AED 100,000.{" "}
-          <a href="/bunker.html" style={styles.bunkerLink}>Learn more →</a>
+          <a href="/bunker" style={styles.bunkerLink}>Learn more →</a>
         </div>
       </div>
     </section>
@@ -1515,7 +1515,7 @@ function Footer() {
             <a href="/about" style={styles.footerLink}>About</a>
             <a href="/projects" style={styles.footerLink}>Projects</a>
             <a href="/contact" style={styles.footerLink}>Contact</a>
-            <a href="/bunker.html" style={styles.footerLink}>Underground Protection</a>
+            <a href="/bunker" style={styles.footerLink}>Underground Protection</a>
           </div>
         </div>
       </div>
@@ -1705,9 +1705,7 @@ export default function App() {
   } else if (route.type === "contact") {
     page = <ContactPage />;
   } else if (route.type === "bunker") {
-    // Redirect to the static bunker.html page
-    window.location.replace("/bunker.html");
-    page = null;
+    page = <StaticPageRedirect to="/bunker.html" />;
   } else if (route.type === "not-found") {
     page = <NotFoundPage />;
   }
@@ -1768,56 +1766,65 @@ function BunkerPage({ onContact }) {
     <>
       {/* ── HERO ── */}
       <section style={bStyles.hero} className="bunker-hero">
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "url('/assets/images/bunker-rendering.png')", backgroundSize: "cover", backgroundPosition: "center 40%" }} />
-        <div style={styles.heroOverlay} />
-        <div style={styles.heroContent} className="hero-content bunker-hero-content">
-          <div style={styles.eyebrow} className="hero-eyebrow">Underground Protection</div>
-          <h1 style={styles.heroH1} className="hero-h1">
-            Built for your
-            <em style={styles.heroEm}>family's safety.</em>
+        {/* Background image */}
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "url('/assets/images/bunker-full.png')", backgroundSize: "cover", backgroundPosition: "center 40%" }} />
+        {/* Subtle light overlay */}
+        <div style={{
+          display: "block",
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(105deg, rgba(244,248,245,0.30) 0%, rgba(244,248,245,0.10) 50%, rgba(244,248,245,0.0) 100%)",
+        }} />
+        {/* 4px green left edge line */}
+        <div style={bStyles.heroGreenLine} />
+        {/* Content box */}
+        <div style={bStyles.heroContentBox} className="bunker-hero-content">
+          {/* Eyebrow with horizontal line before it */}
+          <div style={bStyles.heroEyebrow}>
+            <span style={{ display: "inline-block", width: 28, height: 1, background: GREEN, flexShrink: 0 }} />
+            SafeHaven by Al Hadeeqa Contracting
+          </div>
+          <h1 style={bStyles.heroH1}>
+            A Private Underground Space.
+            <em style={{ fontStyle: "italic", color: GREEN, display: "block" }}>Built to the Highest Standard.</em>
           </h1>
-          <p style={styles.heroSub} className="hero-sub">
-            Al Hadeeqa designs and builds discreet underground safe rooms for UAE villa owners — purpose-engineered, properly built, and installed by a licensed contractor with 35+ years in the UAE.
+          <p style={bStyles.heroSub}>
+            Al Hadeeqa designs and builds discreet underground safe rooms for UAE villa owners — purpose-engineered, properly built, and installed by a licensed contractor with 20+ years in the UAE.
           </p>
-          <div style={styles.heroCtas}>
+          <div style={bStyles.heroCtas}>
+            {/* Primary CTA — WhatsApp icon + scrolls to #quote */}
             <button
-              style={styles.btnPrimary}
-              onClick={() => document.getElementById("bunker-tiers").scrollIntoView({ behavior: "smooth" })}
+              style={bStyles.btnPrimary}
+              onClick={() => document.getElementById("quote") ? document.getElementById("quote").scrollIntoView({ behavior: "smooth" }) : onContact()}
             >
-              See Our Solutions ↓
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Request Free Assessment
             </button>
-            <button
-              style={{
-                background: "transparent",
-                color: GREEN,
-                border: `1px solid ${GREEN}`,
-                cursor: "pointer",
-                padding: "14px 28px",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 13,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                fontWeight: 600,
-                transition: "background 0.2s, color 0.2s",
-                display: "inline-flex",
-                alignItems: "center",
-              }}
-              onClick={onContact}
+            {/* Secondary text link — scrolls to what-we-build */}
+            <a
+              href="#what-we-build"
+              style={bStyles.btnSecondary}
+              onClick={(e) => { e.preventDefault(); document.getElementById("what-we-build") && document.getElementById("what-we-build").scrollIntoView({ behavior: "smooth" }); }}
             >
-              Get a Free Assessment
-            </button>
+              See what we build ↓
+            </a>
           </div>
         </div>
+        {/* Right stats panel */}
         <div style={bStyles.heroStats} className="bunker-hero-stats">
           {[
-            { val: "35+",      label: "Years in UAE" },
-            { val: "50+",      label: "Projects Done" },
-            { val: "48h",      label: "First Response" },
-            { val: "AED 100K", label: "Starting From" },
-          ].map((s) => (
-            <div key={s.label} style={styles.heroStatItem} className="hero-stat-item">
-              <div style={styles.heroStatVal}>{s.val}</div>
-              <div style={styles.heroStatLabel}>{s.label}</div>
+            { val: "20+", label: "Years in UAE" },
+            { val: "50+", label: "Projects Done" },
+            { val: "48h", label: "First Response" },
+          ].map((s, i) => (
+            <div key={s.label}>
+              <div style={bStyles.heroStatItem}>
+                <div style={bStyles.heroStatVal}>{s.val}</div>
+                <div style={bStyles.heroStatLabel}>{s.label}</div>
+              </div>
+              {i < 2 && <div style={bStyles.heroStatDivider} />}
             </div>
           ))}
         </div>
@@ -1831,9 +1838,9 @@ function BunkerPage({ onContact }) {
             <strong>Assessments available within 48 hours</strong> — Currently accepting new projects
           </span>
           <span style={bStyles.infoSep} />
-          <span style={bStyles.infoItem}>Free consultation · No obligation</span>
+          <span style={bStyles.infoItem}><strong>Serving Dubai Only</strong></span>
           <span style={bStyles.infoSep} />
-          <span style={bStyles.infoItem}>UAE Licensed · Dubai &amp; Abu Dhabi</span>
+          <span style={bStyles.infoItem}>Free consultation · No obligation</span>
         </div>
       </div>
 
@@ -1848,22 +1855,44 @@ function BunkerPage({ onContact }) {
           <div style={bStyles.sitLabel}>The Craft</div>
         </div>
         <BunkerReveal style={bStyles.sitText} className="bunker-sit-text">
-          <div style={styles.sectionEyebrow}>Why Clients Choose Al Hadeeqa</div>
+          <div style={styles.sectionEyebrow}>Why Clients Choose SafeHaven</div>
           <div style={{ width: 44, height: 2, background: GREEN, margin: "12px 0 20px" }} />
           <blockquote style={bStyles.sitQuote}>
             "Complete privacy. Complete peace of mind. Built properly."
           </blockquote>
           <p style={bStyles.sitP}>
-            Discerning homeowners across the UAE are investing in private underground spaces for one simple reason: the option is there when you need it, and <strong style={{ color: GREEN }}>invisible when you don't.</strong>
+            Discerning homeowners across Dubai are investing in private underground spaces for one simple reason: the option is there when you need it, and <strong style={{ color: GREEN }}>invisible when you don't.</strong>
           </p>
           <p style={bStyles.sitP}>
-            Every shelter is custom-engineered to your property's specific layout — discreet, permanent, and built by a team with 35+ years in UAE construction.
+            Every SafeHaven shelter is custom-engineered to your villa's specific layout — discreet, permanent, and built by a team with 20+ years in UAE construction.
           </p>
         </BunkerReveal>
       </section>
 
+      {/* ── VIDEO ── (placed right after situation, before what we build) */}
+      <section style={bStyles.videoSection} className="bunker-video-section">
+        <video autoPlay muted loop playsInline style={bStyles.videoBg}>
+          <source src="/assets/videos/bunker-walkthrough.mp4" type="video/mp4" />
+        </video>
+        <div style={bStyles.videoOverlay} />
+        <div style={bStyles.videoContent} className="video-content-inner">
+          <BunkerReveal>
+            <div style={{ fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: 16, display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ display: "inline-block", width: 24, height: 1, background: "rgba(255,255,255,0.3)" }} />
+              See the Work
+            </div>
+            <div style={bStyles.videoH2}>
+              An underground<br />
+              safe room,{" "}
+              <em style={{ fontStyle: "italic", color: "#a8c8a0" }}>up close.</em>
+            </div>
+          </BunkerReveal>
+        </div>
+        <div style={bStyles.videoCaption}>Al Hadeeqa Contracting — Underground Shelter</div>
+      </section>
+
       {/* ── WHAT WE BUILD ── */}
-      <section style={bStyles.whatWeBuild} className="bunker-section">
+      <section id="what-we-build" style={bStyles.whatWeBuild} className="bunker-section">
         <BunkerReveal style={bStyles.whatHeader}>
           <div style={styles.sectionEyebrow}>What We Build</div>
           <div style={{ width: 44, height: 2, background: GREEN, margin: "12px 0 20px" }} />
@@ -1874,11 +1903,11 @@ function BunkerPage({ onContact }) {
         </BunkerReveal>
         <div className="bunker-what-layout" style={bStyles.whatLayout}>
           <div style={bStyles.whatImgWrap} className="bunker-what-img">
-            <img src="/assets/images/bunker-top-down.png" alt="Underground shelter top-down view" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            <img src="/assets/images/bunker-rendering.png" alt="Underground shelter rendering" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", filter: "grayscale(10%) brightness(0.80)", transition: "filter 0.5s" }} />
             <div style={bStyles.whatImgOverlay} />
             <div style={bStyles.whatImgCaption}>
               <div style={bStyles.whatImgTitle}>The Underground Shelter</div>
-              <p style={{ fontSize: 13, color: "#a8c8a0", lineHeight: 1.6, margin: 0 }}>Purpose-built below your property. Your neighbours will think you're renovating a pool.</p>
+              <p style={{ fontSize: 13, color: "#aec8b4", lineHeight: 1.6, margin: 0 }}>Purpose-built below your villa. Your neighbors will think you're renovating a pool.</p>
             </div>
           </div>
           <BunkerReveal style={bStyles.whatFeatures} className="bunker-what-features">
@@ -1888,12 +1917,12 @@ function BunkerPage({ onContact }) {
             <ul style={{ listStyle: "none", margin: "0 0 32px", padding: 0 }}>
               {[
                 "Full underground reinforced concrete structure",
-                "Blast-resistant entry with redundant locking",
+                "Blast-proof hatch entry with redundant locking",
                 "Independent air filtration & ventilation",
-                "Power backup system (autonomy from 12 hrs to 14+ days)",
+                "72-hour power backup system",
                 "Water storage & emergency supply integration",
                 "Communication & monitoring setup",
-                "Discreet integration — no visible trace above ground",
+                "Discreet backyard integration — no visible trace",
                 "UAE climate-rated materials throughout",
               ].map((f) => (
                 <li key={f} style={bStyles.whatFeatureItem}>
@@ -1903,7 +1932,7 @@ function BunkerPage({ onContact }) {
               ))}
             </ul>
             <p style={bStyles.whatNote}>
-              Every project is custom-quoted after a free site assessment. The assessment is free. The quote is fixed. No surprises.
+              Every project is custom-quoted after a free site assessment. We don't publish prices because every villa and plot is different. The assessment is free. The quote is fixed. No surprises.
             </p>
           </BunkerReveal>
         </div>
@@ -1918,16 +1947,16 @@ function BunkerPage({ onContact }) {
               <div style={{ width: 44, height: 2, background: GREEN, margin: "12px 0 20px" }} />
               <div style={{ ...bStyles.leftH2, marginBottom: 16 }}>
                 Not a pop-up service.<br />
-                <em style={{ fontStyle: "italic", color: GREEN }}>A 35-year contractor.</em>
+                <em style={{ fontStyle: "italic", color: GREEN }}>A 20-year contractor.</em>
               </div>
               <p style={{ ...bStyles.leftSub, marginBottom: 36 }}>
-                Al Hadeeqa Contracting has built hundreds of residential and commercial projects across the UAE. Our bunker division is backed by the same licensed team, proven materials, and accountability.
+                Al Hadeeqa Contracting has built hundreds of residential projects across the UAE. SafeHaven is our dedicated bunker division — backed by the same licensed team, proven materials, and accountability.
               </p>
               <div style={bStyles.mosaicStats}>
                 {[
-                  { val: "35+", label: "Years in UAE" },
+                  { val: "20+", label: "Years in UAE" },
                   { val: "50+", label: "Projects Done" },
-                  { val: "48h", label: "First Response" },
+                  { val: "1",   label: "City Served"  },
                 ].map((s) => (
                   <div key={s.label} style={bStyles.mosaicStat}>
                     <div style={bStyles.mosaicStatVal}>{s.val}</div>
@@ -2048,31 +2077,127 @@ function BunkerPage({ onContact }) {
         </BunkerReveal>
       </section>
 
-      {/* ── VIDEO ── */}
-      <section style={bStyles.videoSection} className="bunker-video-section">
-        <video autoPlay muted loop playsInline style={bStyles.videoBg}>
-          <source src="/assets/videos/bunker-walkthrough.mp4" type="video/mp4" />
-        </video>
-        <div style={bStyles.videoOverlay} />
-        <div style={bStyles.videoContent} className="video-content-inner">
-          <BunkerReveal>
-            <div style={{ fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: 16, display: "flex", alignItems: "center", gap: 10 }}>
-              <span style={{ display: "inline-block", width: 24, height: 1, background: "rgba(255,255,255,0.3)" }} />
-              See the Work
-            </div>
-            <div style={bStyles.videoH2}>
-              An underground<br />
-              safe room,{" "}
-              <em style={{ fontStyle: "italic", color: "#a8c8a0" }}>up close.</em>
-            </div>
-          </BunkerReveal>
-        </div>
-        <div style={bStyles.videoCaption}>Al Hadeeqa Contracting — Underground Shelter</div>
+      {/* ── HOW IT WORKS ── */}
+      <section style={{ background: "#f4f8f5", padding: "80px 64px", textAlign: "center" }} className="bunker-process-band">
+        <BunkerReveal>
+          <div style={styles.sectionEyebrow}>How It Works</div>
+          <div style={{ width: 44, height: 2, background: GREEN, margin: "12px auto 20px" }} />
+          <div style={{ ...bStyles.leftH2, textAlign: "center", marginBottom: 52 }}>
+            Three steps.<br /><em style={{ fontStyle: "italic", color: GREEN }}>That's it.</em>
+          </div>
+        </BunkerReveal>
+        <BunkerReveal>
+          <div className="bunker-process-inline" style={{ display: "flex", alignItems: "flex-start", justifyContent: "center", gap: 0, maxWidth: 900, margin: "0 auto" }}>
+            {[
+              { n: "1", title: "Free Assessment", desc: "We visit your villa within 48 hours. Review the plot, assess feasibility, answer every question. Zero cost, zero commitment." },
+              { n: "2", title: "Fixed-Price Quote", desc: "Fully itemised proposal — all materials, all labour, firm timeline. Everything in writing before a single shovel moves." },
+              { n: "3", title: "We Build It",       desc: "Our licensed team completes the build in 6–10 weeks. Discreet, professional, tested with you at handover. Done." },
+            ].flatMap((step, i) => [
+              <div key={step.n} className="bunker-process-step" style={{ textAlign: "center", flex: 1, padding: "0 20px" }}>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 48, fontWeight: 900, color: GREEN, lineHeight: 1, marginBottom: 16 }}>{step.n}</div>
+                <div style={{ fontSize: 15, fontWeight: 600, color: "#141f16", marginBottom: 10 }}>{step.title}</div>
+                <p style={{ fontSize: 13, color: "#6b876f", lineHeight: 1.65, maxWidth: 200, margin: "0 auto" }}>{step.desc}</p>
+              </div>,
+              i < 2 ? <div key={`arr${i}`} className="bunker-process-arrow" style={{ color: "rgba(42,110,58,0.4)", fontSize: 22, paddingTop: 14, flexShrink: 0 }}>→</div> : null,
+            ])}
+          </div>
+        </BunkerReveal>
       </section>
 
-      {/* ── CONTACT (shared component) ── */}
-      <Contact pageOffset />
+      {/* ── CTA + FORM ── */}
+      <div id="quote" style={bStyles.ctaSection} className="bunker-cta-section">
+        <div style={bStyles.ctaBg} />
+        <div style={bStyles.ctaInner} className="bunker-cta-inner">
+          <BunkerReveal>
+            <h2 style={bStyles.ctaH2}>
+              Built once.<br />Built right.<br />
+              <em style={{ fontStyle: "italic", color: "#7ec490", display: "block" }}>Built to last.</em>
+            </h2>
+            <p style={bStyles.ctaP}>A free assessment costs nothing. A private safe room is one of the most enduring additions you can make to your home.</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {[
+                "Free site assessment — no cost, no obligation",
+                "Fixed-price quote before work begins",
+                "6–10 week build, fully discreet",
+                "UAE licensed · 20+ years · Dubai only",
+              ].map((item) => (
+                <div key={item} style={bStyles.ctaCheck}>
+                  <span style={{ color: "#7ec490", fontWeight: 700, flexShrink: 0 }}>✓</span>
+                  {item}
+                </div>
+              ))}
+            </div>
+          </BunkerReveal>
+          <BunkerReveal>
+            <CtaForm />
+          </BunkerReveal>
+        </div>
+      </div>
     </>
+  );
+}
+
+function CtaForm() {
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
+  const [phone, setPhone] = useState("");
+  const [area, setArea] = useState("");
+  const [community, setCommunity] = useState("");
+
+  function handleSubmit() {
+    const name = (first + " " + last).trim() || "Not provided";
+    const ph = phone || "Not provided";
+    const ar = area || "Not specified";
+    const msg = encodeURIComponent(
+      `Hi Al Hadeeqa Contracting,\n\nI am interested in a *free underground bunker assessment* for my villa.\n\n*Name:* ${name}\n*Phone:* ${ph}\n*Area in Dubai:* ${ar}${community ? "\n*Community:* " + community : ""}\n\nPlease contact me at your earliest convenience.`
+    );
+    window.open(`https://wa.me/971544419854?text=${msg}`, "_blank");
+  }
+
+  const inputStyle = {
+    width: "100%",
+    background: "#f4f8f5",
+    border: "1px solid rgba(42,110,58,0.2)",
+    color: "#141f16",
+    padding: "14px 16px",
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: 14,
+    outline: "none",
+    appearance: "none",
+    boxSizing: "border-box",
+  };
+
+  return (
+    <div style={bStyles.ctaForm}>
+      <h3 style={bStyles.ctaFormH3}>Request Your Free Assessment</h3>
+      <p style={bStyles.ctaFormP}>We'll reach out via WhatsApp within 2 hours.</p>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
+        <input style={inputStyle} type="text" placeholder="First Name" value={first} onChange={(e) => setFirst(e.target.value)} />
+        <input style={inputStyle} type="text" placeholder="Last Name" value={last} onChange={(e) => setLast(e.target.value)} />
+      </div>
+      <div style={{ marginBottom: 14 }}>
+        <input style={inputStyle} type="tel" placeholder="WhatsApp Number (+971...)" value={phone} onChange={(e) => setPhone(e.target.value)} />
+      </div>
+      <div style={{ marginBottom: 14 }}>
+        <select style={inputStyle} value={area} onChange={(e) => setArea(e.target.value)}>
+          <option value="" disabled>Your Dubai area</option>
+          <option>Dubai Marina</option>
+          <option>Jumeirah</option>
+          <option>Business Bay</option>
+          <option>Dubai Hills</option>
+        </select>
+      </div>
+      <div style={{ marginBottom: 14 }}>
+        <input style={inputStyle} type="text" placeholder="Community / Area (optional)" value={community} onChange={(e) => setCommunity(e.target.value)} />
+      </div>
+      <button style={bStyles.ctaSubmit} onClick={handleSubmit}>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+        Send via WhatsApp — Get Free Assessment
+      </button>
+      <p style={bStyles.ctaNote}>🔒 Goes directly to our licensed contractor. No spam, ever.</p>
+    </div>
   );
 }
 
@@ -2084,6 +2209,116 @@ const bStyles = {
     alignItems: "center",
     overflow: "hidden",
     paddingTop: 104,
+    paddingBottom: 80,
+  },
+  /* 4px green left edge line on hero */
+  heroGreenLine: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    width: 4,
+    background: `linear-gradient(to bottom, transparent, ${GREEN} 20%, ${GREEN} 80%, transparent)`,
+    zIndex: 2,
+  },
+  /* White content box with border-left green */
+  heroContentBox: {
+    position: "relative",
+    zIndex: 2,
+    padding: "52px 52px 52px 56px",
+    maxWidth: 680,
+    marginTop: 64,
+    marginLeft: 48,
+    background: "rgba(255,255,255,0.96)",
+    border: "1px solid rgba(255,255,255,0.98)",
+    borderLeft: `4px solid ${GREEN}`,
+    boxShadow: "0 8px 48px rgba(0,0,0,0.14)",
+  },
+  /* Eyebrow with horizontal line before it (via flexbox) */
+  heroEyebrow: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 12,
+    fontSize: 11,
+    letterSpacing: "0.22em",
+    textTransform: "uppercase",
+    color: GREEN,
+    marginBottom: 28,
+    fontFamily: "'DM Sans', sans-serif",
+    fontWeight: 600,
+  },
+  heroH1: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "clamp(44px, 6vw, 86px)",
+    fontWeight: 700,
+    lineHeight: 1.04,
+    color: "#141f16",
+    marginBottom: 24,
+  },
+  heroSub: {
+    fontSize: 18,
+    color: "#6b876f",
+    maxWidth: 500,
+    marginBottom: 52,
+    lineHeight: 1.8,
+  },
+  heroCtas: {
+    display: "flex",
+    gap: 14,
+    alignItems: "center",
+    flexWrap: "wrap",
+  },
+  btnPrimary: {
+    background: GREEN,
+    color: "#fff",
+    border: "none",
+    cursor: "pointer",
+    padding: "16px 36px",
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: 13,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    transition: "background 0.2s",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 10,
+    textDecoration: "none",
+  },
+  btnSecondary: {
+    color: "#6b876f",
+    fontSize: 13,
+    letterSpacing: "0.08em",
+    textDecoration: "none",
+    borderBottom: `1px solid rgba(42,110,58,0.25)`,
+    paddingBottom: 2,
+    transition: "color 0.2s, border-color 0.2s",
+    cursor: "pointer",
+  },
+  /* Alert badge: blinking red dot */
+  alertBadge: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 10,
+    background: "rgba(42,110,58,0.08)",
+    border: "1px solid rgba(42,110,58,0.30)",
+    padding: "8px 16px",
+    marginBottom: 32,
+  },
+  alertDot: {
+    width: 7,
+    height: 7,
+    borderRadius: "50%",
+    background: "#c0392b",
+    flexShrink: 0,
+    animation: "bunkerBlink 1.8s infinite",
+  },
+  alertText: {
+    fontSize: 11,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    color: "#3d5c42",
+    fontWeight: 500,
   },
   heroStats: {
     position: "absolute",
@@ -2091,10 +2326,36 @@ const bStyles = {
     top: "50%",
     transform: "translateY(-50%)",
     zIndex: 3,
-    background: "rgba(255,255,255,0.97)",
+    background: "rgba(255,255,255,0.96)",
+    border: "1px solid rgba(255,255,255,0.98)",
     borderTop: `4px solid ${GREEN}`,
     boxShadow: "0 8px 48px rgba(0,0,0,0.14)",
     padding: "28px 32px",
+    display: "flex",
+    flexDirection: "column",
+    gap: 0,
+  },
+  heroStatItem: {
+    textAlign: "center",
+  },
+  heroStatVal: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: 42,
+    fontWeight: 700,
+    color: GREEN,
+    lineHeight: 1,
+  },
+  heroStatLabel: {
+    fontSize: 10,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    color: "#6b876f",
+    marginTop: 4,
+  },
+  heroStatDivider: {
+    height: 1,
+    background: "rgba(42,110,58,0.15)",
+    margin: "18px 0",
   },
   section: {
     padding: "100px 64px",
@@ -2586,6 +2847,95 @@ const bStyles = {
     color: GREEN,
     background: "rgba(255,255,255,0.90)",
     padding: "4px 9px",
+  },
+
+  /* ── CTA + FORM ── */
+  ctaSection: {
+    position: "relative",
+    overflow: "hidden",
+    padding: "120px 80px",
+  },
+  ctaBg: {
+    position: "absolute",
+    inset: 0,
+    backgroundImage: "url('/assets/images/pexels-jacobyclarkephoto-1579356.jpg')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    filter: "grayscale(20%) brightness(0.25)",
+  },
+  ctaInner: {
+    position: "relative",
+    zIndex: 2,
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: 80,
+    alignItems: "center",
+    maxWidth: 1100,
+    margin: "0 auto",
+  },
+  ctaH2: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "clamp(36px, 5vw, 62px)",
+    fontWeight: 700,
+    color: "#fff",
+    lineHeight: 1.08,
+    marginBottom: 20,
+  },
+  ctaP: {
+    fontSize: 16,
+    color: "#8aab90",
+    lineHeight: 1.85,
+    marginBottom: 30,
+  },
+  ctaCheck: {
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    fontSize: 14,
+    color: "#c8daca",
+  },
+  ctaForm: {
+    background: "rgba(255,255,255,0.96)",
+    border: "1px solid rgba(42,110,58,0.2)",
+    padding: 44,
+    backdropFilter: "blur(20px)",
+  },
+  ctaFormH3: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: 24,
+    color: "#141f16",
+    marginBottom: 6,
+    fontWeight: 700,
+  },
+  ctaFormP: {
+    fontSize: 13,
+    color: "#6b876f",
+    marginBottom: 28,
+  },
+  ctaSubmit: {
+    width: "100%",
+    background: GREEN,
+    color: "#fff",
+    border: "none",
+    padding: 17,
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: 13,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    fontWeight: 700,
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+    marginTop: 4,
+    boxSizing: "border-box",
+  },
+  ctaNote: {
+    fontSize: 11,
+    color: "#6b876f",
+    textAlign: "center",
+    marginTop: 12,
   },
 };
 
