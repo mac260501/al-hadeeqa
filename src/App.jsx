@@ -2858,7 +2858,7 @@ const bStyles = {
   ctaBg: {
     position: "absolute",
     inset: 0,
-    backgroundImage: "url('/assets/images/pexels-jacobyclarkephoto-1579356.jpg')",
+    backgroundImage: "url('/assets/images/1774299363277.png')",
     backgroundSize: "cover",
     backgroundPosition: "center",
     filter: "grayscale(20%) brightness(0.25)",
