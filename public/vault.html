@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Vault — Underground Luxury Living | Al Hadeeqa Contracting</title>
+<meta name="description" content="A private underground living space beneath your villa. Car ramp entry, cinema, gym, lounge, bar — built to bunker-grade specifications. Starting from AED 5,000,000. Dubai, UAE.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Ctext x='16' y='23' font-family='Georgia%2C serif' font-size='20' font-weight='600' fill='%23C9A54E' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary:   #0A0A0A;
+    --bg-secondary: #111111;
+    --bg-tertiary:  #161616;
+    --gold:         #C9A54E;
+    --gold-dark:    #A8893A;
+    --text-primary: #E8E4DC;
+    --text-secondary: #8A8478;
+    --text-white:   #FFFFFF;
+    --concrete:     #3A3A38;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── VAULT INTRO ── */
+  #vault-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+  }
+  #vault-panel-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50vh;
+    background: var(--bg-primary);
+    z-index: 9999;
+    transition: transform 0.9s cubic-bezier(0.76,0,0.24,1);
+  }
+  #vault-panel-bottom {
+    position: absolute;
+    top: 50vh; left: 0; right: 0;
+    height: 50vh;
+    background: var(--bg-primary);
+    z-index: 9999;
+    transition: transform 0.9s cubic-bezier(0.76,0,0.24,1);
+  }
+  #vault-intro.open #vault-panel-top {
+    transform: translateY(-100%);
+  }
+  #vault-intro.open #vault-panel-bottom {
+    transform: translateY(100%);
+  }
+
+  #vault-lock-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    transition: opacity 0.3s ease;
+  }
+  #vault-lock-container.fade-out {
+    opacity: 0;
+  }
+
+  #vault-lock-svg {
+    width: clamp(80px, 15vw, 120px);
+    height: clamp(80px, 15vw, 120px);
+    filter: drop-shadow(0 0 12px rgba(201,165,78,0.4));
+    transition: filter 0.3s ease;
+  }
+  #vault-lock-svg.glow {
+    filter: drop-shadow(0 0 24px rgba(201,165,78,0.7));
+  }
+
+  @keyframes vaultRotate {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(90deg); }
+  }
+  #vault-lock-svg.spinning {
+    animation: vaultRotate 0.7s ease-out forwards;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  #vault-wordmark-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 2.5vw, 22px);
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  #vault-seam {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--gold);
+    z-index: 10000;
+    opacity: 0;
+    transform: scaleX(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  #vault-seam.visible {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  #vault-seam.fade-out {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+
+  /* ── NAVIGATION ── */
+  #vault-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.3s ease, border-bottom 0.3s ease, padding 0.3s ease;
+  }
+  #vault-nav.scrolled {
+    background: rgba(10,10,10,0.96);
+    border-bottom: 1px solid rgba(201,165,78,0.1);
+    padding: 16px 48px;
+  }
+  .vault-nav-brand {
+    display: flex;
+    flex-direction: column;
+  }
+  .vault-nav-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .vault-nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 4px;
+    transition: color 0.2s;
+  }
+  .vault-nav-back:hover { color: var(--gold); }
+  .vault-nav-byline {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .vault-nav-cta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .vault-nav-cta:hover {
+    background: var(--gold);
+    color: var(--bg-primary);
+  }
+
+  /* ── HERO ── */
+  #vault-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+    background: var(--bg-primary);
+    position: relative;
+  }
+  .hero-content {
+    max-width: 800px;
+  }
+
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    animation: heroFadeUp 0.8s ease forwards;
+    animation-delay: 0.1s;
+    opacity: 0;
+  }
+  .hero-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 7vw, 88px);
+    color: var(--gold);
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+    margin-bottom: 28px;
+    animation: heroFadeUp 0.8s ease forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+    white-space: pre-line;
+  }
+  .hero-sub {
+    font-size: clamp(15px, 1.8vw, 18px);
+    color: var(--text-primary);
+    font-weight: 300;
+    max-width: 580px;
+    margin: 0 auto 40px;
+    animation: heroFadeUp 0.8s ease forwards;
+    animation-delay: 0.35s;
+    opacity: 0;
+  }
+  a.hero-cta {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 14px 32px;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+    animation: heroFadeUp 0.8s ease forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+  }
+  a.hero-cta:hover {
+    background: var(--gold);
+    color: var(--bg-primary);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    animation: heroFadeUp 0.8s ease forwards;
+    animation-delay: 0.8s;
+    opacity: 0;
+  }
+  .scroll-line {
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: var(--gold);
+    transform-origin: top;
+  }
+
+  @keyframes scrollPulse {
+    0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+    50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    51%  { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0.3; }
+  }
+  .scroll-line {
+    animation: scrollPulse 1.8s ease-in-out infinite;
+  }
+
+  /* ── SECTION SHARED ── */
+  .section-eyebrow {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .section-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 500;
+    color: var(--text-white);
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
+  }
+  .section-sub {
+    font-size: 15px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.85;
+    max-width: 560px;
+  }
+
+  /* ── REVEAL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .gold-rule {
+    display: block;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s ease;
+    margin: 32px 0;
+  }
+  .gold-rule.visible {
+    transform: scaleX(1);
+  }
+
+  /* ── CONCEPT ── */
+  #vault-concept {
+    background: var(--bg-primary);
+    padding: 120px 40px;
+    text-align: center;
+  }
+  .concept-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .concept-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 500;
+    color: var(--text-white);
+    letter-spacing: 0.02em;
+    margin-bottom: 32px;
+  }
+  .concept-p {
+    font-size: 16px;
+    color: var(--text-primary);
+    line-height: 1.85;
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+  .concept-p:last-child { margin-bottom: 0; }
+
+  /* ── ZONES ── */
+  #vault-zones {
+    background: var(--bg-secondary);
+  }
+  .zone {
+    padding: 100px 80px;
+    border-bottom: 1px solid rgba(58,58,56,0.4);
+  }
+  .zone:last-child { border-bottom: none; }
+  .zone-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .zone.reversed .zone-inner {
+    direction: rtl;
+  }
+  .zone.reversed .zone-inner > * {
+    direction: ltr;
+  }
+  .zone-placeholder {
+    aspect-ratio: 16/9;
+    background: #1A1A1A;
+    border: 1px solid #2A2724;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .zone-placeholder::after {
+    content: attr(data-label);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #3A3A38;
+  }
+  .zone-eyebrow {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .zone-h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    color: var(--text-white);
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+  .zone-p {
+    font-size: 15px;
+    color: var(--text-primary);
+    line-height: 1.85;
+    font-weight: 300;
+    margin-bottom: 28px;
+  }
+  .zone-details {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    border-top: 1px solid rgba(58,58,56,0.5);
+    padding-top: 20px;
+  }
+  .zone-details span {
+    color: var(--gold);
+    opacity: 0.6;
+    padding: 0 10px;
+  }
+
+  /* ── SPECS ── */
+  #vault-specs {
+    background: var(--bg-primary);
+    padding: 120px 80px;
+  }
+  .specs-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .specs-header {
+    margin-bottom: 48px;
+  }
+  .specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid rgba(201,165,78,0.2);
+  }
+  .spec-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(58,58,56,0.4);
+    align-items: baseline;
+  }
+  .spec-row:nth-child(even) {
+    padding-left: 40px;
+  }
+  .spec-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    min-width: 90px;
+    flex-shrink: 0;
+  }
+  .spec-value {
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 300;
+  }
+
+  /* ── PRICE ── */
+  #vault-price {
+    background: var(--bg-secondary);
+    padding: 140px 80px;
+    text-align: center;
+  }
+  .price-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5.5vw, 72px);
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    margin: 28px 0;
+    display: block;
+  }
+  .price-p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    max-width: 500px;
+    margin: 0 auto 40px;
+  }
+
+  /* ── PROCESS ── */
+  #vault-process {
+    background: var(--bg-primary);
+    padding: 120px 80px;
+  }
+  .process-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 60px;
+    border-top: 1px solid rgba(201,165,78,0.15);
+  }
+  .process-step {
+    padding: 40px 36px 40px 36px;
+    border-right: 1px solid rgba(58,58,56,0.4);
+  }
+  .process-step:last-child {
+    border-right: none;
+  }
+
+  .process-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    color: rgba(201,165,78,0.2);
+    line-height: 1;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .process-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--text-white);
+    margin-bottom: 12px;
+  }
+  .process-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  /* ── CONNECTION ── */
+  #vault-connection {
+    background: var(--bg-secondary);
+    padding: 80px;
+    border-top: 1px solid rgba(58,58,56,0.4);
+    border-bottom: 1px solid rgba(58,58,56,0.4);
+  }
+  .connection-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .connection-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 20px;
+    line-height: 1.85;
+  }
+  .connection-link {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid rgba(201,165,78,0.3);
+    text-decoration: none;
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+  }
+  .connection-link:hover {
+    border-color: var(--gold);
+  }
+
+  /* ── ENQUIRY ── */
+  #vault-enquiry {
+    background: var(--bg-tertiary);
+    padding: 120px 80px;
+  }
+  .enquiry-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  #vault-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  #vault-form input,
+  #vault-form select,
+  #vault-form textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(58,58,56,0.6);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 16px 20px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  #vault-form input::placeholder,
+  #vault-form textarea::placeholder {
+    color: var(--text-secondary);
+  }
+  #vault-form select {
+    color: var(--text-secondary);
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8478' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    padding-right: 48px;
+  }
+  #vault-form select option {
+    background: #1A1A1A;
+    color: var(--text-primary);
+  }
+  #vault-form textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  #vault-form input:focus,
+  #vault-form select:focus,
+  #vault-form textarea:focus {
+    border-color: var(--gold);
+  }
+  .vault-submit {
+    background: var(--gold);
+    color: var(--bg-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 18px 32px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s ease;
+    align-self: flex-start;
+  }
+  .vault-submit:hover {
+    background: var(--gold-dark);
+  }
+  .enquiry-alt {
+    margin-top: 32px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+  .enquiry-alt a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,165,78,0.3);
+    padding-bottom: 1px;
+    transition: border-color 0.2s ease;
+  }
+  .enquiry-alt a:hover {
+    border-color: var(--gold);
+  }
+
+  /* ── OUTLINED BUTTON (shared) ── */
+  .btn-gold-outline {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 14px 32px;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+    margin-top: 8px;
+  }
+  .btn-gold-outline:hover {
+    background: var(--gold);
+    color: var(--bg-primary);
+  }
+
+  /* ── FOOTER ── */
+  #vault-footer {
+    background: #050505;
+    padding: 60px 80px;
+    border-top: 1px solid rgba(201,165,78,0.1);
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .footer-brand-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .footer-brand-sub {
+    font-size: 10px;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+  }
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    #vault-nav {
+      padding: 16px 24px;
+    }
+    #vault-nav.scrolled {
+      padding: 12px 24px;
+    }
+    .vault-nav-byline {
+      display: none;
+    }
+
+    #vault-hero {
+      padding: 100px 24px 80px;
+    }
+
+    #vault-concept,
+    #vault-specs,
+    #vault-price,
+    #vault-process,
+    #vault-enquiry {
+      padding: 80px 24px;
+    }
+    #vault-connection {
+      padding: 60px 24px;
+    }
+    #vault-footer {
+      padding: 48px 24px;
+    }
+
+    .zone {
+      padding: 60px 24px;
+    }
+    .zone-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .zone.reversed .zone-inner {
+      direction: ltr;
+    }
+
+    .specs-grid {
+      grid-template-columns: 1fr;
+    }
+    .spec-row:nth-child(even) {
+      padding-left: 0;
+    }
+
+    .process-steps {
+      grid-template-columns: 1fr 1fr;
+    }
+    .process-step {
+      padding: 28px 20px 28px 20px;
+    }
+    .process-step:nth-child(even) {
+      border-right: none;
+    }
+    .process-step:nth-child(3),
+    .process-step:nth-child(4) {
+      border-top: 1px solid rgba(201, 165, 78, 0.2);
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-inner {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-right {
+      align-items: center;
+    }
+
+    a.hero-cta,
+    .btn-gold-outline,
+    .vault-submit {
+      display: block;
+      text-align: center;
+    }
+    .vault-submit {
+      align-self: stretch;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- VAULT INTRO ANIMATION -->
+<div id="vault-intro">
+  <div id="vault-panel-top"></div>
+  <div id="vault-panel-bottom"></div>
+</div>
+<div id="vault-lock-container">
+  <svg id="vault-lock-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <!-- outer circle -->
+    <circle cx="50" cy="50" r="42" stroke="#C9A54E" stroke-width="1.5"/>
+    <!-- inner circle -->
+    <circle cx="50" cy="50" r="14" stroke="#C9A54E" stroke-width="1.5"/>
+    <!-- center dot -->
+    <circle cx="50" cy="50" r="3" fill="#C9A54E"/>
+    <!-- 6 spokes -->
+    <!-- top -->
+    <line x1="50" y1="36" x2="50" y2="8" stroke="#C9A54E" stroke-width="1.5"/>
+    <!-- top-right -->
+    <line x1="62.1" y1="43" x2="86.4" y2="29" stroke="#C9A54E" stroke-width="1.5"/>
+    <!-- bottom-right -->
+    <line x1="62.1" y1="57" x2="86.4" y2="71" stroke="#C9A54E" stroke-width="1.5"/>
+    <!-- bottom -->
+    <line x1="50" y1="64" x2="50" y2="92" stroke="#C9A54E" stroke-width="1.5"/>
+    <!-- bottom-left -->
+    <line x1="37.9" y1="57" x2="13.6" y2="71" stroke="#C9A54E" stroke-width="1.5"/>
+    <!-- top-left -->
+    <line x1="37.9" y1="43" x2="13.6" y2="29" stroke="#C9A54E" stroke-width="1.5"/>
+  </svg>
+  <span id="vault-wordmark-intro">The Vault</span>
+</div>
+<div id="vault-seam"></div>
+
+<!-- NAVIGATION -->
+<nav id="vault-nav">
+  <div class="vault-nav-brand">
+    <span class="vault-nav-wordmark">The Vault</span>
+    <a href="/bunker" class="vault-nav-back">← Bunker Range</a>
+  </div>
+  <a href="#vault-enquiry" class="vault-nav-cta">Enquire</a>
+</nav>
+
+<!-- HERO -->
+<section id="vault-hero">
+  <div class="hero-content">
+    <span class="hero-eyebrow">Underground Luxury Living</span>
+    <h1 class="hero-h1">Your Private
+Underground World</h1>
+    <p class="hero-sub">A luxury living space beneath your villa — with the protection of a bunker built into every wall.</p>
+    <a href="#vault-enquiry" class="hero-cta">Begin Your Consultation →</a>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <span class="scroll-line"></span>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section id="vault-concept">
+  <div class="concept-inner">
+    <span class="gold-rule reveal"></span>
+    <h2 class="concept-h2 reveal">Not a Bunker. An Underground Sanctuary.</h2>
+    <p class="concept-p reveal">You drive down a private ramp into your underground garage, step out of your car into a space that opens into a lounge, a bar, a cinema, a gym — your own world, invisible from above. The exposed concrete and warm timber create an atmosphere that feels both raw and refined.</p>
+    <p class="concept-p reveal">And behind the design, every wall is 500mm reinforced concrete. The air filtration runs silently. There is a blast-rated door hidden behind a panel. Water storage, power autonomy, satellite communications — all invisible. If the world above ever changes, this space quietly becomes a fully autonomous shelter for your family. Same space. Same comfort. Different context.</p>
+    <span class="gold-rule reveal"></span>
+  </div>
+</section>
+
+<!-- EXPERIENCE ZONES -->
+<div id="vault-zones">
+
+  <!-- Zone 01 -->
+  <div class="zone">
+    <div class="zone-inner">
+      <div class="zone-placeholder reveal" data-label="Garage Render"></div>
+      <div class="zone-text reveal">
+        <span class="zone-eyebrow">Zone 01</span>
+        <h3 class="zone-h3">The Arrival</h3>
+        <p class="zone-p">A gently sloping car ramp descends from your property into the underground level. As you descend, the ceiling lowers, the lighting shifts to warm amber, and the outside world disappears. You arrive in your private garage — your cars displayed like sculptures behind glass.</p>
+        <div class="zone-details">Car ramp (straight or spiral)<span>·</span>4–8 vehicle bays<span>·</span>Feature lighting<span>·</span>Hydraulic surface door<span>·</span>Turntable option</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zone 02 -->
+  <div class="zone reversed">
+    <div class="zone-inner">
+      <div class="zone-placeholder reveal" data-label="Gallery Render"></div>
+      <div class="zone-text reveal">
+        <span class="zone-eyebrow">Zone 02</span>
+        <h3 class="zone-h3">The Gallery</h3>
+        <p class="zone-p">A transitional corridor of exposed concrete and dark timber. Art niches, living green walls, and dramatic spot lighting create anticipation before the main space reveals itself.</p>
+        <div class="zone-details">Board-formed concrete<span>·</span>Dark walnut cladding<span>·</span>Adjustable track lighting<span>·</span>Optional living wall</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zone 03 -->
+  <div class="zone">
+    <div class="zone-inner">
+      <div class="zone-placeholder reveal" data-label="Lounge Render"></div>
+      <div class="zone-text reveal">
+        <span class="zone-eyebrow">Zone 03</span>
+        <h3 class="zone-h3">The Hall</h3>
+        <p class="zone-p">The heart of The Vault. A double-height open space configured for the way you actually want to live — a sunken lounge for conversation, a full-service bar, a pool table under statement lighting, and a media wall for cinema-scale viewing.</p>
+        <div class="zone-details">Sunken conversation pit<span>·</span>Full-service bar<span>·</span>Tournament pool table<span>·</span>85–100" screen<span>·</span>Surround sound</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zone 04 -->
+  <div class="zone reversed">
+    <div class="zone-inner">
+      <div class="zone-placeholder reveal" data-label="Cinema Render"></div>
+      <div class="zone-text reveal">
+        <span class="zone-eyebrow">Zone 04</span>
+        <h3 class="zone-h3">The Cinema</h3>
+        <p class="zone-p">A dedicated, acoustically isolated screening room. Tiered seating for 8–12 in reclining leather chairs. 120-inch 4K laser projection. Dolby Atmos. This is not a TV room.</p>
+        <div class="zone-details">120"+ screen<span>·</span>Dolby Atmos<span>·</span>Tiered recliner seating<span>·</span>Acoustic isolation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zone 05 -->
+  <div class="zone">
+    <div class="zone-inner">
+      <div class="zone-placeholder reveal" data-label="Gym Render"></div>
+      <div class="zone-text reveal">
+        <span class="zone-eyebrow">Zone 05</span>
+        <h3 class="zone-h3">The Gym</h3>
+        <p class="zone-p">A fully equipped private gym adjacent to the main hall. The industrial concrete aesthetic works perfectly here. Optional cold plunge, infrared sauna, and steam room.</p>
+        <div class="zone-details">Full equipment suite<span>·</span>Rubber flooring<span>·</span>Cold plunge option<span>·</span>Sauna option</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zone 06 -->
+  <div class="zone reversed">
+    <div class="zone-inner">
+      <div class="zone-placeholder reveal" data-label="Suite Render"></div>
+      <div class="zone-text reveal">
+        <span class="zone-eyebrow">Zone 06</span>
+        <h3 class="zone-h3">The Suite</h3>
+        <p class="zone-p">One or two private bedroom suites for extended stays. The same material language continues — concrete, timber, stone — but softer here with textiles, bedding, and warmer lighting.</p>
+        <div class="zone-details">Master en-suite<span>·</span>Walk-in closet<span>·</span>Premium fixtures<span>·</span>Climate controlled</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SPECIFICATIONS -->
+<section id="vault-specs">
+  <div class="specs-inner">
+    <div class="specs-header reveal">
+      <span class="section-eyebrow">Specifications</span>
+      <h2 class="section-h2">Built to Endure</h2>
+      <p class="section-sub">Every Vault is constructed to bunker-grade specifications — concealed within the luxury.</p>
+    </div>
+    <div class="specs-grid reveal">
+      <div class="spec-row">
+        <span class="spec-label">Size</span>
+        <span class="spec-value">300–500+ sqm</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">Depth</span>
+        <span class="spec-value">5–6m below grade</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">Structure</span>
+        <span class="spec-value">500mm reinforced concrete, C50</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">Air</span>
+        <span class="spec-value">Redundant HEPA + carbon, positive pressure</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">Power</span>
+        <span class="spec-value">14+ day autonomy, diesel generator</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">Water</span>
+        <span class="spec-value">2,000L+ multi-stage filtration</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">Comms</span>
+        <span class="spec-value">Full satellite, CCTV, mobile repeater</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">Security</span>
+        <span class="spec-value">Concealed blast door, biometric access</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">Autonomy</span>
+        <span class="spec-value">14+ days fully sealed</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">Timeline</span>
+        <span class="spec-value">8–12 months</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section id="vault-price">
+  <div class="price-inner">
+    <span class="section-eyebrow reveal">Pricing</span>
+    <h2 class="section-h2 reveal">An Investment in Permanence</h2>
+    <span class="price-amount reveal">Starting from AED 5,000,000</span>
+    <p class="price-p reveal">Every Vault is custom-designed to your villa's site plan. Price is determined by size, specification, and site conditions. A consultation is the first step.</p>
+    <a href="#vault-enquiry" class="btn-gold-outline reveal">Request Your Private Consultation →</a>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="vault-process">
+  <div class="process-inner">
+    <div class="reveal">
+      <span class="section-eyebrow">Process</span>
+      <h2 class="section-h2">How It Begins</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <span class="process-num">01</span>
+        <div class="process-title">Private Consultation</div>
+        <p class="process-desc">We visit your property. Understand your vision. Assess feasibility.</p>
+      </div>
+      <div class="process-step reveal">
+        <span class="process-num">02</span>
+        <div class="process-title">Concept Design</div>
+        <p class="process-desc">Architect produces plans tailored to your site. AI-rendered visuals of your specific Vault.</p>
+      </div>
+      <div class="process-step reveal">
+        <span class="process-num">03</span>
+        <div class="process-title">Engineering &amp; Approval</div>
+        <p class="process-desc">Structural drawings, MEP design, municipality approvals handled in full.</p>
+      </div>
+      <div class="process-step reveal">
+        <span class="process-num">04</span>
+        <div class="process-title">Construction</div>
+        <p class="process-desc">Our team builds it over 8–12 months. Discreet. Professional. Tested at handover.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AL HADEEQA CONNECTION -->
+<div id="vault-connection">
+  <div class="connection-inner reveal">
+    <p class="connection-text">The Vault is created by Al Hadeeqa Contracting — a UAE-licensed contractor with 20+ years of experience and ISO 9001, 14001, and OHSAS 18001 certifications.</p>
+    <a href="/bunker" class="connection-link">View our bunker range →</a>
+  </div>
+</div>
+
+<!-- ENQUIRY -->
+<section id="vault-enquiry">
+  <div class="enquiry-inner">
+    <div class="reveal">
+      <span class="section-eyebrow">Private Consultation</span>
+      <h2 class="section-h2">Begin the Conversation</h2>
+      <p class="section-sub">Share your details and we will arrange a private consultation at your property.</p>
+    </div>
+    <form id="vault-form" novalidate>
+      <div class="form-row">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="tel" name="whatsapp" placeholder="WhatsApp Number">
+      </div>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <select name="location">
+        <option value="" disabled selected>Location / Emirate</option>
+        <option value="Dubai">Dubai</option>
+        <option value="Abu Dhabi">Abu Dhabi</option>
+        <option value="Sharjah">Sharjah</option>
+        <option value="Other">Other</option>
+      </select>
+      <textarea name="brief" placeholder="Brief description of your property (optional)"></textarea>
+      <button type="submit" class="vault-submit">Request Consultation</button>
+    </form>
+    <p class="enquiry-alt">Or contact us directly via <a href="https://wa.me/971544419854?text=I%27m%20interested%20in%20The%20Vault%20%E2%80%94%20underground%20luxury%20living.%20Can%20we%20arrange%20a%20consultation%3F" target="_blank" rel="noopener">WhatsApp</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="vault-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-brand-wordmark">The Vault</span>
+      <span class="footer-brand-sub">by Al Hadeeqa Contracting Co. L.L.C</span>
+    </div>
+    <div class="footer-right">
+      <span>+971 54 441 9854</span>
+      <span>Dubai U.A.E</span>
+      <span>© 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── VAULT INTRO ── */
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var intro = document.getElementById('vault-intro');
+  var lockContainer = document.getElementById('vault-lock-container');
+  var lockSvg = document.getElementById('vault-lock-svg');
+  var seam = document.getElementById('vault-seam');
+
+  if (reducedMotion) {
+    intro.style.display = 'none';
+    lockContainer.style.display = 'none';
+    seam.style.display = 'none';
+  } else {
+    document.body.style.overflow = 'hidden';
+
+    setTimeout(function () {
+      lockSvg.classList.add('glow');
+    }, 100);
+
+    setTimeout(function () {
+      lockSvg.classList.add('spinning');
+    }, 500);
+
+    setTimeout(function () {
+      lockContainer.classList.add('fade-out');
+      seam.classList.add('visible');
+    }, 1200);
+
+    setTimeout(function () {
+      intro.classList.add('open');
+      seam.classList.add('fade-out');
+    }, 1500);
+
+    setTimeout(function () {
+      intro.style.display = 'none';
+      lockContainer.style.display = 'none';
+      seam.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 2800);
+  }
+
+  /* ── NAV SCROLL ── */
+  var nav = document.getElementById('vault-nav');
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  /* ── INTERSECTION OBSERVER (reveal + gold-rule) ── */
+  var revealEls = document.querySelectorAll('.reveal');
+  var goldRules = document.querySelectorAll('.gold-rule');
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(function (el) { observer.observe(el); });
+  goldRules.forEach(function (el) { observer.observe(el); });
+
+  /* ── FORM SUBMIT → WHATSAPP ── */
+  var form = document.getElementById('vault-form');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var data = new FormData(form);
+    var name = data.get('name') || '';
+    var whatsapp = data.get('whatsapp') || '';
+    var email = data.get('email') || '';
+    var location = data.get('location') || '';
+    var brief = data.get('brief') || '';
+
+    var lines = ['I\'m interested in The Vault \u2014 underground luxury living.', ''];
+    if (name)     lines.push('Name: ' + name);
+    if (whatsapp) lines.push('WhatsApp: ' + whatsapp);
+    if (email)    lines.push('Email: ' + email);
+    if (location) lines.push('Location: ' + location);
+    if (brief)    lines.push('Property: ' + brief);
+    lines.push('', 'Can we arrange a consultation?');
+
+    var msg = encodeURIComponent(lines.join('\n'));
+    window.open('https://wa.me/971544419854?text=' + msg, '_blank', 'noopener,noreferrer');
+  });
+})();
+</script>
+</body>
+</html>

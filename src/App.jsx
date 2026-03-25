@@ -190,6 +190,10 @@ function resolveRoute(pathname) {
     return { type: "bunker", pathname: normalizedPath };
   }
 
+  if (normalizedPath === "/vault") {
+    return { type: "vault", pathname: normalizedPath };
+  }
+
   const serviceMatch = normalizedPath.match(/^\/services\/([^/]+)$/);
   if (serviceMatch) {
     const serviceId = decodeURIComponent(serviceMatch[1]);
@@ -311,8 +315,11 @@ function Nav({ onContact, route }) {
     { label: "About", href: "/about" },
     { label: "Projects", href: "/projects" },
     { label: "Bunkers", href: "/bunker" },
+    { label: "The Vault", href: "/vault", vault: true },
     { label: "Contact", href: "/contact" },
   ];
+
+  const VAULT_LINK = { label: "The Vault", href: "/vault", vault: true };
 
   if (route.type === "services") {
     navLinks = [
@@ -321,6 +328,7 @@ function Nav({ onContact, route }) {
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
       { label: "Bunkers", href: "/bunker" },
+      VAULT_LINK,
       { label: "Contact", href: "/contact" },
     ];
   } else if (route.type === "service") {
@@ -330,6 +338,7 @@ function Nav({ onContact, route }) {
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
       { label: "Bunkers", href: "/bunker" },
+      VAULT_LINK,
       { label: "Contact", href: "/contact" },
     ];
   } else if (route.type === "about") {
@@ -339,6 +348,7 @@ function Nav({ onContact, route }) {
       { label: "About", href: "/about", active: true },
       { label: "Projects", href: "/projects" },
       { label: "Bunkers", href: "/bunker" },
+      VAULT_LINK,
       { label: "Contact", href: "/contact" },
     ];
   } else if (route.type === "projects") {
@@ -348,6 +358,7 @@ function Nav({ onContact, route }) {
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects", active: true },
       { label: "Bunkers", href: "/bunker" },
+      VAULT_LINK,
       { label: "Contact", href: "/contact" },
     ];
   } else if (route.type === "contact") {
@@ -357,6 +368,7 @@ function Nav({ onContact, route }) {
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
       { label: "Bunkers", href: "/bunker" },
+      VAULT_LINK,
       { label: "Contact", href: "/contact", active: true },
     ];
   } else if (route.type === "not-found") {
@@ -366,6 +378,7 @@ function Nav({ onContact, route }) {
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
       { label: "Bunkers", href: "/bunker" },
+      VAULT_LINK,
       { label: "Contact", href: "/contact" },
     ];
   }
@@ -390,7 +403,7 @@ function Nav({ onContact, route }) {
           <a
             key={link.label}
             href={link.href}
-            style={{ ...styles.navLink, ...(link.active ? styles.navLinkActive : {}) }}
+            style={{ ...styles.navLink, ...(link.active ? styles.navLinkActive : {}), ...(link.vault ? styles.navLinkVault : {}) }}
           >
             {link.label}
           </a>
@@ -408,7 +421,7 @@ function Nav({ onContact, route }) {
       {menuOpen && (
         <div style={styles.mobileMenu} className="mobile-menu">
           {navLinks.map((link) => (
-            <a key={link.label} href={link.href} style={styles.mobileLink} onClick={() => setMenuOpen(false)}>
+            <a key={link.label} href={link.href} style={{ ...styles.mobileLink, ...(link.vault ? styles.mobileLinkVault : {}) }} onClick={() => setMenuOpen(false)}>
               {link.label}
             </a>
           ))}
@@ -1516,6 +1529,7 @@ function Footer() {
             <a href="/projects" style={styles.footerLink}>Projects</a>
             <a href="/contact" style={styles.footerLink}>Contact</a>
             <a href="/bunker" style={styles.footerLink}>Underground Protection</a>
+            <a href="/vault" style={{ ...styles.footerLink, color: "#c9a54e" }}>The Vault ↗</a>
           </div>
         </div>
       </div>
@@ -1706,6 +1720,8 @@ export default function App() {
     page = <ContactPage />;
   } else if (route.type === "bunker") {
     page = <StaticPageRedirect to="/bunker.html" />;
+  } else if (route.type === "vault") {
+    page = <StaticPageRedirect to="/vault.html" />;
   } else if (route.type === "not-found") {
     page = <NotFoundPage />;
   }
@@ -2987,6 +3003,22 @@ const styles = {
     color: GREEN,
     borderBottom: `2px solid ${GREEN}`,
     paddingBottom: 4,
+  },
+  navLinkVault: {
+    color: "#c9a54e",
+    background: "#0a0a0a",
+    border: "1px solid rgba(201,165,78,0.5)",
+    borderRadius: 2,
+    padding: "5px 13px",
+    fontSize: 13,
+    letterSpacing: "0.08em",
+  },
+  mobileLinkVault: {
+    color: "#c9a54e",
+    background: "#0a0a0a",
+    border: "1px solid rgba(201,165,78,0.45)",
+    padding: "10px 14px",
+    margin: "4px 0",
   },
   navCta: {
     background: GREEN,

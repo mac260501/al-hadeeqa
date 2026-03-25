@@ -546,7 +546,49 @@
     .f-grid { grid-template-columns: 1fr; }
     footer { padding: 28px 20px; flex-direction: column; align-items: flex-start; gap: 10px; }
     .wa-tip { display: none; }
+    .vault-promo-section { padding: 72px 24px; }
+    .vault-promo-actions { flex-direction: column; align-items: stretch; }
+    .vault-promo-cta, .vault-promo-cta-outline { text-align: center; }
   }
+
+  /* ── VAULT PROMO ── */
+  .vault-promo-section {
+    background: #04090a;
+    padding: 100px 80px;
+    text-align: center;
+    border-top: 1px solid rgba(201,165,78,0.15);
+    border-bottom: 1px solid rgba(201,165,78,0.08);
+  }
+  .vault-promo-inner { max-width: 700px; margin: 0 auto; }
+  .vault-promo-tag {
+    font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: rgba(201,165,78,0.7); font-weight: 600; margin-bottom: 20px;
+  }
+  .vault-promo-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 7vw, 88px); font-weight: 400;
+    color: #C9A54E; letter-spacing: 0.1em; line-height: 1.0; margin-bottom: 28px;
+  }
+  .vault-promo-rule {
+    width: 48px; height: 1px; background: rgba(201,165,78,0.4); margin: 0 auto 28px;
+  }
+  .vault-promo-p {
+    font-size: 15px; color: rgba(232,228,220,0.75); font-weight: 300;
+    line-height: 1.85; margin-bottom: 44px;
+  }
+  .vault-promo-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .vault-promo-cta {
+    display: inline-block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-weight: 600; color: #04090a; background: #C9A54E; padding: 15px 32px;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .vault-promo-cta:hover { background: #a8893a; }
+  .vault-promo-cta-outline {
+    display: inline-block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-weight: 500; color: #C9A54E; border: 1px solid rgba(201,165,78,0.45); padding: 15px 32px;
+    text-decoration: none; transition: border-color 0.2s;
+  }
+  .vault-promo-cta-outline:hover { border-color: #C9A54E; }
 </style>
 </head>
 <body>
@@ -575,6 +617,7 @@
     <a href="/about">About</a>
     <a href="/projects">Projects</a>
     <a href="/bunker" class="active">Bunkers</a>
+    <a href="/vault" style="color:#c9a54e;background:#0a0a0a;border:1px solid rgba(201,165,78,0.5);border-radius:2px;padding:5px 13px;font-size:13px;letter-spacing:0.08em;">The Vault</a>
     <a href="/contact">Contact</a>
   </div>
   <a href="https://wa.me/971544419854?text=Hi%2C%20I%27d%20like%20a%20free%20consultation" target="_blank" class="nav-cta-btn nav-cta-desktop-only">Free Consultation</a>
@@ -589,6 +632,7 @@
     <a href="/about" class="mobile-nav-link">About</a>
     <a href="/projects" class="mobile-nav-link">Projects</a>
     <a href="/bunker" class="mobile-nav-link">Bunkers</a>
+    <a href="/vault" class="mobile-nav-link" style="color:#c9a54e;background:#0a0a0a;border:1px solid rgba(201,165,78,0.45);padding:10px 14px;margin:4px 0;">The Vault</a>
     <a href="/contact" class="mobile-nav-link">Contact</a>
     <div class="mobile-cta">
       <a href="https://wa.me/971544419854?text=Hi%2C%20I%27d%20like%20a%20free%20consultation" target="_blank" class="nav-cta-btn">Free Consultation</a>
@@ -780,7 +824,7 @@
       <div class="th th-tier">Shelter<div class="tier-type">Poured</div></div>
       <div class="th th-tier th-featured">Safe Room<div class="tier-type">Poured · Popular</div></div>
       <div class="th th-tier">Fortified<div class="tier-type">Poured</div></div>
-      <div class="th th-vault">The Vault<div class="tier-type">Poured</div></div>
+      <a href="/vault" class="th th-vault" style="text-decoration:none; display:flex; flex-direction:column; cursor:pointer; gap:6px;">The Vault<div class="tier-type" style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.4); font-weight:400;">Poured</div><div style="margin-top:4px; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:#c9a54e; border:1px solid rgba(201,165,78,0.5); padding:4px 10px; display:inline-block; width:fit-content;">Enquire →</div></a>
       <!-- Starting From -->
       <div class="tiers-row-label odd">Starting From</div>
       <div class="tiers-cell odd price">AED 100K</div>
@@ -876,6 +920,20 @@
     </div>
   </div>
 </div>
+
+<!-- THE VAULT PROMO -->
+<section class="vault-promo-section">
+  <div class="vault-promo-inner reveal">
+    <div class="vault-promo-tag">Above Every Tier</div>
+    <div class="vault-promo-h2">The Vault</div>
+    <div class="vault-promo-rule"></div>
+    <p class="vault-promo-p">Not a bunker. An underground luxury lifestyle space — private car ramp, cinema, gym, bar, and suite — built to the same fortified specification as our highest tier. Conceived for villa owners who want something that has never existed before in the UAE.</p>
+    <div class="vault-promo-actions">
+      <a href="/vault" class="vault-promo-cta">Explore The Vault →</a>
+      <a href="/vault#vault-enquiry" class="vault-promo-cta-outline">Request Private Consultation</a>
+    </div>
+  </div>
+</section>
 
 <!-- CTA + FORM -->
 <div class="cta-section" id="quote">
