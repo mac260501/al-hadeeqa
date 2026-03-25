@@ -399,21 +399,11 @@
   .zone.reversed .zone-inner > * {
     direction: ltr;
   }
-  .zone-placeholder {
+  .zone-img {
+    width: 100%;
     aspect-ratio: 16/9;
-    background: #1A1A1A;
-    border: 1px solid #2A2724;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-  .zone-placeholder::after {
-    content: attr(data-label);
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #3A3A38;
+    object-fit: cover;
+    display: block;
   }
   .zone-eyebrow {
     display: block;
@@ -536,7 +526,7 @@
     border-top: 1px solid rgba(201,165,78,0.15);
   }
   .process-step {
-    padding: 40px 36px 40px 36px;
+    padding: 40px 36px 40px 52px;
     border-right: 1px solid rgba(58,58,56,0.4);
   }
   .process-step:last-child {
@@ -800,7 +790,7 @@
       grid-template-columns: 1fr 1fr;
     }
     .process-step {
-      padding: 28px 20px 28px 20px;
+      padding: 28px 20px 28px 32px;
     }
     .process-step:nth-child(even) {
       border-right: none;
@@ -909,7 +899,7 @@ Underground World</h1>
   <!-- Zone 01 -->
   <div class="zone">
     <div class="zone-inner">
-      <div class="zone-placeholder reveal" data-label="Garage Render"></div>
+      <img class="zone-img reveal" src="assets/images/zone-1.jpg" alt="The Arrival — private underground garage" loading="lazy">
       <div class="zone-text reveal">
         <span class="zone-eyebrow">Zone 01</span>
         <h3 class="zone-h3">The Arrival</h3>
@@ -922,7 +912,7 @@ Underground World</h1>
   <!-- Zone 02 -->
   <div class="zone reversed">
     <div class="zone-inner">
-      <div class="zone-placeholder reveal" data-label="Gallery Render"></div>
+      <img class="zone-img reveal" src="assets/images/zone-2.jpeg" alt="The Gallery — transitional corridor" loading="lazy">
       <div class="zone-text reveal">
         <span class="zone-eyebrow">Zone 02</span>
         <h3 class="zone-h3">The Gallery</h3>
@@ -935,7 +925,7 @@ Underground World</h1>
   <!-- Zone 03 -->
   <div class="zone">
     <div class="zone-inner">
-      <div class="zone-placeholder reveal" data-label="Lounge Render"></div>
+      <img class="zone-img reveal" src="assets/images/zone-3.jpeg" alt="The Hall — sunken lounge and bar" loading="lazy">
       <div class="zone-text reveal">
         <span class="zone-eyebrow">Zone 03</span>
         <h3 class="zone-h3">The Hall</h3>
@@ -948,7 +938,7 @@ Underground World</h1>
   <!-- Zone 04 -->
   <div class="zone reversed">
     <div class="zone-inner">
-      <div class="zone-placeholder reveal" data-label="Cinema Render"></div>
+      <img class="zone-img reveal" src="assets/images/zone-4.jpeg" alt="The Cinema — private screening room" loading="lazy">
       <div class="zone-text reveal">
         <span class="zone-eyebrow">Zone 04</span>
         <h3 class="zone-h3">The Cinema</h3>
@@ -961,7 +951,7 @@ Underground World</h1>
   <!-- Zone 05 -->
   <div class="zone">
     <div class="zone-inner">
-      <div class="zone-placeholder reveal" data-label="Gym Render"></div>
+      <img class="zone-img reveal" src="assets/images/zone-5.jpeg" alt="The Gym — private fitness suite" loading="lazy">
       <div class="zone-text reveal">
         <span class="zone-eyebrow">Zone 05</span>
         <h3 class="zone-h3">The Gym</h3>
@@ -974,7 +964,7 @@ Underground World</h1>
   <!-- Zone 06 -->
   <div class="zone reversed">
     <div class="zone-inner">
-      <div class="zone-placeholder reveal" data-label="Suite Render"></div>
+      <img class="zone-img reveal" src="assets/images/zone-6.jpeg" alt="The Suite — private bedroom suite" loading="lazy">
       <div class="zone-text reveal">
         <span class="zone-eyebrow">Zone 06</span>
         <h3 class="zone-h3">The Suite</h3>
