@@ -13,6 +13,24 @@ import {
   getServiceById,
   getServiceHref,
 } from "./constants/services";
+import { usePageMeta } from "./hooks/usePageMeta";
+import {
+  organizationSchema,
+  breadcrumbSchema,
+  pergolaServiceSchema,
+  carportServiceSchema,
+  dewateringServiceSchema,
+  constructionServiceSchema,
+  faqSchema,
+  serviceSchema,
+} from "./data/schemas";
+import {
+  pergolaFAQs,
+  carportFAQs,
+  dewateringFAQs,
+  generalFAQs,
+} from "./data/faqs";
+import FAQPage from "./pages/FAQPage";
 
 const LogoImg = ({ size = 44 }) => (
   <img
@@ -192,6 +210,10 @@ function resolveRoute(pathname) {
 
   if (normalizedPath === "/vault") {
     return { type: "vault", pathname: normalizedPath };
+  }
+
+  if (normalizedPath === "/faq") {
+    return { type: "faq", pathname: normalizedPath };
   }
 
   const serviceMatch = normalizedPath.match(/^\/services\/([^/]+)$/);
@@ -1016,7 +1038,45 @@ function ServicesPageSection() {
   );
 }
 
+const SERVICE_FAQS = {
+  pergolas: pergolaFAQs,
+  carports: carportFAQs,
+  dewatering: dewateringFAQs,
+};
+
+const SERVICE_SCHEMAS = {
+  pergolas: pergolaServiceSchema,
+  carports: carportServiceSchema,
+  dewatering: dewateringServiceSchema,
+  construction: constructionServiceSchema,
+};
+
 function ServiceLandingPage({ service, onContact }) {
+  const BASE_URL = "https://alhadeeqacontracting.com";
+  const serviceUrl = `${BASE_URL}/services/${service.id}`;
+  const serviceFAQs = SERVICE_FAQS[service.id] || [];
+  const serviceSchemaObj = SERVICE_SCHEMAS[service.id] || serviceSchema({
+    serviceType: service.title,
+    name: `${service.title} in Dubai | Al Hadeeqa Contracting`,
+    description: service.heroDescription,
+    serviceUrl,
+  });
+
+  usePageMeta({
+    title: `${service.title} in Dubai | Al Hadeeqa Contracting — ${service.subtitle}`,
+    description: `${service.heroDescription} Al Hadeeqa Contracting — established 2009, ISO 9001 certified, 50+ crew, 15+ years experience in Dubai. Free site assessment.`,
+    canonical: serviceUrl,
+    schemas: [
+      serviceSchemaObj,
+      ...(serviceFAQs.length > 0 ? [faqSchema(serviceFAQs)] : []),
+      breadcrumbSchema([
+        { name: "Home", url: BASE_URL },
+        { name: "Services", url: `${BASE_URL}/services` },
+        { name: service.title, url: serviceUrl },
+      ]),
+    ],
+  });
+
   const relatedServices = service.relatedIds
     .map((serviceId) => getServiceById(serviceId))
     .filter(Boolean);
@@ -1528,7 +1588,8 @@ function Footer() {
             <a href="/about" style={styles.footerLink}>About</a>
             <a href="/projects" style={styles.footerLink}>Projects</a>
             <a href="/contact" style={styles.footerLink}>Contact</a>
-            <a href="/bunker" style={styles.footerLink}>Underground Protection</a>
+            <a href="/bunker" style={styles.footerLink}>Underground Shelters</a>
+            <a href="/faq" style={styles.footerLink}>FAQs</a>
             <a href="/vault" style={{ ...styles.footerLink, color: "#c9a54e" }}>The Vault ↗</a>
           </div>
         </div>
@@ -1602,6 +1663,16 @@ function JanGroupSection() {
 }
 
 function HomePage({ onContact }) {
+  usePageMeta({
+    title: "Al Hadeeqa Contracting — Construction, Pergolas, Carports & Underground Shelters in Dubai",
+    description:
+      "Al Hadeeqa Contracting: Dubai's trusted construction company since 2009. Pergolas, carports, dewatering, excavation, underground shelters from AED 100,000, and The Vault luxury underground residence. ISO 9001 certified. 50+ crew. Free site assessment.",
+    canonical: "https://alhadeeqacontracting.com/",
+    schemas: [
+      organizationSchema,
+      breadcrumbSchema([{ name: "Al Hadeeqa Contracting", url: "https://alhadeeqacontracting.com" }]),
+    ],
+  });
   return (
     <>
       <Hero onContact={onContact} />
@@ -1615,6 +1686,19 @@ function HomePage({ onContact }) {
 }
 
 function ServicesPage({ onContact }) {
+  usePageMeta({
+    title: "Construction Services in Dubai | Al Hadeeqa Contracting — Pergolas, Carports, Dewatering & More",
+    description:
+      "Al Hadeeqa Contracting offers pergola construction, carports, dewatering, excavation, shoring, demolition, glass rooms, waterproofing, and maintenance in Dubai. ISO certified. 15+ years experience. Free site assessment.",
+    canonical: "https://alhadeeqacontracting.com/services",
+    schemas: [
+      organizationSchema,
+      breadcrumbSchema([
+        { name: "Home", url: "https://alhadeeqacontracting.com" },
+        { name: "Services", url: "https://alhadeeqacontracting.com/services" },
+      ]),
+    ],
+  });
   return (
     <>
       <ServicesPageHero onContact={onContact} />
@@ -1627,6 +1711,19 @@ function ServicesPage({ onContact }) {
 }
 
 function AboutPage({ onContact }) {
+  usePageMeta({
+    title: "About Al Hadeeqa Contracting | Dubai Construction Company Since 2009 | ISO Certified",
+    description:
+      "Al Hadeeqa Contracting Co. L.L.C — founded 2009 by Engr. Muhammad Ashraf Jan. Dubai Municipality licensed, ISO 9001:2015 & 14001:2015 certified. 50+ crew, 500+ projects completed across UAE. Pergolas, carports, dewatering, underground shelters.",
+    canonical: "https://alhadeeqacontracting.com/about",
+    schemas: [
+      organizationSchema,
+      breadcrumbSchema([
+        { name: "Home", url: "https://alhadeeqacontracting.com" },
+        { name: "About", url: "https://alhadeeqacontracting.com/about" },
+      ]),
+    ],
+  });
   return (
     <>
       <AboutPageHero onContact={onContact} />
@@ -1687,7 +1784,17 @@ export default function App() {
     }
 
     if (route.type === "bunker") {
-      document.title = "Underground Protection | Al Hadeeqa Contracting";
+      document.title = "Underground Shelters Dubai | Al Hadeeqa Contracting";
+      return;
+    }
+
+    if (route.type === "vault") {
+      document.title = "The Vault — Underground Luxury Residence | Al Hadeeqa Contracting";
+      return;
+    }
+
+    if (route.type === "faq") {
+      document.title = "Frequently Asked Questions | Al Hadeeqa Contracting";
       return;
     }
 
@@ -1696,7 +1803,7 @@ export default function App() {
       return;
     }
 
-    document.title = "Al Hadeeqa Contracting";
+    document.title = "Al Hadeeqa Contracting — Dubai Construction, Pergolas, Carports & Underground Shelters";
   }, [route.type, route.type === "service" ? route.service.title : ""]);
 
   const openContact = (service = "") => setModal(service || "General Enquiry");
@@ -1722,6 +1829,8 @@ export default function App() {
     page = <StaticPageRedirect to="/bunker.html" />;
   } else if (route.type === "vault") {
     page = <StaticPageRedirect to="/vault.html" />;
+  } else if (route.type === "faq") {
+    page = <FAQPage />;
   } else if (route.type === "not-found") {
     page = <NotFoundPage />;
   }

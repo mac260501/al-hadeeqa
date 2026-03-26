@@ -1,0 +1,227 @@
+// ─── GENERAL / COMPANY ───────────────────────────────────────────────────────
+export const generalFAQs = [
+  {
+    q: "What services does Al Hadeeqa Contracting offer?",
+    a: "Al Hadeeqa Contracting offers pergola construction, carport construction, dewatering, excavation, shoring, demolition, glass rooms, roof waterproofing, and general construction in Dubai. The company also builds underground shelters (bunkers) starting from AED 100,000 and The Vault, an underground luxury residence from AED 5,000,000.",
+  },
+  {
+    q: "Where is Al Hadeeqa Contracting located?",
+    a: "Al Hadeeqa Contracting is located at Office 404, PTC Building, Al Qusais Industrial First, Dubai, UAE. The company has served residential and commercial clients across Dubai, Abu Dhabi, Sharjah, and Ajman since 2009.",
+  },
+  {
+    q: "Is Al Hadeeqa Contracting licensed in Dubai?",
+    a: "Yes, Al Hadeeqa Contracting Co. L.L.C is a Dubai Municipality licensed contractor. The company holds registration number 1064775 and is certified to ISO 9001:2015, ISO 14001:2015, and OHSAS 18001:2007 standards.",
+  },
+  {
+    q: "What certifications does Al Hadeeqa Contracting hold?",
+    a: "Al Hadeeqa Contracting holds ISO 9001:2015 (Quality Management), ISO 14001:2015 (Environmental Management), OHSAS 18001:2007 (Health & Safety), and ASCB(E) accreditation. The company is also licensed by Dubai Municipality.",
+  },
+  {
+    q: "How long has Al Hadeeqa Contracting been operating?",
+    a: "Al Hadeeqa Contracting was founded in 2009 by Engr. Muhammad Ashraf Jan, who has been working in the UAE construction market since the 1990s. The company has over 35 years of combined experience and 500+ completed projects across Dubai and the UAE.",
+  },
+  {
+    q: "Does Al Hadeeqa work outside Dubai?",
+    a: "Yes, Al Hadeeqa Contracting serves clients across the UAE including Abu Dhabi, Sharjah, and Ajman. The company's Ajman facility manufactures precast underground shelters for delivery and installation anywhere in the UAE.",
+  },
+  {
+    q: "How do I get a quote from Al Hadeeqa Contracting?",
+    a: "You can request a quote from Al Hadeeqa Contracting by calling +971 4 263 2371, messaging +971 54 441 9854 on WhatsApp, or emailing alhadeeqallc@gmail.com. Al Hadeeqa offers free site assessments for all construction and shelter projects.",
+  },
+  {
+    q: "Does Al Hadeeqa offer free site assessments?",
+    a: "Yes, Al Hadeeqa Contracting provides free site assessments for all projects including pergolas, carports, dewatering, and underground shelters. Contact the team via WhatsApp at +971 54 441 9854 to schedule a visit.",
+  },
+];
+
+// ─── PERGOLA ──────────────────────────────────────────────────────────────────
+export const pergolaFAQs = [
+  {
+    q: "How much does a pergola cost in Dubai?",
+    a: "A custom pergola in Dubai typically costs between AED 15,000 and AED 80,000 depending on size, material (steel, aluminium, or timber), and whether it includes motorised louvres or fixed panels. Motorised louvre systems start from approximately AED 40,000. Al Hadeeqa Contracting provides free on-site quotes for all pergola projects across Dubai.",
+  },
+  {
+    q: "How long does it take to build a pergola in Dubai?",
+    a: "Most residential pergola projects in Dubai take 2–4 weeks from approved design to completed installation. Larger commercial structures may take 4–6 weeks. Al Hadeeqa Contracting handles design, municipality drawing submissions, fabrication, and installation as a complete turnkey service.",
+  },
+  {
+    q: "Do I need a permit to build a pergola in Dubai?",
+    a: "In most cases, yes. Dubai Municipality requires approved drawings for permanent outdoor structures attached to a property. Al Hadeeqa Contracting handles drawing preparation and submission as part of its turnkey pergola service, covering all approvals at no extra cost.",
+  },
+  {
+    q: "What materials are used for pergolas in Dubai?",
+    a: "Al Hadeeqa Contracting builds pergolas using steel (powder-coated or galvanised), aluminium (lightweight, corrosion-resistant), and treated timber (hardwood or cedar). Each material suits different aesthetics and budgets. Aluminium is the most popular choice in Dubai due to its heat resistance and low maintenance.",
+  },
+  {
+    q: "Can a pergola be built on a rooftop in Dubai?",
+    a: "Yes, Al Hadeeqa Contracting regularly installs rooftop pergolas on villas and apartment buildings in Dubai. A structural assessment is required to confirm the roof can support the load. Al Hadeeqa coordinates with structural engineers as part of the project scope.",
+  },
+  {
+    q: "What is a motorised louvre pergola?",
+    a: "A motorised louvre pergola has adjustable aluminium slats (louvres) that can be opened or closed via a remote control or app. When closed, louvres provide full rain and sun protection. When open, they allow ventilation and natural light. Al Hadeeqa Contracting installs motorised louvre systems starting from AED 40,000.",
+  },
+  {
+    q: "What is the best pergola material for Dubai's climate?",
+    a: "Aluminium is the best pergola material for Dubai's climate. It is resistant to UV radiation, humidity, and corrosion, requires minimal maintenance, and stays cooler than steel under direct sunlight. Al Hadeeqa Contracting uses powder-coated aluminium as the standard specification for most Dubai pergola projects.",
+  },
+  {
+    q: "Can I attach a pergola to my villa wall?",
+    a: "Yes, wall-attached pergolas (also called lean-to pergolas) are one of the most common designs Al Hadeeqa Contracting installs in Dubai. The structure is fixed to the villa wall on one side and supported by posts on the other, maximising covered space without a full freestanding footprint.",
+  },
+];
+
+// ─── CARPORT ─────────────────────────────────────────────────────────────────
+export const carportFAQs = [
+  {
+    q: "How much does a carport cost in Dubai?",
+    a: "A residential carport in Dubai costs between AED 8,000 and AED 50,000 depending on size (number of vehicles), material (steel or aluminium), and roofing type. Premium architectural carports for luxury villas and multi-vehicle structures can cost more. Al Hadeeqa Contracting provides free quotes for all carport projects.",
+  },
+  {
+    q: "What materials are best for carports in Dubai?",
+    a: "Steel and aluminium are the most suitable materials for carports in Dubai. Steel offers greater structural strength for wider spans and multi-vehicle carports. Aluminium is lighter, corrosion-resistant, and requires less maintenance. Al Hadeeqa Contracting uses UV-resistant roofing materials rated for Dubai's extreme heat.",
+  },
+  {
+    q: "Do I need approval to build a carport in Dubai?",
+    a: "Dubai Municipality approval is typically required for permanent carport structures built on a villa plot or commercial property. Al Hadeeqa Contracting manages drawing submissions and approvals as part of its full-service carport construction scope.",
+  },
+  {
+    q: "How long does it take to build a carport in Dubai?",
+    a: "Most single or double carport builds in Dubai take 1–3 weeks from design approval to installation. Larger multi-vehicle carports or those with special roofing systems may take 3–5 weeks. Al Hadeeqa Contracting handles the complete project from design to handover.",
+  },
+  {
+    q: "What is the difference between a carport and a garage?",
+    a: "A carport is an open or semi-open shade structure that protects vehicles from sun and rain. A garage is an enclosed structure with walls and doors. Carports in Dubai are generally faster to build, more cost-effective, and do not require the same structural approvals as a full garage. Al Hadeeqa Contracting builds both.",
+  },
+  {
+    q: "Can a carport support solar panels?",
+    a: "Yes, Al Hadeeqa Contracting designs and builds solar-ready carport structures in Dubai. The steel or aluminium frame is engineered to carry the additional load of photovoltaic panels. This is an increasingly popular option for villa owners looking to combine vehicle protection with energy generation.",
+  },
+];
+
+// ─── DEWATERING ───────────────────────────────────────────────────────────────
+export const dewateringFAQs = [
+  {
+    q: "What is dewatering in construction?",
+    a: "Dewatering in construction is the process of removing or controlling groundwater from an excavation or construction site. It keeps the working area dry, stable, and safe during foundation, basement, and underground works. Common methods include wellpoint systems, deepwell dewatering, and sump pumping.",
+  },
+  {
+    q: "How much does dewatering cost in Dubai?",
+    a: "Dewatering costs in Dubai vary based on site depth, soil conditions, groundwater levels, and project duration. Residential dewatering projects typically range from AED 15,000 to AED 80,000. Large commercial or deep excavation projects can cost significantly more. Al Hadeeqa Contracting provides site-specific dewatering assessments and quotes.",
+  },
+  {
+    q: "When is dewatering required on a construction site?",
+    a: "Dewatering is required when excavation depth reaches groundwater levels, which in Dubai commonly occurs at 1.5–3m below ground surface in coastal and low-lying areas. It is also required when soil instability from water poses a safety risk or when basement construction requires a consistently dry working environment.",
+  },
+  {
+    q: "What dewatering methods does Al Hadeeqa use?",
+    a: "Al Hadeeqa Contracting uses wellpoint dewatering (shallow systems for depths up to 6m), deepwell dewatering (for deeper excavations), and sump pumping (reactive removal of water entering the excavation). The appropriate method depends on site depth, soil permeability, and groundwater pressure.",
+  },
+  {
+    q: "How long does a dewatering project take?",
+    a: "Dewatering is typically an ongoing operation that runs in parallel with excavation and foundation works. Setup takes 1–3 days. Active dewatering continues throughout the construction phase until the structure is sufficiently waterproofed. Al Hadeeqa Contracting coordinates dewatering timelines with excavation and construction schedules.",
+  },
+  {
+    q: "Does Al Hadeeqa provide dewatering for residential projects?",
+    a: "Yes, Al Hadeeqa Contracting provides dewatering services for residential projects including villa basements, swimming pool excavations, and foundation works. The company manages dewatering as part of a coordinated enabling works package alongside excavation and shoring.",
+  },
+];
+
+// ─── BUNKER / UNDERGROUND SHELTER ────────────────────────────────────────────
+export const bunkerFAQs = [
+  {
+    q: "How much does an underground bunker cost in Dubai?",
+    a: "Underground bunkers in Dubai start from AED 100,000 for Al Hadeeqa's precast Emergency Pod (7–8 sqm, 2–4 people). The Compact Shelter (15–20 sqm, 6–8 people) costs AED 200,000. The Shelter poured-in-place (25–35 sqm, 8–15 people) starts from AED 500,000. Custom sizes are priced at AED 15,200 per square metre.",
+  },
+  {
+    q: "Can you build an underground bunker in Dubai?",
+    a: "Yes, underground shelters can be built in Dubai. Al Hadeeqa Contracting has designed and built multiple underground shelter installations across the UAE. Projects require structural engineering, municipality approvals, and coordination with property developers or villa owners. Al Hadeeqa manages the complete process from design to installation.",
+  },
+  {
+    q: "Do you need a permit for an underground shelter in the UAE?",
+    a: "Yes, underground construction in the UAE requires permits. Structural drawings must be approved by the relevant municipality (Dubai Municipality, Abu Dhabi DMT, or the relevant emirate authority). Al Hadeeqa Contracting handles all permitting, drawing submissions, and approvals as part of its full shelter service.",
+  },
+  {
+    q: "How deep is a residential underground shelter?",
+    a: "Al Hadeeqa's precast shelters are installed at 2.5–3.5m below grade. The poured-in-place Shelter sits at 3.0–4.0m depth. The Vault and larger fortified structures go 5–6m deep. Exact depth depends on soil conditions, groundwater level, and the size of the shelter.",
+  },
+  {
+    q: "How long does it take to build an underground shelter?",
+    a: "Al Hadeeqa's precast Emergency Pod (AED 100,000) takes 5–7 days to manufacture and 1–2 days to install. The Compact Shelter takes 7–10 days to manufacture and 2–3 days to install. The poured-in-place Shelter takes 4–6 weeks to build on-site. The Vault takes 3–6 months depending on size and specification.",
+  },
+  {
+    q: "What is a precast underground shelter?",
+    a: "A precast underground shelter is manufactured in a controlled factory environment, then transported to the site and installed by crane. Al Hadeeqa manufactures precast shelters at its Ajman facility. Precast units are faster to install (1–3 days vs. weeks) and have consistent structural quality. They are ideal for sites where access permits crane placement.",
+  },
+  {
+    q: "What is the difference between a precast and poured-in-place bunker?",
+    a: "A precast bunker is manufactured off-site and installed by crane in 1–3 days. It is faster and more predictable but limited to sizes that can be transported. A poured-in-place bunker is built on-site, allowing larger sizes and custom layouts but requiring 4–8 weeks of construction. Al Hadeeqa offers both options starting at AED 100,000 (precast) and AED 500,000 (poured).",
+  },
+  {
+    q: "How many people can an underground shelter hold?",
+    a: "Al Hadeeqa's Emergency Pod shelters 2–4 people. The Compact Shelter accommodates 6–8 people. The Shelter holds 8–15 people. Larger custom shelters can accommodate 20–30+ people. Capacity depends on internal area, autonomy duration, and the level of supplies stored.",
+  },
+  {
+    q: "What is the cheapest underground shelter available in Dubai?",
+    a: "The cheapest underground shelter available in Dubai is Al Hadeeqa Contracting's Emergency Pod, priced from AED 100,000. It is a precast reinforced concrete unit (7–8 sqm) for 2–4 people, manufactured in 5–7 days and installed on your property in 1–2 days. It includes a steel hatch, ventilation, water storage, and a chemical toilet.",
+  },
+  {
+    q: "Does an underground shelter need ventilation?",
+    a: "Yes, all underground shelters require a ventilation system to supply fresh air and remove carbon dioxide. Al Hadeeqa's Emergency Pod includes a basic mechanical ventilation system. The Compact Shelter includes HEPA filtration for air purification. Larger shelters include NBC (Nuclear, Biological, Chemical) filtration systems on request.",
+  },
+  {
+    q: "Can an underground shelter be added to an existing villa?",
+    a: "Yes, Al Hadeeqa Contracting installs underground shelters at existing villas in Dubai. The most common approach is a precast unit installed in the garden. Poured-in-place shelters can be built beneath a villa extension or in the courtyard. A site assessment determines the best location relative to the villa structure and groundwater level.",
+  },
+  {
+    q: "What is HEPA filtration in a bunker?",
+    a: "HEPA (High Efficiency Particulate Air) filtration removes 99.97% of airborne particles including dust, pollen, bacteria, and some viruses from the shelter's air supply. In Al Hadeeqa's Compact Shelter and larger units, HEPA filtration is included as standard to ensure safe, breathable air during extended shelter periods.",
+  },
+  {
+    q: "How long can you survive in an underground shelter?",
+    a: "Al Hadeeqa's Emergency Pod supports 12–24 hours of autonomous operation with standard supplies. The Compact Shelter supports 1–3 days. The poured-in-place Shelter supports 1–3 days standard with an option for extended autonomy. Larger shelters can be equipped with water storage, food supplies, power generation, and NBC filtration for 7–14+ days of operation.",
+  },
+];
+
+// ─── THE VAULT ────────────────────────────────────────────────────────────────
+export const vaultFAQs = [
+  {
+    q: "What is The Vault by Al Hadeeqa?",
+    a: "The Vault is an underground luxury residence built by Al Hadeeqa Contracting in Dubai. Starting from AED 5,000,000, it combines bunker-grade reinforced concrete construction (500mm walls, 5–6m depth) with premium luxury finishes. Features include an underground garage with car ramp, home cinema, gym, lounge bar, bedrooms, and a full kitchen. Each Vault is custom designed to the owner's brief.",
+  },
+  {
+    q: "How much does an underground luxury residence cost in Dubai?",
+    a: "Al Hadeeqa Contracting's Vault — Dubai's first purpose-built underground luxury residence — starts from AED 5,000,000. Final pricing depends on size (300–500+ sqm), specification, and the scope of luxury finishes. Al Hadeeqa offers private consultations to discuss requirements and provide a tailored proposal.",
+  },
+  {
+    q: "Can you drive a car into an underground bunker?",
+    a: "Yes. The Vault by Al Hadeeqa Contracting includes a car ramp that allows direct vehicle access to an underground garage. The ramp is engineered into the reinforced concrete structure, creating a seamless transition from the surface driveway to the underground level. This is a defining feature of The Vault, distinguishing it from standard underground shelters.",
+  },
+  {
+    q: "How is The Vault different from a standard underground shelter?",
+    a: "The Vault is an underground luxury residence, not a basic shelter. While it is built to bunker-grade structural specifications (500mm reinforced concrete walls, 5–6m depth), all protection systems are concealed behind luxury interiors. It includes a car ramp, garage, cinema, gym, lounge, bedrooms, and kitchen. It is designed for lifestyle use, not just emergency protection.",
+  },
+  {
+    q: "How long does it take to build The Vault?",
+    a: "Al Hadeeqa Contracting's Vault takes approximately 3–6 months to complete depending on size (300–500+ sqm) and the level of interior specification. The process includes design, structural engineering, municipality approval, excavation, concrete construction, MEP installation, and luxury fit-out.",
+  },
+];
+
+// ─── ALL FAQs COMBINED ────────────────────────────────────────────────────────
+export const ALL_FAQS = [
+  { category: "General & Company", items: generalFAQs },
+  { category: "Pergolas", items: pergolaFAQs },
+  { category: "Carports", items: carportFAQs },
+  { category: "Dewatering", items: dewateringFAQs },
+  { category: "Underground Shelters (Bunkers)", items: bunkerFAQs },
+  { category: "The Vault", items: vaultFAQs },
+];
+
+// Flat array of all FAQs for schema injection
+export const ALL_FAQS_FLAT = [
+  ...generalFAQs,
+  ...pergolaFAQs,
+  ...carportFAQs,
+  ...dewateringFAQs,
+  ...bunkerFAQs,
+  ...vaultFAQs,
+];
