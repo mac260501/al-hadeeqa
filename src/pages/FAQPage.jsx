@@ -9,7 +9,7 @@ const S = {
   page: { background: "#0a0f0b", color: "#e8ede9", fontFamily: "'DM Sans', sans-serif", minHeight: "100vh" },
   hero: {
     background: "linear-gradient(160deg, #0d1a10 0%, #0a0f0b 100%)",
-    padding: "72px 24px 56px",
+    padding: "160px 24px 56px",
     borderBottom: "1px solid rgba(255,255,255,0.06)",
   },
   heroInner: { maxWidth: 820, margin: "0 auto" },
@@ -32,6 +32,7 @@ const S = {
     gap: 8,
     flexWrap: "wrap",
     alignItems: "center",
+    justifyContent: "center",
   },
   jumpNavLabel: { fontSize: 11, color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 600, marginRight: 4 },
   jumpLink: {
