@@ -186,6 +186,106 @@ export const constructionServiceSchema = serviceSchema({
   ],
 });
 
+// ─── WEBSITE SCHEMA ───────────────────────────────────────────────────────────
+export const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Al Hadeeqa Contracting",
+  url: BASE_URL,
+  publisher: { "@id": ORG_ID },
+};
+
+// ─── ADDITIONAL SERVICE SCHEMAS ───────────────────────────────────────────────
+export const shoringServiceSchema = serviceSchema({
+  serviceType: "Shoring & Excavation Support",
+  name: "Shoring Services in Dubai | Al Hadeeqa Contracting",
+  description:
+    "Al Hadeeqa Contracting provides excavation shoring services for residential and commercial construction in Dubai. Services include sheet piling, soldier piles, and trench boxes coordinated with dewatering and excavation packages.",
+  serviceUrl: `${BASE_URL}/services/shoring`,
+  catalog: [
+    "Sheet Piling",
+    "Soldier Piles & Timber Lagging",
+    "Trench Boxes",
+    "Basement Shoring",
+    "Coordinated Dewatering & Shoring Packages",
+  ],
+});
+
+export const excavationServiceSchema = serviceSchema({
+  serviceType: "Excavation Services",
+  name: "Excavation Services in Dubai | Al Hadeeqa Contracting",
+  description:
+    "Al Hadeeqa Contracting provides residential and commercial excavation services in Dubai including foundation excavation, basement digging, utility trenching, swimming pool excavation, and general earthworks. Coordinated with shoring and dewatering where required.",
+  serviceUrl: `${BASE_URL}/services/excavation`,
+  catalog: [
+    "Foundation & Basement Excavation",
+    "Swimming Pool Excavation",
+    "Utility Trenching",
+    "Underground Shelter Installation",
+    "Site Earthworks & Levelling",
+  ],
+});
+
+export const demolitionServiceSchema = serviceSchema({
+  serviceType: "Demolition Services",
+  name: "Demolition Services in Dubai | Al Hadeeqa Contracting",
+  description:
+    "Al Hadeeqa Contracting provides licensed residential and commercial demolition in Dubai including full villa demolition, partial structural demolition, internal strip-out, and site clearance. Debris removal included. Dubai Municipality permits managed.",
+  serviceUrl: `${BASE_URL}/services/demolition`,
+  catalog: [
+    "Full Villa Demolition",
+    "Partial Structural Demolition",
+    "Internal Strip-Out",
+    "Debris Removal & Site Clearance",
+    "Boundary Wall Demolition",
+  ],
+});
+
+export const glassroomsServiceSchema = serviceSchema({
+  serviceType: "Glass Room & Partition Installation",
+  name: "Glass Rooms & Partitions in Dubai | Al Hadeeqa Contracting",
+  description:
+    "Al Hadeeqa Contracting builds glass rooms, frameless partitions, balustrades, and glass enclosures for villas and commercial properties in Dubai. Tempered heat-resistant glass. Design, supply, and installation included.",
+  serviceUrl: `${BASE_URL}/services/glassrooms`,
+  catalog: [
+    "Villa Patio Glass Rooms",
+    "Frameless Glass Partitions",
+    "Office Glass Partitions",
+    "Glass Balustrades & Railings",
+    "Custom Glass Enclosures",
+  ],
+});
+
+export const waterproofingServiceSchema = serviceSchema({
+  serviceType: "Waterproofing Services",
+  name: "Waterproofing Services in Dubai | Al Hadeeqa Contracting",
+  description:
+    "Al Hadeeqa Contracting provides roof waterproofing, basement waterproofing, swimming pool waterproofing, and wet area waterproofing in Dubai. Systems include bituminous membranes, liquid-applied coatings, and crystalline waterproofing.",
+  serviceUrl: `${BASE_URL}/services/waterproofing`,
+  catalog: [
+    "Flat Roof Waterproofing",
+    "Terrace Waterproofing",
+    "Basement Waterproofing",
+    "Swimming Pool Waterproofing",
+    "Wet Area & Bathroom Waterproofing",
+  ],
+});
+
+export const maintenanceServiceSchema = serviceSchema({
+  serviceType: "Property Maintenance",
+  name: "Property Maintenance Services in Dubai | Al Hadeeqa Contracting",
+  description:
+    "Al Hadeeqa Contracting provides planned and reactive property maintenance for villas and commercial buildings in Dubai. Services include painting, repairs, fixture replacement, waterproofing maintenance, and pergola upkeep. Annual maintenance contracts available.",
+  serviceUrl: `${BASE_URL}/services/maintenance`,
+  catalog: [
+    "Villa Painting (Interior & Exterior)",
+    "General Repairs & Handyman Services",
+    "Waterproofing Maintenance",
+    "Pergola & Carport Servicing",
+    "Annual Maintenance Contracts",
+  ],
+});
+
 // ─── BUNKER PRODUCT SCHEMAS ───────────────────────────────────────────────────
 export const emergencyPodSchema = {
   "@context": "https://schema.org",

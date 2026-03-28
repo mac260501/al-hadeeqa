@@ -206,6 +206,174 @@ export const vaultFAQs = [
   },
 ];
 
+// ─── SHORING ──────────────────────────────────────────────────────────────────
+export const shoringFAQs = [
+  {
+    q: "What is shoring in construction?",
+    a: "Shoring is a temporary or permanent support system used to stabilise an excavation, trench, or adjacent structure during construction. In Dubai, shoring is commonly required for basement construction, underground shelter installation, and deep foundation works where soil conditions or proximity to neighbouring structures require lateral support.",
+  },
+  {
+    q: "When is shoring required in Dubai?",
+    a: "Shoring is required in Dubai when excavation depth exceeds safe open-cut limits — typically beyond 1.5–2m in loose or granular soils. It is also required when excavating close to existing structures, boundary walls, or roads. Dubai Municipality and DEWA require shoring plans as part of building permit submissions for basement and deep excavation projects.",
+  },
+  {
+    q: "What shoring methods does Al Hadeeqa use?",
+    a: "Al Hadeeqa Contracting uses sheet piling, soldier piles with timber lagging, and trench boxes depending on depth, soil conditions, and site access. For urban Dubai projects with tight boundaries, sheet piling is the most common method as it minimises soil disturbance and provides immediate lateral support.",
+  },
+  {
+    q: "Does shoring work alongside dewatering?",
+    a: "Yes. Shoring and dewatering are complementary enabling works that are best planned together. Al Hadeeqa Contracting provides coordinated shoring and dewatering packages for Dubai construction projects. This combined approach ensures excavations stay stable and dry so the main construction can proceed on schedule.",
+  },
+  {
+    q: "How long does shoring installation take?",
+    a: "Shoring installation typically takes 3–7 days for a residential basement project and 1–3 weeks for larger commercial sites. Timeline depends on depth, soil conditions, and the shoring method used. Al Hadeeqa Contracting coordinates shoring installation with the broader excavation programme.",
+  },
+];
+
+// ─── EXCAVATION ───────────────────────────────────────────────────────────────
+export const excavationFAQs = [
+  {
+    q: "What excavation services does Al Hadeeqa provide?",
+    a: "Al Hadeeqa Contracting provides residential and commercial excavation services in Dubai including foundation excavation, basement digging, utility trenching, swimming pool excavation, underground shelter installation, and general earthworks. The company coordinates excavation with shoring and dewatering where required.",
+  },
+  {
+    q: "How deep can you excavate in Dubai?",
+    a: "Excavation depth in Dubai depends on soil conditions, groundwater level, and structural requirements. Residential basement projects typically go 3–5m deep. Underground shelter projects go 3–6m. Deeper excavations require shoring and dewatering. Al Hadeeqa Contracting conducts site assessments to determine the safest and most practical excavation approach.",
+  },
+  {
+    q: "Do you provide shoring for excavation in Dubai?",
+    a: "Yes, Al Hadeeqa Contracting provides shoring as part of its coordinated excavation service for projects that require lateral earth support. This includes sheet piling, soldier piles, and trench boxes depending on site conditions. Shoring and excavation are planned together to avoid delays and ensure site safety.",
+  },
+  {
+    q: "What is the difference between open-cut excavation and shored excavation?",
+    a: "Open-cut excavation uses sloped sides to maintain stability — suitable for wide open sites with low groundwater. Shored excavation uses structural support systems (sheet piles or soldier piles) to hold vertical walls, required when space is constrained or adjacent structures must be protected. Al Hadeeqa Contracting assesses each site to recommend the correct method.",
+  },
+  {
+    q: "How long does a residential excavation take in Dubai?",
+    a: "A standard residential plot excavation in Dubai typically takes 3–7 working days for a single-basement level. Swimming pool excavations take 2–4 days. Underground shelter excavations take 1–3 days. Larger commercial or multi-basement excavations can take several weeks. Al Hadeeqa Contracting provides site-specific timeline estimates before starting work.",
+  },
+];
+
+// ─── DEMOLITION ───────────────────────────────────────────────────────────────
+export const demolitionFAQs = [
+  {
+    q: "What types of demolition does Al Hadeeqa handle?",
+    a: "Al Hadeeqa Contracting handles residential and commercial demolition in Dubai including full villa demolition, partial structural demolition, internal strip-out, and demolition of outbuildings, boundary walls, and shades. The company manages debris removal and site clearance as part of its full-service demolition scope.",
+  },
+  {
+    q: "Do you need a permit for demolition in Dubai?",
+    a: "Yes, demolition in Dubai requires a demolition permit from Dubai Municipality. The permit requires approved drawings, a licensed contractor, and in some cases a structural engineer's report. Al Hadeeqa Contracting manages the permit application and approval process on behalf of clients as part of its full demolition service.",
+  },
+  {
+    q: "How long does a villa demolition take in Dubai?",
+    a: "A standard single-storey villa demolition in Dubai typically takes 3–7 working days including debris removal and site clearance. Two-storey villas may take 7–14 days. Timeline depends on structure size, material type, and access conditions. Al Hadeeqa Contracting provides a site assessment and timeline estimate before commencing.",
+  },
+  {
+    q: "Does Al Hadeeqa handle waste removal after demolition?",
+    a: "Yes, Al Hadeeqa Contracting includes debris removal and site clearance as part of its demolition service. All demolition waste is disposed of in accordance with Dubai Municipality regulations. The site is left clean, levelled, and ready for the next phase of construction or excavation.",
+  },
+  {
+    q: "What is controlled demolition?",
+    a: "Controlled demolition is a systematic approach to taking down structures in a planned sequence, minimising risk to adjacent buildings, infrastructure, and personnel. In urban Dubai where villas and commercial buildings sit close together, controlled demolition techniques are essential. Al Hadeeqa Contracting applies controlled methods on all demolition projects to protect neighbouring properties.",
+  },
+];
+
+// ─── GLASS ROOMS ─────────────────────────────────────────────────────────────
+export const glassroomFAQs = [
+  {
+    q: "What is a glass room?",
+    a: "A glass room is an enclosed outdoor or semi-outdoor space built primarily from glass and aluminium or steel framing. In Dubai, glass rooms are commonly added to villa patios, gardens, and terraces to create weather-protected living or dining spaces. Al Hadeeqa Contracting builds frameless and framed glass room enclosures for residential and commercial properties.",
+  },
+  {
+    q: "How much does a glass room cost in Dubai?",
+    a: "Glass room costs in Dubai depend on size, glass type (standard, tempered, or laminated), framing material, and whether operable panels are included. Small patio enclosures start from AED 20,000. Larger bespoke glass rooms for villas can cost AED 60,000–150,000+. Al Hadeeqa Contracting provides free site assessments and quotes.",
+  },
+  {
+    q: "What glass is best for outdoor rooms in Dubai?",
+    a: "Tempered safety glass with low-E or solar control coating is best for outdoor glass rooms in Dubai. It withstands impact, handles thermal expansion from intense heat, and reduces solar heat gain. Al Hadeeqa Contracting specifies heat-resistant, UV-blocking glass as standard for all Dubai glass room projects.",
+  },
+  {
+    q: "Can Al Hadeeqa build glass partitions for offices?",
+    a: "Yes, Al Hadeeqa Contracting builds frameless and framed glass partition systems for offices, commercial spaces, and hotels across Dubai. Office glass partitions improve natural light distribution while separating work areas. The company handles design, supply, and installation as a complete service.",
+  },
+  {
+    q: "Do glass rooms need Dubai Municipality approval?",
+    a: "Permanent glass enclosures attached to a villa or commercial property in Dubai typically require Dubai Municipality approval. Al Hadeeqa Contracting manages drawing preparation and permit submissions for all glass room projects as part of its full-service scope.",
+  },
+];
+
+// ─── WATERPROOFING ────────────────────────────────────────────────────────────
+export const waterproofingFAQs = [
+  {
+    q: "What types of waterproofing does Al Hadeeqa provide?",
+    a: "Al Hadeeqa Contracting provides torch-applied bituminous membrane waterproofing, self-adhesive membrane systems, liquid-applied coatings, crystalline waterproofing, and injection grouting. Applications include flat roofs, terraces, basements, wet areas (bathrooms and kitchens), swimming pools, and retaining walls.",
+  },
+  {
+    q: "How long does waterproofing last in Dubai?",
+    a: "Quality waterproofing systems in Dubai last 10–25 years depending on material and application. Torch-applied bituminous membranes typically carry a 10-year warranty. Liquid-applied polyurethane systems last 15–20 years with proper maintenance. Al Hadeeqa Contracting installs waterproofing systems with 10-year warranties on select works.",
+  },
+  {
+    q: "What areas of a Dubai villa need waterproofing?",
+    a: "In a Dubai villa, waterproofing is required on flat roofs and terraces (UV and rain exposure), basement slabs and walls (groundwater), wet areas including bathrooms and kitchens, swimming pools and water features, and planter boxes. Al Hadeeqa Contracting recommends a full building assessment to identify all areas that require protection.",
+  },
+  {
+    q: "What is the difference between membrane and crystalline waterproofing?",
+    a: "Membrane waterproofing applies a physical barrier (bituminous sheet or liquid-applied coating) on the surface to block water. Crystalline waterproofing is added to concrete or applied as a slurry and reacts with water to form insoluble crystals that block pores permanently from within. Crystalline is better for basements and structures where access for future repairs is difficult.",
+  },
+  {
+    q: "Does Al Hadeeqa waterproof swimming pools?",
+    a: "Yes, Al Hadeeqa Contracting waterproofs swimming pools in Dubai using flexible polyurethane or cementitious coatings rated for permanent water immersion. Pool waterproofing is applied to the shell before tiling. The company also performs remedial waterproofing for leaking pools, addressing cracks and failed joints before recoating.",
+  },
+];
+
+// ─── MAINTENANCE ──────────────────────────────────────────────────────────────
+export const maintenanceFAQs = [
+  {
+    q: "What maintenance services does Al Hadeeqa offer?",
+    a: "Al Hadeeqa Contracting offers planned and reactive property maintenance for villas and commercial properties in Dubai including interior and exterior painting, tile repairs, plumbing and electrical fixture replacement, waterproofing repairs, pergola and carport maintenance, door and window adjustments, and general handyman work.",
+  },
+  {
+    q: "Does Al Hadeeqa offer annual maintenance contracts?",
+    a: "Yes, Al Hadeeqa Contracting offers annual maintenance contracts for Dubai villas and commercial properties. Annual contracts typically include scheduled inspections, preventive maintenance visits, and priority response for reactive repairs. Contact the team via WhatsApp at +971 54 441 9854 to discuss scope and pricing for your property.",
+  },
+  {
+    q: "How quickly does Al Hadeeqa respond to maintenance requests?",
+    a: "Al Hadeeqa Contracting responds to maintenance enquiries within 2 hours via WhatsApp during business hours, seven days a week. Emergency reactive maintenance can typically be attended within 24–48 hours in Dubai. Annual contract clients receive priority scheduling.",
+  },
+  {
+    q: "Does Al Hadeeqa handle painting for villas in Dubai?",
+    a: "Yes, Al Hadeeqa Contracting provides interior and exterior painting services for villas and commercial properties in Dubai. This includes surface preparation, priming, and application of quality paints suited to Dubai's climate. Exterior paints are UV-resistant and heat-reflective where appropriate.",
+  },
+  {
+    q: "Can Al Hadeeqa maintain the pergola or carport they built?",
+    a: "Yes, Al Hadeeqa Contracting provides ongoing maintenance for all pergolas and carports built by the company. Maintenance includes cleaning, recoating powder-coated surfaces, lubricating moving parts on motorised louvre systems, and inspecting structural fixings. Clients can request maintenance visits or include them in an annual contract.",
+  },
+];
+
+// ─── CONSTRUCTION & REMODELING ────────────────────────────────────────────────
+export const constructionFAQs = [
+  {
+    q: "What construction services does Al Hadeeqa provide?",
+    a: "Al Hadeeqa Contracting provides full-scope residential and commercial construction in Dubai including villa construction and extensions, structural works, interior fit-out, bathroom and kitchen remodeling, commercial interior fitout, partition works, flooring, painting, and complete property renovations. The company has been delivering construction projects in Dubai since 2009.",
+  },
+  {
+    q: "How much does a villa extension cost in Dubai?",
+    a: "Villa extension costs in Dubai vary significantly depending on size, structural complexity, and finish level. A ground-floor room addition typically costs AED 80,000–200,000. A full additional floor can cost AED 300,000–600,000+. Al Hadeeqa Contracting provides free site assessments and detailed cost estimates for all extension and renovation projects.",
+  },
+  {
+    q: "Does Al Hadeeqa handle interior fit-out?",
+    a: "Yes, Al Hadeeqa Contracting delivers interior fit-out for villas, apartments, and commercial spaces in Dubai. Fit-out scope includes partition walls, flooring, ceilings, joinery, MEP coordination, tiling, painting, and final finishes. The company manages the complete fit-out from design coordination through to handover.",
+  },
+  {
+    q: "How long does a villa renovation take in Dubai?",
+    a: "Villa renovation timelines in Dubai depend on scope. A single bathroom renovation takes 2–4 weeks. A full kitchen remodel takes 3–6 weeks. A whole-villa fit-out typically takes 3–6 months. Al Hadeeqa Contracting provides a detailed programme at the start of each project so clients have a clear timeline from day one.",
+  },
+  {
+    q: "Is Al Hadeeqa licensed for construction in Dubai?",
+    a: "Yes, Al Hadeeqa Contracting Co. L.L.C is a Dubai Municipality licensed contractor, registration number 1064775. The company is ISO 9001:2015 certified for quality management, ISO 14001:2015 for environmental management, and OHSAS 18001:2007 for health and safety. All construction works are carried out under the appropriate permits.",
+  },
+];
+
 // ─── ALL FAQs COMBINED ────────────────────────────────────────────────────────
 export const ALL_FAQS = [
   { category: "General & Company", items: generalFAQs },

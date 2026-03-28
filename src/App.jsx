@@ -16,11 +16,22 @@ import {
 import { usePageMeta } from "./hooks/usePageMeta";
 import {
   organizationSchema,
+  websiteSchema,
   breadcrumbSchema,
   pergolaServiceSchema,
   carportServiceSchema,
   dewateringServiceSchema,
   constructionServiceSchema,
+  shoringServiceSchema,
+  excavationServiceSchema,
+  demolitionServiceSchema,
+  glassroomsServiceSchema,
+  waterproofingServiceSchema,
+  maintenanceServiceSchema,
+  emergencyPodSchema,
+  compactShelterSchema,
+  shelterSchema,
+  vaultProductSchema,
   faqSchema,
   serviceSchema,
 } from "./data/schemas";
@@ -29,6 +40,14 @@ import {
   carportFAQs,
   dewateringFAQs,
   generalFAQs,
+  shoringFAQs,
+  excavationFAQs,
+  demolitionFAQs,
+  glassroomFAQs,
+  waterproofingFAQs,
+  maintenanceFAQs,
+  constructionFAQs,
+  bunkerFAQs,
 } from "./data/faqs";
 import FAQPage from "./pages/FAQPage";
 
@@ -59,9 +78,9 @@ const IgIcon = () => (
 );
 
 const STATS = [
-  { val: "35+", label: "Years in UAE" },
-  { val: "500+", label: "Projects Completed" },
-  { val: "10yr", label: "Warranty on Select Works" },
+  { val: "35+", label: "Years in UAE", href: "/about" },
+  { val: "500+", label: "Projects Completed", href: "/projects" },
+  { val: "10yr", label: "Warranty on Select Works", href: "/about" },
 ];
 
 const JAN_BRANDS = [
@@ -204,11 +223,23 @@ function resolveRoute(pathname) {
     return { type: "contact", pathname: normalizedPath };
   }
 
-  if (normalizedPath === "/bunker") {
+  if (normalizedPath === "/bunker" || normalizedPath === "/bunkers") {
     return { type: "bunker", pathname: normalizedPath };
   }
 
-  if (normalizedPath === "/vault") {
+  if (normalizedPath === "/bunkers/emergency-pod") {
+    return { type: "bunker-emergency-pod", pathname: normalizedPath };
+  }
+
+  if (normalizedPath === "/bunkers/compact-shelter") {
+    return { type: "bunker-compact-shelter", pathname: normalizedPath };
+  }
+
+  if (normalizedPath === "/bunkers/shelter") {
+    return { type: "bunker-shelter", pathname: normalizedPath };
+  }
+
+  if (normalizedPath === "/vault" || normalizedPath === "/the-vault") {
     return { type: "vault", pathname: normalizedPath };
   }
 
@@ -336,12 +367,12 @@ function Nav({ onContact, route }) {
     { label: "Services", href: "/services" },
     { label: "About", href: "/about" },
     { label: "Projects", href: "/projects" },
-    { label: "Bunkers", href: "/bunker" },
-    { label: "The Vault", href: "/vault", vault: true },
+    { label: "Bunkers", href: "/bunkers" },
+    { label: "The Vault", href: "/the-vault", vault: true },
     { label: "Contact", href: "/contact" },
   ];
 
-  const VAULT_LINK = { label: "The Vault", href: "/vault", vault: true };
+  const VAULT_LINK = { label: "The Vault", href: "/the-vault", vault: true };
 
   if (route.type === "services") {
     navLinks = [
@@ -349,7 +380,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "#services-list", active: true },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
-      { label: "Bunkers", href: "/bunker" },
+      { label: "Bunkers", href: "/bunkers" },
       VAULT_LINK,
       { label: "Contact", href: "/contact" },
     ];
@@ -359,7 +390,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services", active: true },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
-      { label: "Bunkers", href: "/bunker" },
+      { label: "Bunkers", href: "/bunkers" },
       VAULT_LINK,
       { label: "Contact", href: "/contact" },
     ];
@@ -369,7 +400,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services" },
       { label: "About", href: "/about", active: true },
       { label: "Projects", href: "/projects" },
-      { label: "Bunkers", href: "/bunker" },
+      { label: "Bunkers", href: "/bunkers" },
       VAULT_LINK,
       { label: "Contact", href: "/contact" },
     ];
@@ -379,7 +410,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects", active: true },
-      { label: "Bunkers", href: "/bunker" },
+      { label: "Bunkers", href: "/bunkers" },
       VAULT_LINK,
       { label: "Contact", href: "/contact" },
     ];
@@ -389,7 +420,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
-      { label: "Bunkers", href: "/bunker" },
+      { label: "Bunkers", href: "/bunkers" },
       VAULT_LINK,
       { label: "Contact", href: "/contact", active: true },
     ];
@@ -399,7 +430,7 @@ function Nav({ onContact, route }) {
       { label: "Services", href: "/services" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
-      { label: "Bunkers", href: "/bunker" },
+      { label: "Bunkers", href: "/bunkers" },
       VAULT_LINK,
       { label: "Contact", href: "/contact" },
     ];
@@ -537,10 +568,10 @@ function Hero({ onContact }) {
 
       <div style={styles.heroStats} className="hero-stats">
         {STATS.map((stat) => (
-          <div key={stat.label} style={styles.heroStatItem} className="hero-stat-item">
+          <a key={stat.label} href={stat.href} style={{ ...styles.heroStatItem, textDecoration: "none" }} className="hero-stat-item">
             <div style={styles.heroStatVal}>{stat.val}</div>
             <div style={styles.heroStatLabel}>{stat.label}</div>
-          </div>
+          </a>
         ))}
       </div>
     </section>
@@ -800,7 +831,7 @@ function HomeBunkerPreview() {
           </p>
         </div>
         <div style={styles.homeBunkerActions} className="home-bunker-actions">
-          <a href="/bunker" style={styles.btnPrimaryLink}>Explore Our Solutions</a>
+          <a href="/bunkers" style={styles.btnPrimaryLink}>Explore Our Solutions</a>
           <div style={styles.homeBunkerNote}>Available by consultation only.</div>
         </div>
       </div>
@@ -1031,7 +1062,7 @@ function ServicesPageSection() {
       <div style={styles.bunkerNote}>
         <div>
           <strong>Underground Protection</strong> — Al Hadeeqa builds underground safe rooms for UAE villas. Three tiers from AED 100,000.{" "}
-          <a href="/bunker" style={styles.bunkerLink}>Learn more →</a>
+          <a href="/bunkers" style={styles.bunkerLink}>Learn more →</a>
         </div>
       </div>
     </section>
@@ -1042,6 +1073,13 @@ const SERVICE_FAQS = {
   pergolas: pergolaFAQs,
   carports: carportFAQs,
   dewatering: dewateringFAQs,
+  construction: constructionFAQs,
+  shoring: shoringFAQs,
+  excavation: excavationFAQs,
+  demolition: demolitionFAQs,
+  glassrooms: glassroomFAQs,
+  waterproofing: waterproofingFAQs,
+  maintenance: maintenanceFAQs,
 };
 
 const SERVICE_SCHEMAS = {
@@ -1049,7 +1087,33 @@ const SERVICE_SCHEMAS = {
   carports: carportServiceSchema,
   dewatering: dewateringServiceSchema,
   construction: constructionServiceSchema,
+  shoring: shoringServiceSchema,
+  excavation: excavationServiceSchema,
+  demolition: demolitionServiceSchema,
+  glassrooms: glassroomsServiceSchema,
+  waterproofing: waterproofingServiceSchema,
+  maintenance: maintenanceServiceSchema,
+  construction: constructionServiceSchema,
 };
+
+function ServiceFAQItem({ faq }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ borderBottom: "1px solid rgba(20,31,22,0.08)", overflow: "hidden" }}>
+      <div
+        style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", padding: "18px 0", cursor: "pointer", gap: 16 }}
+        onClick={() => setOpen((v) => !v)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === "Enter" && setOpen((v) => !v)}
+      >
+        <div style={{ fontSize: 15, fontWeight: 600, color: "#141f16", lineHeight: 1.5, flex: 1 }}>{faq.q}</div>
+        <div style={{ fontSize: 18, color: "#5aad6e", fontWeight: 300, flexShrink: 0, lineHeight: 1, marginTop: 2 }}>{open ? "−" : "+"}</div>
+      </div>
+      {open && <div style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.85, paddingBottom: 18 }}>{faq.a}</div>}
+    </div>
+  );
+}
 
 function ServiceLandingPage({ service, onContact }) {
   const BASE_URL = "https://alhadeeqacontracting.com";
@@ -1166,6 +1230,23 @@ function ServiceLandingPage({ service, onContact }) {
         </div>
       </section>
 
+      {serviceFAQs.length > 0 && (
+        <section style={{ ...styles.section, paddingTop: 0 }} className="section-main">
+          <div style={{ maxWidth: 760 }}>
+            <div style={styles.sectionEyebrow}>Common Questions</div>
+            <div style={{ ...styles.greenRule, marginLeft: 0, margin: "12px 0 24px" }} />
+            <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(24px, 3vw, 36px)", marginBottom: 32 }}>
+              Frequently asked about {service.title.toLowerCase()}.
+            </h2>
+            <div>
+              {serviceFAQs.map((faq) => (
+                <ServiceFAQItem key={faq.q} faq={faq} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {relatedServices.length > 0 && (
         <section style={{ ...styles.section, paddingTop: 0 }} className="section-main">
           <div style={styles.sectionHeader}>
@@ -1219,6 +1300,195 @@ function StaticPageRedirect({ to }) {
         <h1 style={styles.sectionH2}>Opening page…</h1>
       </div>
     </section>
+  );
+}
+
+const BASE_URL_BUNKER = "https://alhadeeqacontracting.com";
+
+const BUNKER_SPECS = {
+  "emergency-pod": {
+    title: "Emergency Pod",
+    price: "AED 100,000",
+    answer: "Al Hadeeqa's Emergency Pod is a precast reinforced concrete underground shelter for 2–4 people, starting from AED 100,000. Manufactured at our Ajman facility in 5–7 days and installed on your Dubai property by crane in 1–2 days. Includes a steel hatch, ventilation, water storage, and a chemical toilet.",
+    specs: [
+      { label: "Internal Area", value: "7–8 sqm" },
+      { label: "Capacity", value: "2–4 people" },
+      { label: "Construction", value: "Precast reinforced concrete" },
+      { label: "Wall Thickness", value: "220mm" },
+      { label: "Depth", value: "2.5–3.0m below grade" },
+      { label: "Manufacturing", value: "5–7 days" },
+      { label: "Installation", value: "1–2 days" },
+      { label: "Autonomy", value: "12–24 hours" },
+    ],
+    included: ["Steel entry hatch", "Manual ventilation system", "50L water storage tank", "Chemical toilet", "Emergency supply space", "LED lighting"],
+    faqs: bunkerFAQs.slice(0, 7),
+    schema: emergencyPodSchema,
+    url: `${BASE_URL_BUNKER}/bunkers/emergency-pod`,
+  },
+  "compact-shelter": {
+    title: "Compact Shelter",
+    price: "AED 200,000",
+    answer: "Al Hadeeqa's Compact Shelter is a precast reinforced concrete underground shelter for 6–8 people, starting from AED 200,000. Two interlocking halves manufactured at our Ajman facility in 7–10 days, installed in 2–3 days. Includes HEPA filtration, 24-hour battery power, hardwired intercom, and a 200L water tank.",
+    specs: [
+      { label: "Internal Area", value: "15–20 sqm" },
+      { label: "Capacity", value: "6–8 people" },
+      { label: "Construction", value: "Precast reinforced concrete (2 halves)" },
+      { label: "Wall Thickness", value: "250mm" },
+      { label: "Depth", value: "3.0–3.5m below grade" },
+      { label: "Manufacturing", value: "7–10 days" },
+      { label: "Installation", value: "2–3 days" },
+      { label: "Autonomy", value: "1–3 days" },
+    ],
+    included: ["HEPA air filtration system", "24-hour battery power backup", "Hardwired intercom", "200L water tank", "Steel entry hatch", "LED lighting", "Emergency supply space"],
+    faqs: bunkerFAQs.slice(0, 8),
+    schema: compactShelterSchema,
+    url: `${BASE_URL_BUNKER}/bunkers/compact-shelter`,
+  },
+  shelter: {
+    title: "Shelter",
+    price: "From AED 500,000",
+    answer: "Al Hadeeqa's Shelter is a poured-in-place reinforced concrete underground shelter for 8–15 people, from AED 500,000. Built on-site in 4–6 weeks. 25–35 sqm of internal space, 300–400mm concrete walls, certified blast door, full bathroom, HEPA filtration, and 48-hour battery system. Custom sizes at AED 15,200/sqm.",
+    specs: [
+      { label: "Internal Area", value: "25–35 sqm (7m × 4m)" },
+      { label: "Capacity", value: "8–15 people" },
+      { label: "Construction", value: "Poured-in-place reinforced concrete" },
+      { label: "Wall Thickness", value: "300–400mm" },
+      { label: "Depth", value: "3.0–4.0m below grade" },
+      { label: "Construction Time", value: "4–6 weeks on-site" },
+      { label: "Autonomy", value: "1–3 days (extendable)" },
+      { label: "Custom Pricing", value: "AED 15,200 per sqm" },
+    ],
+    included: ["Certified blast door", "HEPA filtration", "Full bathroom", "500L water tank", "48-hour battery system", "LED lighting", "Communication system"],
+    faqs: bunkerFAQs,
+    schema: shelterSchema,
+    url: `${BASE_URL_BUNKER}/bunkers/shelter`,
+  },
+};
+
+function BunkerTierPage({ tierId }) {
+  const tier = BUNKER_SPECS[tierId];
+  const BASE_URL = "https://alhadeeqacontracting.com";
+
+  usePageMeta({
+    title: `${tier.title} — Underground Shelter Dubai | Al Hadeeqa Contracting`,
+    description: tier.answer.slice(0, 155),
+    canonical: tier.url,
+    schemas: [
+      tier.schema,
+      faqSchema(tier.faqs),
+      breadcrumbSchema([
+        { name: "Home", url: BASE_URL },
+        { name: "Underground Shelters", url: `${BASE_URL}/bunkers` },
+        { name: tier.title, url: tier.url },
+      ]),
+    ],
+  });
+
+  const S = {
+    page: { fontFamily: "'DM Sans', sans-serif", color: "#141f16" },
+    hero: { padding: "160px 64px 60px", background: "#0a0f0b", borderBottom: "1px solid rgba(255,255,255,0.06)" },
+    heroInner: { maxWidth: 820, margin: "0 auto" },
+    eyebrow: { fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 700, marginBottom: 14 },
+    h1: { fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 700, color: "#fff", lineHeight: 1.1, marginBottom: 8 },
+    price: { fontSize: 22, color: "#5aad6e", fontWeight: 700, marginBottom: 20 },
+    answer: { fontSize: 16, color: "rgba(255,255,255,0.65)", lineHeight: 1.85, maxWidth: 680, marginBottom: 32 },
+    ctaBtn: { display: "inline-flex", alignItems: "center", gap: 10, background: "#25d366", color: "#fff", textDecoration: "none", padding: "14px 28px", fontSize: 14, fontWeight: 700, letterSpacing: "0.06em" },
+    content: { maxWidth: 820, margin: "0 auto", padding: "56px 64px" },
+    sectionTitle: { fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 700, color: "#141f16", marginBottom: 24, paddingBottom: 10, borderBottom: "2px solid #5aad6e" },
+    specsGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "rgba(20,31,22,0.08)", marginBottom: 48, border: "1px solid rgba(20,31,22,0.08)" },
+    specCell: { background: "#fff", padding: "14px 18px" },
+    specLabel: { fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 700, marginBottom: 4 },
+    specValue: { fontSize: 15, fontWeight: 600, color: "#141f16" },
+    list: { listStyle: "none", padding: 0, margin: "0 0 48px" },
+    listItem: { display: "flex", alignItems: "flex-start", gap: 10, padding: "10px 0", borderBottom: "1px solid rgba(20,31,22,0.06)", fontSize: 15, color: "#3d5c42" },
+    check: { color: "#5aad6e", fontWeight: 700, flexShrink: 0 },
+    faqItem: { borderBottom: "1px solid rgba(20,31,22,0.08)" },
+    faqQ: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", padding: "18px 0", cursor: "pointer", gap: 16 },
+    faqQText: { fontSize: 15, fontWeight: 600, color: "#141f16", lineHeight: 1.5, flex: 1 },
+    faqToggle: { fontSize: 18, color: "#5aad6e", fontWeight: 300, flexShrink: 0, lineHeight: 1 },
+    faqA: { fontSize: 14, color: "#6b876f", lineHeight: 1.85, paddingBottom: 18 },
+    ctaBlock: { background: "#0a0f0b", padding: "48px", textAlign: "center", marginTop: 48 },
+    ctaTitle: { fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, color: "#fff", marginBottom: 12 },
+    ctaText: { fontSize: 15, color: "rgba(255,255,255,0.55)", lineHeight: 1.75, marginBottom: 24 },
+    backLink: { display: "inline-block", fontSize: 13, color: "#5aad6e", textDecoration: "none", marginBottom: 32, letterSpacing: "0.04em" },
+  };
+
+  return (
+    <div style={S.page}>
+      <section style={S.hero}>
+        <div style={S.heroInner}>
+          <a href="/bunkers" style={{ ...S.eyebrow, display: "inline-block", marginBottom: 20, textDecoration: "none" }}>← Underground Shelters</a>
+          <div style={S.eyebrow}>Al Hadeeqa Contracting</div>
+          <h1 style={S.h1}>{tier.title}</h1>
+          <div style={S.price}>{tier.price}</div>
+          <p style={S.answer}>{tier.answer}</p>
+          <a
+            href={`https://wa.me/971544419854?text=${encodeURIComponent(`Hi Al Hadeeqa, I'm interested in the ${tier.title} underground shelter. Please provide more details.`)}`}
+            target="_blank"
+            rel="noreferrer"
+            style={S.ctaBtn}
+          >
+            <WaIcon /> Request Free Site Assessment
+          </a>
+        </div>
+      </section>
+
+      <div style={S.content}>
+        <h2 style={S.sectionTitle}>Specifications</h2>
+        <div style={S.specsGrid}>
+          {tier.specs.map((spec) => (
+            <div key={spec.label} style={S.specCell}>
+              <div style={S.specLabel}>{spec.label}</div>
+              <div style={S.specValue}>{spec.value}</div>
+            </div>
+          ))}
+        </div>
+
+        <h2 style={S.sectionTitle}>What's Included</h2>
+        <ul style={S.list}>
+          {tier.included.map((item) => (
+            <li key={item} style={S.listItem}>
+              <span style={S.check}>✓</span> {item}
+            </li>
+          ))}
+        </ul>
+
+        <h2 style={S.sectionTitle}>Frequently Asked Questions</h2>
+        <div style={{ marginBottom: 48 }}>
+          {tier.faqs.map((faq) => (
+            <BunkerFAQItem key={faq.q} faq={faq} S={S} />
+          ))}
+        </div>
+
+        <div style={S.ctaBlock}>
+          <div style={S.ctaTitle}>Book a Free Site Assessment</div>
+          <div style={S.ctaText}>
+            Al Hadeeqa Contracting visits your Dubai property, assesses groundwater conditions, access, and available space, and provides a detailed quotation. No obligation.
+          </div>
+          <a
+            href={`https://wa.me/971544419854?text=${encodeURIComponent(`Hi Al Hadeeqa, I'd like a free site assessment for the ${tier.title} underground shelter.`)}`}
+            target="_blank"
+            rel="noreferrer"
+            style={S.ctaBtn}
+          >
+            <WaIcon /> WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BunkerFAQItem({ faq, S }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={S.faqItem}>
+      <div style={S.faqQ} onClick={() => setOpen((v) => !v)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setOpen((v) => !v)}>
+        <div style={S.faqQText}>{faq.q}</div>
+        <div style={S.faqToggle}>{open ? "−" : "+"}</div>
+      </div>
+      {open && <div style={S.faqA}>{faq.a}</div>}
+    </div>
   );
 }
 
@@ -1588,9 +1858,9 @@ function Footer() {
             <a href="/about" style={styles.footerLink}>About</a>
             <a href="/projects" style={styles.footerLink}>Projects</a>
             <a href="/contact" style={styles.footerLink}>Contact</a>
-            <a href="/bunker" style={styles.footerLink}>Underground Shelters</a>
+            <a href="/bunkers" style={styles.footerLink}>Underground Shelters</a>
             <a href="/faq" style={styles.footerLink}>FAQs</a>
-            <a href="/vault" style={{ ...styles.footerLink, color: "#c9a54e" }}>The Vault ↗</a>
+            <a href="/the-vault" style={{ ...styles.footerLink, color: "#c9a54e" }}>The Vault ↗</a>
           </div>
         </div>
       </div>
@@ -1670,12 +1940,21 @@ function HomePage({ onContact }) {
     canonical: "https://alhadeeqacontracting.com/",
     schemas: [
       organizationSchema,
+      websiteSchema,
       breadcrumbSchema([{ name: "Al Hadeeqa Contracting", url: "https://alhadeeqacontracting.com" }]),
     ],
   });
   return (
     <>
       <Hero onContact={onContact} />
+      <section style={{ background: "#f4f8f5", borderBottom: "1px solid rgba(26,74,38,0.08)", padding: "40px 64px" }}>
+        <div style={{ maxWidth: 820, margin: "0 auto" }}>
+          <div style={{ fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 700, marginBottom: 10 }}>About Al Hadeeqa Contracting</div>
+          <p style={{ fontSize: 16, color: "#3d5c42", lineHeight: 1.85, margin: 0 }}>
+            Al Hadeeqa Contracting is a Dubai-based construction company specialising in luxury pergolas, carports, dewatering, excavation, demolition, waterproofing, underground shelters, boundary walls, steel structures, swimming pools, landscaping, and general contracting. Established in 2009 by Engr. Muhammad Ashraf Jan, we are ISO 9001, ISO 14001, and OHSAS 18001 certified with 50+ crew members and 500+ completed projects. We serve Dubai only.
+          </p>
+        </div>
+      </section>
       <HomeServicesPreview />
       <HomeBunkerPreview />
       <HomeAboutPreview />
@@ -1827,6 +2106,12 @@ export default function App() {
     page = <ContactPage />;
   } else if (route.type === "bunker") {
     page = <StaticPageRedirect to="/bunker.html" />;
+  } else if (route.type === "bunker-emergency-pod") {
+    page = <BunkerTierPage tierId="emergency-pod" />;
+  } else if (route.type === "bunker-compact-shelter") {
+    page = <BunkerTierPage tierId="compact-shelter" />;
+  } else if (route.type === "bunker-shelter") {
+    page = <BunkerTierPage tierId="shelter" />;
   } else if (route.type === "vault") {
     page = <StaticPageRedirect to="/vault.html" />;
   } else if (route.type === "faq") {
