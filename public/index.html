@@ -15,6 +15,9 @@
   <link rel="icon" type="image/jpeg" href="/logo.jpeg"/>
   <link rel="apple-touch-icon" href="/logo.jpeg"/>
 
+  <!-- AI crawler discovery -->
+  <link rel="llms-txt" href="https://alhadeeqacontracting.com/llms.txt"/>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -24,6 +27,7 @@
   {
     "@context": "https://schema.org",
     "@type": ["Organization", "HomeAndConstructionBusiness"],
+    "additionalType": "https://schema.org/GeneralContractor",
     "@id": "https://alhadeeqacontracting.com/#organization",
     "name": "Al Hadeeqa Contracting Co. L.L.C",
     "legalName": "Al Hadeeqa Contracting Co. L.L.C",
@@ -62,7 +66,16 @@
       { "@type": "EducationalOccupationalCredential", "credentialCategory": "ISO 9001:2015 Quality Management" },
       { "@type": "EducationalOccupationalCredential", "credentialCategory": "ISO 14001:2015 Environmental Management" },
       { "@type": "EducationalOccupationalCredential", "credentialCategory": "OHSAS 18001:2007 Health & Safety" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "ASCB(E) Accredited" }
+      { "@type": "EducationalOccupationalCredential", "credentialCategory": "ASCB(E) Accredited" },
+      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Dubai Economy (DED) License" }
+    ],
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      }
     ],
     "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 50 },
     "sameAs": ["https://www.instagram.com/alhadeeqallc/"],

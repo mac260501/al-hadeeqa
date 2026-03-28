@@ -6,6 +6,7 @@ export const ORG_ID = `${BASE_URL}/#organization`;
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": ["Organization", "HomeAndConstructionBusiness"],
+  additionalType: "https://schema.org/GeneralContractor",
   "@id": ORG_ID,
   name: "Al Hadeeqa Contracting Co. L.L.C",
   legalName: "Al Hadeeqa Contracting Co. L.L.C",
@@ -59,6 +60,18 @@ export const organizationSchema = {
     {
       "@type": "EducationalOccupationalCredential",
       credentialCategory: "ASCB(E) Accredited",
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "Dubai Economy (DED) License",
+    },
+  ],
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "08:00",
+      closes: "18:00",
     },
   ],
   numberOfEmployees: {

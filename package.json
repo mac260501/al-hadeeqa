@@ -18,6 +18,11 @@
     "source": "build",
     "skipThirdPartyRequests": true,
     "minifyHtml": false,
+    "include": [
+      "/bunkers/emergency-pod",
+      "/bunkers/compact-shelter",
+      "/bunkers/shelter"
+    ],
     "puppeteerArgs": [
       "--no-sandbox",
       "--disable-setuid-sandbox"

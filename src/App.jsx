@@ -731,7 +731,7 @@ function HomeAboutPreview() {
             <em style={{ color: "var(--green)", fontStyle: "italic" }}>Delivered by one team.</em>
           </h2>
           <p style={styles.aboutDesc}>
-            Al Hadeeqa has spent 35 years building across the UAE — from enabling works and specialist site packages to luxury pergolas, fit-outs, glass, waterproofing, and maintenance.
+            Al Hadeeqa Contracting was established in 2009. Our founder and team bring over 35 years of UAE construction experience — from enabling works and specialist site packages to luxury pergolas, fit-outs, glass, waterproofing, and maintenance.
           </p>
           <p style={styles.aboutDesc}>
             Our in-house crew handles every phase of your project, so nothing gets passed down the chain. One point of contact, one accountable team, from site prep through to final finish.
@@ -909,7 +909,7 @@ function AboutPageHero({ onContact }) {
             A licensed contractor with depth, not just range.
           </h1>
           <p style={styles.pageHeroSub}>
-            35 years in the UAE, a fully licensed in-house crew, and a track record that spans residential villas, commercial fit-outs, and complex enabling works — all under one contractor.
+            Established in 2009, with a founder and team bringing over 35 years of UAE construction experience — a fully licensed in-house crew, and a track record that spans residential villas, commercial fit-outs, and complex enabling works — all under one contractor.
           </p>
           <div style={styles.pageHeroActions} className="page-cta-row">
             <button style={styles.btnPrimary} onClick={() => onContact("General Enquiry")}>
@@ -1310,6 +1310,8 @@ const BUNKER_SPECS = {
   "emergency-pod": {
     title: "Emergency Pod",
     price: "AED 100,000",
+    metaTitle: "Emergency Pod — Precast Underground Shelter | AED 100,000 | Al Hadeeqa Contracting",
+    metaDescription: "Precast underground shelter for 2–4 people. 7–8 sqm, AED 100,000. Manufactured in 5–7 days, installed in 1–2 days by crane. 220mm reinforced concrete walls. Al Hadeeqa Contracting, Dubai.",
     answer: "Al Hadeeqa's Emergency Pod is a precast reinforced concrete underground shelter for 2–4 people, starting from AED 100,000. Manufactured at our Ajman facility in 5–7 days and installed on your Dubai property by crane in 1–2 days. Includes a steel hatch, ventilation, water storage, and a chemical toilet.",
     specs: [
       { label: "Internal Area", value: "7–8 sqm" },
@@ -1329,6 +1331,8 @@ const BUNKER_SPECS = {
   "compact-shelter": {
     title: "Compact Shelter",
     price: "AED 200,000",
+    metaTitle: "Compact Shelter — Precast Underground Shelter | AED 200,000 | Al Hadeeqa Contracting",
+    metaDescription: "Precast underground shelter for 6–8 people. 15–20 sqm, AED 200,000. HEPA filtration, 24hr battery, intercom, 200L water tank. Installed in 2–3 days. Al Hadeeqa Contracting, Dubai.",
     answer: "Al Hadeeqa's Compact Shelter is a precast reinforced concrete underground shelter for 6–8 people, starting from AED 200,000. Two interlocking halves manufactured at our Ajman facility in 7–10 days, installed in 2–3 days. Includes HEPA filtration, 24-hour battery power, hardwired intercom, and a 200L water tank.",
     specs: [
       { label: "Internal Area", value: "15–20 sqm" },
@@ -1348,6 +1352,8 @@ const BUNKER_SPECS = {
   shelter: {
     title: "Shelter",
     price: "From AED 500,000",
+    metaTitle: "Shelter — Poured-in-Place Underground Shelter | From AED 500,000 | Al Hadeeqa Contracting",
+    metaDescription: "Poured-in-place underground shelter for 8–15 people. 25–35 sqm, from AED 500,000. Blast door, HEPA filtration, full bathroom, 500L water, 48hr battery. Custom sizes at AED 15,200/sqm. Dubai.",
     answer: "Al Hadeeqa's Shelter is a poured-in-place reinforced concrete underground shelter for 8–15 people, from AED 500,000. Built on-site in 4–6 weeks. 25–35 sqm of internal space, 300–400mm concrete walls, certified blast door, full bathroom, HEPA filtration, and 48-hour battery system. Custom sizes at AED 15,200/sqm.",
     specs: [
       { label: "Internal Area", value: "25–35 sqm (7m × 4m)" },
@@ -1371,8 +1377,8 @@ function BunkerTierPage({ tierId }) {
   const BASE_URL = "https://alhadeeqacontracting.com";
 
   const meta = usePageMeta({
-    title: `${tier.title} — Underground Shelter Dubai | Al Hadeeqa Contracting`,
-    description: tier.answer.slice(0, 155),
+    title: tier.metaTitle || `${tier.title} — Underground Shelter Dubai | Al Hadeeqa Contracting`,
+    description: tier.metaDescription || tier.answer.slice(0, 155),
     canonical: tier.url,
     schemas: [
       tier.schema,
@@ -1475,6 +1481,25 @@ function BunkerTierPage({ tierId }) {
           >
             <WaIcon /> WhatsApp Us
           </a>
+        </div>
+
+        <div style={{ marginTop: 56 }}>
+          <h2 style={S.sectionTitle}>Related Services</h2>
+          <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.75, marginBottom: 24 }}>
+            Underground shelter installation is coordinated with these enabling works — often scoped together on the same project.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
+            {[
+              { href: "/services/excavation", label: "Excavation", desc: "Site preparation and basement digs for shelter installation." },
+              { href: "/services/dewatering", label: "Dewatering", desc: "Groundwater control to enable safe below-grade construction." },
+              { href: "/services/waterproofing", label: "Waterproofing", desc: "Below-slab and perimeter waterproofing systems for underground structures." },
+            ].map((link) => (
+              <a key={link.href} href={link.href} style={{ textDecoration: "none", display: "block", background: "#f4f8f5", padding: "18px 20px", border: "1px solid rgba(20,31,22,0.08)" }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: "#5aad6e", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 6 }}>{link.label} →</div>
+                <div style={{ fontSize: 13, color: "#3d5c42", lineHeight: 1.6 }}>{link.desc}</div>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -1596,7 +1621,7 @@ function About() {
             <em style={{ color: "var(--green)", fontStyle: "italic" }}>Delivered by people who stay.</em>
           </h2>
           <p style={styles.aboutDesc}>
-            Al Hadeeqa Contracting, Dewatering, Aluminum & Glass LLC has been building across the UAE for 35 years. We are a fully licensed contractor serving Dubai with a team that has seen and solved every site condition the city can throw at a project.
+            Al Hadeeqa Contracting was established in 2009 by Engr. Muhammad Ashraf Jan. Our founder and team bring over 35 years of UAE construction experience — across residential villas, commercial fit-outs, and specialist enabling works. We are a fully licensed contractor serving Dubai with a team that has seen and solved every site condition the city can throw at a project.
           </p>
           <p style={styles.aboutDesc}>
             We do not subcontract your project to strangers. Our in-house crew handles groundwork, structure, glass, aluminum, finishes, and maintenance. One point of contact. One accountable team.
@@ -1737,7 +1762,7 @@ function Contact({ pageOffset = false }) {
             </a>
             <div style={styles.contactItem}>
               <span style={styles.contactItemLabel}>Office</span>
-              <span>Downtown Dubai, UAE · Always Open</span>
+              <span>Office 404, PTC Building, Al Qusais Industrial First, Dubai, UAE</span>
             </div>
           </div>
         </div>
@@ -1821,7 +1846,7 @@ function Footer() {
             <a href={CONTACT_WHATSAPP_URL} target="_blank" rel="noreferrer" style={styles.footerLink}>{CONTACT_PHONE_DISPLAY}</a>
             <a href={CONTACT_TEL_URL} style={styles.footerLink}>{CONTACT_PHONE_DISPLAY}</a>
             <a href="mailto:alhadeeqallc@gmail.com" style={styles.footerLink}>alhadeeqallc@gmail.com</a>
-            <div style={{ ...styles.footerLink, cursor: "default" }}>Downtown Dubai, UAE 23435</div>
+            <div style={{ ...styles.footerLink, cursor: "default" }}>Office 404, PTC Building, Al Qusais Industrial First, Dubai, UAE</div>
             <div style={styles.footerSocialRow}>
               <a
                 href="https://www.facebook.com/p/Al-Hadeeqa-Contracting-100088397351845/"
@@ -1993,6 +2018,63 @@ function ServicesPage({ onContact }) {
   );
 }
 
+function WarrantySection() {
+  return (
+    <section style={{ ...styles.section, background: "#f4f8f5" }} className="section-main">
+      <div style={{ maxWidth: 820, margin: "0 auto" }}>
+        <div style={styles.sectionEyebrow}>Our Guarantee</div>
+        <div style={{ ...styles.greenRule, marginLeft: 0, margin: "12px 0 24px" }} />
+        <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(24px, 3vw, 36px)", marginBottom: 24 }}>
+          10-Year Warranty — What It Covers
+        </h2>
+        <p style={{ ...styles.aboutDesc, marginBottom: 16 }}>
+          Al Hadeeqa Contracting offers a 10-year structural warranty on carports, pergolas, and shading structures manufactured and installed by our in-house team. The warranty covers structural failure, weld integrity, and powder-coat delamination attributable to manufacturing or installation defect.
+        </p>
+        <p style={{ ...styles.aboutDesc, marginBottom: 16 }}>
+          Waterproofing systems installed by Al Hadeeqa carry a 10-year material and workmanship warranty, subject to the membrane manufacturer's own product guarantee (typically Sika, Fosroc, or equivalent). This applies to flat roof and terrace waterproofing where the substrate was prepared to our specification.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginTop: 24, marginBottom: 16 }}>
+          <div style={{ background: "#fff", padding: "20px 24px", borderLeft: "3px solid #5aad6e" }}>
+            <div style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 700, marginBottom: 10 }}>Covered</div>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {[
+                "Structural frame defects (carports, pergolas)",
+                "Weld and connection failures",
+                "Powder-coat delamination from defect",
+                "Waterproofing membrane failure (substrate conditions met)",
+                "Installation defects identified within warranty period",
+              ].map((item) => (
+                <li key={item} style={{ fontSize: 14, color: "#3d5c42", padding: "6px 0", borderBottom: "1px solid rgba(20,31,22,0.06)", display: "flex", gap: 8 }}>
+                  <span style={{ color: "#5aad6e", fontWeight: 700, flexShrink: 0 }}>✓</span> {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div style={{ background: "#fff", padding: "20px 24px", borderLeft: "3px solid rgba(20,31,22,0.2)" }}>
+            <div style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(20,31,22,0.4)", fontWeight: 700, marginBottom: 10 }}>Exclusions</div>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {[
+                "Damage from external impact or modification",
+                "Normal surface wear and UV fading over time",
+                "Substrate movement or settlement not caused by our works",
+                "Works not installed by Al Hadeeqa's in-house team",
+                "Maintenance-dependent items where scheduled care was not followed",
+              ].map((item) => (
+                <li key={item} style={{ fontSize: 14, color: "#6b876f", padding: "6px 0", borderBottom: "1px solid rgba(20,31,22,0.06)", display: "flex", gap: 8 }}>
+                  <span style={{ color: "rgba(20,31,22,0.3)", fontWeight: 700, flexShrink: 0 }}>—</span> {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <p style={{ fontSize: 13, color: "rgba(20,31,22,0.45)", lineHeight: 1.7, marginTop: 16 }}>
+          Warranty terms are confirmed in writing at contract signature. Claims must be submitted within the warranty period with photographic evidence. Al Hadeeqa Contracting will inspect the site within 5 working days of a valid claim and carry out remedial works at no cost where the defect falls within scope.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function AboutPage({ onContact }) {
   const meta = usePageMeta({
     title: "About Al Hadeeqa Contracting | Dubai Construction Company Since 2009 | ISO Certified",
@@ -2012,6 +2094,7 @@ function AboutPage({ onContact }) {
       {meta}
       <AboutPageHero onContact={onContact} />
       <About />
+      <WarrantySection />
       <Contact />
     </>
   );
@@ -2097,6 +2180,21 @@ export default function App() {
 
     if (route.type === "bunker") {
       document.title = "Underground Shelters Dubai | Al Hadeeqa Contracting";
+      return;
+    }
+
+    if (route.type === "bunker-emergency-pod") {
+      document.title = "Emergency Pod — Precast Underground Shelter | AED 100,000 | Al Hadeeqa Contracting";
+      return;
+    }
+
+    if (route.type === "bunker-compact-shelter") {
+      document.title = "Compact Shelter — Precast Underground Shelter | AED 200,000 | Al Hadeeqa Contracting";
+      return;
+    }
+
+    if (route.type === "bunker-shelter") {
+      document.title = "Shelter — Poured-in-Place Underground Shelter | From AED 500,000 | Al Hadeeqa Contracting";
       return;
     }
 
