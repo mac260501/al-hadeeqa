@@ -2210,12 +2210,12 @@ function BunkerPage({ onContact }) {
       {/* ── HERO ── */}
       <section style={bStyles.hero} className="bunker-hero">
         {/* Background image */}
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "url('/assets/images/bunker-full.png')", backgroundSize: "cover", backgroundPosition: "center 40%" }} />
+        <div style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundImage: "url('/assets/images/bunker-full.png')", backgroundSize: "cover", backgroundPosition: "center 40%" }} />
         {/* Subtle light overlay */}
         <div style={{
           display: "block",
           position: "absolute",
-          inset: 0,
+          top: 0, right: 0, bottom: 0, left: 0,
           background: "linear-gradient(105deg, rgba(244,248,245,0.30) 0%, rgba(244,248,245,0.10) 50%, rgba(244,248,245,0.0) 100%)",
         }} />
         {/* 4px green left edge line */}
@@ -2959,7 +2959,7 @@ const bStyles = {
   },
   videoBg: {
     position: "absolute",
-    inset: 0,
+    top: 0, right: 0, bottom: 0, left: 0,
     width: "100%",
     height: "100%",
     objectFit: "cover",
@@ -2967,7 +2967,7 @@ const bStyles = {
   },
   videoOverlay: {
     position: "absolute",
-    inset: 0,
+    top: 0, right: 0, bottom: 0, left: 0,
     /* Left + right edge fade hides compression artefacts; bottom-heavy gradient provides text contrast */
     background: [
       "linear-gradient(to right,  rgba(6,10,7,0.82) 0%, rgba(6,10,7,0.05) 30%, rgba(6,10,7,0.05) 70%, rgba(6,10,7,0.82) 100%)",
@@ -3199,7 +3199,7 @@ const bStyles = {
   },
   whatImgOverlay: {
     position: "absolute",
-    inset: 0,
+    top: 0, right: 0, bottom: 0, left: 0,
     background: "linear-gradient(to top, rgba(4,12,6,0.82) 0%, transparent 50%)",
   },
   whatImgCaption: {
@@ -3300,7 +3300,7 @@ const bStyles = {
   },
   ctaBg: {
     position: "absolute",
-    inset: 0,
+    top: 0, right: 0, bottom: 0, left: 0,
     backgroundImage: "url('/assets/images/1774299363277.png')",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -3513,14 +3513,14 @@ const styles = {
   },
   heroBg: {
     position: "absolute",
-    inset: 0,
+    top: 0, right: 0, bottom: 0, left: 0,
     backgroundSize: "cover",
     backgroundPosition: "center 40%",
     backgroundRepeat: "no-repeat",
   },
   heroOverlay: {
     position: "absolute",
-    inset: 0,
+    top: 0, right: 0, bottom: 0, left: 0,
     background: "linear-gradient(105deg, rgba(244,248,245,0.22) 0%, rgba(244,248,245,0.06) 50%, transparent 100%)",
   },
   heroContent: {
@@ -3674,7 +3674,7 @@ const styles = {
   },
   pageHeroBg: {
     position: "absolute",
-    inset: 0,
+    top: 0, right: 0, bottom: 0, left: 0,
     backgroundSize: "cover",
     backgroundPosition: "center center",
     backgroundRepeat: "no-repeat",
@@ -3682,7 +3682,7 @@ const styles = {
   },
   pageHeroOverlay: {
     position: "absolute",
-    inset: 0,
+    top: 0, right: 0, bottom: 0, left: 0,
     background: "linear-gradient(108deg, rgba(9,18,11,0.74) 0%, rgba(9,18,11,0.58) 42%, rgba(9,18,11,0.44) 100%)",
   },
   pageHeroInner: {
@@ -4062,7 +4062,7 @@ const styles = {
   },
   serviceImgWrap: { height: 200, overflow: "hidden", position: "relative", flexShrink: 0 },
   serviceImg: { width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" },
-  serviceImgOverlay: { position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(26,74,38,0.15), transparent)" },
+  serviceImgOverlay: { position: "absolute", top: 0, right: 0, bottom: 0, left: 0, background: "linear-gradient(to top, rgba(26,74,38,0.15), transparent)" },
   serviceBody: { padding: "24px 24px 28px", flex: 1, display: "flex", flexDirection: "column" },
   serviceSubtitle: { fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: GREEN, marginBottom: 8, fontWeight: 600 },
   serviceTitle: {
@@ -4127,7 +4127,7 @@ const styles = {
   spotlightSection: { background: "#111", position: "relative", padding: "100px 64px", overflow: "hidden" },
   spotlightBg: {
     position: "absolute",
-    inset: 0,
+    top: 0, right: 0, bottom: 0, left: 0,
     background: "radial-gradient(ellipse at 70% 50%, rgba(26,74,38,0.25) 0%, transparent 70%)",
     pointerEvents: "none",
   },
@@ -4155,14 +4155,14 @@ const styles = {
   projectsGrid: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, maxWidth: 1280, margin: "0 auto" },
   projectThumb: { position: "relative", overflow: "hidden", aspectRatio: "4/3", cursor: "pointer" },
   projectImg: { width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease", display: "block" },
-  projectOverlay: { position: "absolute", inset: 0, background: "rgba(26,74,38,0.7)", display: "flex", alignItems: "flex-end", padding: 16, transition: "opacity 0.3s" },
+  projectOverlay: { position: "absolute", top: 0, right: 0, bottom: 0, left: 0, background: "rgba(26,74,38,0.7)", display: "flex", alignItems: "flex-end", padding: 16, transition: "opacity 0.3s" },
   projectLabel: { color: "#fff", fontSize: 15, fontWeight: 500, letterSpacing: "0.04em" },
 
   contactSection: { background: "#0f1f12", position: "relative", overflow: "hidden" },
   contactPageSection: { paddingTop: 104 },
   contactBg: {
     position: "absolute",
-    inset: 0,
+    top: 0, right: 0, bottom: 0, left: 0,
     background: "radial-gradient(ellipse at 30% 50%, rgba(26,74,38,0.3) 0%, transparent 70%)",
     pointerEvents: "none",
   },
@@ -4191,7 +4191,7 @@ const styles = {
 
   modalOverlay: {
     position: "fixed",
-    inset: 0,
+    top: 0, right: 0, bottom: 0, left: 0,
     background: "rgba(0,0,0,0.6)",
     zIndex: 1000,
     display: "flex",
