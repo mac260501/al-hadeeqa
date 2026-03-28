@@ -17,6 +17,7 @@
   "reactSnap": {
     "source": "build",
     "skipThirdPartyRequests": true,
+    "minifyHtml": false,
     "puppeteerArgs": [
       "--no-sandbox",
       "--disable-setuid-sandbox"
