@@ -16,9 +16,7 @@
   },
   "reactSnap": {
     "source": "build",
-    "inlineCss": true,
     "skipThirdPartyRequests": true,
-    "ignorePageErrors": true,
     "puppeteerArgs": [
       "--no-sandbox",
       "--disable-setuid-sandbox"
