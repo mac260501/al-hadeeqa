@@ -1126,7 +1126,7 @@ function ServiceLandingPage({ service, onContact }) {
     serviceUrl,
   });
 
-  usePageMeta({
+  const meta = usePageMeta({
     title: `${service.title} in Dubai | Al Hadeeqa Contracting — ${service.subtitle}`,
     description: `${service.heroDescription} Al Hadeeqa Contracting — established 2009, ISO 9001 certified, 50+ crew, 15+ years experience in Dubai. Free site assessment.`,
     canonical: serviceUrl,
@@ -1147,6 +1147,7 @@ function ServiceLandingPage({ service, onContact }) {
 
   return (
     <>
+      {meta}
       <section style={styles.serviceHero} className="service-detail-hero">
         <div style={styles.serviceHeroInner} className="service-detail-hero-inner">
           <div style={styles.serviceHeroCopy}>
@@ -1369,7 +1370,7 @@ function BunkerTierPage({ tierId }) {
   const tier = BUNKER_SPECS[tierId];
   const BASE_URL = "https://alhadeeqacontracting.com";
 
-  usePageMeta({
+  const meta = usePageMeta({
     title: `${tier.title} — Underground Shelter Dubai | Al Hadeeqa Contracting`,
     description: tier.answer.slice(0, 155),
     canonical: tier.url,
@@ -1415,6 +1416,7 @@ function BunkerTierPage({ tierId }) {
 
   return (
     <div style={S.page}>
+      {meta}
       <section style={S.hero}>
         <div style={S.heroInner}>
           <a href="/bunkers" style={{ ...S.eyebrow, display: "inline-block", marginBottom: 20, textDecoration: "none" }}>← Underground Shelters</a>
@@ -1933,7 +1935,7 @@ function JanGroupSection() {
 }
 
 function HomePage({ onContact }) {
-  usePageMeta({
+  const meta = usePageMeta({
     title: "Al Hadeeqa Contracting — Construction, Pergolas, Carports & Underground Shelters in Dubai",
     description:
       "Al Hadeeqa Contracting: Dubai's trusted construction company since 2009. Pergolas, carports, dewatering, excavation, underground shelters from AED 100,000, and The Vault luxury underground residence. ISO 9001 certified. 50+ crew. Free site assessment.",
@@ -1946,6 +1948,7 @@ function HomePage({ onContact }) {
   });
   return (
     <>
+      {meta}
       <Hero onContact={onContact} />
       <section style={{ background: "#f4f8f5", borderBottom: "1px solid rgba(26,74,38,0.08)", padding: "40px 64px" }}>
         <div style={{ maxWidth: 820, margin: "0 auto" }}>
@@ -1965,7 +1968,7 @@ function HomePage({ onContact }) {
 }
 
 function ServicesPage({ onContact }) {
-  usePageMeta({
+  const meta = usePageMeta({
     title: "Construction Services in Dubai | Al Hadeeqa Contracting — Pergolas, Carports, Dewatering & More",
     description:
       "Al Hadeeqa Contracting offers pergola construction, carports, dewatering, excavation, shoring, demolition, glass rooms, waterproofing, and maintenance in Dubai. ISO certified. 15+ years experience. Free site assessment.",
@@ -1980,6 +1983,7 @@ function ServicesPage({ onContact }) {
   });
   return (
     <>
+      {meta}
       <ServicesPageHero onContact={onContact} />
       <ServicesQuickNav />
       <ServicesPageSection />
@@ -1990,7 +1994,7 @@ function ServicesPage({ onContact }) {
 }
 
 function AboutPage({ onContact }) {
-  usePageMeta({
+  const meta = usePageMeta({
     title: "About Al Hadeeqa Contracting | Dubai Construction Company Since 2009 | ISO Certified",
     description:
       "Al Hadeeqa Contracting Co. L.L.C — founded 2009 by Engr. Muhammad Ashraf Jan. Dubai Municipality licensed, ISO 9001:2015 & 14001:2015 certified. 50+ crew, 500+ projects completed across UAE. Pergolas, carports, dewatering, underground shelters.",
@@ -2005,6 +2009,7 @@ function AboutPage({ onContact }) {
   });
   return (
     <>
+      {meta}
       <AboutPageHero onContact={onContact} />
       <About />
       <Contact />
@@ -2013,8 +2018,22 @@ function AboutPage({ onContact }) {
 }
 
 function ProjectsPage({ onContact }) {
+  const meta = usePageMeta({
+    title: "Projects | Al Hadeeqa Contracting — Dubai Construction Portfolio",
+    description:
+      "Browse Al Hadeeqa Contracting's portfolio of 500+ completed projects across Dubai and the UAE — pergolas, carports, underground shelters, dewatering, and bespoke construction.",
+    canonical: "https://alhadeeqacontracting.com/projects",
+    schemas: [
+      organizationSchema,
+      breadcrumbSchema([
+        { name: "Home", url: "https://alhadeeqacontracting.com" },
+        { name: "Projects", url: "https://alhadeeqacontracting.com/projects" },
+      ]),
+    ],
+  });
   return (
     <>
+      {meta}
       <ProjectsPageHero onContact={onContact} />
       <Projects />
       <Contact />
@@ -2023,8 +2042,22 @@ function ProjectsPage({ onContact }) {
 }
 
 function ContactPage() {
+  const meta = usePageMeta({
+    title: "Contact Al Hadeeqa Contracting | Get a Free Quote in Dubai",
+    description:
+      "Contact Al Hadeeqa Contracting Co. L.L.C for a free site assessment and quote. Call or WhatsApp +971 54 441 9854. Serving Dubai and all UAE emirates.",
+    canonical: "https://alhadeeqacontracting.com/contact",
+    schemas: [
+      organizationSchema,
+      breadcrumbSchema([
+        { name: "Home", url: "https://alhadeeqacontracting.com" },
+        { name: "Contact", url: "https://alhadeeqacontracting.com/contact" },
+      ]),
+    ],
+  });
   return (
     <>
+      {meta}
       <Contact pageOffset />
     </>
   );

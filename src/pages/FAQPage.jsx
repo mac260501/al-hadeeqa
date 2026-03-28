@@ -127,7 +127,7 @@ function FAQItem({ faq }) {
 }
 
 export default function FAQPage() {
-  usePageMeta({
+  const meta = usePageMeta({
     title: "Frequently Asked Questions | Al Hadeeqa Contracting — Dubai Construction, Bunkers & The Vault",
     description:
       "Complete FAQ for Al Hadeeqa Contracting covering pergolas, carports, dewatering, underground bunkers, and The Vault. Pricing, timelines, permits, and specifications answered. Updated March 2026.",
@@ -144,6 +144,7 @@ export default function FAQPage() {
 
   return (
     <div style={S.page}>
+      {meta}
       {/* Hero */}
       <section style={S.hero}>
         <div style={S.heroInner}>

@@ -1,70 +1,38 @@
-import { useEffect } from "react";
-
-function setMetaTag(name, content, attr = "name") {
-  if (!content) return;
-  let el = document.querySelector(`meta[${attr}="${name}"]`);
-  if (!el) {
-    el = document.createElement("meta");
-    el.setAttribute(attr, name);
-    document.head.appendChild(el);
-  }
-  el.setAttribute("content", content);
-}
-
-function setLinkTag(rel, href) {
-  if (!href) return;
-  let el = document.querySelector(`link[rel="${rel}"]`);
-  if (!el) {
-    el = document.createElement("link");
-    el.setAttribute("rel", rel);
-    document.head.appendChild(el);
-  }
-  el.setAttribute("href", href);
-}
-
-function removePageSchemas() {
-  document.querySelectorAll('script[data-page-schema="true"]').forEach((el) => el.remove());
-}
-
-function injectSchemas(schemas) {
-  schemas.forEach((schema) => {
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.setAttribute("data-page-schema", "true");
-    script.textContent = JSON.stringify(schema);
-    document.head.appendChild(script);
-  });
-}
+import { Helmet } from "react-helmet-async";
 
 /**
- * usePageMeta — sets per-page meta tags and JSON-LD schemas.
- * Cleans up schemas on unmount so they don't bleed between pages.
+ * usePageMeta — returns a <Helmet> element with per-page meta tags and JSON-LD schemas.
+ * Render the returned element at the top of your page component's JSX.
+ *
+ * react-helmet-async captures these tags during react-snap pre-rendering,
+ * so crawlers see the correct title, description, canonical, and schemas
+ * for every individual page — not just the homepage defaults.
  */
 export function usePageMeta({ title, description, canonical, ogImage, schemas = [] }) {
-  useEffect(() => {
-    if (title) document.title = title;
+  return (
+    <Helmet>
+      {title && <title>{title}</title>}
+      {description && <meta name="description" content={description} />}
+      {canonical && <link rel="canonical" href={canonical} />}
 
-    setMetaTag("description", description);
-    setLinkTag("canonical", canonical);
+      {/* Open Graph */}
+      {title && <meta property="og:title" content={title} />}
+      {description && <meta property="og:description" content={description} />}
+      {canonical && <meta property="og:url" content={canonical} />}
+      <meta property="og:type" content="website" />
+      {ogImage && <meta property="og:image" content={ogImage} />}
 
-    // Open Graph
-    setMetaTag("og:title", title, "property");
-    setMetaTag("og:description", description, "property");
-    setMetaTag("og:url", canonical, "property");
-    setMetaTag("og:type", "website", "property");
-    if (ogImage) setMetaTag("og:image", ogImage, "property");
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      {title && <meta name="twitter:title" content={title} />}
+      {description && <meta name="twitter:description" content={description} />}
 
-    // Twitter Card
-    setMetaTag("twitter:card", "summary_large_image");
-    setMetaTag("twitter:title", title);
-    setMetaTag("twitter:description", description);
-
-    // Inject page-specific JSON-LD schemas
-    removePageSchemas();
-    injectSchemas(schemas);
-
-    return () => {
-      removePageSchemas();
-    };
-  }, [title, description, canonical]); // eslint-disable-line
+      {/* JSON-LD schemas */}
+      {schemas.map((schema, i) => (
+        <script key={i} type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
+      ))}
+    </Helmet>
+  );
 }
