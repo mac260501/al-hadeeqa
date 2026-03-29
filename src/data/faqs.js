@@ -326,7 +326,7 @@ export const waterproofingFAQs = [
   },
   {
     q: "How much does roof waterproofing cost in Dubai?",
-    a: "Villa roof waterproofing in Dubai typically costs AED 15–45 per square foot depending on the system, roof condition, and access. A standard 3-bedroom villa roof (150–200 sqm) usually falls in the AED 12,000–35,000 range. Al Hadeeqa provides free site assessments with detailed, itemised quotes before any work begins.",
+    a: "Al Hadeeqa's waterproofing services start from AED 200 per sqm. Final pricing depends on the system, roof condition, and access. A standard 3-bedroom villa roof (150–200 sqm) typically falls in the AED 30,000–45,000 range. Al Hadeeqa provides free site assessments with detailed, itemised quotes before any work begins.",
   },
   {
     q: "My villa leaked during the March 2026 storms. What should I do first?",

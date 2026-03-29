@@ -77,6 +77,7 @@ export const SERVICES = [
       "Renovation projects requiring bathroom or balcony retanking",
       "Warehouses and commercial buildings with metal roofing",
     ],
+    pricingFrom: "200 AED / sqm",
     urgencyBanner: {
       text: "Post-Storm Assessment Available — After this week's heavy rainfall, we're offering free roof and basement inspections across Dubai. Water damage worsens quickly — don't wait for the next storm.",
       cta: "Book Your Free Inspection",

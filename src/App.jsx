@@ -1219,6 +1219,11 @@ function ServiceLandingPage({ service, onContact }) {
             </div>
             <div style={styles.serviceSidebarCard}>
               <div style={styles.serviceSidebarLabel}>Need Pricing?</div>
+              {service.pricingFrom && (
+                <div style={{ fontSize: 22, fontWeight: 700, color: "#1a4a26", marginBottom: 4, fontFamily: "'Cormorant Garamond', serif" }}>
+                  From {service.pricingFrom}
+                </div>
+              )}
               <p style={styles.serviceSidebarText}>
                 Send us the project location, property type, and a quick summary of the scope. We will respond on WhatsApp with the next step.
               </p>
