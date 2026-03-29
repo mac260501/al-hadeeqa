@@ -272,25 +272,49 @@ export const glassroomsServiceSchema = serviceSchema({
 export const waterproofingServiceSchema = {
   ...serviceSchema({
     serviceType: "Waterproofing Services",
-    name: "Waterproofing Services Dubai | Al Hadeeqa Contracting",
+    name: "Waterproofing Dubai | Al Hadeeqa Contracting",
     description:
-      "Al Hadeeqa Contracting provides villa roof waterproofing, basement waterproofing, bathroom and wet area tanking, and metal roof waterproofing in Dubai. Construction-grade systems with 10-year warranty. Free site inspection. 35+ years UAE experience.",
+      "Al Hadeeqa Contracting provides construction-grade waterproofing for Dubai villas, basements, wet areas, and metal roofs. Systems include torch-applied bituminous membranes, liquid polyurethane coatings, crystalline waterproofing, and injection grouting. From AED 200/sqm. Up to 10-year warranty. Free site inspection. Established 2009, ISO 9001 certified.",
     serviceUrl: `${BASE_URL}/services/waterproofing`,
     catalog: [
-      "Villa Roof Waterproofing",
+      "Villa Flat Roof Waterproofing",
       "Basement & Below-Slab Waterproofing",
-      "Bathroom & Wet Area Waterproofing",
+      "Bathroom & Wet Area Tanking",
       "Metal Roof & Warehouse Waterproofing",
-      "Swimming Pool Waterproofing",
     ],
   }),
-  offers: {
-    "@type": "Offer",
-    name: "Free Site Inspection",
-    description: "Free roof and basement inspection across Dubai. No obligation, no pressure.",
-    price: "0",
-    priceCurrency: "AED",
-  },
+  priceRange: "AED 200–800 per sqm",
+  offers: [
+    {
+      "@type": "Offer",
+      name: "Villa Flat Roof Waterproofing",
+      description: "Torch-applied bituminous membrane or liquid polyurethane coating for flat roofs and terraces. UV-resistant topcoat. Joint and penetration detailing.",
+      priceCurrency: "AED",
+      priceSpecification: { "@type": "UnitPriceSpecification", price: "200", priceCurrency: "AED", unitText: "per sqm" },
+      seller: { "@type": "Organization", "@id": ORG_ID },
+    },
+    {
+      "@type": "Offer",
+      name: "Basement & Below-Slab Waterproofing",
+      description: "Crystalline waterproofing, external membranes, injection grouting, and negative-side coatings for basements and below-grade concrete.",
+      priceCurrency: "AED",
+      seller: { "@type": "Organization", "@id": ORG_ID },
+    },
+    {
+      "@type": "Offer",
+      name: "Bathroom & Wet Area Tanking",
+      description: "Cementitious and flexible liquid membranes for bathrooms, kitchens, laundry rooms, and balconies. Before or after tile removal.",
+      priceCurrency: "AED",
+      seller: { "@type": "Organization", "@id": ORG_ID },
+    },
+    {
+      "@type": "Offer",
+      name: "Metal Roof & Warehouse Waterproofing",
+      description: "Joint and screw sealing, rust treatment, and elastomeric coating systems for metal and industrial roofs.",
+      priceCurrency: "AED",
+      seller: { "@type": "Organization", "@id": ORG_ID },
+    },
+  ],
 };
 
 export const maintenanceServiceSchema = serviceSchema({
@@ -456,7 +480,7 @@ export function faqSchema(items) {
 }
 
 // ─── ARTICLE SCHEMA HELPER ────────────────────────────────────────────────────
-export function articleSchema({ headline, description, url, datePublished = "2026-03-25" }) {
+export function articleSchema({ headline, description, url, datePublished = "2026-03-25", keywords, about, mentions }) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -467,5 +491,8 @@ export function articleSchema({ headline, description, url, datePublished = "202
     datePublished,
     dateModified: datePublished,
     mainEntityOfPage: url,
+    ...(keywords ? { keywords } : {}),
+    ...(about ? { about } : {}),
+    ...(mentions ? { mentions } : {}),
   };
 }

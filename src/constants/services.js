@@ -176,6 +176,12 @@ export const SERVICES = [
       },
     ],
     relatedIds: ["construction", "maintenance", "glassrooms"],
+    relatedArticle: {
+      href: "/blog/dubai-floods-march-2026-villa-waterproofing-checklist",
+      title: "Dubai's March 2026 Floods: What Villa Owners Should Inspect Right Now",
+      desc: "After the March 26–28 storms, this checklist covers what to inspect — roof drains, ceiling stains, basement walls — and when to call a professional waterproofing contractor.",
+      published: "29 March 2026",
+    },
   },
   {
     id: "excavation",

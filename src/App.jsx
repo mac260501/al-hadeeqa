@@ -1344,6 +1344,30 @@ function ServiceLandingPage({ service, onContact }) {
         </section>
       )}
 
+      {service.relatedArticle && (
+        <section style={{ ...styles.section, paddingTop: 0 }} className="section-main">
+          <div style={{ maxWidth: 760 }}>
+            <div style={styles.sectionEyebrow}>Related Reading</div>
+            <div style={{ ...styles.greenRule, marginLeft: 0, margin: "12px 0 24px" }} />
+            <a
+              href={service.relatedArticle.href}
+              style={{ display: "block", textDecoration: "none", border: "1px solid rgba(20,31,22,0.12)", padding: "24px 28px", background: "#f4f8f5" }}
+            >
+              <div style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 700, marginBottom: 8 }}>
+                Article · {service.relatedArticle.published}
+              </div>
+              <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(18px, 2vw, 24px)", fontWeight: 700, color: "#141f16", lineHeight: 1.3, marginBottom: 10 }}>
+                {service.relatedArticle.title}
+              </h3>
+              <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.75, margin: 0 }}>
+                {service.relatedArticle.desc}
+              </p>
+              <div style={{ marginTop: 14, fontSize: 13, fontWeight: 700, color: "#1a4a26" }}>Read the checklist →</div>
+            </a>
+          </div>
+        </section>
+      )}
+
       {relatedServices.length > 0 && (
         <section style={{ ...styles.section, paddingTop: 0 }} className="section-main">
           <div style={styles.sectionHeader}>
@@ -1395,6 +1419,20 @@ function BlogWaterproofingChecklist({ onContact }) {
         description: "After the March 26–28 2026 Dubai floods, villa owners should act fast. Our checklist covers roof drains, ceiling stains, basement walls, and when to call a professional waterproofing contractor.",
         url: pageUrl,
         datePublished: "2026-03-29",
+        keywords: "waterproofing Dubai, villa roof leak, flat roof waterproofing, basement waterproofing, Dubai floods 2026, post-storm inspection",
+        about: {
+          "@type": "Service",
+          name: "Waterproofing Services",
+          provider: { "@type": "Organization", "@id": "https://alhadeeqacontracting.com/#organization" },
+          url: "https://alhadeeqacontracting.com/services/waterproofing",
+        },
+        mentions: [
+          { "@type": "Thing", name: "Bituminous membrane waterproofing" },
+          { "@type": "Thing", name: "Crystalline waterproofing" },
+          { "@type": "Thing", name: "Polyurethane liquid waterproofing" },
+          { "@type": "Thing", name: "Injection grouting" },
+          { "@type": "Place", name: "Dubai, UAE" },
+        ],
       }),
       faqSchema(BLOG_WATERPROOFING_FAQS),
       breadcrumbSchema([
@@ -2465,7 +2503,7 @@ export default function App() {
     }
 
     if (route.type === "service") {
-      document.title = `${route.service.title} | Al Hadeeqa Contracting`;
+      document.title = route.service.metaTitle || `${route.service.title} | Al Hadeeqa Contracting`;
       return;
     }
 
@@ -2515,7 +2553,7 @@ export default function App() {
     }
 
     if (route.type === "blog-waterproofing-checklist") {
-      document.title = "Dubai's March 2026 Floods: Villa Waterproofing Checklist | Al Hadeeqa Contracting";
+      document.title = "Dubai's March 2026 Floods: What Villa Owners Should Inspect Right Now | Al Hadeeqa Contracting";
       return;
     }
 
