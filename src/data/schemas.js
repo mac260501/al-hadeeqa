@@ -269,20 +269,29 @@ export const glassroomsServiceSchema = serviceSchema({
   ],
 });
 
-export const waterproofingServiceSchema = serviceSchema({
-  serviceType: "Waterproofing Services",
-  name: "Waterproofing Services in Dubai | Al Hadeeqa Contracting",
-  description:
-    "Al Hadeeqa Contracting provides roof waterproofing, basement waterproofing, swimming pool waterproofing, and wet area waterproofing in Dubai. Systems include bituminous membranes, liquid-applied coatings, and crystalline waterproofing.",
-  serviceUrl: `${BASE_URL}/services/waterproofing`,
-  catalog: [
-    "Flat Roof Waterproofing",
-    "Terrace Waterproofing",
-    "Basement Waterproofing",
-    "Swimming Pool Waterproofing",
-    "Wet Area & Bathroom Waterproofing",
-  ],
-});
+export const waterproofingServiceSchema = {
+  ...serviceSchema({
+    serviceType: "Waterproofing Services",
+    name: "Waterproofing Services Dubai | Al Hadeeqa Contracting",
+    description:
+      "Al Hadeeqa Contracting provides villa roof waterproofing, basement waterproofing, bathroom and wet area tanking, and metal roof waterproofing in Dubai. Construction-grade systems with 10-year warranty. Free site inspection. 35+ years UAE experience.",
+    serviceUrl: `${BASE_URL}/services/waterproofing`,
+    catalog: [
+      "Villa Roof Waterproofing",
+      "Basement & Below-Slab Waterproofing",
+      "Bathroom & Wet Area Waterproofing",
+      "Metal Roof & Warehouse Waterproofing",
+      "Swimming Pool Waterproofing",
+    ],
+  }),
+  offers: {
+    "@type": "Offer",
+    name: "Free Site Inspection",
+    description: "Free roof and basement inspection across Dubai. No obligation, no pressure.",
+    price: "0",
+    priceCurrency: "AED",
+  },
+};
 
 export const maintenanceServiceSchema = serviceSchema({
   serviceType: "Property Maintenance",

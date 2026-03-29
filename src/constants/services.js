@@ -52,6 +52,131 @@ export const SERVICES = [
     relatedIds: ["dewatering", "excavation", "demolition"],
   },
   {
+    id: "waterproofing",
+    title: "Waterproofing",
+    subtitle: "Sealed against the elements",
+    desc: "Villa roof, basement, bathroom & metal roof waterproofing in Dubai. Construction-grade systems built to last 10–25 years.",
+    heroDescription: "Al Hadeeqa delivers construction-grade waterproofing for villas, basements, wet areas, and metal roofs across Dubai. Systems built to last 10–25 years — not just until the next rain.",
+    metaTitle: "Waterproofing Dubai | Al Hadeeqa Contracting",
+    metaDescription: "Villa roof, basement, bathroom & metal roof waterproofing in Dubai. Construction-grade systems with 10-year warranty. Free inspection. Al Hadeeqa Contracting — 35+ years in UAE.",
+    image: "/assets/images/waterproofing.jpg",
+    tags: ["Villa Roofs", "Basements", "Wet Areas", "Metal Roofs", "10-Year Warranty"],
+    summary: [
+      "Most waterproofing companies apply surface treatments. Al Hadeeqa is a licensed construction contractor with 35+ years in the UAE. We understand concrete, steel, drainage, and structural movement — so we fix the cause, not just the symptom.",
+      "Our service covers all four primary waterproofing needs: villa flat roofs, basement and below-slab systems, bathroom and wet area tanking, and metal roof sealing. One company, one warranty, done properly.",
+    ],
+    inclusions: [
+      "Villa flat roof and terrace waterproofing",
+      "Basement and below-slab waterproofing",
+      "Bathroom, kitchen, and wet area tanking",
+      "Metal roof and warehouse waterproofing",
+    ],
+    idealFor: [
+      "Villas with flat roofs showing staining, dampness, or active leaks",
+      "Properties with basement garages or habitable lower-ground floors",
+      "Renovation projects requiring bathroom or balcony retanking",
+      "Warehouses and commercial buildings with metal roofing",
+    ],
+    urgencyBanner: {
+      text: "Post-Storm Assessment Available — After this week's heavy rainfall, we're offering free roof and basement inspections across Dubai. Water damage worsens quickly — don't wait for the next storm.",
+      cta: "Book Your Free Inspection",
+      waText: "Hi Al Hadeeqa, I'd like to book a free post-storm roof/basement inspection.",
+    },
+    serviceCards: [
+      {
+        title: "Villa Roof Waterproofing",
+        eyebrow: "The most common request after heavy rain.",
+        description: "Flat roofs in Dubai take punishment from both UV heat and sudden downpours. Cracked membranes, failed joints around AC units, and blocked drainage cause leaks that damage ceilings, electrics, and interiors. We strip the failed system, repair the substrate, and apply a new waterproofing membrane with heat-reflective topcoat.",
+        bullets: [
+          "Torch-applied bituminous membranes",
+          "Liquid-applied polyurethane coatings",
+          "Heat-reflective cool-roof topcoats",
+          "Joint and penetration detailing",
+        ],
+        warranty: "Up to 10 years",
+        bestFor: "Villas with flat roofs showing staining, dampness, or active leaks.",
+      },
+      {
+        title: "Basement & Below-Slab Waterproofing",
+        eyebrow: "We build underground shelters. We know how to keep water out.",
+        description: "Basement waterproofing requires understanding hydrostatic pressure, soil conditions, and structural movement — not just surface coatings. Al Hadeeqa's experience in underground construction means your basement gets the same engineering attention.",
+        bullets: [
+          "External membrane application (new builds)",
+          "Crystalline waterproofing (permanently blocks concrete pores)",
+          "Injection grouting for active leaks",
+          "Negative-side coatings for existing basements",
+        ],
+        bestFor: "Villas with basement garages, storage areas, or habitable lower-ground floors showing dampness or water ingress.",
+      },
+      {
+        title: "Bathroom & Wet Area Waterproofing",
+        eyebrow: "Prevent leaks before they become your neighbour's problem.",
+        description: "Wet area failures are the #1 cause of water damage in apartments and villas. We apply tanking membranes under tiles in bathrooms, kitchens, laundry rooms, and balconies — before or after tile removal.",
+        bullets: [
+          "Cementitious tanking membranes",
+          "Flexible liquid-applied coatings",
+          "Floor drain and threshold detailing",
+          "Balcony and planter waterproofing",
+        ],
+        bestFor: "Renovation projects, leaking bathrooms, new-build wet areas, balcony and planter boxes.",
+      },
+      {
+        title: "Metal Roof & Warehouse Waterproofing",
+        eyebrow: "Stop the drip before it damages your stock.",
+        description: "Metal roofs in Dubai's industrial areas corrode at joints, screws, and gutters. We seal joints, treat rust, and apply elastomeric coatings that flex with thermal expansion.",
+        bullets: [
+          "Joint and screw waterproofing",
+          "Rust treatment and prevention",
+          "Elastomeric coating systems",
+          "Gutter waterproofing and repair",
+        ],
+        warranty: "Up to 10 years",
+        bestFor: "Warehouses, labour camps, factories, and commercial buildings with metal roofing.",
+      },
+    ],
+    trustPoints: [
+      {
+        title: "We understand structure, not just coatings",
+        body: "Most waterproofing companies apply surface treatments. We're a licensed construction contractor with 35+ years in the UAE. We understand concrete, steel, drainage, and structural movement — so we fix the cause, not just the symptom.",
+      },
+      {
+        title: "One team, no subcontracting",
+        body: "Our in-house crew handles every phase. The team that inspects is the team that builds. No middlemen, no finger-pointing.",
+      },
+      {
+        title: "Warranty-backed systems",
+        body: "Up to 10-year warranty on select waterproofing works. ISO 9001, ISO 14001, and OHSAS 18001 certified. Dubai Economy licensed.",
+      },
+      {
+        title: "Free site assessment",
+        body: "We inspect, diagnose, and quote before any work begins. No obligation, no pressure.",
+      },
+    ],
+    processSteps: [
+      {
+        number: "01",
+        title: "Free Inspection",
+        body: "We visit your property, assess the condition, and identify all areas needing waterproofing.",
+      },
+      {
+        number: "02",
+        title: "System Recommendation",
+        body: "We recommend the right system for your situation — membrane, coating, crystalline, or injection — and provide a clear, itemised quote.",
+      },
+      {
+        number: "03",
+        title: "Professional Application",
+        body: "Our licensed crew prepares the surface, applies the system, and details every edge, joint, and penetration properly.",
+      },
+      {
+        number: "04",
+        title: "Handover & Warranty",
+        body: "Water testing, documentation, and warranty certificate. Maintenance guidance included.",
+      },
+    ],
+    relatedIds: ["construction", "maintenance", "glassrooms"],
+  },
+  {
     id: "excavation",
     title: "Excavation",
     subtitle: "Precision earthworks",
@@ -208,32 +333,6 @@ export const SERVICES = [
     relatedIds: ["construction", "pergolas", "maintenance"],
   },
   {
-    id: "waterproofing",
-    title: "Roof Waterproofing",
-    subtitle: "Sealed against the elements",
-    desc: "Comprehensive waterproofing systems for flat roofs, terraces, and wet areas. UAE-rated membranes and coatings handle extreme heat and punishing rain without compromise.",
-    heroDescription: "Waterproofing systems designed to protect roofs, terraces, and exposed surfaces from leakage, heat, and premature deterioration.",
-    image: "/assets/images/roofing.jpg",
-    tags: ["Membrane Systems", "Terrace Waterproofing", "Heat-Resistant", "10-Year Warranty"],
-    summary: [
-      "Waterproofing fails when it is rushed, poorly detailed, or treated as a surface-only fix. We focus on the underlying condition, the right system choice, and the edges and transitions that usually cause trouble later.",
-      "This service works for new builds, remedial repairs, and aging roofs that need a more durable solution before leakage turns into interior damage and repeated maintenance costs.",
-    ],
-    inclusions: [
-      "Roof and terrace waterproofing systems",
-      "Membrane and coating applications",
-      "Heat-exposed surface protection",
-      "Repair-focused waterproofing upgrades where needed",
-    ],
-    idealFor: [
-      "Flat roofs and exposed terraces",
-      "Properties showing leak or seepage issues",
-      "Villas and buildings needing preventive protection",
-      "Projects pairing waterproofing with broader renovation work",
-    ],
-    relatedIds: ["construction", "maintenance", "glassrooms"],
-  },
-  {
     id: "maintenance",
     title: "Maintenance",
     subtitle: "Ongoing care, on schedule",
@@ -262,7 +361,11 @@ export const SERVICES = [
 ];
 
 export const SERVICE_SELECT_OPTIONS = [
-  ...SERVICES.map((service) => service.title),
+  ...SERVICES.flatMap((service) =>
+    service.id === "waterproofing"
+      ? [service.title, "Bathroom / Wet Area Waterproofing", "Metal Roof Waterproofing"]
+      : [service.title]
+  ),
   "Underground Bunker",
   "Other",
 ];

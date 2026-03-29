@@ -324,6 +324,22 @@ export const waterproofingFAQs = [
     q: "Does Al Hadeeqa waterproof swimming pools?",
     a: "Yes, Al Hadeeqa Contracting waterproofs swimming pools in Dubai using flexible polyurethane or cementitious coatings rated for permanent water immersion. Pool waterproofing is applied to the shell before tiling. The company also performs remedial waterproofing for leaking pools, addressing cracks and failed joints before recoating.",
   },
+  {
+    q: "How much does roof waterproofing cost in Dubai?",
+    a: "Villa roof waterproofing in Dubai typically costs AED 15–45 per square foot depending on the system, roof condition, and access. A standard 3-bedroom villa roof (150–200 sqm) usually falls in the AED 12,000–35,000 range. Al Hadeeqa provides free site assessments with detailed, itemised quotes before any work begins.",
+  },
+  {
+    q: "My villa leaked during the March 2026 storms. What should I do first?",
+    a: "First, document the leak location with photos. Check your roof drains are clear — blocked drains cause most storm-related flooding on flat roofs. Then contact a waterproofing contractor for a professional inspection. Water damage worsens quickly through mould and structural degradation, so act within days rather than weeks. Al Hadeeqa offers free post-storm assessments across Dubai.",
+  },
+  {
+    q: "How long does waterproofing take?",
+    a: "Most villa roof waterproofing projects take 3–7 working days depending on roof size and condition. Bathroom waterproofing takes 2–4 days. Basement waterproofing depends on the approach — external membrane on a new build is done during construction, while injection grouting on an existing basement can take 1–3 days.",
+  },
+  {
+    q: "Can you waterproof my basement from inside without digging?",
+    a: "Yes — crystalline waterproofing and injection grouting can treat basements from the negative (interior) side. Crystalline systems penetrate into the concrete and form permanent crystals that block water pathways. This is the best option when external excavation is impractical.",
+  },
 ];
 
 // ─── MAINTENANCE ──────────────────────────────────────────────────────────────

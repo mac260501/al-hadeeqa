@@ -21,7 +21,9 @@
     "include": [
       "/bunkers/emergency-pod",
       "/bunkers/compact-shelter",
-      "/bunkers/shelter"
+      "/bunkers/shelter",
+      "/services/waterproofing",
+      "/blog/dubai-floods-march-2026-villa-waterproofing-checklist"
     ],
     "puppeteerArgs": [
       "--no-sandbox",

@@ -34,6 +34,7 @@ import {
   vaultProductSchema,
   faqSchema,
   serviceSchema,
+  articleSchema,
 } from "./data/schemas";
 import {
   pergolaFAQs,
@@ -245,6 +246,10 @@ function resolveRoute(pathname) {
 
   if (normalizedPath === "/faq") {
     return { type: "faq", pathname: normalizedPath };
+  }
+
+  if (normalizedPath === "/blog/dubai-floods-march-2026-villa-waterproofing-checklist") {
+    return { type: "blog-waterproofing-checklist", pathname: normalizedPath };
   }
 
   const serviceMatch = normalizedPath.match(/^\/services\/([^/]+)$/);
@@ -672,7 +677,7 @@ function ServiceDetailCard({ service, index }) {
 
 function HomeServicesPreview() {
   const [ref, inView] = useInView();
-  const featuredServices = ["construction", "shoring", "excavation", "carports"]
+  const featuredServices = ["construction", "shoring", "waterproofing", "carports"]
     .map((serviceId) => getServiceById(serviceId))
     .filter(Boolean);
 
@@ -1127,8 +1132,8 @@ function ServiceLandingPage({ service, onContact }) {
   });
 
   const meta = usePageMeta({
-    title: `${service.title} in Dubai | Al Hadeeqa Contracting — ${service.subtitle}`,
-    description: `${service.heroDescription} Al Hadeeqa Contracting — established 2009, ISO 9001 certified, 50+ crew, 15+ years experience in Dubai. Free site assessment.`,
+    title: service.metaTitle || `${service.title} in Dubai | Al Hadeeqa Contracting — ${service.subtitle}`,
+    description: service.metaDescription || `${service.heroDescription} Al Hadeeqa Contracting — established 2009, ISO 9001 certified, 50+ crew, 15+ years experience in Dubai. Free site assessment.`,
     canonical: serviceUrl,
     schemas: [
       serviceSchemaObj,
@@ -1175,6 +1180,22 @@ function ServiceLandingPage({ service, onContact }) {
           </div>
         </div>
       </section>
+
+      {service.urgencyBanner && (
+        <div className="urgency-banner" style={{ background: "#1a4a26", color: "#fff", padding: "18px 64px", display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap", justifyContent: "space-between" }}>
+          <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, flex: 1, minWidth: 200 }}>
+            <strong style={{ color: "#5aad6e" }}>⚠ </strong>{service.urgencyBanner.text}
+          </p>
+          <a
+            href={`https://wa.me/971544419854?text=${encodeURIComponent(service.urgencyBanner.waText)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ background: "#25d366", color: "#fff", textDecoration: "none", padding: "10px 20px", fontSize: 13, fontWeight: 700, letterSpacing: "0.06em", whiteSpace: "nowrap", flexShrink: 0 }}
+          >
+            {service.urgencyBanner.cta} →
+          </a>
+        </div>
+      )}
 
       <section style={styles.section} className="section-main">
         <div style={styles.serviceDetailGrid} className="service-detail-grid">
@@ -1231,6 +1252,76 @@ function ServiceLandingPage({ service, onContact }) {
         </div>
       </section>
 
+      {service.serviceCards && service.serviceCards.length > 0 && (
+        <section style={{ ...styles.section, paddingTop: 0 }} className="section-main">
+          <div style={styles.sectionHeader}>
+            <div style={styles.sectionEyebrow}>Service Breakdown</div>
+            <div style={styles.greenRule} />
+            <h2 style={styles.sectionH2}>What we waterproof.</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+            {service.serviceCards.map((card) => (
+              <div key={card.title} style={{ border: "1px solid rgba(20,31,22,0.12)", padding: "28px 28px 24px", background: "#fff" }}>
+                <div style={{ fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 600, marginBottom: 8 }}>{card.eyebrow}</div>
+                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(20px, 2vw, 26px)", fontWeight: 700, color: "#141f16", lineHeight: 1.2, marginBottom: 14 }}>{card.title}</h3>
+                <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.8, marginBottom: 16 }}>{card.description}</p>
+                <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px" }}>
+                  {card.bullets.map((b) => (
+                    <li key={b} style={{ fontSize: 13, color: "#3d5c42", lineHeight: 1.7, paddingLeft: 14, position: "relative" }}>
+                      <span style={{ position: "absolute", left: 0, color: "#5aad6e" }}>—</span> {b}
+                    </li>
+                  ))}
+                </ul>
+                {card.warranty && (
+                  <div style={{ fontSize: 12, fontWeight: 700, color: "#1a4a26", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 8 }}>Warranty: {card.warranty}</div>
+                )}
+                <p style={{ fontSize: 12, color: "#6b876f", lineHeight: 1.6, borderTop: "1px solid rgba(20,31,22,0.08)", paddingTop: 12, margin: "8px 0 0" }}>
+                  <strong style={{ color: "#141f16" }}>Best for:</strong> {card.bestFor}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {service.trustPoints && service.trustPoints.length > 0 && (
+        <section style={{ ...styles.section, paddingTop: 0, background: "#f8faf8" }} className="section-main">
+          <div style={styles.sectionHeader}>
+            <div style={styles.sectionEyebrow}>Why Al Hadeeqa</div>
+            <div style={styles.greenRule} />
+            <h2 style={styles.sectionH2}>Why choose a construction company for waterproofing?</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24, maxWidth: 1100, margin: "0 auto" }}>
+            {service.trustPoints.map((point, i) => (
+              <div key={point.title} style={{ padding: "24px 24px 20px", borderLeft: "3px solid #5aad6e", background: "#fff" }}>
+                <div style={{ fontSize: 11, letterSpacing: "0.18em", color: "#5aad6e", fontWeight: 700, marginBottom: 8 }}>0{i + 1}</div>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: "#141f16", lineHeight: 1.4, marginBottom: 10 }}>{point.title}</h3>
+                <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.8, margin: 0 }}>{point.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {service.processSteps && service.processSteps.length > 0 && (
+        <section style={{ ...styles.section, paddingTop: 0 }} className="section-main">
+          <div style={styles.sectionHeader}>
+            <div style={styles.sectionEyebrow}>How It Works</div>
+            <div style={styles.greenRule} />
+            <h2 style={styles.sectionH2}>From inspection to warranty.</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 24, maxWidth: 1100, margin: "0 auto" }}>
+            {service.processSteps.map((step) => (
+              <div key={step.number} style={{ padding: "24px", border: "1px solid rgba(20,31,22,0.1)" }}>
+                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 48, fontWeight: 700, color: "rgba(26,74,38,0.12)", lineHeight: 1, marginBottom: 12 }}>{step.number}</div>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: "#141f16", marginBottom: 10 }}>{step.title}</h3>
+                <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.8, margin: 0 }}>{step.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {serviceFAQs.length > 0 && (
         <section style={{ ...styles.section, paddingTop: 0 }} className="section-main">
           <div style={{ maxWidth: 760 }}>
@@ -1266,6 +1357,216 @@ function ServiceLandingPage({ service, onContact }) {
         </section>
       )}
     </>
+  );
+}
+
+const BLOG_WATERPROOFING_FAQS = [
+  {
+    q: "What should I check first after flooding in my Dubai villa?",
+    a: "Start with roof drains — blocked drains are the primary cause of storm flooding on flat roofs. Clear debris, then document ceiling stains, basement walls, and balcony drains with photos. Contact a waterproofing contractor within days, not weeks, to prevent mould and structural degradation.",
+  },
+  {
+    q: "Why do flat roofs fail in Dubai after heavy rain?",
+    a: "Flat roofs in Dubai fail from UV degradation of membrane surfaces, thermal expansion cracking at joints and penetrations, blocked drainage causing ponding, and poor detailing around AC units and parapets. A single heavy storm exposes years of gradual deterioration.",
+  },
+  {
+    q: "How do I choose a waterproofing contractor in Dubai?",
+    a: "Look for a contractor with a Dubai construction license (not just a maintenance trade licence), written warranty documentation, ISO certification, an in-house crew rather than subcontractors, and verifiable references from similar villa or basement projects.",
+  },
+];
+
+function BlogWaterproofingChecklist({ onContact }) {
+  const BASE_URL = "https://alhadeeqacontracting.com";
+  const pageUrl = `${BASE_URL}/blog/dubai-floods-march-2026-villa-waterproofing-checklist`;
+  const waUrl = `https://wa.me/971544419854?text=${encodeURIComponent("Hi Al Hadeeqa, I'd like to book a free post-storm inspection for my villa.")}`;
+
+  const meta = usePageMeta({
+    title: "Dubai's March 2026 Floods: What Villa Owners Should Inspect Right Now | Al Hadeeqa Contracting",
+    description: "After the March 26–28 2026 Dubai floods, villa owners should act fast. Our checklist covers roof drains, ceiling stains, basement walls, and when to call a professional waterproofing contractor.",
+    canonical: pageUrl,
+    schemas: [
+      articleSchema({
+        headline: "Dubai's March 2026 Floods: What Villa Owners Should Inspect Right Now",
+        description: "After the March 26–28 2026 Dubai floods, villa owners should act fast. Our checklist covers roof drains, ceiling stains, basement walls, and when to call a professional waterproofing contractor.",
+        url: pageUrl,
+        datePublished: "2026-03-29",
+      }),
+      faqSchema(BLOG_WATERPROOFING_FAQS),
+      breadcrumbSchema([
+        { name: "Home", url: BASE_URL },
+        { name: "Blog", url: `${BASE_URL}/blog` },
+        { name: "Dubai Floods March 2026 — Villa Waterproofing Checklist", url: pageUrl },
+      ]),
+    ],
+  });
+
+  const S = {
+    page: { fontFamily: "'DM Sans', sans-serif", color: "#141f16" },
+    hero: { background: "#132017", padding: "140px 64px 60px", borderBottom: "1px solid rgba(90,173,110,0.2)" },
+    heroInner: { maxWidth: 800, margin: "0 auto" },
+    eyebrow: { fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 700, marginBottom: 12 },
+    h1: { fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 700, color: "#fff", lineHeight: 1.1, marginBottom: 20 },
+    meta: { fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 32 },
+    content: { maxWidth: 800, margin: "0 auto", padding: "60px 64px" },
+    h2: { fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 700, color: "#141f16", marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: "2px solid #5aad6e" },
+    h3: { fontSize: 17, fontWeight: 700, color: "#141f16", marginTop: 28, marginBottom: 10 },
+    p: { fontSize: 16, color: "#3d5c42", lineHeight: 1.9, marginBottom: 20 },
+    ul: { paddingLeft: 20, marginBottom: 20 },
+    li: { fontSize: 15, color: "#3d5c42", lineHeight: 1.8, marginBottom: 8 },
+    callout: { background: "#f0f7f1", borderLeft: "4px solid #5aad6e", padding: "18px 24px", marginBottom: 24 },
+    calloutText: { fontSize: 15, color: "#1a4a26", lineHeight: 1.8, margin: 0 },
+    ctaBox: { background: "#1a4a26", padding: "40px 48px", textAlign: "center", marginTop: 48 },
+    ctaTitle: { fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 700, color: "#fff", marginBottom: 12 },
+    ctaSub: { fontSize: 15, color: "rgba(255,255,255,0.7)", marginBottom: 24 },
+    ctaBtn: { display: "inline-flex", alignItems: "center", gap: 10, background: "#25d366", color: "#fff", textDecoration: "none", padding: "14px 28px", fontSize: 14, fontWeight: 700, letterSpacing: "0.06em" },
+    faqSection: { maxWidth: 800, margin: "0 auto", padding: "0 64px 60px" },
+  };
+
+  return (
+    <div style={S.page}>
+      {meta}
+
+      <section style={S.hero}>
+        <div style={S.heroInner}>
+          <div style={S.eyebrow}>Al Hadeeqa Contracting — Waterproofing</div>
+          <h1 style={S.h1}>Dubai's March 2026 Floods: What Villa Owners Should Inspect Right Now</h1>
+          <p style={S.meta}>Published 29 March 2026 · 7 min read · Dubai, UAE</p>
+        </div>
+      </section>
+
+      <div style={S.content}>
+        <p style={S.p}>
+          On 26–28 March 2026, Dubai, Sharjah, and Abu Dhabi experienced some of the heaviest rainfall in recent years. Streets flooded, basements filled, and villa roofs that had held up through years of summer heat were suddenly under the kind of sustained water pressure they were never designed to ignore.
+        </p>
+        <p style={S.p}>
+          If your property took on water — or if you're not sure whether it did — now is the time to act. Water damage compounds quickly: mould establishes within 48–72 hours, and what starts as a damp ceiling can become a structural issue within weeks if left unaddressed.
+        </p>
+        <p style={S.p}>
+          This checklist walks you through what to inspect, what the warning signs mean, and when to call a waterproofing contractor.
+        </p>
+
+        <h2 style={S.h2}>What should I check immediately after heavy rain?</h2>
+
+        <h3 style={S.h3}>1. Roof drainage — the most common cause of storm flooding</h3>
+        <p style={S.p}>
+          Flat roofs in Dubai are designed to drain quickly, but drains block easily with sand, leaves, and debris. Check your roof drains first. If water is pooling on the roof surface, that standing water will find every weakness in the membrane — cracks, failed joints, deteriorated flashings.
+        </p>
+        <ul style={S.ul}>
+          <li style={S.li}>Clear roof drains of any visible debris</li>
+          <li style={S.li}>Check that drainpipes are flowing freely at ground level</li>
+          <li style={S.li}>Look for ponding water more than 24 hours after rain stops — this indicates drainage failure</li>
+        </ul>
+
+        <h3 style={S.h3}>2. Ceiling stains — document before they dry</h3>
+        <p style={S.p}>
+          Ceiling stains are the most visible sign of a roof leak, but they often appear some distance from the actual leak point because water travels along roof structure before dropping through. Photograph every stain now — the pattern and location will help a contractor diagnose the source accurately.
+        </p>
+        <div style={S.callout}>
+          <p style={S.calloutText}>
+            <strong>Important:</strong> A stain that looks dry may be hiding active moisture in the slab above. A damp meter reading will confirm whether the issue is resolved or ongoing.
+          </p>
+        </div>
+
+        <h3 style={S.h3}>3. Basement walls and floor — salt deposits and dampness</h3>
+        <p style={S.p}>
+          After heavy rain, groundwater levels rise. If your basement or lower-ground parking area shows white powdery deposits (efflorescence), damp patches on walls, or standing water, the waterproofing system is under hydrostatic pressure it can no longer resist.
+        </p>
+        <ul style={S.ul}>
+          <li style={S.li}>White salt deposits on concrete indicate water has been passing through the wall</li>
+          <li style={S.li}>Damp floor without obvious water source may indicate below-slab ingress</li>
+          <li style={S.li}>Active seeping through cracks requires immediate attention — pressure will not reduce for days</li>
+        </ul>
+
+        <h3 style={S.h3}>4. Balconies, planters, and AC penetrations</h3>
+        <p style={S.p}>
+          Balcony drains and planter drainage need the same attention as roof drains. Blocked balcony drains flood the tanking and force water under the tile bed. AC unit penetrations through the roof membrane are frequently the entry point for leaks — check the surrounding area on the ceiling below for staining.
+        </p>
+
+        <h2 style={S.h2}>Why do flat roofs in Dubai fail after rain?</h2>
+        <p style={S.p}>
+          Dubai's climate creates a specific and punishing failure mechanism for flat roofs. The combination of extreme UV exposure during summer and sudden heavy rain events in winter means the waterproofing membrane goes through thermal expansion cycles far beyond what temperate climates produce.
+        </p>
+        <p style={S.p}>
+          Most villa roof failures fall into one of four categories:
+        </p>
+        <ul style={S.ul}>
+          <li style={S.li}><strong>UV degradation:</strong> Bituminous membranes without a UV-resistant topcoat become brittle over 5–8 years, developing surface cracks that allow water penetration</li>
+          <li style={S.li}><strong>Thermal cracking at joints:</strong> Where two membrane sheets overlap, or where the membrane meets a parapet or AC plinth, thermal movement opens gaps that water exploits</li>
+          <li style={S.li}><strong>Drainage failure:</strong> Poor fall design means water pools rather than draining, accelerating membrane deterioration</li>
+          <li style={S.li}><strong>Penetration detailing failure:</strong> Pipe sleeves, drain collars, and AC brackets are the most common failure points — they require flexible detailing that re-seals as the structure moves</li>
+        </ul>
+        <p style={S.p}>
+          A single storm reveals years of gradual deterioration. The roof was not "destroyed by the rain" — the rain found the damage that was already there.
+        </p>
+
+        <h2 style={S.h2}>When should I call a professional waterproofing contractor?</h2>
+        <p style={S.p}>
+          Call a professional if you have any of the following:
+        </p>
+        <ul style={S.ul}>
+          <li style={S.li}>Active water ingress anywhere inside the property</li>
+          <li style={S.li}>Ceiling staining that was not present before the storm</li>
+          <li style={S.li}>Basement or lower-ground level showing new damp or standing water</li>
+          <li style={S.li}>Visible membrane damage, blistering, or cracking visible from the roof</li>
+          <li style={S.li}>A property over 8 years old that has never had a waterproofing inspection</li>
+        </ul>
+        <p style={S.p}>
+          A proper inspection should include: physical inspection of the membrane surface, flashings, and all penetrations; a review of drainage design and drain condition; moisture readings inside the property; and a written diagnosis with system recommendation.
+        </p>
+        <div style={S.callout}>
+          <p style={S.calloutText}>
+            A quote that arrives without a site visit is not a quote — it is a guess. Any contractor quoting remotely from photos is not diagnosing your roof.
+          </p>
+        </div>
+
+        <h2 style={S.h2}>What waterproofing systems are available and which is right for my situation?</h2>
+        <ul style={S.ul}>
+          <li style={S.li}><strong>Torch-applied bituminous membrane:</strong> The most proven system for flat roofs in the UAE. Two-layer application handles thermal movement and has a 30-year track record. Best for: complete roof replacement.</li>
+          <li style={S.li}><strong>Liquid-applied polyurethane coating:</strong> Seamless application ideal for roofs with many penetrations and complex geometry. Adheres to existing substrate where condition permits. Best for: overcoating sound membranes, complex roofs.</li>
+          <li style={S.li}><strong>Crystalline waterproofing:</strong> Applied as a slurry to concrete surfaces; reacts with moisture to form crystals that permanently block pores. Cannot be peeled off or damaged by hydrostatic pressure. Best for: basements, water tanks, below-slab applications.</li>
+          <li style={S.li}><strong>Injection grouting:</strong> Used for active leaks in concrete walls and joints. Polyurethane or epoxy resin is injected under pressure, sealing cracks from the inside. Best for: emergency leak sealing, existing basement repairs without excavation.</li>
+        </ul>
+
+        <h2 style={S.h2}>How do I choose the right waterproofing contractor in Dubai?</h2>
+        <p style={S.p}>
+          The waterproofing market in Dubai includes many operators offering quick-fix coatings that will not last through another storm season. Here is what to check:
+        </p>
+        <ul style={S.ul}>
+          <li style={S.li}><strong>Construction license, not just a maintenance trade licence:</strong> Waterproofing that involves membrane replacement, structural repair, or basement work requires a construction contractor licence from Dubai Economy</li>
+          <li style={S.li}><strong>Written warranty with named system:</strong> A verbal promise is not a warranty. Ask for the warranty document before signing, and ask which membrane product and manufacturer is being used</li>
+          <li style={S.li}><strong>ISO certification:</strong> ISO 9001 (quality management) and ISO 14001 (environmental management) indicate the company operates to documented standards</li>
+          <li style={S.li}><strong>In-house crew:</strong> Contractors who subcontract the actual work lose accountability when something fails — ask directly whether the company's own crew will be on site</li>
+          <li style={S.li}><strong>Site visit before quoting:</strong> Any contractor quoting from photos or a phone call is guessing at scope and price. A real waterproofing diagnosis requires physical inspection</li>
+        </ul>
+      </div>
+
+      <div style={S.ctaBox}>
+        <h2 style={S.ctaTitle}>Free Post-Storm Inspection</h2>
+        <p style={S.ctaSub}>We're offering free roof and basement inspections across Dubai following the March 2026 storms. Our licensed team will assess, diagnose, and quote — no obligation.</p>
+        <a href={waUrl} target="_blank" rel="noopener noreferrer" style={S.ctaBtn}>
+          <WaIcon /> Book Your Free Inspection
+        </a>
+      </div>
+
+      <div style={S.faqSection}>
+        <div style={{ marginTop: 48 }}>
+          <div style={{ fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", color: "#1a4a26", fontWeight: 600 }}>Common Questions</div>
+          <div style={{ width: 36, height: 2, background: "#1a4a26", margin: "12px 0 24px" }} />
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 700, color: "#141f16", marginBottom: 32 }}>
+            Frequently asked.
+          </h2>
+          {BLOG_WATERPROOFING_FAQS.map((faq) => (
+            <ServiceFAQItem key={faq.q} faq={faq} />
+          ))}
+        </div>
+        <div style={{ marginTop: 40, paddingTop: 32, borderTop: "1px solid rgba(20,31,22,0.1)" }}>
+          <p style={{ fontSize: 14, color: "#6b876f" }}>
+            See the full waterproofing service page for pricing guidance, system details, and service breakdown:{" "}
+            <a href="/services/waterproofing" style={{ color: "#1a4a26", fontWeight: 600 }}>Al Hadeeqa Waterproofing Services →</a>
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -2208,6 +2509,11 @@ export default function App() {
       return;
     }
 
+    if (route.type === "blog-waterproofing-checklist") {
+      document.title = "Dubai's March 2026 Floods: Villa Waterproofing Checklist | Al Hadeeqa Contracting";
+      return;
+    }
+
     if (route.type === "not-found") {
       document.title = "Page Not Found | Al Hadeeqa Contracting";
       return;
@@ -2247,6 +2553,8 @@ export default function App() {
     page = <StaticPageRedirect to="/vault.html" />;
   } else if (route.type === "faq") {
     page = <FAQPage />;
+  } else if (route.type === "blog-waterproofing-checklist") {
+    page = <BlogWaterproofingChecklist onContact={openContact} />;
   } else if (route.type === "not-found") {
     page = <NotFoundPage />;
   }
