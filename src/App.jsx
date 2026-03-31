@@ -2825,7 +2825,7 @@ function RentalsPage() {
     title: "Equipment Rentals Dubai | Al Hadeeqa Contracting — Excavators, Pumps, Cranes",
     description: "Rent construction equipment in Dubai. Excavators, dewatering pumps, concrete pumps, cranes and more from Al Hadeeqa Contracting. Competitive daily, weekly and monthly rates. Delivery available across Dubai.",
     canonical: "https://alhadeeqacontracting.com/rentals",
-    ogImage: "https://alhadeeqacontracting.com/logo.jpeg",
+    ogImage: "https://alhadeeqacontracting.com/assets/images/rentals/dump-truck.jpg",
     schemas: [
       rentalsServiceSchema,
       faqSchema(RENTALS_FAQS),
