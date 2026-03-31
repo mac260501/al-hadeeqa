@@ -1032,11 +1032,11 @@ function HomeEquipmentCarousel() {
               background: "#fff",
               border: "1px solid rgba(26,74,38,0.14)",
               borderTop: "3px solid #1a4a26",
-              padding: "24px 20px 22px",
               textDecoration: "none",
               color: "inherit",
               scrollSnapAlign: "start",
               flexShrink: 0,
+              overflow: "hidden",
               transition: "box-shadow 0.25s, transform 0.25s",
               opacity: inView ? 1 : 0,
               transform: inView ? "translateY(0)" : "translateY(20px)",
@@ -1044,12 +1044,14 @@ function HomeEquipmentCarousel() {
             }}
             className="equipment-carousel-card"
           >
-            <div style={{ color: "#1a4a26", marginBottom: 16 }}>
-              {EQUIPMENT_ICONS[cat.id]}
+            <div style={{ height: 120, overflow: "hidden", flexShrink: 0 }}>
+              <img src={cat.image} alt={cat.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
             </div>
-            <div style={{ fontSize: 15, fontWeight: 700, color: "#141f16", marginBottom: 8, lineHeight: 1.3 }}>{cat.name}</div>
-            <div style={{ fontSize: 13, color: "#6b876f", lineHeight: 1.7, fontWeight: 300, flex: 1 }}>{cat.description}</div>
-            <div style={{ fontSize: 12, color: "#1a4a26", fontWeight: 700, letterSpacing: "0.08em", marginTop: 14, textTransform: "uppercase" }}>See Fleet →</div>
+            <div style={{ padding: "18px 20px 20px", display: "flex", flexDirection: "column", flex: 1 }}>
+              <div style={{ fontSize: 15, fontWeight: 700, color: "#141f16", marginBottom: 6, lineHeight: 1.3 }}>{cat.name}</div>
+              <div style={{ fontSize: 13, color: "#6b876f", lineHeight: 1.7, fontWeight: 300, flex: 1 }}>{cat.description}</div>
+              <div style={{ fontSize: 12, color: "#1a4a26", fontWeight: 700, letterSpacing: "0.08em", marginTop: 12, textTransform: "uppercase" }}>See Fleet →</div>
+            </div>
           </a>
         ))}
       </div>
@@ -2655,7 +2657,13 @@ function EquipmentFleetPage({ category }) {
 
       {/* Hero */}
       <section style={{ padding: "168px 64px 64px", background: "#132017", position: "relative", overflow: "hidden" }} className="rentals-hero">
-        <div style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, background: "radial-gradient(ellipse at 70% 50%, rgba(26,74,38,0.35) 0%, transparent 70%)", pointerEvents: "none" }} />
+        {category.image && (
+          <div style={{ position: "absolute", top: 0, right: 0, bottom: 0, width: "50%", overflow: "hidden", pointerEvents: "none" }}>
+            <img src={category.image} alt="" aria-hidden="true" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.22, display: "block" }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, #132017 0%, transparent 60%)" }} />
+          </div>
+        )}
+        <div style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, background: "radial-gradient(ellipse at 70% 50%, rgba(26,74,38,0.25) 0%, transparent 70%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative" }}>
           <a href="/rentals" style={{ ...styles.backToOverview, color: "rgba(255,255,255,0.5)", borderBottomColor: "rgba(255,255,255,0.15)", marginBottom: 24, display: "inline-block" }}>← Back to Equipment Rentals</a>
           <div style={{ color: "#1a4a26", marginBottom: 20 }}>
@@ -2873,18 +2881,20 @@ function RentalsPage() {
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 20, maxWidth: 1280, margin: "0 auto" }} className="rentals-equipment-grid">
           {equipmentCategories.map((cat) => (
-            <div key={cat.id} id={cat.id} style={{ background: "#fff", border: "1px solid rgba(26,74,38,0.14)", borderTop: "3px solid #1a4a26", padding: "28px 24px 24px", display: "flex", flexDirection: "column", gap: 14, scrollMarginTop: 96 }}>
-              <div style={{ color: "#1a4a26" }}>{EQUIPMENT_ICONS[cat.id]}</div>
-              <div>
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 700, color: "#141f16", margin: "0 0 8px", lineHeight: 1.2 }}>{cat.name}</h3>
-                <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{cat.description}</p>
+            <div key={cat.id} id={cat.id} style={{ background: "#fff", border: "1px solid rgba(26,74,38,0.14)", borderTop: "3px solid #1a4a26", display: "flex", flexDirection: "column", scrollMarginTop: 96, overflow: "hidden" }}>
+              <div style={{ height: 180, overflow: "hidden", flexShrink: 0 }}>
+                <img src={cat.image} alt={cat.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
-              <a
-                href={`/rentals/${cat.id}`}
-                style={{ ...styles.serviceLinkBtn, marginTop: "auto", alignSelf: "flex-start" }}
-              >
-                See Our Fleet →
-              </a>
+              <div style={{ padding: "22px 24px 24px", display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
+                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 700, color: "#141f16", margin: 0, lineHeight: 1.2 }}>{cat.name}</h3>
+                <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{cat.description}</p>
+                <a
+                  href={`/rentals/${cat.id}`}
+                  style={{ ...styles.serviceLinkBtn, marginTop: "auto", alignSelf: "flex-start" }}
+                >
+                  See Our Fleet →
+                </a>
+              </div>
             </div>
           ))}
         </div>

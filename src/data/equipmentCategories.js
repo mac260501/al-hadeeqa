@@ -44,7 +44,7 @@ const equipmentCategories = [
     id: 'generators',
     name: 'Generators',
     description: 'Diesel generators for site power — 20kVA to 500kVA',
-    image: '/assets/images/rentals/generator.jpg',
+    image: '/assets/images/rentals/generators.jpg',
     items: [],
     rates: null,
   },
