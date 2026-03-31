@@ -365,12 +365,42 @@ export const SERVICES = [
     ],
     relatedIds: ["waterproofing", "construction", "pergolas"],
   },
+  {
+    id: "equipment-rentals",
+    title: "Equipment Rentals",
+    subtitle: "Equipment available across Dubai",
+    desc: "Excavators, dewatering pumps, concrete pumps, cranes, compactors and more. Daily, weekly, or monthly hire with delivery to your site.",
+    heroDescription: "Construction equipment hire in Dubai. Excavators, pumps, cranes and specialist plant — delivered to your site, available daily, weekly, or monthly.",
+    image: "/assets/images/excavation.jpg",
+    tags: ["Excavators", "Pumps", "Cranes", "Generators", "Delivery"],
+    ctaHref: "/rentals",
+    summary: [
+      "Al Hadeeqa offers a full fleet of construction equipment for hire across Dubai. Excavators, dewatering pumps, concrete pumps, cranes, compactors, generators, dump trucks, and scaffolding — available daily, weekly, or monthly.",
+      "All equipment is delivered to your site and collected when you're done. Trained operators are available with select equipment. Contact us for a rate card.",
+    ],
+    inclusions: [
+      "Excavators (mini, midi and full-size)",
+      "Dewatering and submersible pump systems",
+      "Concrete line pumps and boom pumps",
+      "Mobile cranes and lifting equipment",
+      "Compactors, generators, dump trucks and scaffolding",
+    ],
+    idealFor: [
+      "Construction sites needing short-term plant hire",
+      "Projects requiring delivery and on-site setup",
+      "Teams needing flexible daily, weekly or monthly periods",
+      "Contractors who need operators supplied with equipment",
+    ],
+    relatedIds: ["dewatering", "excavation", "construction"],
+  },
 ];
 
 export const SERVICE_SELECT_OPTIONS = [
   ...SERVICES.flatMap((service) =>
     service.id === "waterproofing"
       ? [service.title, "Bathroom / Wet Area Waterproofing", "Metal Roof Waterproofing"]
+      : service.id === "equipment-rentals"
+      ? ["Equipment Rental"]
       : [service.title]
   ),
   "Underground Bunker",

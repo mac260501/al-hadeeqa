@@ -461,6 +461,86 @@ html, body {
   }
 }
 
+/* ── EQUIPMENT CAROUSEL ── */
+.equipment-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-arrow-btn:hover {
+  background: #1a4a26 !important;
+  color: #fff !important;
+  border-color: #1a4a26 !important;
+}
+
+.equipment-carousel-card:hover {
+  box-shadow: 0 12px 32px rgba(26,74,38,0.14) !important;
+  transform: translateY(-3px) !important;
+}
+
+@media (max-width: 768px) {
+  .carousel-arrows {
+    display: none !important;
+  }
+
+  .equipment-carousel {
+    padding: 0 20px 16px !important;
+  }
+
+  .home-equipment-header {
+    padding: 0 20px !important;
+  }
+
+  .rentals-hero {
+    padding: 128px 20px 56px !important;
+  }
+
+  .rentals-stats-bar {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  .rentals-how-it-works {
+    padding: 56px 20px !important;
+  }
+
+  .rentals-how-it-works-cards {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .rentals-why-rent-cards {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .rentals-rates-section {
+    padding: 56px 20px !important;
+  }
+
+  .rentals-rates-section > div {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .rentals-equipment-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .rentals-how-it-works-cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  .rentals-why-rent-cards {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .rentals-hero {
+    padding: 120px 16px 48px !important;
+  }
+}
+
 /* ── BUNKER PAGE ── */
 
 /* ── BUNKER PAGE: Global overflow guard ── */

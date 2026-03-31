@@ -23,7 +23,8 @@
       "/bunkers/compact-shelter",
       "/bunkers/shelter",
       "/services/waterproofing",
-      "/blog/dubai-floods-march-2026-villa-waterproofing-checklist"
+      "/blog/dubai-floods-march-2026-villa-waterproofing-checklist",
+      "/rentals"
     ],
     "puppeteerArgs": [
       "--no-sandbox",

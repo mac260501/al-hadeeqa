@@ -51,6 +51,7 @@ import {
   bunkerFAQs,
 } from "./data/faqs";
 import FAQPage from "./pages/FAQPage";
+import equipmentCategories from "./data/equipmentCategories";
 
 const LogoImg = ({ size = 44 }) => (
   <img
@@ -248,6 +249,19 @@ function resolveRoute(pathname) {
     return { type: "faq", pathname: normalizedPath };
   }
 
+  if (normalizedPath === "/rentals") {
+    return { type: "rentals", pathname: normalizedPath };
+  }
+
+  const rentalsCategoryMatch = normalizedPath.match(/^\/rentals\/([^/]+)$/);
+  if (rentalsCategoryMatch) {
+    const categoryId = decodeURIComponent(rentalsCategoryMatch[1]);
+    const category = equipmentCategories.find((c) => c.id === categoryId);
+    if (category) {
+      return { type: "rentals-category", pathname: normalizedPath, category };
+    }
+  }
+
   if (normalizedPath === "/blog/dubai-floods-march-2026-villa-waterproofing-checklist") {
     return { type: "blog-waterproofing-checklist", pathname: normalizedPath };
   }
@@ -370,6 +384,7 @@ function Nav({ onContact, route }) {
   let navLinks = [
     { label: "Home", href: "/", active: route.type === "home" },
     { label: "Services", href: "/services" },
+    { label: "Rentals", href: "/rentals" },
     { label: "About", href: "/about" },
     { label: "Projects", href: "/projects" },
     { label: "Bunkers", href: "/bunkers" },
@@ -383,6 +398,7 @@ function Nav({ onContact, route }) {
     navLinks = [
       { label: "Home", href: "/" },
       { label: "Services", href: "#services-list", active: true },
+      { label: "Rentals", href: "/rentals" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
       { label: "Bunkers", href: "/bunkers" },
@@ -393,6 +409,18 @@ function Nav({ onContact, route }) {
     navLinks = [
       { label: "Home", href: "/" },
       { label: "Services", href: "/services", active: true },
+      { label: "Rentals", href: "/rentals" },
+      { label: "About", href: "/about" },
+      { label: "Projects", href: "/projects" },
+      { label: "Bunkers", href: "/bunkers" },
+      VAULT_LINK,
+      { label: "Contact", href: "/contact" },
+    ];
+  } else if (route.type === "rentals" || route.type === "rentals-category") {
+    navLinks = [
+      { label: "Home", href: "/" },
+      { label: "Services", href: "/services" },
+      { label: "Rentals", href: "/rentals", active: true },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
       { label: "Bunkers", href: "/bunkers" },
@@ -403,6 +431,7 @@ function Nav({ onContact, route }) {
     navLinks = [
       { label: "Home", href: "/" },
       { label: "Services", href: "/services" },
+      { label: "Rentals", href: "/rentals" },
       { label: "About", href: "/about", active: true },
       { label: "Projects", href: "/projects" },
       { label: "Bunkers", href: "/bunkers" },
@@ -413,6 +442,7 @@ function Nav({ onContact, route }) {
     navLinks = [
       { label: "Home", href: "/" },
       { label: "Services", href: "/services" },
+      { label: "Rentals", href: "/rentals" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects", active: true },
       { label: "Bunkers", href: "/bunkers" },
@@ -423,6 +453,7 @@ function Nav({ onContact, route }) {
     navLinks = [
       { label: "Home", href: "/" },
       { label: "Services", href: "/services" },
+      { label: "Rentals", href: "/rentals" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
       { label: "Bunkers", href: "/bunkers" },
@@ -433,6 +464,7 @@ function Nav({ onContact, route }) {
     navLinks = [
       { label: "Home", href: "/" },
       { label: "Services", href: "/services" },
+      { label: "Rentals", href: "/rentals" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
       { label: "Bunkers", href: "/bunkers" },
@@ -669,7 +701,7 @@ function ServiceDetailCard({ service, index }) {
             <span key={tag} style={styles.serviceTag}>{tag}</span>
           ))}
         </div>
-        <a href={getServiceHref(service.id)} style={styles.serviceLinkBtn}>Learn More →</a>
+        <a href={service.ctaHref || getServiceHref(service.id)} style={styles.serviceLinkBtn}>Learn More →</a>
       </div>
     </div>
   );
@@ -839,6 +871,187 @@ function HomeBunkerPreview() {
           <a href="/bunkers" style={styles.btnPrimaryLink}>Explore Our Solutions</a>
           <div style={styles.homeBunkerNote}>Available by consultation only.</div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+const EQUIPMENT_ICONS = {
+  excavators: (
+    <svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="4" y="30" width="18" height="10" rx="1"/>
+      <circle cx="9" cy="40" r="3"/><circle cx="17" cy="40" r="3"/>
+      <path d="M22 35h6l8-12 6 4-6 8h-8"/>
+      <path d="M28 23l4-10 8 3-4 10"/>
+    </svg>
+  ),
+  "dewatering-pumps": (
+    <svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M24 6 C18 16 12 20 12 26a12 12 0 0024 0c0-6-6-10-12-20z"/>
+      <path d="M24 30v6M20 33h8"/>
+    </svg>
+  ),
+  "concrete-pumps": (
+    <svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="4" y="28" width="20" height="12" rx="1"/>
+      <circle cx="10" cy="40" r="3"/><circle cx="18" cy="40" r="3"/>
+      <path d="M24 34h6l10-18"/>
+      <path d="M34 16l4-4 4 4M38 12v12"/>
+    </svg>
+  ),
+  cranes: (
+    <svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="12" y1="44" x2="12" y2="8"/>
+      <line x1="12" y1="8" x2="42" y2="14"/>
+      <line x1="12" y1="8" x2="4" y2="16"/>
+      <line x1="28" y1="11" x2="28" y2="28"/>
+      <rect x="24" y="28" width="8" height="6" rx="1"/>
+    </svg>
+  ),
+  compactors: (
+    <svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="10" y="18" width="28" height="14" rx="2"/>
+      <ellipse cx="24" cy="38" rx="14" ry="5"/>
+      <line x1="18" y1="18" x2="18" y2="10"/>
+      <line x1="30" y1="18" x2="30" y2="10"/>
+      <line x1="18" y1="10" x2="30" y2="10"/>
+    </svg>
+  ),
+  generators: (
+    <svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="6" y="14" width="36" height="22" rx="2"/>
+      <path d="M26 20l-6 8h8l-6 8"/>
+      <line x1="6" y1="36" x2="4" y2="40"/><line x1="42" y1="36" x2="44" y2="40"/>
+    </svg>
+  ),
+  "dump-trucks": (
+    <svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 32V20h24l6 12H4z"/>
+      <path d="M28 20l6-8h6l4 8"/>
+      <path d="M28 20h16v12h-4"/>
+      <circle cx="10" cy="38" r="4"/><circle cx="36" cy="38" r="4"/>
+    </svg>
+  ),
+  scaffolding: (
+    <svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="10" y1="6" x2="10" y2="44"/>
+      <line x1="24" y1="6" x2="24" y2="44"/>
+      <line x1="38" y1="6" x2="38" y2="44"/>
+      <line x1="6" y1="14" x2="42" y2="14"/>
+      <line x1="6" y1="24" x2="42" y2="24"/>
+      <line x1="6" y1="34" x2="42" y2="34"/>
+    </svg>
+  ),
+};
+
+function HomeEquipmentCarousel() {
+  const [ref, inView] = useInView();
+  const carouselRef = useRef(null);
+  const SCROLL_BY = 238; // card width (220) + gap (18)
+
+  const scroll = (dir) => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: dir * SCROLL_BY, behavior: "smooth" });
+    }
+  };
+
+  return (
+    <section style={{ background: "#f4f8f5", borderTop: "1px solid rgba(26,74,38,0.08)", padding: "80px 0 64px" }}>
+      <div
+        ref={ref}
+        style={{
+          maxWidth: 1400,
+          margin: "0 auto",
+          padding: "0 64px",
+          opacity: inView ? 1 : 0,
+          transform: inView ? "translateY(0)" : "translateY(20px)",
+          transition: "opacity 0.6s ease, transform 0.6s ease",
+        }}
+        className="home-equipment-header"
+      >
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 36, flexWrap: "wrap", gap: 20 }}>
+          <div>
+            <div style={styles.sectionEyebrow}>Equipment Rentals</div>
+            <div style={{ ...styles.greenRule, margin: "12px 0 16px", marginLeft: 0 }} />
+            <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(28px, 3.5vw, 48px)", margin: 0 }}>
+              Construction equipment.<br />
+              <em style={{ fontStyle: "italic", color: "#1a4a26" }}>Ready when you are.</em>
+            </h2>
+            <p style={{ fontSize: 16, color: "#6b876f", lineHeight: 1.8, fontWeight: 300, maxWidth: 520, marginTop: 14, marginBottom: 0 }}>
+              Excavators, pumps, cranes and specialist plant available for daily, weekly, or monthly hire across Dubai.
+            </p>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 20, flexShrink: 0 }}>
+            {/* Desktop arrows — hidden on mobile via CSS */}
+            <div className="carousel-arrows" style={{ display: "flex", gap: 8 }}>
+              <button
+                onClick={() => scroll(-1)}
+                aria-label="Previous"
+                style={{ width: 40, height: 40, background: "#fff", border: "1px solid rgba(26,74,38,0.18)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#1a4a26", transition: "background 0.2s" }}
+                className="carousel-arrow-btn"
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="10,3 5,8 10,13"/></svg>
+              </button>
+              <button
+                onClick={() => scroll(1)}
+                aria-label="Next"
+                style={{ width: 40, height: 40, background: "#fff", border: "1px solid rgba(26,74,38,0.18)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "#1a4a26", transition: "background 0.2s" }}
+                className="carousel-arrow-btn"
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6,3 11,8 6,13"/></svg>
+              </button>
+            </div>
+            <a href="/rentals" style={{ ...styles.servicesNavCta }}>View Equipment &amp; Rates →</a>
+          </div>
+        </div>
+      </div>
+
+      <div
+        ref={carouselRef}
+        className="equipment-carousel"
+        style={{
+          display: "flex",
+          overflowX: "auto",
+          gap: 18,
+          padding: "0 64px 16px",
+          scrollSnapType: "x mandatory",
+          WebkitOverflowScrolling: "touch",
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
+        }}
+      >
+        {equipmentCategories.map((cat, index) => (
+          <a
+            key={cat.id}
+            href={`/rentals/${cat.id}`}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              minWidth: 220,
+              maxWidth: 220,
+              background: "#fff",
+              border: "1px solid rgba(26,74,38,0.14)",
+              borderTop: "3px solid #1a4a26",
+              padding: "24px 20px 22px",
+              textDecoration: "none",
+              color: "inherit",
+              scrollSnapAlign: "start",
+              flexShrink: 0,
+              transition: "box-shadow 0.25s, transform 0.25s",
+              opacity: inView ? 1 : 0,
+              transform: inView ? "translateY(0)" : "translateY(20px)",
+              transitionDelay: `${index * 0.05}s`,
+            }}
+            className="equipment-carousel-card"
+          >
+            <div style={{ color: "#1a4a26", marginBottom: 16 }}>
+              {EQUIPMENT_ICONS[cat.id]}
+            </div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: "#141f16", marginBottom: 8, lineHeight: 1.3 }}>{cat.name}</div>
+            <div style={{ fontSize: 13, color: "#6b876f", lineHeight: 1.7, fontWeight: 300, flex: 1 }}>{cat.description}</div>
+            <div style={{ fontSize: 12, color: "#1a4a26", fontWeight: 700, letterSpacing: "0.08em", marginTop: 14, textTransform: "uppercase" }}>See Fleet →</div>
+          </a>
+        ))}
       </div>
     </section>
   );
@@ -2060,7 +2273,7 @@ function ProjectThumb({ project, index }) {
   );
 }
 
-function Contact({ pageOffset = false }) {
+function Contact({ pageOffset = false, defaultService = "" }) {
   const [ref, inView] = useInView();
 
   return (
@@ -2113,18 +2326,18 @@ function Contact({ pageOffset = false }) {
         <div style={styles.contactFormCard}>
           <h3 style={styles.contactFormTitle}>Request a Free Assessment</h3>
           <p style={styles.contactFormSub}>We'll respond via WhatsApp within 2 hours.</p>
-          <ContactFormInline />
+          <ContactFormInline defaultService={defaultService} />
         </div>
       </div>
     </section>
   );
 }
 
-function ContactFormInline() {
+function ContactFormInline({ defaultService = "" }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [area, setArea] = useState("");
-  const [service, setService] = useState("");
+  const [service, setService] = useState(defaultService);
   const [msg, setMsg] = useState("");
 
   const submit = () => {
@@ -2182,7 +2395,7 @@ function Footer() {
           <div style={styles.footerLinkGroup}>
             <div style={styles.footerLinkHead}>Services</div>
             {SERVICES.map((service) => (
-              <a key={service.id} href={getServiceHref(service.id)} style={styles.footerLink}>{service.title}</a>
+              <a key={service.id} href={service.ctaHref || getServiceHref(service.id)} style={styles.footerLink}>{service.title}</a>
             ))}
           </div>
           <div style={styles.footerLinkGroup}>
@@ -2327,6 +2540,7 @@ function HomePage({ onContact }) {
           </p>
         </div>
       </section>
+      <HomeEquipmentCarousel />
       <HomeServicesPreview />
       <HomeBunkerPreview />
       <HomeAboutPreview />
@@ -2416,6 +2630,384 @@ function WarrantySection() {
         </p>
       </div>
     </section>
+  );
+}
+
+function EquipmentFleetPage({ category }) {
+  const meta = usePageMeta({
+    title: `${category.name} for Hire Dubai | Al Hadeeqa Contracting Equipment Rentals`,
+    description: `Rent ${category.name.toLowerCase()} in Dubai. ${category.description}. Daily, weekly and monthly rates. Delivery to your site. Al Hadeeqa Contracting.`,
+    canonical: `https://alhadeeqacontracting.com/rentals/${category.id}`,
+    schemas: [
+      breadcrumbSchema([
+        { name: "Home", url: "https://alhadeeqacontracting.com" },
+        { name: "Equipment Rentals", url: "https://alhadeeqacontracting.com/rentals" },
+        { name: category.name, url: `https://alhadeeqacontracting.com/rentals/${category.id}` },
+      ]),
+    ],
+  });
+
+  const waText = encodeURIComponent(`Hi Al Hadeeqa, I'd like to enquire about renting ${category.name}. Can you send me availability and rates?`);
+
+  return (
+    <>
+      {meta}
+
+      {/* Hero */}
+      <section style={{ padding: "168px 64px 64px", background: "#132017", position: "relative", overflow: "hidden" }} className="rentals-hero">
+        <div style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, background: "radial-gradient(ellipse at 70% 50%, rgba(26,74,38,0.35) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative" }}>
+          <a href="/rentals" style={{ ...styles.backToOverview, color: "rgba(255,255,255,0.5)", borderBottomColor: "rgba(255,255,255,0.15)", marginBottom: 24, display: "inline-block" }}>← Back to Equipment Rentals</a>
+          <div style={{ color: "#1a4a26", marginBottom: 20 }}>
+            <div style={{ color: "#5aad6e" }}>{EQUIPMENT_ICONS[category.id]}</div>
+          </div>
+          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(44px, 5.5vw, 72px)", lineHeight: 1.04, fontWeight: 700, color: "#fff", margin: "0 0 16px", maxWidth: 760 }}>
+            {category.name}
+          </h1>
+          <p style={{ fontSize: 18, color: "rgba(255,255,255,0.72)", lineHeight: 1.75, fontWeight: 300, maxWidth: 560, margin: "0 0 36px" }}>
+            {category.description}. Available for daily, weekly, or monthly hire across Dubai. Delivery and collection included.
+          </p>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+            <a href={`https://wa.me/971544419854?text=${waText}`} target="_blank" rel="noreferrer" style={styles.btnPrimaryLink}>
+              <WaIcon /> Enquire on WhatsApp
+            </a>
+            <span
+              style={{ ...styles.btnSecondary, color: "rgba(255,255,255,0.45)", borderBottomColor: "rgba(255,255,255,0.15)", fontSize: 14, letterSpacing: "0.08em", cursor: "default" }}
+            >
+              Download Rate Card PDF ↓
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Fleet Listing */}
+      <section style={{ ...styles.section, padding: "80px 64px" }} className="section-main">
+        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+          <div style={{ marginBottom: 48 }}>
+            <div style={styles.sectionEyebrow}>Available Fleet</div>
+            <div style={{ ...styles.greenRule, margin: "12px 0 0", marginLeft: 0 }} />
+          </div>
+
+          {category.items && category.items.length > 0 ? (
+            /* Rates table — shown once Jan provides data */
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'DM Sans', sans-serif" }}>
+                <thead>
+                  <tr style={{ background: "#1a4a26", color: "#fff" }}>
+                    <th style={{ padding: "14px 18px", textAlign: "left", fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600 }}>Equipment</th>
+                    <th style={{ padding: "14px 18px", textAlign: "left", fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600 }}>Specification</th>
+                    <th style={{ padding: "14px 18px", textAlign: "right", fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600 }}>Daily</th>
+                    <th style={{ padding: "14px 18px", textAlign: "right", fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600 }}>Weekly</th>
+                    <th style={{ padding: "14px 18px", textAlign: "right", fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600 }}>Monthly</th>
+                    <th style={{ padding: "14px 18px", textAlign: "center", fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600 }}>Enquire</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {category.items.map((item, i) => (
+                    <tr key={item.name} style={{ background: i % 2 === 0 ? "#fff" : "#f4f8f5", borderBottom: "1px solid rgba(26,74,38,0.08)" }}>
+                      <td style={{ padding: "14px 18px", fontSize: 15, fontWeight: 600, color: "#141f16" }}>{item.name}</td>
+                      <td style={{ padding: "14px 18px", fontSize: 14, color: "#6b876f" }}>{item.spec || "—"}</td>
+                      <td style={{ padding: "14px 18px", fontSize: 14, color: "#3d5c42", textAlign: "right" }}>{item.dailyRate ? `AED ${item.dailyRate}` : "—"}</td>
+                      <td style={{ padding: "14px 18px", fontSize: 14, color: "#3d5c42", textAlign: "right" }}>{item.weeklyRate ? `AED ${item.weeklyRate}` : "—"}</td>
+                      <td style={{ padding: "14px 18px", fontSize: 14, color: "#3d5c42", textAlign: "right" }}>{item.monthlyRate ? `AED ${item.monthlyRate}` : "—"}</td>
+                      <td style={{ padding: "14px 18px", textAlign: "center" }}>
+                        <a
+                          href={`https://wa.me/971544419854?text=${encodeURIComponent(`Hi Al Hadeeqa, I'd like to enquire about renting the ${item.name}. Can you confirm availability and rates?`)}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{ ...styles.serviceLinkBtn, padding: "8px 14px", fontSize: 11 }}
+                        >
+                          Enquire
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            /* Placeholder — shown until Jan provides the fleet list */
+            <div style={{ background: "#f4f8f5", border: "1px solid rgba(26,74,38,0.14)", borderLeft: "4px solid #1a4a26", padding: "40px 36px", maxWidth: 680 }}>
+              <div style={{ fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#1a4a26", fontWeight: 700, marginBottom: 14 }}>Fleet listing coming soon</div>
+              <p style={{ fontSize: 16, color: "#556d5b", lineHeight: 1.8, margin: "0 0 28px", fontWeight: 300 }}>
+                We're updating our {category.name.toLowerCase()} inventory list with full specs and rates. In the meantime, WhatsApp us directly — we'll confirm availability and send a quote the same day.
+              </p>
+              <a href={`https://wa.me/971544419854?text=${waText}`} target="_blank" rel="noreferrer" style={styles.btnPrimaryLink}>
+                <WaIcon /> Check Availability on WhatsApp
+              </a>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Rate Card Request */}
+      <section className="rentals-rates-section" style={{ background: "#f4f8f5", borderTop: "1px solid rgba(26,74,38,0.08)", padding: "56px 64px" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 40, flexWrap: "wrap" }}>
+          <div>
+            <div style={styles.sectionEyebrow}>Pricing</div>
+            <div style={{ ...styles.greenRule, margin: "10px 0 14px", marginLeft: 0 }} />
+            <p style={{ fontSize: 16, color: "#556d5b", lineHeight: 1.75, margin: 0, fontWeight: 300, maxWidth: 480 }}>
+              Daily, weekly and monthly rates available. Download our full rate card PDF for complete pricing.
+            </p>
+          </div>
+          <button
+            style={{ ...styles.btnPrimaryLink, gap: 12, flexShrink: 0, cursor: "default", opacity: 0.72, border: "none" }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download Rate Card PDF
+          </button>
+        </div>
+      </section>
+
+      {/* Cross-sell */}
+      <section style={{ background: "#1a4a26", padding: "40px 64px" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 32, flexWrap: "wrap" }}>
+          <p style={{ fontSize: 16, color: "rgba(255,255,255,0.82)", lineHeight: 1.7, margin: 0, fontWeight: 300, maxWidth: 580 }}>
+            Need the full package? Al Hadeeqa handles excavation, dewatering, shoring and construction — with our own fleet on site.
+          </p>
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+            <a href="/rentals" style={{ ...styles.btnPrimaryLink, background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)" }}>← All Equipment</a>
+            <a href="/services" style={{ ...styles.btnPrimaryLink, background: "#fff", color: "#1a4a26" }}>View All Services →</a>
+          </div>
+        </div>
+      </section>
+
+      <Contact defaultService="Equipment Rental" />
+    </>
+  );
+}
+
+const RENTALS_FAQS = [
+  { q: "What equipment do you have available?", a: "We offer excavators, dewatering pumps, concrete pumps, cranes, compactors, generators, dump trucks, and scaffolding. Contact us for the full current inventory." },
+  { q: "What are your rental rates?", a: "Rates depend on equipment type and rental duration. We offer daily, weekly, and monthly pricing with discounts for longer periods. WhatsApp us for a quote." },
+  { q: "Do you deliver equipment to site?", a: "Yes. All equipment is delivered to your project site and collected when you're finished. Delivery is available across Dubai." },
+  { q: "Can I rent equipment with an operator?", a: "Yes. Trained operators are available with select equipment. Let us know your requirements when you enquire." },
+  { q: "What is the minimum rental period?", a: "Most equipment is available from a single day. Some specialist items have a minimum weekly rental. We'll confirm when you enquire." },
+  { q: "Do you serve areas outside Dubai?", a: "Our primary service area is Dubai. For projects in Sharjah, Ajman, or Abu Dhabi, contact us to discuss availability." },
+];
+
+function RentalsPage() {
+  const [openFaq, setOpenFaq] = useState(null);
+
+  const rentalsServiceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Construction Equipment Rentals Dubai",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Al Hadeeqa Contracting Co. L.L.C",
+      "url": "https://alhadeeqacontracting.com",
+      "telephone": "+971544419854",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Dubai",
+        "addressCountry": "AE"
+      }
+    },
+    "areaServed": { "@type": "City", "name": "Dubai" },
+    "description": "Construction equipment rentals in Dubai. Excavators, dewatering pumps, concrete pumps, cranes and more. Daily, weekly and monthly rates.",
+    "url": "https://alhadeeqacontracting.com/rentals"
+  };
+
+  const meta = usePageMeta({
+    title: "Equipment Rentals Dubai | Al Hadeeqa Contracting — Excavators, Pumps, Cranes",
+    description: "Rent construction equipment in Dubai. Excavators, dewatering pumps, concrete pumps, cranes and more from Al Hadeeqa Contracting. Competitive daily, weekly and monthly rates. Delivery available across Dubai.",
+    canonical: "https://alhadeeqacontracting.com/rentals",
+    og: {
+      title: "Equipment Rentals Dubai | Al Hadeeqa Contracting",
+      description: "Rent construction equipment in Dubai. Excavators, dewatering pumps, concrete pumps, cranes and more. Daily, weekly and monthly rates.",
+      image: "https://alhadeeqacontracting.com/logo.jpeg",
+    },
+    schemas: [
+      rentalsServiceSchema,
+      faqSchema(RENTALS_FAQS),
+      breadcrumbSchema([
+        { name: "Home", url: "https://alhadeeqacontracting.com" },
+        { name: "Equipment Rentals", url: "https://alhadeeqacontracting.com/rentals" },
+      ]),
+    ],
+  });
+
+  return (
+    <>
+      {meta}
+
+      {/* A. Hero */}
+      <section style={{ padding: "168px 64px 72px", background: "#132017", position: "relative", overflow: "hidden" }} className="rentals-hero">
+        <div style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, background: "radial-gradient(ellipse at 70% 50%, rgba(26,74,38,0.35) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative" }}>
+          <div style={{ ...styles.sectionEyebrow, color: "rgba(255,255,255,0.6)", marginBottom: 10 }}>Al Hadeeqa Contracting</div>
+          <div style={{ width: 36, height: 2, background: "#5aad6e", margin: "0 0 28px" }} />
+          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(44px, 5.5vw, 80px)", lineHeight: 1.02, fontWeight: 700, color: "#fff", margin: "0 0 20px", maxWidth: 820 }}>
+            Construction Equipment Rentals
+          </h1>
+          <p style={{ fontSize: 20, color: "rgba(255,255,255,0.72)", lineHeight: 1.75, fontWeight: 300, maxWidth: 600, margin: "0 0 36px" }}>
+            Excavators, pumps, cranes and specialist plant — available daily, weekly, or monthly across Dubai.
+          </p>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+            <a href="#contact" style={styles.btnPrimaryLink}>Get a Rental Quote</a>
+            <a href="#equipment" style={{ ...styles.btnSecondary, color: "rgba(255,255,255,0.72)", borderBottomColor: "rgba(255,255,255,0.3)", fontSize: 14, letterSpacing: "0.08em" }}>View Equipment ↓</a>
+          </div>
+          <div style={{ display: "flex", gap: 0, marginTop: 56, borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: 28, flexWrap: "wrap" }} className="rentals-stats-bar">
+            {[
+              { val: "XX+", label: "Machines Available" },
+              { val: "Daily / Weekly / Monthly", label: "Flexible Hire Periods" },
+              { val: "Dubai-Wide", label: "Delivery Included" },
+            ].map((stat, i) => (
+              <div key={stat.label} style={{ flex: 1, minWidth: 160, padding: "0 28px 0 0", borderRight: i < 2 ? "1px solid rgba(255,255,255,0.1)" : "none", marginRight: i < 2 ? 28 : 0 }}>
+                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, color: "#fff", lineHeight: 1.1 }}>{stat.val}</div>
+                <div style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginTop: 6 }}>{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* B. Equipment Categories Grid */}
+      <section id="equipment" style={{ ...styles.section, scrollMarginTop: 96 }} className="section-main">
+        <div style={styles.sectionHeader}>
+          <div style={styles.sectionEyebrow}>Our Fleet</div>
+          <div style={styles.greenRule} />
+          <h2 style={styles.sectionH2}>Equipment available for hire</h2>
+          <p style={styles.sectionSub}>Select any category to enquire. All equipment delivered to your site across Dubai.</p>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 20, maxWidth: 1280, margin: "0 auto" }} className="rentals-equipment-grid">
+          {equipmentCategories.map((cat) => (
+            <div key={cat.id} id={cat.id} style={{ background: "#fff", border: "1px solid rgba(26,74,38,0.14)", borderTop: "3px solid #1a4a26", padding: "28px 24px 24px", display: "flex", flexDirection: "column", gap: 14, scrollMarginTop: 96 }}>
+              <div style={{ color: "#1a4a26" }}>{EQUIPMENT_ICONS[cat.id]}</div>
+              <div>
+                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, fontWeight: 700, color: "#141f16", margin: "0 0 8px", lineHeight: 1.2 }}>{cat.name}</h3>
+                <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.7, margin: 0, fontWeight: 300 }}>{cat.description}</p>
+              </div>
+              <a
+                href={`/rentals/${cat.id}`}
+                style={{ ...styles.serviceLinkBtn, marginTop: "auto", alignSelf: "flex-start" }}
+              >
+                See Our Fleet →
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* C. How It Works */}
+      <section style={{ ...styles.section, background: "#f4f8f5", padding: "80px 64px" }} className="section-main rentals-how-it-works">
+        <div style={styles.sectionHeader}>
+          <div style={styles.sectionEyebrow}>The Process</div>
+          <div style={styles.greenRule} />
+          <h2 style={styles.sectionH2}>How it works</h2>
+        </div>
+        <div className="rentals-how-it-works-cards" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20, maxWidth: 1280, margin: "0 auto" }}>
+          {[
+            { number: "01", title: "Tell us what you need", body: "Call or WhatsApp with your equipment requirements and project dates." },
+            { number: "02", title: "We confirm availability", body: "Same-day confirmation on equipment and delivery schedule." },
+            { number: "03", title: "Delivered to your site", body: "Equipment transported, set up, and ready to operate." },
+            { number: "04", title: "Flexible returns", body: "Extend, swap, or return. We handle collection." },
+          ].map((step) => (
+            <div key={step.number} style={{ background: "#fff", borderTop: "3px solid #1a4a26", padding: "28px 24px 24px" }}>
+              <div style={{ fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#1a4a26", fontWeight: 700, marginBottom: 14 }}>{step.number}</div>
+              <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, fontWeight: 700, color: "#141f16", margin: "0 0 10px", lineHeight: 1.25 }}>{step.title}</h3>
+              <p style={{ fontSize: 15, color: "#6b876f", lineHeight: 1.75, margin: 0, fontWeight: 300 }}>{step.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* D. Why Rent From Al Hadeeqa */}
+      <section style={{ ...styles.section, padding: "80px 64px" }} className="section-main">
+        <div style={styles.sectionHeader}>
+          <div style={styles.sectionEyebrow}>Why Al Hadeeqa</div>
+          <div style={styles.greenRule} />
+          <h2 style={styles.sectionH2}>Why rent from us</h2>
+        </div>
+        <div className="rentals-why-rent-cards" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 20, maxWidth: 1280, margin: "0 auto" }}>
+          {[
+            { title: "Licensed & Insured", body: "All equipment maintained and insured. Al Hadeeqa is a Dubai-licensed contractor." },
+            { title: "Delivery & Pickup Included", body: "Equipment delivered to your site and collected when you're done. Dubai-wide." },
+            { title: "Daily, Weekly, Monthly Rates", body: "Flexible rental periods. Long-term discounts available." },
+            { title: "Operator Available", body: "Need an operator? We supply trained operators with select equipment." },
+            { title: "35+ Years in Dubai Construction", body: "We know what works on UAE sites. Get the right machine for your scope." },
+          ].map((point) => (
+            <div key={point.title} style={{ background: "#fff", border: "1px solid rgba(26,74,38,0.14)", borderLeft: "4px solid #1a4a26", padding: "24px 24px 22px" }}>
+              <h3 style={{ fontSize: 16, fontWeight: 700, color: "#141f16", margin: "0 0 10px" }}>{point.title}</h3>
+              <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.75, margin: 0, fontWeight: 300 }}>{point.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* E. Rates / Brochure Section */}
+      <section className="rentals-rates-section" style={{ background: "#f4f8f5", borderTop: "1px solid rgba(26,74,38,0.08)", borderBottom: "1px solid rgba(26,74,38,0.08)", padding: "72px 64px" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
+          <div style={{ flex: 1, minWidth: 280 }}>
+            <div style={styles.sectionEyebrow}>Pricing</div>
+            <div style={{ ...styles.greenRule, margin: "12px 0 18px", marginLeft: 0 }} />
+            <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(28px, 3.5vw, 44px)", marginBottom: 14 }}>
+              Rental Rate Card
+            </h2>
+            <p style={{ fontSize: 17, color: "#6b876f", lineHeight: 1.8, fontWeight: 300, maxWidth: 480, marginBottom: 0 }}>
+              Daily, weekly and monthly rates across all equipment categories. Download our full rate card PDF for a complete pricing overview.
+            </p>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 14, flexShrink: 0 }}>
+            <button
+              style={{ ...styles.btnPrimaryLink, gap: 12, cursor: "default", opacity: 0.72, border: "none" }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Download Rate Card PDF
+            </button>
+            <span style={{ fontSize: 13, color: "#6b876f", letterSpacing: "0.04em" }}>PDF available soon</span>
+          </div>
+        </div>
+      </section>
+
+      {/* F. Cross-Sell Banner */}
+      <section style={{ background: "#1a4a26", padding: "48px 64px" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 32, flexWrap: "wrap" }}>
+          <p style={{ fontSize: 18, color: "rgba(255,255,255,0.88)", lineHeight: 1.7, margin: 0, fontWeight: 300, maxWidth: 680 }}>
+            Need the full package? Al Hadeeqa handles excavation, dewatering, shoring and construction — with our own fleet on site.
+          </p>
+          <a href="/services" style={{ ...styles.btnPrimaryLink, background: "#fff", color: "#1a4a26", flexShrink: 0 }}>View All Services →</a>
+        </div>
+      </section>
+
+      {/* G. FAQ Section */}
+      <section style={{ ...styles.section, padding: "80px 64px" }} className="section-main">
+        <div style={{ maxWidth: 820, margin: "0 auto" }}>
+          <div style={styles.sectionEyebrow}>Common Questions</div>
+          <div style={{ ...styles.greenRule, margin: "12px 0 32px", marginLeft: 0 }} />
+          <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(28px, 3.5vw, 44px)", marginBottom: 36 }}>
+            Equipment rental FAQs
+          </h2>
+          {RENTALS_FAQS.map((faq, i) => (
+            <div key={faq.q} style={{ borderBottom: "1px solid rgba(20,31,22,0.08)", overflow: "hidden" }}>
+              <div
+                style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", padding: "18px 0", cursor: "pointer", gap: 16 }}
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === "Enter" && setOpenFaq(openFaq === i ? null : i)}
+              >
+                <div style={{ fontSize: 15, fontWeight: 600, color: "#141f16", lineHeight: 1.5, flex: 1 }}>{faq.q}</div>
+                <div style={{ fontSize: 18, color: "#5aad6e", fontWeight: 300, flexShrink: 0, lineHeight: 1, marginTop: 2 }}>{openFaq === i ? "−" : "+"}</div>
+              </div>
+              {openFaq === i && <div style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.85, paddingBottom: 18 }}>{faq.a}</div>}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* H. Contact Form */}
+      <Contact defaultService="Equipment Rental" />
+    </>
   );
 }
 
@@ -2547,6 +3139,16 @@ export default function App() {
       return;
     }
 
+    if (route.type === "rentals") {
+      document.title = "Equipment Rentals Dubai | Al Hadeeqa Contracting — Excavators, Pumps, Cranes";
+      return;
+    }
+
+    if (route.type === "rentals-category") {
+      document.title = `${route.category.name} for Hire Dubai | Al Hadeeqa Contracting`;
+      return;
+    }
+
     if (route.type === "faq") {
       document.title = "Frequently Asked Questions | Al Hadeeqa Contracting";
       return;
@@ -2594,6 +3196,10 @@ export default function App() {
     page = <BunkerTierPage tierId="shelter" />;
   } else if (route.type === "vault") {
     page = <StaticPageRedirect to="/vault.html" />;
+  } else if (route.type === "rentals") {
+    page = <RentalsPage />;
+  } else if (route.type === "rentals-category") {
+    page = <EquipmentFleetPage category={route.category} />;
   } else if (route.type === "faq") {
     page = <FAQPage />;
   } else if (route.type === "blog-waterproofing-checklist") {
