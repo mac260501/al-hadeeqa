@@ -1350,6 +1350,7 @@ function ServiceLandingPage({ service, onContact }) {
     title: service.metaTitle || `${service.title} in Dubai | Al Hadeeqa Contracting — ${service.subtitle}`,
     description: service.metaDescription || `${service.heroDescription} Al Hadeeqa Contracting — established 2009, ISO 9001 certified, 50+ crew, 15+ years experience in Dubai. Free site assessment.`,
     canonical: serviceUrl,
+    ogImage: service.image ? `https://alhadeeqacontracting.com${service.image}` : undefined,
     schemas: [
       serviceSchemaObj,
       ...(serviceFAQs.length > 0 ? [faqSchema(serviceFAQs)] : []),
@@ -2524,6 +2525,7 @@ function HomePage({ onContact }) {
     description:
       "Al Hadeeqa Contracting: Dubai's trusted construction company since 2009. Pergolas, carports, dewatering, excavation, underground shelters from AED 100,000, and The Vault luxury underground residence. ISO 9001 certified. 50+ crew. Free site assessment.",
     canonical: "https://alhadeeqacontracting.com/",
+    ogImage: "https://alhadeeqacontracting.com/assets/images/services-hero.jpg",
     schemas: [
       organizationSchema,
       websiteSchema,
@@ -2558,6 +2560,7 @@ function ServicesPage({ onContact }) {
     description:
       "Al Hadeeqa Contracting offers pergola construction, carports, dewatering, excavation, shoring, demolition, glass rooms, waterproofing, and maintenance in Dubai. ISO certified. 15+ years experience. Free site assessment.",
     canonical: "https://alhadeeqacontracting.com/services",
+    ogImage: "https://alhadeeqacontracting.com/assets/images/services-hero.jpg",
     schemas: [
       organizationSchema,
       breadcrumbSchema([
@@ -2640,6 +2643,7 @@ function EquipmentFleetPage({ category }) {
     title: `${category.name} for Hire Dubai | Al Hadeeqa Contracting Equipment Rentals`,
     description: `Rent ${category.name.toLowerCase()} in Dubai. ${category.description}. Daily, weekly and monthly rates. Delivery to your site. Al Hadeeqa Contracting.`,
     canonical: `https://alhadeeqacontracting.com/rentals/${category.id}`,
+    ogImage: `https://alhadeeqacontracting.com${category.image}`,
     schemas: [
       breadcrumbSchema([
         { name: "Home", url: "https://alhadeeqacontracting.com" },
@@ -3023,6 +3027,7 @@ function AboutPage({ onContact }) {
     description:
       "Al Hadeeqa Contracting Co. L.L.C — founded 2009 by Engr. Muhammad Ashraf Jan. Dubai Municipality licensed, ISO 9001:2015 & 14001:2015 certified. 50+ crew, 500+ projects completed across UAE. Pergolas, carports, dewatering, underground shelters.",
     canonical: "https://alhadeeqacontracting.com/about",
+    ogImage: "https://alhadeeqacontracting.com/assets/images/about-hero.jpg",
     schemas: [
       organizationSchema,
       breadcrumbSchema([
@@ -3048,6 +3053,7 @@ function ProjectsPage({ onContact }) {
     description:
       "Browse Al Hadeeqa Contracting's portfolio of 500+ completed projects across Dubai and the UAE — pergolas, carports, underground shelters, dewatering, and bespoke construction.",
     canonical: "https://alhadeeqacontracting.com/projects",
+    ogImage: "https://alhadeeqacontracting.com/assets/images/projects-hero.jpg",
     schemas: [
       organizationSchema,
       breadcrumbSchema([
@@ -3072,6 +3078,7 @@ function ContactPage() {
     description:
       "Contact Al Hadeeqa Contracting Co. L.L.C for a free site assessment and quote. Call or WhatsApp +971 54 441 9854. Serving Dubai and all UAE emirates.",
     canonical: "https://alhadeeqacontracting.com/contact",
+    ogImage: "https://alhadeeqacontracting.com/assets/images/services-hero.jpg",
     schemas: [
       organizationSchema,
       breadcrumbSchema([
