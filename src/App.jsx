@@ -779,7 +779,7 @@ function HomeAboutPreview() {
         </div>
         <div style={styles.aboutImages} className="about-images">
           <img
-            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80"
+            src="/assets/images/construction-remodeling.jpg"
             alt="Construction site Dubai"
             style={styles.aboutImg}
           />
@@ -2200,7 +2200,7 @@ function About() {
         </div>
         <div style={styles.aboutImages} className="about-images">
           <img
-            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80"
+            src="/assets/images/construction-remodeling.jpg"
             alt="Construction site Dubai"
             style={styles.aboutImg}
           />
@@ -2545,8 +2545,8 @@ function HomePage({ onContact }) {
         </div>
       </section>
       <HomeEquipmentCarousel />
-      <HomeServicesPreview />
       <HomeBunkerPreview />
+      <HomeServicesPreview />
       <HomeAboutPreview />
       <HomeProjectsPreview />
       <Contact />
