@@ -225,19 +225,19 @@ function resolveRoute(pathname) {
     return { type: "contact", pathname: normalizedPath };
   }
 
-  if (normalizedPath === "/bunker" || normalizedPath === "/bunkers") {
+  if (normalizedPath === "/bunker" || normalizedPath === "/bunkers" || normalizedPath === "/shelters") {
     return { type: "bunker", pathname: normalizedPath };
   }
 
-  if (normalizedPath === "/bunkers/emergency-pod") {
+  if (normalizedPath === "/bunkers/emergency-pod" || normalizedPath === "/shelters/emergency-pod") {
     return { type: "bunker-emergency-pod", pathname: normalizedPath };
   }
 
-  if (normalizedPath === "/bunkers/compact-shelter") {
+  if (normalizedPath === "/bunkers/compact-shelter" || normalizedPath === "/shelters/compact-shelter") {
     return { type: "bunker-compact-shelter", pathname: normalizedPath };
   }
 
-  if (normalizedPath === "/bunkers/shelter") {
+  if (normalizedPath === "/bunkers/shelter" || normalizedPath === "/shelters/shelter") {
     return { type: "bunker-shelter", pathname: normalizedPath };
   }
 
@@ -1313,7 +1313,6 @@ const SERVICE_SCHEMAS = {
   glassrooms: glassroomsServiceSchema,
   waterproofing: waterproofingServiceSchema,
   maintenance: maintenanceServiceSchema,
-  construction: constructionServiceSchema,
 };
 
 function ServiceFAQItem({ faq }) {
@@ -1478,7 +1477,7 @@ function ServiceLandingPage({ service, onContact }) {
           <div style={styles.sectionHeader}>
             <div style={styles.sectionEyebrow}>Service Breakdown</div>
             <div style={styles.greenRule} />
-            <h2 style={styles.sectionH2}>What we waterproof.</h2>
+            <h2 style={styles.sectionH2}>{service.serviceCardsHeading || "What we cover."}</h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
             {service.serviceCards.map((card) => (
@@ -1510,7 +1509,7 @@ function ServiceLandingPage({ service, onContact }) {
           <div style={styles.sectionHeader}>
             <div style={styles.sectionEyebrow}>Why Al Hadeeqa</div>
             <div style={styles.greenRule} />
-            <h2 style={styles.sectionH2}>Why choose a construction company for waterproofing?</h2>
+            <h2 style={styles.sectionH2}>{service.trustHeading || "Why choose Al Hadeeqa?"}</h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24, maxWidth: 1100, margin: "0 auto" }}>
             {service.trustPoints.map((point, i) => (
@@ -1529,7 +1528,7 @@ function ServiceLandingPage({ service, onContact }) {
           <div style={styles.sectionHeader}>
             <div style={styles.sectionEyebrow}>How It Works</div>
             <div style={styles.greenRule} />
-            <h2 style={styles.sectionH2}>From inspection to warranty.</h2>
+            <h2 style={styles.sectionH2}>{service.processHeading || "How it works."}</h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 24, maxWidth: 1100, margin: "0 auto" }}>
             {service.processSteps.map((step) => (
@@ -2639,16 +2638,27 @@ function WarrantySection() {
 }
 
 function EquipmentFleetPage({ category }) {
+  const BASE_URL = "https://alhadeeqacontracting.com";
+  const categoryUrl = `${BASE_URL}/rentals/${category.id}`;
+  const categoryFAQs = category.faqs || [];
+
   const meta = usePageMeta({
-    title: `${category.name} for Hire Dubai | Al Hadeeqa Contracting Equipment Rentals`,
-    description: `Rent ${category.name.toLowerCase()} in Dubai. ${category.description}. Daily, weekly and monthly rates. Delivery to your site. Al Hadeeqa Contracting.`,
-    canonical: `https://alhadeeqacontracting.com/rentals/${category.id}`,
-    ogImage: `https://alhadeeqacontracting.com${category.image}`,
+    title: category.metaTitle || `${category.name} Rental in Dubai | Al Hadeeqa Contracting`,
+    description: category.metaDescription || `Rent ${category.name.toLowerCase()} in Dubai. ${category.description}. Daily, weekly and monthly rates. Delivery to your site. Al Hadeeqa Contracting.`,
+    canonical: categoryUrl,
+    ogImage: `${BASE_URL}${category.image}`,
     schemas: [
+      serviceSchema({
+        serviceType: `${category.name} Rental`,
+        name: category.metaTitle || `${category.name} Rental in Dubai`,
+        description: category.metaDescription || `${category.description}. Available for daily, weekly, and monthly hire across Dubai.`,
+        serviceUrl: categoryUrl,
+      }),
+      ...(categoryFAQs.length > 0 ? [faqSchema(categoryFAQs)] : []),
       breadcrumbSchema([
-        { name: "Home", url: "https://alhadeeqacontracting.com" },
-        { name: "Equipment Rentals", url: "https://alhadeeqacontracting.com/rentals" },
-        { name: category.name, url: `https://alhadeeqacontracting.com/rentals/${category.id}` },
+        { name: "Home", url: BASE_URL },
+        { name: "Equipment Rentals", url: `${BASE_URL}/rentals` },
+        { name: category.name, url: categoryUrl },
       ]),
     ],
   });
@@ -2674,10 +2684,10 @@ function EquipmentFleetPage({ category }) {
             <div style={{ color: "#5aad6e" }}>{EQUIPMENT_ICONS[category.id]}</div>
           </div>
           <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(44px, 5.5vw, 72px)", lineHeight: 1.04, fontWeight: 700, color: "#fff", margin: "0 0 16px", maxWidth: 760 }}>
-            {category.name}
+            {category.h1 || category.name}
           </h1>
           <p style={{ fontSize: 18, color: "rgba(255,255,255,0.72)", lineHeight: 1.75, fontWeight: 300, maxWidth: 560, margin: "0 0 36px" }}>
-            {category.description}. Available for daily, weekly, or monthly hire across Dubai. Delivery and collection included.
+            {category.intro ? category.intro[0] : `${category.description}. Available for daily, weekly, or monthly hire across Dubai. Delivery and collection included.`}
           </p>
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
             <a href={`https://wa.me/971544419854?text=${waText}`} target="_blank" rel="noreferrer" style={styles.btnPrimaryLink}>
@@ -2751,6 +2761,54 @@ function EquipmentFleetPage({ category }) {
           )}
         </div>
       </section>
+
+      {/* About / Intro second paragraph */}
+      {category.intro && category.intro.length > 1 && (
+        <section style={{ ...styles.section, paddingTop: 0, paddingBottom: 0 }} className="section-main">
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+            <p style={{ fontSize: 16, color: "#556d5b", lineHeight: 1.85, maxWidth: 760, margin: 0 }}>{category.intro[1]}</p>
+          </div>
+        </section>
+      )}
+
+      {/* Use Cases */}
+      {category.useCases && category.useCases.length > 0 && (
+        <section style={{ ...styles.section, paddingTop: "60px" }} className="section-main">
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+            <div style={{ marginBottom: 36 }}>
+              <div style={styles.sectionEyebrow}>Applications</div>
+              <div style={{ ...styles.greenRule, margin: "12px 0 0", marginLeft: 0 }} />
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
+              {category.useCases.map((uc, i) => (
+                <div key={uc.title} style={{ padding: "24px 24px 20px", borderLeft: "3px solid #5aad6e", background: "#f4f8f5" }}>
+                  <div style={{ fontSize: 11, letterSpacing: "0.18em", color: "#5aad6e", fontWeight: 700, marginBottom: 8 }}>0{i + 1}</div>
+                  <h3 style={{ fontSize: 15, fontWeight: 700, color: "#141f16", lineHeight: 1.4, marginBottom: 8 }}>{uc.title}</h3>
+                  <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.8, margin: 0 }}>{uc.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* FAQ Section */}
+      {categoryFAQs.length > 0 && (
+        <section style={{ ...styles.section, paddingTop: "60px" }} className="section-main">
+          <div style={{ maxWidth: 760 }}>
+            <div style={styles.sectionEyebrow}>Common Questions</div>
+            <div style={{ ...styles.greenRule, margin: "12px 0 24px", marginLeft: 0 }} />
+            <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(24px, 3vw, 36px)", marginBottom: 32 }}>
+              Frequently asked about {category.name.toLowerCase()} rental.
+            </h2>
+            <div>
+              {categoryFAQs.map((faq) => (
+                <ServiceFAQItem key={faq.q} faq={faq} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Rate Card Request */}
       <section className="rentals-rates-section" style={{ background: "#f4f8f5", borderTop: "1px solid rgba(26,74,38,0.08)", padding: "56px 64px" }}>
@@ -3158,7 +3216,7 @@ export default function App() {
     }
 
     if (route.type === "rentals-category") {
-      document.title = `${route.category.name} for Hire Dubai | Al Hadeeqa Contracting`;
+      document.title = route.category.metaTitle || `${route.category.name} Rental in Dubai | Al Hadeeqa Contracting`;
       return;
     }
 
