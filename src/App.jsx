@@ -225,19 +225,19 @@ function resolveRoute(pathname) {
     return { type: "contact", pathname: normalizedPath };
   }
 
-  if (normalizedPath === "/bunker" || normalizedPath === "/bunkers" || normalizedPath === "/shelters") {
+  if (normalizedPath === "/bunker" || normalizedPath === "/bunkers") {
     return { type: "bunker", pathname: normalizedPath };
   }
 
-  if (normalizedPath === "/bunkers/emergency-pod" || normalizedPath === "/shelters/emergency-pod") {
+  if (normalizedPath === "/bunkers/emergency-pod") {
     return { type: "bunker-emergency-pod", pathname: normalizedPath };
   }
 
-  if (normalizedPath === "/bunkers/compact-shelter" || normalizedPath === "/shelters/compact-shelter") {
+  if (normalizedPath === "/bunkers/compact-shelter") {
     return { type: "bunker-compact-shelter", pathname: normalizedPath };
   }
 
-  if (normalizedPath === "/bunkers/shelter" || normalizedPath === "/shelters/shelter") {
+  if (normalizedPath === "/bunkers/shelter") {
     return { type: "bunker-shelter", pathname: normalizedPath };
   }
 

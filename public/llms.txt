@@ -1,5 +1,6 @@
 # Al Hadeeqa Contracting Co. L.L.C
 > Dubai-based construction and contracting company specialising in pergolas, carports, dewatering, underground shelters (bunkers), boundary walls, steel structures, swimming pools, landscaping, and general contracting. Established 2009. ISO 9001:2015, ISO 14001:2015, OHSAS 18001:2007 certified. ASCB(E) accredited. 50+ crew. Licensed by Dubai Municipality.
+> Last-Updated: 2026-03-31
 
 ## Services
 
@@ -13,6 +14,18 @@
 - [Glass Rooms & Partitions](https://alhadeeqacontracting.com/services/glassrooms): Architectural glass installations, partitions, balustrades, and enclosures.
 - [Roof Waterproofing](https://alhadeeqacontracting.com/services/waterproofing): Membrane and coating waterproofing systems for flat roofs and terraces. 10-year warranty.
 - [Maintenance](https://alhadeeqacontracting.com/services/maintenance): Planned and reactive property maintenance for villas and commercial properties.
+
+## Equipment Rentals
+
+- [Equipment Rentals Overview](https://alhadeeqacontracting.com/rentals): Heavy construction equipment rental across Dubai and UAE. Daily, weekly, and monthly rates available.
+- [Excavator Rental](https://alhadeeqacontracting.com/rentals/excavators): Mini to large excavators (1.5T–30T+). From AED 1,200/day. Operator available.
+- [Crane Rental](https://alhadeeqacontracting.com/rentals/cranes): Mobile and tower cranes for construction and heavy lifts. From AED 2,500/day.
+- [Dewatering Pump Rental](https://alhadeeqacontracting.com/rentals/dewatering-pumps): Submersible, centrifugal, and vacuum-assisted dewatering pumps for construction sites.
+- [Compactor Rental](https://alhadeeqacontracting.com/rentals/compactors): Plate compactors and roller compactors for soil and asphalt compaction.
+- [Concrete Pump Rental](https://alhadeeqacontracting.com/rentals/concrete-pumps): Truck-mounted and stationary concrete pumps for residential and commercial pours.
+- [Generator Rental](https://alhadeeqacontracting.com/rentals/generators): Diesel generators 20kVA–500kVA for construction sites and events.
+- [Scaffolding Rental](https://alhadeeqacontracting.com/rentals/scaffolding): System and tube-and-clamp scaffolding across Dubai and UAE.
+- [Dump Truck Rental](https://alhadeeqacontracting.com/rentals/dump-trucks): 10T–30T tipper trucks for spoil removal and bulk material delivery.
 
 ## Underground Shelters (Bunkers)
 
