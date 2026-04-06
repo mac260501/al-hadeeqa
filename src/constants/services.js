@@ -119,6 +119,11 @@ export const SERVICES = [
     metaTitle: "Shoring & Earth Retention in Dubai | Al Hadeeqa",
     metaDescription: "Sheet piling, soldier piles & shoring systems for deep excavations in Dubai. Combined shoring, dewatering & excavation from one contractor. Free site assessment.",
     image: "/assets/images/shoring.jpeg",
+    gallery: [
+      "/assets/images/rentals/shoring-1.webp",
+      "/assets/images/rentals/shoring-2.webp",
+      "/assets/images/rentals/shoring-3.webp",
+    ],
     tags: ["Sheet Piling", "Retaining Systems", "Basement Support", "Excavation Safety"],
     summary: [
       "In Dubai's urban environment, any excavation deeper than 1.5–2m in granular soils — or any dig close to an adjacent structure — requires a properly engineered shoring system. Without it, walls collapse, neighbouring buildings settle, and utility lines shift. Shoring is not a precaution; it is a safety and legal requirement.",
@@ -476,6 +481,11 @@ export const SERVICES = [
     metaTitle: "Dewatering Services in Dubai | Construction Dewatering | Al Hadeeqa",
     metaDescription: "Professional dewatering for basements, foundations & deep excavations in Dubai. Wellpoint systems, deep well & sump pumping. Combined with shoring & excavation. Free assessment.",
     image: "/assets/images/dewatering.png",
+    gallery: [
+      "/assets/images/rentals/dewatering-1.webp",
+      "/assets/images/rentals/dewatering-2.webp",
+      "/assets/images/rentals/dewatering-3.webp",
+    ],
     tags: ["Wellpoint Systems", "Groundwater Control", "Deep Excavation", "Site Pumping"],
     summary: [
       "In Dubai's coastal and low-lying areas — Jumeirah, Palm Jumeirah, Dubai Marina, and Business Bay — groundwater is encountered at 1.5–3m below surface. Without active dewatering, any excavation into that zone becomes unstable, unsafe, and unworkable. Al Hadeeqa has been managing groundwater on Dubai construction sites for 15+ years.",

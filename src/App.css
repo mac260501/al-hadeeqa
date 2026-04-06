@@ -533,6 +533,10 @@ html, body {
   .rentals-why-rent-cards {
     grid-template-columns: 1fr !important;
   }
+
+  .fleet-gallery {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 @media (max-width: 480px) {

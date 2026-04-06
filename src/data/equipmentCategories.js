@@ -81,6 +81,11 @@ const equipmentCategories = [
       { q: 'Do you provide pump operators or installation?', a: 'Pump rental is available dry (equipment only). If you need Al Hadeeqa to install and operate the dewatering system throughout your project, that is also available as a managed dewatering service. See our dewatering services page for full details.' },
       { q: 'How long does dewatering take for a typical Dubai basement?', a: 'Wellpoints typically begin drawing the water table down within 24–48 hours of installation. Active dewatering continues for the duration of the excavation and foundation phase — commonly 2–8 weeks on residential projects. The system is decommissioned once the structure is waterproofed and backfilled.' },
     ],
+    gallery: [
+      '/assets/images/rentals/dewatering-1.webp',
+      '/assets/images/rentals/dewatering-2.webp',
+      '/assets/images/rentals/dewatering-3.webp',
+    ],
     items: [],
     rates: null,
   },

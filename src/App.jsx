@@ -944,6 +944,41 @@ const EQUIPMENT_ICONS = {
   ),
 };
 
+function CompanyProfileStrip() {
+  return (
+    <section className="rentals-rates-section" style={{ background: "#f4f8f5", borderTop: "1px solid rgba(26,74,38,0.08)", borderBottom: "1px solid rgba(26,74,38,0.08)", padding: "64px 64px" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, flexWrap: "wrap" }}>
+        <div style={{ flex: 1, minWidth: 280 }}>
+          <div style={styles.sectionEyebrow}>Company Profile</div>
+          <div style={{ ...styles.greenRule, margin: "12px 0 18px", marginLeft: 0 }} />
+          <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(26px, 3vw, 40px)", marginBottom: 14 }}>
+            Download Our Company Profile
+          </h2>
+          <p style={{ fontSize: 16, color: "#6b876f", lineHeight: 1.8, fontWeight: 300, maxWidth: 480, marginBottom: 0 }}>
+            An overview of Al Hadeeqa Contracting — our services, credentials, certifications, and completed projects across Dubai.
+          </p>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 10, flexShrink: 0 }}>
+          <a
+            href="/assets/Al%20Hadeeqa%20Company%20Profile-compressed.pdf"
+            target="_blank"
+            rel="noreferrer"
+            style={{ ...styles.btnPrimaryLink, gap: 12 }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download Company Profile
+          </a>
+          <span style={{ fontSize: 12, color: "#9aafa0", letterSpacing: "0.04em" }}>PDF · Al Hadeeqa Contracting</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HomeEquipmentCarousel() {
   const [ref, inView] = useInView();
   const carouselRef = useRef(null);
@@ -1517,6 +1552,18 @@ function ServiceLandingPage({ service, onContact }) {
                 <div style={{ fontSize: 11, letterSpacing: "0.18em", color: "#5aad6e", fontWeight: 700, marginBottom: 8 }}>0{i + 1}</div>
                 <h3 style={{ fontSize: 16, fontWeight: 700, color: "#141f16", lineHeight: 1.4, marginBottom: 10 }}>{point.title}</h3>
                 <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.8, margin: 0 }}>{point.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {service.gallery && service.gallery.length > 0 && (
+        <section style={{ ...styles.section, paddingTop: 0 }} className="section-main">
+          <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }} className="fleet-gallery">
+            {service.gallery.map((src, i) => (
+              <div key={i} style={{ aspectRatio: "4/3", overflow: "hidden" }}>
+                <img src={src} alt={`${service.title} ${i + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
             ))}
           </div>
@@ -2548,6 +2595,7 @@ function HomePage({ onContact }) {
       <HomeServicesPreview />
       <HomeAboutPreview />
       <HomeProjectsPreview />
+      <CompanyProfileStrip />
       <Contact />
     </>
   );
@@ -2575,6 +2623,7 @@ function ServicesPage({ onContact }) {
       <ServicesQuickNav />
       <ServicesPageSection />
       <LuxurySpotlight onContact={onContact} />
+      <CompanyProfileStrip />
       <Contact />
     </>
   );
@@ -2762,6 +2811,19 @@ function EquipmentFleetPage({ category }) {
         </div>
       </section>
 
+      {/* Photo Gallery */}
+      {category.gallery && category.gallery.length > 0 && (
+        <section style={{ padding: "0 64px 80px" }} className="section-main">
+          <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }} className="fleet-gallery">
+            {category.gallery.map((src, i) => (
+              <div key={i} style={{ aspectRatio: "4/3", overflow: "hidden" }}>
+                <img src={src} alt={`${category.name} ${i + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* About / Intro second paragraph */}
       {category.intro && category.intro.length > 1 && (
         <section style={{ ...styles.section, paddingTop: 0, paddingBottom: 0 }} className="section-main">
@@ -2846,6 +2908,7 @@ function EquipmentFleetPage({ category }) {
         </div>
       </section>
 
+      <CompanyProfileStrip />
       <Contact defaultService="Equipment Rental" />
     </>
   );
@@ -3047,6 +3110,8 @@ function RentalsPage() {
         </div>
       </section>
 
+      <CompanyProfileStrip />
+
       {/* G. FAQ Section */}
       <section style={{ ...styles.section, padding: "80px 64px" }} className="section-main">
         <div style={{ maxWidth: 820, margin: "0 auto" }}>
@@ -3100,6 +3165,7 @@ function AboutPage({ onContact }) {
       <AboutPageHero onContact={onContact} />
       <About />
       <WarrantySection />
+      <CompanyProfileStrip />
       <Contact />
     </>
   );
@@ -3125,6 +3191,7 @@ function ProjectsPage({ onContact }) {
       {meta}
       <ProjectsPageHero onContact={onContact} />
       <Projects />
+      <CompanyProfileStrip />
       <Contact />
     </>
   );
@@ -3248,6 +3315,7 @@ export default function App() {
     page = (
       <>
         <ServiceLandingPage service={route.service} onContact={openContact} />
+        <CompanyProfileStrip />
         <Contact />
       </>
     );
