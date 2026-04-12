@@ -1062,11 +1062,9 @@ function CompanyProfileStrip() {
           </p>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 10, flexShrink: 0 }}>
-          <a
-            href="/assets/Al%20Hadeeqa%20Company%20Profile-compressed.pdf"
-            target="_blank"
-            rel="noreferrer"
-            style={{ ...styles.btnPrimaryLink, gap: 12 }}
+          <button
+            onClick={() => window.open("/assets/Al%20Hadeeqa%20Company%20Profile-compressed.pdf", "_blank", "noreferrer")}
+            style={{ ...styles.btnPrimary, gap: 12, cursor: "pointer" }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
@@ -1074,7 +1072,7 @@ function CompanyProfileStrip() {
               <line x1="12" y1="15" x2="12" y2="3"/>
             </svg>
             Download Company Profile
-          </a>
+          </button>
           <span style={{ fontSize: 12, color: "#9aafa0", letterSpacing: "0.04em" }}>PDF · Al Hadeeqa Contracting</span>
         </div>
       </div>
@@ -1541,13 +1539,12 @@ function ServiceLandingPage({ service, onContact }) {
             <span style={{ fontSize: 13, fontWeight: 700, color: "#141f16", letterSpacing: "0.04em", textTransform: "uppercase" }}>Product Brochure</span>
             <span style={{ fontSize: 13, color: "#6b876f", marginLeft: 12 }}>Full range, specifications & project examples — download as PDF</span>
           </div>
-          <a
-            href={service.brochureUrl}
-            download
-            style={{ background: "#1a4a26", color: "#fff", padding: "10px 22px", textDecoration: "none", fontSize: 13, fontWeight: 700, letterSpacing: "0.07em", display: "inline-flex", alignItems: "center", gap: 8, whiteSpace: "nowrap", flexShrink: 0 }}
+          <button
+            onClick={() => { const a = document.createElement("a"); a.href = service.brochureUrl; a.download = ""; a.click(); }}
+            style={{ background: "#1a4a26", color: "#fff", padding: "10px 22px", border: "none", fontSize: 13, fontWeight: 700, letterSpacing: "0.07em", display: "inline-flex", alignItems: "center", gap: 8, whiteSpace: "nowrap", flexShrink: 0, cursor: "pointer" }}
           >
             ↓ Download Brochure (PDF)
-          </a>
+          </button>
         </div>
       )}
 

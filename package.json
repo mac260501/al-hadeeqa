@@ -44,11 +44,6 @@
       "/rentals/scaffolding",
       "/rentals/dump-trucks"
     ],
-    "skipRoutes": [
-      "/assets/Al%20Hadeeqa%20Company%20Profile-compressed.pdf",
-      "/assets/AlHadeeqa-Glass-Aluminium-Brochure.pdf",
-      "/assets/Al_Hadeeqa_Bunker_Full_Guide.pdf"
-    ],
     "puppeteerArgs": [
       "--no-sandbox",
       "--disable-setuid-sandbox"
