@@ -269,6 +269,23 @@ export const glassroomsServiceSchema = serviceSchema({
   ],
 });
 
+export const glassAluminiumServiceSchema = serviceSchema({
+  serviceType: "Glass & Aluminium Installation",
+  name: "Glass & Aluminium Solutions Dubai | Al Hadeeqa Contracting",
+  description:
+    "Custom glass and aluminium installations for homes and businesses in Dubai. Shower enclosures, mirrors, staircases, doors, windows, partitions, pergolas, and carports.",
+  serviceUrl: `${BASE_URL}/services/glass-aluminium`,
+  catalog: [
+    "Shower Enclosures",
+    "Mirrors & Decorative Glass",
+    "Glass Staircases & Balustrades",
+    "Aluminium Doors & Entryways",
+    "Aluminium Windows & Facades",
+    "Office & Interior Glass Partitions",
+    "Pergolas, Carports & Outdoor Structures",
+  ],
+});
+
 export const waterproofingServiceSchema = {
   ...serviceSchema({
     serviceType: "Waterproofing Services",

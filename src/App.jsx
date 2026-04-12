@@ -26,6 +26,7 @@ import {
   excavationServiceSchema,
   demolitionServiceSchema,
   glassroomsServiceSchema,
+  glassAluminiumServiceSchema,
   waterproofingServiceSchema,
   maintenanceServiceSchema,
   emergencyPodSchema,
@@ -371,6 +372,71 @@ function ContactModal({ service, onClose }) {
   );
 }
 
+function ServicesDropdown({ isServicesActive, isGlassActive }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      style={{ position: "relative" }}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <a
+        href="/services"
+        style={{
+          ...styles.navLink,
+          ...(isServicesActive || isGlassActive ? styles.navLinkActive : {}),
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 4,
+        }}
+      >
+        Services <span style={{ fontSize: 9, opacity: 0.6, marginTop: 1 }}>▾</span>
+      </a>
+      {open && (
+        <div style={{
+          position: "absolute",
+          top: "calc(100% + 8px)",
+          left: "50%",
+          transform: "translateX(-50%)",
+          background: "#fff",
+          border: "1px solid rgba(20,31,22,0.12)",
+          boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+          minWidth: 210,
+          zIndex: 1100,
+          padding: "8px 0",
+        }}>
+          <a href="/services" style={{
+            display: "block",
+            padding: "10px 20px",
+            fontSize: 13,
+            color: "#3d5c42",
+            textDecoration: "none",
+            fontWeight: isServicesActive ? 700 : 500,
+            letterSpacing: "0.03em",
+            background: isServicesActive ? "rgba(90,173,110,0.06)" : "transparent",
+          }}>All Services</a>
+          <div style={{ borderTop: "1px solid rgba(20,31,22,0.08)", margin: "4px 0" }} />
+          <a href="/services/glass-aluminium" style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "10px 20px",
+            fontSize: 13,
+            color: "#1a4a26",
+            textDecoration: "none",
+            fontWeight: 700,
+            letterSpacing: "0.03em",
+            background: isGlassActive ? "rgba(90,173,110,0.08)" : "transparent",
+          }}>
+            <span style={{ color: "#5aad6e", fontSize: 10 }}>◆</span>
+            Glass & Aluminium
+          </a>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Nav({ onContact, route }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -381,23 +447,26 @@ function Nav({ onContact, route }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const SERVICES_LINK = { label: "Services", href: "/services", dropdown: "services" };
+  const VAULT_LINK = { label: "The Vault", href: "/the-vault", vault: true };
+
+  const isOnGlassAluminium = route.type === "service" && route.service && route.service.id === "glass-aluminium";
+
   let navLinks = [
     { label: "Home", href: "/", active: route.type === "home" },
-    { label: "Services", href: "/services" },
+    { ...SERVICES_LINK },
     { label: "Rentals", href: "/rentals" },
     { label: "About", href: "/about" },
     { label: "Projects", href: "/projects" },
     { label: "Bunkers", href: "/bunkers" },
-    { label: "The Vault", href: "/the-vault", vault: true },
+    VAULT_LINK,
     { label: "Contact", href: "/contact" },
   ];
-
-  const VAULT_LINK = { label: "The Vault", href: "/the-vault", vault: true };
 
   if (route.type === "services") {
     navLinks = [
       { label: "Home", href: "/" },
-      { label: "Services", href: "#services-list", active: true },
+      { ...SERVICES_LINK, active: true },
       { label: "Rentals", href: "/rentals" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
@@ -408,7 +477,7 @@ function Nav({ onContact, route }) {
   } else if (route.type === "service") {
     navLinks = [
       { label: "Home", href: "/" },
-      { label: "Services", href: "/services", active: true },
+      { ...SERVICES_LINK, active: true, glassActive: isOnGlassAluminium },
       { label: "Rentals", href: "/rentals" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
@@ -419,7 +488,7 @@ function Nav({ onContact, route }) {
   } else if (route.type === "rentals" || route.type === "rentals-category") {
     navLinks = [
       { label: "Home", href: "/" },
-      { label: "Services", href: "/services" },
+      { ...SERVICES_LINK },
       { label: "Rentals", href: "/rentals", active: true },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
@@ -430,7 +499,7 @@ function Nav({ onContact, route }) {
   } else if (route.type === "about") {
     navLinks = [
       { label: "Home", href: "/" },
-      { label: "Services", href: "/services" },
+      { ...SERVICES_LINK },
       { label: "Rentals", href: "/rentals" },
       { label: "About", href: "/about", active: true },
       { label: "Projects", href: "/projects" },
@@ -441,7 +510,7 @@ function Nav({ onContact, route }) {
   } else if (route.type === "projects") {
     navLinks = [
       { label: "Home", href: "/" },
-      { label: "Services", href: "/services" },
+      { ...SERVICES_LINK },
       { label: "Rentals", href: "/rentals" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects", active: true },
@@ -452,7 +521,7 @@ function Nav({ onContact, route }) {
   } else if (route.type === "contact") {
     navLinks = [
       { label: "Home", href: "/" },
-      { label: "Services", href: "/services" },
+      { ...SERVICES_LINK },
       { label: "Rentals", href: "/rentals" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
@@ -463,7 +532,7 @@ function Nav({ onContact, route }) {
   } else if (route.type === "not-found") {
     navLinks = [
       { label: "Home", href: "/" },
-      { label: "Services", href: "/services" },
+      { ...SERVICES_LINK },
       { label: "Rentals", href: "/rentals" },
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
@@ -489,15 +558,23 @@ function Nav({ onContact, route }) {
       </a>
 
       <div style={styles.navLinks} className="nav-links">
-        {navLinks.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            style={{ ...styles.navLink, ...(link.active ? styles.navLinkActive : {}), ...(link.vault ? styles.navLinkVault : {}) }}
-          >
-            {link.label}
-          </a>
-        ))}
+        {navLinks.map((link) =>
+          link.dropdown === "services" ? (
+            <ServicesDropdown
+              key="services-dropdown"
+              isServicesActive={link.active && !link.glassActive}
+              isGlassActive={link.glassActive || (route.type === "service" && route.service && route.service.id === "glass-aluminium")}
+            />
+          ) : (
+            <a
+              key={link.label}
+              href={link.href}
+              style={{ ...styles.navLink, ...(link.active ? styles.navLinkActive : {}), ...(link.vault ? styles.navLinkVault : {}) }}
+            >
+              {link.label}
+            </a>
+          )
+        )}
       </div>
 
       <button style={styles.navCta} className="nav-cta-desktop" onClick={onContact}>Free Consultation</button>
@@ -510,11 +587,37 @@ function Nav({ onContact, route }) {
 
       {menuOpen && (
         <div style={styles.mobileMenu} className="mobile-menu">
-          {navLinks.map((link) => (
-            <a key={link.label} href={link.href} style={{ ...styles.mobileLink, ...(link.vault ? styles.mobileLinkVault : {}) }} onClick={() => setMenuOpen(false)}>
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.dropdown === "services" ? (
+              <div key="services-mobile-group" style={{ display: "flex", flexDirection: "column", borderBottom: `1px solid ${GREEN_BORDER}`, paddingBottom: 4 }}>
+                <a href="/services" style={{ ...styles.mobileLink, borderBottom: "none", ...(link.active && !link.glassActive ? { color: "#5aad6e", fontWeight: 700 } : {}) }} onClick={() => setMenuOpen(false)}>
+                  Services
+                </a>
+                <a
+                  href="/services/glass-aluminium"
+                  style={{
+                    display: "block",
+                    textDecoration: "none",
+                    paddingLeft: 16,
+                    paddingTop: 8,
+                    paddingBottom: 10,
+                    fontSize: 14,
+                    borderLeft: "2px solid #5aad6e",
+                    marginLeft: 4,
+                    color: isOnGlassAluminium ? "#1a4a26" : "#3d5c42",
+                    fontWeight: isOnGlassAluminium ? 700 : 500,
+                  }}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  ◆ Glass & Aluminium
+                </a>
+              </div>
+            ) : (
+              <a key={link.label} href={link.href} style={{ ...styles.mobileLink, ...(link.vault ? styles.mobileLinkVault : {}) }} onClick={() => setMenuOpen(false)}>
+                {link.label}
+              </a>
+            )
+          )}
           <div style={styles.mobileCta}>
             <button
               style={{ ...styles.navCta, width: "100%" }}
@@ -1346,6 +1449,7 @@ const SERVICE_SCHEMAS = {
   excavation: excavationServiceSchema,
   demolition: demolitionServiceSchema,
   glassrooms: glassroomsServiceSchema,
+  "glass-aluminium": glassAluminiumServiceSchema,
   waterproofing: waterproofingServiceSchema,
   maintenance: maintenanceServiceSchema,
 };
@@ -1431,6 +1535,22 @@ function ServiceLandingPage({ service, onContact }) {
         </div>
       </section>
 
+      {service.brochureUrl && (
+        <div style={{ background: "#f4f7f4", borderBottom: "1px solid rgba(20,31,22,0.1)", padding: "18px 64px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }} className="brochure-strip">
+          <div>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "#141f16", letterSpacing: "0.04em", textTransform: "uppercase" }}>Product Brochure</span>
+            <span style={{ fontSize: 13, color: "#6b876f", marginLeft: 12 }}>Full range, specifications & project examples — download as PDF</span>
+          </div>
+          <a
+            href={service.brochureUrl}
+            download
+            style={{ background: "#1a4a26", color: "#fff", padding: "10px 22px", textDecoration: "none", fontSize: 13, fontWeight: 700, letterSpacing: "0.07em", display: "inline-flex", alignItems: "center", gap: 8, whiteSpace: "nowrap", flexShrink: 0 }}
+          >
+            ↓ Download Brochure (PDF)
+          </a>
+        </div>
+      )}
+
       {service.urgencyBanner && (
         <div className="urgency-banner" style={{ background: "#1a4a26", color: "#fff", padding: "18px 64px", display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap", justifyContent: "space-between" }}>
           <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, flex: 1, minWidth: 200 }}>
@@ -1464,7 +1584,7 @@ function ServiceLandingPage({ service, onContact }) {
               <div style={styles.serviceSidebarLabel}>Scope Snapshot</div>
               <div style={styles.serviceSidebarTitle}>{service.title}</div>
               <p style={styles.serviceSidebarText}>
-                Al Hadeeqa delivers this service with its own licensed, in-house team. No subcontracting — the same crew that quotes is the crew that builds.
+                {service.sidebarNote || "Al Hadeeqa delivers this service with its own licensed, in-house team. No subcontracting — the same crew that quotes is the crew that builds."}
               </p>
             </div>
             <div style={styles.serviceSidebarCard}>
@@ -1554,6 +1674,38 @@ function ServiceLandingPage({ service, onContact }) {
                 <p style={{ fontSize: 14, color: "#6b876f", lineHeight: 1.8, margin: 0 }}>{point.body}</p>
               </div>
             ))}
+          </div>
+        </section>
+      )}
+
+      {service.videoUrl && (
+        <section style={{ background: "#0d1a10", padding: "80px 64px" }} className="service-video-section">
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+            <div className="service-video-row">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="service-video"
+                style={{ aspectRatio: "16/9", objectFit: "cover", display: "block" }}
+              >
+                <source src={service.videoUrl} type="video/mp4" />
+              </video>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 700, marginBottom: 12 }}>In Progress</div>
+                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: 16 }}>
+                  Built on site.<br />
+                  <em style={{ color: "#5aad6e", fontStyle: "italic" }}>Managed by our team.</em>
+                </h3>
+                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.62)", lineHeight: 1.85, margin: "0 0 24px" }}>
+                  Every glass and aluminium installation is surveyed, fabricated to exact site measurements, and installed by Al Hadeeqa's licensed crew. This is what construction-standard glass work looks like on the ground.
+                </p>
+                <a href="#contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#5aad6e", color: "#fff", padding: "11px 22px", textDecoration: "none", fontSize: 13, fontWeight: 700, letterSpacing: "0.07em" }}>
+                  Request a Site Assessment →
+                </a>
+              </div>
+            </div>
           </div>
         </section>
       )}
@@ -2125,6 +2277,108 @@ function BunkerFAQItem({ faq, S }) {
   );
 }
 
+function GlassAluminiumSpotlight({ onContact }) {
+  const [ref, inView] = useInView();
+
+  return (
+    <section style={{ background: "#0d1a10", position: "relative", overflow: "hidden" }} className="glass-aluminium-spotlight">
+      {/* subtle texture overlay */}
+      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 70% 50%, rgba(90,173,110,0.07) 0%, transparent 65%)", pointerEvents: "none" }} />
+
+      <div
+        ref={ref}
+        style={{ maxWidth: 1280, margin: "0 auto" }}
+        className="glass-spotlight-inner"
+      >
+        {/* ── LEFT: copy ── */}
+        <div
+          style={{
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateX(0)" : "translateX(-30px)",
+            transition: "opacity 0.7s ease, transform 0.7s ease",
+          }}
+          className="glass-spotlight-text"
+        >
+          <div style={{ fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 700, marginBottom: 12 }}>Glass & Aluminium</div>
+          <div style={{ width: 36, height: 2, background: "#5aad6e", marginBottom: 24 }} />
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 54px)", fontWeight: 700, color: "#fff", lineHeight: 1.15, margin: "0 0 20px" }}>
+            Seven categories.<br />
+            <em style={{ color: "#5aad6e", fontStyle: "italic" }}>One specialist team.</em>
+          </h2>
+          <p style={{ fontSize: 15, color: "rgba(255,255,255,0.65)", lineHeight: 1.85, margin: "0 0 28px" }}>
+            From frameless shower enclosures and LED-backlit mirrors to glass staircases, aluminium windows, office partitions, pergolas, and carports — Al Hadeeqa delivers every category of glass and aluminium work to a construction standard.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 11, marginBottom: 36 }}>
+            {[
+              "Shower enclosures & mirrors",
+              "Glass staircases & balustrades",
+              "Aluminium doors & windows",
+              "Office & interior partitions",
+              "Pergolas, carports & mashrabiya",
+            ].map((item) => (
+              <div key={item} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "rgba(255,255,255,0.78)" }}>
+                <span style={{ color: "#5aad6e", fontWeight: 700, fontSize: 12, flexShrink: 0 }}>◆</span>
+                {item}
+              </div>
+            ))}
+          </div>
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+            <a href="/services/glass-aluminium" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#5aad6e", color: "#fff", padding: "13px 26px", textDecoration: "none", fontSize: 13, fontWeight: 700, letterSpacing: "0.07em" }}>
+              View Full Range →
+            </a>
+            <button
+              onClick={() => onContact("Glass & Aluminium")}
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", color: "rgba(255,255,255,0.78)", border: "1px solid rgba(255,255,255,0.22)", padding: "13px 22px", fontSize: 13, fontWeight: 600, letterSpacing: "0.06em", cursor: "pointer" }}
+            >
+              <WaIcon /> Get a Quote
+            </button>
+          </div>
+        </div>
+
+        {/* ── RIGHT: video + photo grid ── */}
+        <div
+          style={{
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateX(0)" : "translateX(30px)",
+            transition: "opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s",
+          }}
+          className="glass-spotlight-media"
+        >
+          {/* Primary: looping video */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ width: "100%", aspectRatio: "16/9", objectFit: "cover", display: "block", marginBottom: 10 }}
+          >
+            <source src="/assets/images/glass-aluminium/aluminium-structure-walkthrough-1.mp4" type="video/mp4" />
+          </video>
+
+          {/* Photo strip below */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+            <img
+              src="/assets/images/glass-aluminium/staircase-balustrade-led.png"
+              alt="Glass staircase balustrade"
+              style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block" }}
+            />
+            <img
+              src="/assets/images/glass-aluminium/shower-enclosure-black-marble.png"
+              alt="Frameless shower enclosure"
+              style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block" }}
+            />
+            <img
+              src="/assets/images/glass-aluminium/pergola-louvred-white-kitchen.jpeg"
+              alt="Aluminium pergola with outdoor kitchen"
+              style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block" }}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function LuxurySpotlight({ onContact }) {
   const [ref, inView] = useInView();
 
@@ -2592,6 +2846,7 @@ function HomePage({ onContact }) {
       </section>
       <HomeEquipmentCarousel />
       <HomeBunkerPreview />
+      <GlassAluminiumSpotlight onContact={onContact} />
       <HomeServicesPreview />
       <HomeAboutPreview />
       <HomeProjectsPreview />
@@ -2622,6 +2877,7 @@ function ServicesPage({ onContact }) {
       <ServicesPageHero onContact={onContact} />
       <ServicesQuickNav />
       <ServicesPageSection />
+      <GlassAluminiumSpotlight onContact={onContact} />
       <LuxurySpotlight onContact={onContact} />
       <CompanyProfileStrip />
       <Contact />
