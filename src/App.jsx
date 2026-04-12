@@ -2347,27 +2347,24 @@ function GlassAluminiumSpotlight({ onContact }) {
             loop
             muted
             playsInline
-            style={{ width: "100%", aspectRatio: "16/9", objectFit: "cover", display: "block", marginBottom: 10 }}
+            className="glass-spotlight-video"
           >
             <source src="/assets/images/glass-aluminium/aluminium-structure-walkthrough-1.mp4" type="video/mp4" />
           </video>
 
           {/* Photo strip below */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+          <div className="glass-spotlight-photo-strip">
             <img
               src="/assets/images/glass-aluminium/staircase-balustrade-led.png"
               alt="Glass staircase balustrade"
-              style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block" }}
             />
             <img
               src="/assets/images/glass-aluminium/shower-enclosure-black-marble.png"
               alt="Frameless shower enclosure"
-              style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block" }}
             />
             <img
               src="/assets/images/glass-aluminium/pergola-louvred-white-kitchen.jpeg"
               alt="Aluminium pergola with outdoor kitchen"
-              style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block" }}
             />
           </div>
         </div>
@@ -4139,7 +4136,7 @@ const bStyles = {
   },
   heroH1: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(44px, 6vw, 86px)",
+    fontSize: "clamp(44px, 5vw, 72px)",
     fontWeight: 700,
     lineHeight: 1.04,
     color: "#141f16",

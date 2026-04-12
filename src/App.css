@@ -798,16 +798,39 @@ html, body {
 .glass-spotlight-inner {
   display: flex !important;
   gap: 72px !important;
-  align-items: center !important;
+  align-items: flex-start !important;
 }
 
 .glass-spotlight-text {
   flex: 0 0 420px !important;
+  padding-top: 8px !important;
 }
 
 .glass-spotlight-media {
   flex: 1 !important;
   min-width: 0 !important;
+}
+
+.glass-spotlight-video {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 380px !important;
+  object-fit: cover !important;
+  display: block !important;
+  margin-bottom: 10px !important;
+}
+
+.glass-spotlight-photo-strip {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 10px !important;
+}
+
+.glass-spotlight-photo-strip img {
+  width: 100% !important;
+  height: 140px !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
 @media (max-width: 1024px) {
