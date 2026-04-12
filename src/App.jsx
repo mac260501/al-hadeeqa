@@ -4136,7 +4136,7 @@ const bStyles = {
   },
   heroH1: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(44px, 5vw, 72px)",
+    fontSize: "clamp(44px, 4.5vw, 68px)",
     fontWeight: 700,
     lineHeight: 1.04,
     color: "#141f16",
@@ -5002,7 +5002,7 @@ const styles = {
   alertText: { fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", color: "#3d5c42", fontWeight: 500 },
   heroH1: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(40px, 5.5vw, 80px)",
+    fontSize: "clamp(44px, 4.5vw, 68px)",
     fontWeight: 700,
     lineHeight: 1.06,
     color: "#141f16",
