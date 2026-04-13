@@ -46,6 +46,10 @@ html, body {
 
 /* ── TABLET (≤ 1024px) ── */
 @media (max-width: 1024px) {
+  .hero-h1, .page-hero-title {
+    font-size: 48px !important;
+  }
+
   .section-main {
     padding: 80px 40px !important;
   }
@@ -143,7 +147,7 @@ html, body {
   }
 
   .hero-h1 {
-    font-size: clamp(30px, 8vw, 44px) !important;
+    font-size: 36px !important;
     margin-bottom: 12px !important;
   }
 

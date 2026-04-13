@@ -1221,7 +1221,7 @@ function ServicesPageHero({ onContact }) {
           <a href="/" style={styles.backToOverview}>← Back to Home</a>
           <div style={styles.sectionEyebrow}>Dedicated Services</div>
           <div style={{ ...styles.greenRule, marginLeft: 0 }} />
-          <h1 style={styles.pageHeroTitle}>
+          <h1 style={styles.pageHeroTitle} className="page-hero-title">
             Ten services. One team. Nothing subcontracted.
           </h1>
           <p style={styles.pageHeroSub}>
@@ -1272,7 +1272,7 @@ function AboutPageHero({ onContact }) {
           <a href="/" style={styles.backToOverview}>← Back to Home</a>
           <div style={styles.sectionEyebrow}>About Al Hadeeqa</div>
           <div style={{ ...styles.greenRule, marginLeft: 0 }} />
-          <h1 style={styles.pageHeroTitle}>
+          <h1 style={styles.pageHeroTitle} className="page-hero-title">
             A licensed contractor with depth, not just range.
           </h1>
           <p style={styles.pageHeroSub}>
@@ -1323,7 +1323,7 @@ function ProjectsPageHero({ onContact }) {
           <a href="/" style={styles.backToOverview}>← Back to Home</a>
           <div style={styles.sectionEyebrow}>Projects</div>
           <div style={{ ...styles.greenRule, marginLeft: 0 }} />
-          <h1 style={styles.pageHeroTitle}>
+          <h1 style={styles.pageHeroTitle} className="page-hero-title">
             A clearer look at the kind of work we deliver.
           </h1>
           <p style={styles.pageHeroSub}>
@@ -1522,7 +1522,7 @@ function ServiceLandingPage({ service, onContact }) {
             <a href="/services" style={styles.backToOverview}>← Back to Services</a>
             <div style={styles.sectionEyebrow}>Al Hadeeqa Contracting</div>
             <div style={{ ...styles.greenRule, marginLeft: 0 }} />
-            <h1 style={styles.serviceHeroTitle}>{service.title}</h1>
+            <h1 style={styles.serviceHeroTitle} className="page-hero-title">{service.title}</h1>
             <div style={styles.serviceHeroSubtitle}>{service.subtitle}</div>
             <p style={styles.serviceHeroSub}>{service.heroDescription}</p>
             <div style={styles.serviceHeroTags}>
@@ -2613,7 +2613,7 @@ function Contact({ pageOffset = false, defaultService = "" }) {
         <div style={styles.contactText}>
           <div style={{ ...styles.sectionEyebrow, color: "rgba(255,255,255,0.6)" }}>Reach Out</div>
           <div style={{ ...styles.greenRule, margin: "12px 0 24px", marginLeft: 0 }} />
-          <h2 style={{ ...styles.pageHeroTitle, color: "#fff", textAlign: "left", margin: "0 0 28px" }}>
+          <h2 style={{ ...styles.pageHeroTitle, color: "#fff", textAlign: "left", margin: "0 0 28px" }} className="page-hero-title">
             Ready to start?<br />
             <em style={{ color: "#5aad6e", fontStyle: "italic" }}>We're one call away.</em>
           </h2>
@@ -4152,7 +4152,7 @@ const bStyles = {
   },
   heroH1: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(42px, 5vw, 72px)",
+    fontSize: 60,
     fontWeight: 700,
     lineHeight: 1.04,
     color: "#141f16",
@@ -5018,7 +5018,7 @@ const styles = {
   alertText: { fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", color: "#3d5c42", fontWeight: 500 },
   heroH1: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(42px, 5vw, 72px)",
+    fontSize: 60,
     fontWeight: 700,
     lineHeight: 1.06,
     color: "#141f16",
@@ -5164,7 +5164,7 @@ const styles = {
   },
   pageHeroTitle: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(42px, 5vw, 72px)",
+    fontSize: 60,
     fontWeight: 700,
     lineHeight: 1.06,
     margin: "0 0 18px",
@@ -5234,7 +5234,7 @@ const styles = {
   serviceHeroCopy: { minWidth: 0 },
   serviceHeroTitle: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(44px, 5.2vw, 76px)",
+    fontSize: 60,
     lineHeight: 1.02,
     fontWeight: 700,
     margin: "0 0 12px",
