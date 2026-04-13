@@ -402,14 +402,17 @@ function ServicesDropdown({ isServicesActive, isGlassActive }) {
       {open && (
         <div style={{
           position: "absolute",
-          top: "calc(100% + 8px)",
+          top: "100%",
           left: "50%",
           transform: "translateX(-50%)",
+          paddingTop: 8,
+          minWidth: 210,
+          zIndex: 1100,
+        }}>
+        <div style={{
           background: "#fff",
           border: "1px solid rgba(20,31,22,0.12)",
           boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-          minWidth: 210,
-          zIndex: 1100,
           padding: "8px 0",
         }}>
           <a href="/services" style={{
@@ -438,6 +441,7 @@ function ServicesDropdown({ isServicesActive, isGlassActive }) {
             <span style={{ color: "#5aad6e", fontSize: 10 }}>◆</span>
             Glass & Aluminium
           </a>
+        </div>
         </div>
       )}
     </div>
