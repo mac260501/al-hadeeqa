@@ -2597,7 +2597,7 @@ function Contact({ pageOffset = false, defaultService = "" }) {
         <div style={styles.contactText}>
           <div style={{ ...styles.sectionEyebrow, color: "rgba(255,255,255,0.6)" }}>Reach Out</div>
           <div style={{ ...styles.greenRule, margin: "12px 0 24px", marginLeft: 0 }} />
-          <h2 style={{ ...styles.sectionH2, color: "#fff", textAlign: "left" }}>
+          <h2 style={{ ...styles.pageHeroTitle, color: "#fff", textAlign: "left", margin: "0 0 28px" }}>
             Ready to start?<br />
             <em style={{ color: "#5aad6e", fontStyle: "italic" }}>We're one call away.</em>
           </h2>
@@ -2982,7 +2982,7 @@ function EquipmentFleetPage({ category }) {
           <div style={{ color: "#1a4a26", marginBottom: 20 }}>
             <div style={{ color: "#5aad6e" }}>{EQUIPMENT_ICONS[category.id]}</div>
           </div>
-          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(44px, 5.5vw, 72px)", lineHeight: 1.04, fontWeight: 700, color: "#fff", margin: "0 0 16px", maxWidth: 760 }}>
+          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(42px, 5vw, 72px)", lineHeight: 1.06, fontWeight: 700, color: "#fff", margin: "0 0 16px", maxWidth: 760 }}>
             {category.h1 || category.name}
           </h1>
           <p style={{ fontSize: 18, color: "rgba(255,255,255,0.72)", lineHeight: 1.75, fontWeight: 300, maxWidth: 560, margin: "0 0 36px" }}>
@@ -3221,7 +3221,7 @@ function RentalsPage() {
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative" }}>
           <div style={{ ...styles.sectionEyebrow, color: "rgba(255,255,255,0.6)", marginBottom: 10 }}>Al Hadeeqa Contracting</div>
           <div style={{ width: 36, height: 2, background: "#5aad6e", margin: "0 0 28px" }} />
-          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(44px, 5.5vw, 80px)", lineHeight: 1.02, fontWeight: 700, color: "#fff", margin: "0 0 20px", maxWidth: 820 }}>
+          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(42px, 5vw, 72px)", lineHeight: 1.06, fontWeight: 700, color: "#fff", margin: "0 0 20px", maxWidth: 820 }}>
             Construction Equipment Rentals
           </h1>
           <p style={{ fontSize: 20, color: "rgba(255,255,255,0.72)", lineHeight: 1.75, fontWeight: 300, maxWidth: 600, margin: "0 0 36px" }}>
@@ -4136,7 +4136,7 @@ const bStyles = {
   },
   heroH1: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(44px, 4.5vw, 68px)",
+    fontSize: "clamp(42px, 5vw, 72px)",
     fontWeight: 700,
     lineHeight: 1.04,
     color: "#141f16",
@@ -5002,7 +5002,7 @@ const styles = {
   alertText: { fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", color: "#3d5c42", fontWeight: 500 },
   heroH1: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(44px, 4.5vw, 68px)",
+    fontSize: "clamp(42px, 5vw, 72px)",
     fontWeight: 700,
     lineHeight: 1.06,
     color: "#141f16",
