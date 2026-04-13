@@ -1065,7 +1065,7 @@ function CompanyProfileStrip() {
         <div style={{ flex: 1, minWidth: 280 }}>
           <div style={styles.sectionEyebrow}>Company Profile</div>
           <div style={{ ...styles.greenRule, margin: "12px 0 18px", marginLeft: 0 }} />
-          <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(26px, 3vw, 40px)", marginBottom: 14 }}>
+          <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: 34, marginBottom: 14 }}>
             Download Our Company Profile
           </h2>
           <p style={{ fontSize: 16, color: "#6b876f", lineHeight: 1.8, fontWeight: 300, maxWidth: 480, marginBottom: 0 }}>
@@ -1120,7 +1120,7 @@ function HomeEquipmentCarousel() {
           <div>
             <div style={styles.sectionEyebrow}>Equipment Rentals</div>
             <div style={{ ...styles.greenRule, margin: "12px 0 16px", marginLeft: 0 }} />
-            <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(28px, 3.5vw, 48px)", margin: 0 }}>
+            <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: 38, margin: 0 }}>
               Construction equipment.<br />
               <em style={{ fontStyle: "italic", color: "#1a4a26" }}>Ready when you are.</em>
             </h2>
@@ -1366,7 +1366,7 @@ function ServicesQuickNav() {
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <div style={styles.sectionEyebrow}>Everything We Do</div>
           <div style={styles.greenRule} />
-          <h2 style={{ ...styles.sectionH2, fontSize: "clamp(26px, 3vw, 40px)" }}>
+          <h2 style={{ ...styles.sectionH2, fontSize: 34 }}>
             Services at a Glance
           </h2>
           <p style={{ ...styles.sectionSub, marginTop: 12 }}>
@@ -1707,7 +1707,7 @@ function ServiceLandingPage({ service, onContact }) {
               </video>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 700, marginBottom: 12 }}>In Progress</div>
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: 16 }}>
+                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, fontWeight: 700, color: "#fff", lineHeight: 1.2, marginBottom: 16 }}>
                   Built on site.<br />
                   <em style={{ color: "#5aad6e", fontStyle: "italic" }}>Managed by our team.</em>
                 </h3>
@@ -1759,7 +1759,7 @@ function ServiceLandingPage({ service, onContact }) {
           <div style={{ maxWidth: 760 }}>
             <div style={styles.sectionEyebrow}>Common Questions</div>
             <div style={{ ...styles.greenRule, marginLeft: 0, margin: "12px 0 24px" }} />
-            <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(24px, 3vw, 36px)", marginBottom: 32 }}>
+            <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: 30, marginBottom: 32 }}>
               Frequently asked about {service.title.toLowerCase()}.
             </h2>
             <div>
@@ -1875,7 +1875,7 @@ function BlogWaterproofingChecklist({ onContact }) {
     hero: { background: "#132017", padding: "140px 64px 60px", borderBottom: "1px solid rgba(90,173,110,0.2)" },
     heroInner: { maxWidth: 800, margin: "0 auto" },
     eyebrow: { fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 700, marginBottom: 12 },
-    h1: { fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 700, color: "#fff", lineHeight: 1.1, marginBottom: 20 },
+    h1: { fontFamily: "'Cormorant Garamond', serif", fontSize: 44, fontWeight: 700, color: "#fff", lineHeight: 1.1, marginBottom: 20 },
     meta: { fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 32 },
     content: { maxWidth: 800, margin: "0 auto", padding: "60px 64px" },
     h2: { fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 700, color: "#141f16", marginTop: 48, marginBottom: 16, paddingBottom: 10, borderBottom: "2px solid #5aad6e" },
@@ -2022,7 +2022,7 @@ function BlogWaterproofingChecklist({ onContact }) {
         <div style={{ marginTop: 48 }}>
           <div style={{ fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", color: "#1a4a26", fontWeight: 600 }}>Common Questions</div>
           <div style={{ width: 36, height: 2, background: "#1a4a26", margin: "12px 0 24px" }} />
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 700, color: "#141f16", marginBottom: 32 }}>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 30, fontWeight: 700, color: "#141f16", marginBottom: 32 }}>
             Frequently asked.
           </h2>
           {BLOG_WATERPROOFING_FAQS.map((faq) => (
@@ -2314,7 +2314,7 @@ function GlassAluminiumSpotlight({ onContact }) {
         >
           <div style={{ fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 700, marginBottom: 12 }}>Glass & Aluminium</div>
           <div style={{ width: 36, height: 2, background: "#5aad6e", marginBottom: 24 }} />
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 54px)", fontWeight: 700, color: "#fff", lineHeight: 1.15, margin: "0 0 20px" }}>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 44, fontWeight: 700, color: "#fff", lineHeight: 1.15, margin: "0 0 20px" }}>
             Seven categories.<br />
             <em style={{ color: "#5aad6e", fontStyle: "italic" }}>One specialist team.</em>
           </h2>
@@ -2901,7 +2901,7 @@ function WarrantySection() {
       <div style={{ maxWidth: 820, margin: "0 auto" }}>
         <div style={styles.sectionEyebrow}>Our Guarantee</div>
         <div style={{ ...styles.greenRule, marginLeft: 0, margin: "12px 0 24px" }} />
-        <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(24px, 3vw, 36px)", marginBottom: 24 }}>
+        <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: 30, marginBottom: 24 }}>
           10-Year Warranty — What It Covers
         </h2>
         <p style={{ ...styles.aboutDesc, marginBottom: 16 }}>
@@ -3343,7 +3343,7 @@ function RentalsPage() {
           <div style={{ flex: 1, minWidth: 280 }}>
             <div style={styles.sectionEyebrow}>Pricing</div>
             <div style={{ ...styles.greenRule, margin: "12px 0 18px", marginLeft: 0 }} />
-            <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(28px, 3.5vw, 44px)", marginBottom: 14 }}>
+            <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: 36, marginBottom: 14 }}>
               Rental Rate Card
             </h2>
             <p style={{ fontSize: 17, color: "#6b876f", lineHeight: 1.8, fontWeight: 300, maxWidth: 480, marginBottom: 0 }}>
@@ -3383,7 +3383,7 @@ function RentalsPage() {
         <div style={{ maxWidth: 820, margin: "0 auto" }}>
           <div style={styles.sectionEyebrow}>Common Questions</div>
           <div style={{ ...styles.greenRule, margin: "12px 0 32px", marginLeft: 0 }} />
-          <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: "clamp(28px, 3.5vw, 44px)", marginBottom: 36 }}>
+          <h2 style={{ ...styles.sectionH2, textAlign: "left", fontSize: 36, marginBottom: 36 }}>
             Equipment rental FAQs
           </h2>
           {RENTALS_FAQS.map((faq, i) => (
@@ -4270,7 +4270,7 @@ const bStyles = {
   },
   leftH2: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(32px, 4vw, 52px)",
+    fontSize: 44,
     fontWeight: 700,
     lineHeight: 1.1,
     color: "#141f16",
@@ -4445,7 +4445,7 @@ const bStyles = {
   },
   videoH2: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(38px, 5.5vw, 76px)",
+    fontSize: 54,
     fontWeight: 700,
     color: "#fff",
     lineHeight: 1.05,
@@ -4778,7 +4778,7 @@ const bStyles = {
   },
   ctaH2: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(36px, 5vw, 62px)",
+    fontSize: 50,
     fontWeight: 700,
     color: "#fff",
     lineHeight: 1.08,
@@ -5110,7 +5110,7 @@ const styles = {
   greenRule: { width: 36, height: 2, background: GREEN, margin: "12px auto 18px" },
   sectionH2: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(36px, 4vw, 56px)",
+    fontSize: 44,
     fontWeight: 700,
     lineHeight: 1.12,
     textAlign: "center",
@@ -5298,7 +5298,7 @@ const styles = {
   },
   serviceSectionTitle: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(32px, 4vw, 48px)",
+    fontSize: 40,
     lineHeight: 1.08,
     fontWeight: 700,
     margin: "0 0 18px",
@@ -5472,7 +5472,7 @@ const styles = {
   },
   homeBunkerTitle: {
     fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "clamp(34px, 4vw, 52px)",
+    fontSize: 44,
     lineHeight: 1.08,
     color: "#fff",
     margin: "0 0 16px",

@@ -50,6 +50,10 @@ html, body {
     font-size: 48px !important;
   }
 
+  .section-h2 {
+    font-size: 36px !important;
+  }
+
   .section-main {
     padding: 80px 40px !important;
   }
@@ -149,6 +153,14 @@ html, body {
   .hero-h1 {
     font-size: 36px !important;
     margin-bottom: 12px !important;
+  }
+
+  .page-hero-title {
+    font-size: 36px !important;
+  }
+
+  .section-h2 {
+    font-size: 28px !important;
   }
 
   .hero-sub {
