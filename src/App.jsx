@@ -2998,7 +2998,7 @@ function EquipmentFleetPage({ category }) {
           <div style={{ color: "#1a4a26", marginBottom: 20 }}>
             <div style={{ color: "#5aad6e" }}>{EQUIPMENT_ICONS[category.id]}</div>
           </div>
-          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(42px, 5vw, 72px)", lineHeight: 1.06, fontWeight: 700, color: "#fff", margin: "0 0 16px", maxWidth: 760 }}>
+          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 60, lineHeight: 1.06, fontWeight: 700, color: "#fff", margin: "0 0 16px", maxWidth: 760 }} className="page-hero-title">
             {category.h1 || category.name}
           </h1>
           <p style={{ fontSize: 18, color: "rgba(255,255,255,0.72)", lineHeight: 1.75, fontWeight: 300, maxWidth: 560, margin: "0 0 36px" }}>
@@ -3237,7 +3237,7 @@ function RentalsPage() {
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative" }}>
           <div style={{ ...styles.sectionEyebrow, color: "rgba(255,255,255,0.6)", marginBottom: 10 }}>Al Hadeeqa Contracting</div>
           <div style={{ width: 36, height: 2, background: "#5aad6e", margin: "0 0 28px" }} />
-          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(42px, 5vw, 72px)", lineHeight: 1.06, fontWeight: 700, color: "#fff", margin: "0 0 20px", maxWidth: 820 }}>
+          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 60, lineHeight: 1.06, fontWeight: 700, color: "#fff", margin: "0 0 20px", maxWidth: 820 }} className="page-hero-title">
             Construction Equipment Rentals
           </h1>
           <p style={{ fontSize: 20, color: "rgba(255,255,255,0.72)", lineHeight: 1.75, fontWeight: 300, maxWidth: 600, margin: "0 0 36px" }}>
