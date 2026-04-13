@@ -54,6 +54,13 @@ import {
 import FAQPage from "./pages/FAQPage";
 import equipmentCategories from "./data/equipmentCategories";
 
+// Services display order for grids/nav
+const SERVICES_ORDERED = [
+  "construction", "glass-aluminium", "shoring", "pergolas", "carports",
+  "equipment-rentals", "waterproofing", "excavation", "dewatering", "demolition",
+  "glassrooms", "maintenance",
+].map((id) => SERVICES.find((s) => s.id === id)).filter(Boolean);
+
 const LogoImg = ({ size = 44 }) => (
   <img
     src="/logo.jpeg"
@@ -1364,7 +1371,7 @@ function ServicesQuickNav() {
         </div>
 
         <div style={styles.servicesNavGrid} className="services-nav-grid">
-          {SERVICES.map((service, index) => (
+          {SERVICES_ORDERED.map((service, index) => (
             <a
               key={service.id}
               href={`#${getServiceAnchorId(service.id)}`}
@@ -1410,7 +1417,7 @@ function ServicesPageSection() {
       </div>
 
       <div style={styles.servicesGrid} className="services-grid">
-        {SERVICES.map((service, index) => (
+        {SERVICES_ORDERED.map((service, index) => (
           <ServiceDetailCard key={service.id} service={service} index={index} />
         ))}
       </div>
@@ -1534,17 +1541,22 @@ function ServiceLandingPage({ service, onContact }) {
       </section>
 
       {service.brochureUrl && (
-        <div style={{ background: "#f4f7f4", borderBottom: "1px solid rgba(20,31,22,0.1)", padding: "18px 64px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }} className="brochure-strip">
-          <div>
-            <span style={{ fontSize: 13, fontWeight: 700, color: "#141f16", letterSpacing: "0.04em", textTransform: "uppercase" }}>Product Brochure</span>
-            <span style={{ fontSize: 13, color: "#6b876f", marginLeft: 12 }}>Full range, specifications & project examples — download as PDF</span>
+        <div style={{ background: "#eef3ee", borderTop: "1px solid rgba(20,31,22,0.1)", borderBottom: "1px solid rgba(20,31,22,0.1)", padding: "36px 64px" }} className="brochure-strip">
+          <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: 48, flexWrap: "wrap", textAlign: "center" }}>
+            <div>
+              <div style={{ fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "#5aad6e", fontWeight: 700, marginBottom: 8 }}>Product Brochure</div>
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(20px, 2.5vw, 28px)", fontWeight: 700, color: "#141f16", lineHeight: 1.2, marginBottom: 6 }}>
+                Download the Full Range Guide
+              </div>
+              <div style={{ fontSize: 13, color: "#6b876f" }}>Specifications, project examples &amp; pricing — PDF</div>
+            </div>
+            <button
+              onClick={() => { const a = document.createElement("a"); a.href = service.brochureUrl; a.download = ""; a.click(); }}
+              style={{ background: "#1a4a26", color: "#fff", padding: "14px 32px", border: "none", fontSize: 13, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", display: "inline-flex", alignItems: "center", gap: 10, whiteSpace: "nowrap", flexShrink: 0, cursor: "pointer" }}
+            >
+              ↓ Download Brochure (PDF)
+            </button>
           </div>
-          <button
-            onClick={() => { const a = document.createElement("a"); a.href = service.brochureUrl; a.download = ""; a.click(); }}
-            style={{ background: "#1a4a26", color: "#fff", padding: "10px 22px", border: "none", fontSize: 13, fontWeight: 700, letterSpacing: "0.07em", display: "inline-flex", alignItems: "center", gap: 8, whiteSpace: "nowrap", flexShrink: 0, cursor: "pointer" }}
-          >
-            ↓ Download Brochure (PDF)
-          </button>
         </div>
       )}
 

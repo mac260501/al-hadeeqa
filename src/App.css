@@ -909,6 +909,13 @@ html, body {
   }
 }
 
+/* ── BROCHURE STRIP ── */
+@media (max-width: 768px) {
+  .brochure-strip {
+    padding: 28px 24px !important;
+  }
+}
+
 /* ── MOBILE NAV: services sub-item ── */
 @media (max-width: 768px) {
   .mobile-glass-sub {
