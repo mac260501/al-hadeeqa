@@ -1,5 +1,5 @@
-export const CONTACT_PHONE_E164 = "971544419854";
-export const CONTACT_PHONE_DISPLAY = "+971 54 441 9854";
+export const CONTACT_PHONE_E164 = "971545546341";
+export const CONTACT_PHONE_DISPLAY = "+971 54 554 6341";
 
 export const CONTACT_WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE_E164}`;
 export const CONTACT_TEL_URL = `tel:+${CONTACT_PHONE_E164}`;

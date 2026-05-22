@@ -1570,7 +1570,7 @@ function ServiceLandingPage({ service, onContact }) {
             <strong style={{ color: "#5aad6e" }}>⚠ </strong>{service.urgencyBanner.text}
           </p>
           <a
-            href={`https://wa.me/971544419854?text=${encodeURIComponent(service.urgencyBanner.waText)}`}
+            href={`https://wa.me/971545546341?text=${encodeURIComponent(service.urgencyBanner.waText)}`}
             target="_blank"
             rel="noopener noreferrer"
             style={{ background: "#25d366", color: "#fff", textDecoration: "none", padding: "10px 20px", fontSize: 13, fontWeight: 700, letterSpacing: "0.06em", whiteSpace: "nowrap", flexShrink: 0 }}
@@ -1834,7 +1834,7 @@ const BLOG_WATERPROOFING_FAQS = [
 function BlogWaterproofingChecklist({ onContact }) {
   const BASE_URL = "https://alhadeeqacontracting.com";
   const pageUrl = `${BASE_URL}/blog/dubai-floods-march-2026-villa-waterproofing-checklist`;
-  const waUrl = `https://wa.me/971544419854?text=${encodeURIComponent("Hi Al Hadeeqa, I'd like to book a free post-storm inspection for my villa.")}`;
+  const waUrl = `https://wa.me/971545546341?text=${encodeURIComponent("Hi Al Hadeeqa, I'd like to book a free post-storm inspection for my villa.")}`;
 
   const meta = usePageMeta({
     title: "Dubai's March 2026 Floods: What Villa Owners Should Inspect Right Now | Al Hadeeqa Contracting",
@@ -2202,7 +2202,7 @@ function BunkerTierPage({ tierId }) {
           <div style={S.price}>{tier.price}</div>
           <p style={S.answer}>{tier.answer}</p>
           <a
-            href={`https://wa.me/971544419854?text=${encodeURIComponent(`Hi Al Hadeeqa, I'm interested in the ${tier.title} underground shelter. Please provide more details.`)}`}
+            href={`https://wa.me/971545546341?text=${encodeURIComponent(`Hi Al Hadeeqa, I'm interested in the ${tier.title} underground shelter. Please provide more details.`)}`}
             target="_blank"
             rel="noreferrer"
             style={S.ctaBtn}
@@ -2245,7 +2245,7 @@ function BunkerTierPage({ tierId }) {
             Al Hadeeqa Contracting visits your Dubai property, assesses groundwater conditions, access, and available space, and provides a detailed quotation. No obligation.
           </div>
           <a
-            href={`https://wa.me/971544419854?text=${encodeURIComponent(`Hi Al Hadeeqa, I'd like a free site assessment for the ${tier.title} underground shelter.`)}`}
+            href={`https://wa.me/971545546341?text=${encodeURIComponent(`Hi Al Hadeeqa, I'd like a free site assessment for the ${tier.title} underground shelter.`)}`}
             target="_blank"
             rel="noreferrer"
             style={S.ctaBtn}
@@ -3005,7 +3005,7 @@ function EquipmentFleetPage({ category }) {
             {category.intro ? category.intro[0] : `${category.description}. Available for daily, weekly, or monthly hire across Dubai. Delivery and collection included.`}
           </p>
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <a href={`https://wa.me/971544419854?text=${waText}`} target="_blank" rel="noreferrer" style={styles.btnPrimaryLink}>
+            <a href={`https://wa.me/971545546341?text=${waText}`} target="_blank" rel="noreferrer" style={styles.btnPrimaryLink}>
               <WaIcon /> Enquire on WhatsApp
             </a>
             <span
@@ -3049,7 +3049,7 @@ function EquipmentFleetPage({ category }) {
                       <td style={{ padding: "14px 18px", fontSize: 14, color: "#3d5c42", textAlign: "right" }}>{item.monthlyRate ? `AED ${item.monthlyRate}` : "—"}</td>
                       <td style={{ padding: "14px 18px", textAlign: "center" }}>
                         <a
-                          href={`https://wa.me/971544419854?text=${encodeURIComponent(`Hi Al Hadeeqa, I'd like to enquire about renting the ${item.name}. Can you confirm availability and rates?`)}`}
+                          href={`https://wa.me/971545546341?text=${encodeURIComponent(`Hi Al Hadeeqa, I'd like to enquire about renting the ${item.name}. Can you confirm availability and rates?`)}`}
                           target="_blank"
                           rel="noreferrer"
                           style={{ ...styles.serviceLinkBtn, padding: "8px 14px", fontSize: 11 }}
@@ -3069,7 +3069,7 @@ function EquipmentFleetPage({ category }) {
               <p style={{ fontSize: 16, color: "#556d5b", lineHeight: 1.8, margin: "0 0 28px", fontWeight: 300 }}>
                 We're updating our {category.name.toLowerCase()} inventory list with full specs and rates. In the meantime, WhatsApp us directly — we'll confirm availability and send a quote the same day.
               </p>
-              <a href={`https://wa.me/971544419854?text=${waText}`} target="_blank" rel="noreferrer" style={styles.btnPrimaryLink}>
+              <a href={`https://wa.me/971545546341?text=${waText}`} target="_blank" rel="noreferrer" style={styles.btnPrimaryLink}>
                 <WaIcon /> Check Availability on WhatsApp
               </a>
             </div>
@@ -3200,7 +3200,7 @@ function RentalsPage() {
       "@type": "LocalBusiness",
       "name": "Al Hadeeqa Contracting Co. L.L.C",
       "url": "https://alhadeeqacontracting.com",
-      "telephone": "+971544419854",
+      "telephone": "+971545546341",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Dubai",
@@ -3467,7 +3467,7 @@ function ContactPage() {
   const meta = usePageMeta({
     title: "Contact Al Hadeeqa Contracting | Get a Free Quote in Dubai",
     description:
-      "Contact Al Hadeeqa Contracting Co. L.L.C for a free site assessment and quote. Call or WhatsApp +971 54 441 9854. Serving Dubai and all UAE emirates.",
+      "Contact Al Hadeeqa Contracting Co. L.L.C for a free site assessment and quote. Call or WhatsApp +971 54 554 6341. Serving Dubai and all UAE emirates.",
     canonical: "https://alhadeeqacontracting.com/contact",
     ogImage: "https://alhadeeqacontracting.com/assets/images/services-hero.jpg",
     schemas: [
@@ -3633,7 +3633,7 @@ const GREEN_BORDER = "rgba(26,74,38,0.18)";
 /* ─────────────────────────────────────────
    BUNKER PAGE
 ───────────────────────────────────────── */
-const BUNKER_WA = "971544419854";
+const BUNKER_WA = "971545546341";
 const bunkerWaUrl = (tier) =>
   `https://wa.me/${BUNKER_WA}?text=${encodeURIComponent(`Hi Al Hadeeqa Contracting,\n\nI'm interested in the ${tier}. Can I get a free assessment?`)}`;
 
@@ -4054,7 +4054,7 @@ function CtaForm() {
     const msg = encodeURIComponent(
       `Hi Al Hadeeqa Contracting,\n\nI am interested in a *free underground bunker assessment* for my villa.\n\n*Name:* ${name}\n*Phone:* ${ph}\n*Area in Dubai:* ${ar}${community ? "\n*Community:* " + community : ""}\n\nPlease contact me at your earliest convenience.`
     );
-    window.open(`https://wa.me/971544419854?text=${msg}`, "_blank");
+    window.open(`https://wa.me/971545546341?text=${msg}`, "_blank");
   }
 
   const inputStyle = {

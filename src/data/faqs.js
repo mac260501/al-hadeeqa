@@ -26,11 +26,11 @@ export const generalFAQs = [
   },
   {
     q: "How do I get a quote from Al Hadeeqa Contracting?",
-    a: "You can request a quote from Al Hadeeqa Contracting by calling +971 4 263 2371, messaging +971 54 441 9854 on WhatsApp, or emailing alhadeeqallc@gmail.com. Al Hadeeqa offers free site assessments for all construction and shelter projects.",
+    a: "You can request a quote from Al Hadeeqa Contracting by calling +971 4 263 2371, messaging +971 54 554 6341 on WhatsApp, or emailing alhadeeqallc@gmail.com. Al Hadeeqa offers free site assessments for all construction and shelter projects.",
   },
   {
     q: "Does Al Hadeeqa offer free site assessments?",
-    a: "Yes, Al Hadeeqa Contracting provides free site assessments for all projects including pergolas, carports, dewatering, and underground shelters. Contact the team via WhatsApp at +971 54 441 9854 to schedule a visit.",
+    a: "Yes, Al Hadeeqa Contracting provides free site assessments for all projects including pergolas, carports, dewatering, and underground shelters. Contact the team via WhatsApp at +971 54 554 6341 to schedule a visit.",
   },
 ];
 
@@ -350,7 +350,7 @@ export const maintenanceFAQs = [
   },
   {
     q: "Does Al Hadeeqa offer annual maintenance contracts?",
-    a: "Yes, Al Hadeeqa Contracting offers annual maintenance contracts for Dubai villas and commercial properties. Annual contracts typically include scheduled inspections, preventive maintenance visits, and priority response for reactive repairs. Contact the team via WhatsApp at +971 54 441 9854 to discuss scope and pricing for your property.",
+    a: "Yes, Al Hadeeqa Contracting offers annual maintenance contracts for Dubai villas and commercial properties. Annual contracts typically include scheduled inspections, preventive maintenance visits, and priority response for reactive repairs. Contact the team via WhatsApp at +971 54 554 6341 to discuss scope and pricing for your property.",
   },
   {
     q: "How quickly does Al Hadeeqa respond to maintenance requests?",

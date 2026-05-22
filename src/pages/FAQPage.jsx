@@ -189,7 +189,7 @@ export default function FAQPage() {
             across Dubai and the UAE.
           </div>
           <a
-            href={`https://wa.me/971544419854?text=${encodeURIComponent("Hi Al Hadeeqa, I have a question about your services.")}`}
+            href={`https://wa.me/971545546341?text=${encodeURIComponent("Hi Al Hadeeqa, I have a question about your services.")}`}
             target="_blank"
             rel="noreferrer"
             style={S.ctaBtn}
