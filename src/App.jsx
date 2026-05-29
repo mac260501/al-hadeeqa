@@ -379,8 +379,17 @@ function ContactModal({ service, onClose }) {
   );
 }
 
-function ServicesDropdown({ isServicesActive, isGlassActive }) {
+function ServicesDropdown({ isServicesActive, activeServiceId }) {
   const [open, setOpen] = useState(false);
+
+  const NAV_SERVICES = [
+    { label: "Glass & Aluminium Solutions", href: "/services/glass-aluminium", id: "glass-aluminium" },
+    { label: "Luxury Pergolas", href: "/services/pergolas", id: "pergolas" },
+    { label: "Premium Carports", href: "/services/carports", id: "carports" },
+    { label: "Construction & Remodeling", href: "/services/construction", id: "construction" },
+    { label: "Waterproofing", href: "/services/waterproofing", id: "waterproofing" },
+  ];
+
   return (
     <div
       style={{ position: "relative" }}
@@ -391,7 +400,7 @@ function ServicesDropdown({ isServicesActive, isGlassActive }) {
         href="/services"
         style={{
           ...styles.navLink,
-          ...(isServicesActive || isGlassActive ? styles.navLinkActive : {}),
+          ...(isServicesActive || !!activeServiceId ? styles.navLinkActive : {}),
           display: "inline-flex",
           alignItems: "center",
           gap: 4,
@@ -406,42 +415,49 @@ function ServicesDropdown({ isServicesActive, isGlassActive }) {
           left: "50%",
           transform: "translateX(-50%)",
           paddingTop: 8,
-          minWidth: 210,
+          minWidth: 250,
           zIndex: 1100,
         }}>
-        <div style={{
-          background: "#fff",
-          border: "1px solid rgba(20,31,22,0.12)",
-          boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-          padding: "8px 0",
-        }}>
-          <a href="/services" style={{
-            display: "block",
-            padding: "10px 20px",
-            fontSize: 13,
-            color: "#3d5c42",
-            textDecoration: "none",
-            fontWeight: isServicesActive ? 700 : 500,
-            letterSpacing: "0.03em",
-            background: isServicesActive ? "rgba(90,173,110,0.06)" : "transparent",
-          }}>All Services</a>
-          <div style={{ borderTop: "1px solid rgba(20,31,22,0.08)", margin: "4px 0" }} />
-          <a href="/services/glass-aluminium" style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            padding: "10px 20px",
-            fontSize: 13,
-            color: "#1a4a26",
-            textDecoration: "none",
-            fontWeight: 700,
-            letterSpacing: "0.03em",
-            background: isGlassActive ? "rgba(90,173,110,0.08)" : "transparent",
+          <div style={{
+            background: "#fff",
+            border: "1px solid rgba(20,31,22,0.12)",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+            padding: "8px 0",
           }}>
-            <span style={{ color: "#5aad6e", fontSize: 10 }}>◆</span>
-            Glass & Aluminium
-          </a>
-        </div>
+            {NAV_SERVICES.map((svc) => (
+              <a key={svc.id} href={svc.href} style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "10px 20px",
+                fontSize: 13,
+                color: "#1a4a26",
+                textDecoration: "none",
+                fontWeight: activeServiceId === svc.id ? 700 : 500,
+                letterSpacing: "0.03em",
+                background: activeServiceId === svc.id ? "rgba(90,173,110,0.08)" : "transparent",
+              }}>
+                <span style={{ color: "#5aad6e", fontSize: 10 }}>◆</span>
+                {svc.label}
+              </a>
+            ))}
+            <div style={{ borderTop: "1px solid rgba(20,31,22,0.08)", margin: "4px 0" }} />
+            <a href="/services" style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "10px 20px",
+              fontSize: 13,
+              color: "#3d5c42",
+              textDecoration: "none",
+              fontWeight: isServicesActive ? 700 : 500,
+              letterSpacing: "0.03em",
+              background: isServicesActive ? "rgba(90,173,110,0.06)" : "transparent",
+            }}>
+              View All Services
+              <span style={{ fontSize: 12, color: "#5aad6e" }}>→</span>
+            </a>
+          </div>
         </div>
       )}
     </div>
@@ -462,6 +478,7 @@ function Nav({ onContact, route }) {
   const VAULT_LINK = { label: "The Vault", href: "/the-vault", vault: true };
 
   const isOnGlassAluminium = route.type === "service" && route.service && route.service.id === "glass-aluminium";
+  const currentServiceId = route.type === "service" && route.service ? route.service.id : null;
 
   let navLinks = [
     { label: "Home", href: "/", active: route.type === "home" },
@@ -573,8 +590,8 @@ function Nav({ onContact, route }) {
           link.dropdown === "services" ? (
             <ServicesDropdown
               key="services-dropdown"
-              isServicesActive={link.active && !link.glassActive}
-              isGlassActive={link.glassActive || (route.type === "service" && route.service && route.service.id === "glass-aluminium")}
+              isServicesActive={route.type === "services"}
+              activeServiceId={currentServiceId}
             />
           ) : (
             <a
@@ -601,27 +618,36 @@ function Nav({ onContact, route }) {
           {navLinks.map((link) =>
             link.dropdown === "services" ? (
               <div key="services-mobile-group" style={{ display: "flex", flexDirection: "column", borderBottom: `1px solid ${GREEN_BORDER}`, paddingBottom: 4 }}>
-                <a href="/services" style={{ ...styles.mobileLink, borderBottom: "none", ...(link.active && !link.glassActive ? { color: "#5aad6e", fontWeight: 700 } : {}) }} onClick={() => setMenuOpen(false)}>
+                <a href="/services" style={{ ...styles.mobileLink, borderBottom: "none", ...(route.type === "services" ? { color: "#5aad6e", fontWeight: 700 } : {}) }} onClick={() => setMenuOpen(false)}>
                   Services
                 </a>
-                <a
-                  href="/services/glass-aluminium"
-                  style={{
-                    display: "block",
-                    textDecoration: "none",
-                    paddingLeft: 16,
-                    paddingTop: 8,
-                    paddingBottom: 10,
-                    fontSize: 14,
-                    borderLeft: "2px solid #5aad6e",
-                    marginLeft: 4,
-                    color: isOnGlassAluminium ? "#1a4a26" : "#3d5c42",
-                    fontWeight: isOnGlassAluminium ? 700 : 500,
-                  }}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  ◆ Glass & Aluminium
-                </a>
+                {[
+                  { label: "Glass & Aluminium Solutions", href: "/services/glass-aluminium", id: "glass-aluminium" },
+                  { label: "Luxury Pergolas", href: "/services/pergolas", id: "pergolas" },
+                  { label: "Premium Carports", href: "/services/carports", id: "carports" },
+                  { label: "Construction & Remodeling", href: "/services/construction", id: "construction" },
+                  { label: "Waterproofing", href: "/services/waterproofing", id: "waterproofing" },
+                ].map((svc) => (
+                  <a
+                    key={svc.id}
+                    href={svc.href}
+                    style={{
+                      display: "block",
+                      textDecoration: "none",
+                      paddingLeft: 16,
+                      paddingTop: 8,
+                      paddingBottom: 10,
+                      fontSize: 14,
+                      borderLeft: "2px solid #5aad6e",
+                      marginLeft: 4,
+                      color: currentServiceId === svc.id ? "#1a4a26" : "#3d5c42",
+                      fontWeight: currentServiceId === svc.id ? 700 : 500,
+                    }}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    ◆ {svc.label}
+                  </a>
+                ))}
               </div>
             ) : (
               <a key={link.label} href={link.href} style={{ ...styles.mobileLink, ...(link.vault ? styles.mobileLinkVault : {}) }} onClick={() => setMenuOpen(false)}>
